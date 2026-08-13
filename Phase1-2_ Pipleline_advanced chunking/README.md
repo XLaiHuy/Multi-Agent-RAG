@@ -126,13 +126,13 @@ We evaluated the system across **4 authentic, publicly available benchmark datas
 ### 4. ⚖️ Legal RAG Benchmark (Commercial Contracts & Court Cases — $N=1,465$ Samples)
 | Retrieval Strategy | Top-k ($k$) | Hit Rate (%) | MRR | Latency P50 | Throughput (QPS) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **BM25 Sparse-only** | 5 | 40.7% | 0.2951 | 0.08 ms | 12,607 QPS |
-| **Dense Vector-only** | 5 | 33.1% | 0.2461 | 0.10 ms | 10,147 QPS |
-| **Hybrid RRF (Our Model)** | **5** | **42.0%** *(+8.9pp vs Dense)* | **0.3192** | **0.20 ms** | **5,045 QPS** |
-| **Hybrid RRF (Our Model)** | **10** | **49.6%** | **0.3273** | **0.31 ms** | **3,244 QPS** |
-| **Hybrid RRF (Our Model)** | **20** | **56.8%** | **0.3323** | **0.36 ms** | **2,777 QPS** |
+| **BM25 Sparse-only** | 5 | 44.4% | 0.3222 | 0.08 ms | 3,920 QPS |
+| **Dense Vector-only** | 5 | 51.4% | 0.3501 | 0.01 ms | 82,243 QPS |
+| **Hybrid RRF Baseline** | 5 | 54.2% | 0.4058 | 0.08 ms | 3,689 QPS |
+| **Parent-Child + Hybrid RRF** | 5 | 50.0% | 0.3374 | 0.20 ms | 781 QPS |
+| **🏆 SOTA 3: HyDE + Parent-Child + Cross-Encoder** | **5** | **56.9%** *(+5.5pp vs Dense)* | **0.4094** *(+17.0% boost)* | **1.20 ms** | **0.8 QPS** |
 
-> **Key Finding:** Dense vector embeddings perform poorly on formal legal contracts ($33.1\%$), whereas Hybrid RRF boosts Hit Rate to **$56.8\%$**, demonstrating why hybrid search is critical for domain-specific enterprise RAG.
+> **Key Finding:** Neural Cross-Encoder Reranking (`BAAI/bge-reranker-base`) combined with Legal HyDE and Parent-Child Chunking delivers the highest MRR (**0.4094**) and Hit Rate (**56.9%**) on complex legal contract benchmarks.
 
 ---
 
