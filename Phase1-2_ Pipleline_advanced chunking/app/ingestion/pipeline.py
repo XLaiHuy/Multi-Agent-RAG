@@ -46,14 +46,17 @@ class IngestionPipeline:
         if not raw_dir.exists():
             raise FileNotFoundError(f"Raw data directory not found: {raw_dir}")
 
-        supported_extensions = {".md", ".txt", ".pdf", ".png", ".jpg", ".jpeg", ".webp"}
+        supported_extensions = {
+            ".md", ".txt", ".pdf", ".json", ".docx", ".doc",
+            ".xlsx", ".xls", ".csv", ".png", ".jpg", ".jpeg", ".webp", ".bmp"
+        }
         files = [
             f for f in raw_dir.iterdir()
             if f.is_file() and f.suffix.lower() in supported_extensions
         ]
 
         if not files:
-            raise ValueError(f"No supported documents (.md, .txt, .pdf, images) found in {raw_dir}")
+            raise ValueError(f"No supported documents found in {raw_dir}")
 
         print(f"[Pipeline] Found {len(files)} files to ingest.")
 

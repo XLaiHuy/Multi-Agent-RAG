@@ -15,7 +15,10 @@ upload_router = APIRouter()
 UPLOAD_DIR = Path("./data/uploads")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
-SUPPORTED_EXTENSIONS = {".pdf", ".txt", ".md", ".png", ".jpg", ".jpeg", ".webp"}
+SUPPORTED_EXTENSIONS = {
+    ".pdf", ".txt", ".md", ".json", ".docx", ".doc",
+    ".xlsx", ".xls", ".csv", ".png", ".jpg", ".jpeg", ".webp", ".bmp"
+}
 
 
 @upload_router.post("/upload", tags=["Admin"])

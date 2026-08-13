@@ -20,3 +20,6 @@ slowapi
 pdf-inspector
 pillow
 pymupdf
+python-docx
+openpyxl
+pandas

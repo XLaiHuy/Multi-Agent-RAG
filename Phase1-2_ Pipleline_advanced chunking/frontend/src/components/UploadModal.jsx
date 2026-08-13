@@ -76,7 +76,7 @@ export default function UploadModal({ token, onClose }) {
           <input
             type="file"
             id="file-upload"
-            accept=".pdf,.txt,.md,.png,.jpg,.jpeg,.webp"
+            accept=".pdf,.txt,.md,.json,.docx,.doc,.xlsx,.xls,.csv,.png,.jpg,.jpeg,.webp,.bmp"
             onChange={handleFileChange}
             style={{ display: 'none' }}
           />
@@ -90,10 +90,10 @@ export default function UploadModal({ token, onClose }) {
             ) : (
               <div>
                 <div style={{ fontWeight: '600', color: '#334155', fontSize: '15px', marginBottom: '4px' }}>
-                  Bấm để chọn file PDF, TXT, MD hoặc Ảnh (PNG, JPG, WEBP)
+                  Bấm để chọn file Word, Excel, PDF, JSON, MD, TXT hoặc Ảnh
                 </div>
                 <div style={{ color: '#94a3b8', fontSize: '12px' }}>
-                  Hỗ trợ Multimodal Vision OCR bóc tách bảng số liệu & sơ đồ
+                  Hỗ trợ Word (.docx), Excel (.xlsx, .csv), PDF siêu tốc & Vision OCR
                 </div>
               </div>
             )}
