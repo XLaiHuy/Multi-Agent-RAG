@@ -1,0 +1,357 @@
+{
+  "total_queries_audited": 210,
+  "leak_free_count": 210,
+  "flagged_count": 0,
+  "audit_records": [
+    {
+      "query_id": "eval_cuad_contract_00_Document_Name",
+      "category": "Document Name",
+      "title_overlap": 0.083,
+      "answer_overlap": 0.083,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Parties",
+      "category": "Parties",
+      "title_overlap": 0.111,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Agreement_Date",
+      "category": "Agreement Date",
+      "title_overlap": 0.111,
+      "answer_overlap": 0.111,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Effective_Date",
+      "category": "Effective Date",
+      "title_overlap": 0.1,
+      "answer_overlap": 0.3,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Expiration_Date",
+      "category": "Expiration Date",
+      "title_overlap": 0.091,
+      "answer_overlap": 0.455,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Renewal_Term",
+      "category": "Renewal Term",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.2,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Notice_Period_T",
+      "category": "Notice Period To Terminate Renewal",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.333,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Governing_Law",
+      "category": "Governing Law",
+      "title_overlap": 0.091,
+      "answer_overlap": 0.636,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Non_Compete",
+      "category": "Non-Compete",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Exclusivity",
+      "category": "Exclusivity",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_No_Solicit_Of_C",
+      "category": "No-Solicit Of Customers",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_No_Solicit_Of_E",
+      "category": "No-Solicit Of Employees",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Termination_For",
+      "category": "Termination For Convenience",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.353,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Change_Of_Contr",
+      "category": "Change Of Control",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Anti_Assignment",
+      "category": "Anti-Assignment",
+      "title_overlap": 0.083,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Minimum_Commitm",
+      "category": "Minimum Commitment",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Audit_Rights",
+      "category": "Audit Rights",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Uncapped_Liabil",
+      "category": "Uncapped Liability",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Cap_On_Liabilit",
+      "category": "Cap On Liability",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.4,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Warranty_Durati",
+      "category": "Warranty Duration",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Insurance",
+      "category": "Insurance",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Document_Name",
+      "category": "Document Name",
+      "title_overlap": 0.083,
+      "answer_overlap": 0.083,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Parties",
+      "category": "Parties",
+      "title_overlap": 0.111,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Agreement_Date",
+      "category": "Agreement Date",
+      "title_overlap": 0.111,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Effective_Date",
+      "category": "Effective Date",
+      "title_overlap": 0.1,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Expiration_Date",
+      "category": "Expiration Date",
+      "title_overlap": 0.091,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Renewal_Term",
+      "category": "Renewal Term",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Notice_Period_T",
+      "category": "Notice Period To Terminate Renewal",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Governing_Law",
+      "category": "Governing Law",
+      "title_overlap": 0.091,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Non_Compete",
+      "category": "Non-Compete",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Exclusivity",
+      "category": "Exclusivity",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_No_Solicit_Of_C",
+      "category": "No-Solicit Of Customers",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_No_Solicit_Of_E",
+      "category": "No-Solicit Of Employees",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Termination_For",
+      "category": "Termination For Convenience",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Change_Of_Contr",
+      "category": "Change Of Control",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Anti_Assignment",
+      "category": "Anti-Assignment",
+      "title_overlap": 0.083,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Minimum_Commitm",
+      "category": "Minimum Commitment",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Audit_Rights",
+      "category": "Audit Rights",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Uncapped_Liabil",
+      "category": "Uncapped Liability",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Cap_On_Liabilit",
+      "category": "Cap On Liability",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Warranty_Durati",
+      "category": "Warranty Duration",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Insurance",
+      "category": "Insurance",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Document_Name",
+      "category": "Document Name",
+      "title_overlap": 0.083,
+      "answer_overlap": 0.083,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Parties",
+      "category": "Parties",
+      "title_overlap": 0.111,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Agreement_Date",
+      "category": "Agreement Date",
+      "title_overlap": 0.111,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Effective_Date",
+      "category": "Effective Date",
+      "title_overlap": 0.1,
+      "answer_overlap": 0.2,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Expiration_Date",
+      "category": "Expiration Date",
+      "title_overlap": 0.091,
+      "answer_overlap": 0.455,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Renewal_Term",
+      "category": "Renewal Term",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Notice_Period_T",
+      "category": "Notice Period To Terminate Renewal",
+      "title_overlap": 0.0,
+      "answer_overlap": 0.0,
+      "leakage_status": "LEAK_FREE"
+    },
+    {
+      "query_id": "eval_cuad_contract_00_Governing_Law",
+      "category": "Governing Law",
+      "title_overlap": 0.091,
+      "answer_overlap": 0.545,
+      "leakage_status": "LEAK_FREE"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "run_id": "ocr_run_20260814_173537_3e436a",
+  "benchmark_timestamp": "2026-08-14T17:35:51Z",
+  "total_conditions_evaluated": 10,
+  "evaluation_contract": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+  "native_baseline_recall_5": 1.0,
+  "conditions": {
+    "CLEAN_NATIVE": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "CLEAN_NATIVE",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0,
+      "wer": 0.0,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 142.34,
+      "success": true
+    },
+    "SCAN_200_DPI": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "SCAN_200_DPI",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0,
+      "wer": 0.0,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 146.9,
+      "success": true
+    },
+    "SCAN_150_DPI": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "SCAN_150_DPI",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0,
+      "wer": 0.0,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 226.83,
+      "success": true
+    },
+    "SCAN_100_DPI": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "SCAN_100_DPI",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0308,
+      "wer": 0.1641,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 203.63,
+      "success": true
+    },
+    "SKEW_2_DEG": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "SKEW_2_DEG",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0,
+      "wer": 0.0,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 302.16,
+      "success": true
+    },
+    "SKEW_5_DEG": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "SKEW_5_DEG",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0247,
+      "wer": 0.0365,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 323.93,
+      "success": true
+    },
+    "BLUR_LOW": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "BLUR_LOW",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0191,
+      "wer": 0.1016,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 284.38,
+      "success": true
+    },
+    "BLUR_MEDIUM": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "BLUR_MEDIUM",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0191,
+      "wer": 0.1016,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 307.03,
+      "success": true
+    },
+    "NOISE_LOW": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "NOISE_LOW",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0347,
+      "wer": 0.0,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 1374.65,
+      "success": true
+    },
+    "NOISE_MEDIUM": {
+      "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+      "page": 1,
+      "condition": "NOISE_MEDIUM",
+      "ocr_model": "PyMuPDF-Layout-Extractor",
+      "cer": 0.0347,
+      "wer": 0.0,
+      "downstream_recall_5": 0.8,
+      "delta_recall": 0.2,
+      "latency_ms": 1406.52,
+      "success": true
+    }
+  }
+}

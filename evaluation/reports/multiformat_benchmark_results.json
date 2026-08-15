@@ -1,0 +1,78 @@
+{
+  "run_id": "multiformat_run_20260814_173638_51b10d",
+  "benchmark_timestamp": "2026-08-14T17:36:38Z",
+  "contract_id": "cuad_contract_003_CENTRACKINTERNATIONALINC_10_29",
+  "queries_count": 5,
+  "results": {
+    "TXT": {
+      "format": "TXT",
+      "file_path": "evaluation\\datasets\\cuad\\processed\\format_variants\\cuad_contract_003_CENTRACKINTERNATIONALINC_10_29.txt",
+      "parse_success": true,
+      "pages_extracted": 1,
+      "blocks_extracted": 65,
+      "child_chunks_indexed": 20,
+      "parent_chunks_indexed": 5,
+      "chars_extracted": 14990,
+      "Recall@5": 1.0,
+      "MRR": 0.7667,
+      "nDCG@5": 0.8262,
+      "latency_ms": 18.58
+    },
+    "MD": {
+      "format": "MD",
+      "file_path": "evaluation\\datasets\\cuad\\processed\\format_variants\\cuad_contract_003_CENTRACKINTERNATIONALINC_10_29.md",
+      "parse_success": true,
+      "pages_extracted": 1,
+      "blocks_extracted": 66,
+      "child_chunks_indexed": 20,
+      "parent_chunks_indexed": 5,
+      "chars_extracted": 15060,
+      "Recall@5": 1.0,
+      "MRR": 0.7667,
+      "nDCG@5": 0.8262,
+      "latency_ms": 13.42
+    },
+    "JSON": {
+      "format": "JSON",
+      "file_path": "evaluation\\datasets\\cuad\\processed\\format_variants\\cuad_contract_003_CENTRACKINTERNATIONALINC_10_29.json",
+      "parse_success": true,
+      "pages_extracted": 1,
+      "blocks_extracted": 197,
+      "child_chunks_indexed": 22,
+      "parent_chunks_indexed": 5,
+      "chars_extracted": 22250,
+      "Recall@5": 1.0,
+      "MRR": 0.8667,
+      "nDCG@5": 0.9,
+      "latency_ms": 15.65
+    },
+    "DOCX": {
+      "format": "DOCX",
+      "file_path": "evaluation\\datasets\\cuad\\processed\\format_variants\\cuad_contract_003_CENTRACKINTERNATIONALINC_10_29.docx",
+      "parse_success": true,
+      "pages_extracted": 1,
+      "blocks_extracted": 66,
+      "child_chunks_indexed": 20,
+      "parent_chunks_indexed": 5,
+      "chars_extracted": 15062,
+      "Recall@5": 1.0,
+      "MRR": 0.7667,
+      "nDCG@5": 0.8262,
+      "latency_ms": 56.89
+    },
+    "PDF": {
+      "format": "PDF",
+      "file_path": "evaluation\\datasets\\cuad\\processed\\format_variants\\cuad_contract_003_CENTRACKINTERNATIONALINC_10_29.pdf",
+      "parse_success": true,
+      "pages_extracted": 4,
+      "blocks_extracted": 3,
+      "child_chunks_indexed": 1,
+      "parent_chunks_indexed": 1,
+      "chars_extracted": 419,
+      "Recall@5": 0.0,
+      "MRR": 0.0,
+      "nDCG@5": 0.0,
+      "latency_ms": 18.97
+    }
+  }
+}

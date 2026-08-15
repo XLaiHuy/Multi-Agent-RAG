@@ -1,0 +1,209 @@
+{
+  "clean": {
+    "target_CER": 0.0,
+    "queries_tested": 10,
+    "mean_Recall@5": 0.3861,
+    "mean_HitRate@5": 0.9,
+    "mean_MRR": 0.8643,
+    "per_query": [
+      {
+        "query_id": "eval_cuad_contract_00_Document_Name",
+        "Recall@5": 0.3333333333333333,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Parties",
+        "Recall@5": 0.4444444444444444,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Agreement_Date",
+        "Recall@5": 0.0,
+        "HitRate@5": 0.0,
+        "MRR": 0.14285714285714285
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Effective_Date",
+        "Recall@5": 0.3333333333333333,
+        "HitRate@5": 1.0,
+        "MRR": 0.5
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Expiration_Date",
+        "Recall@5": 0.3333333333333333,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Renewal_Term",
+        "Recall@5": 0.5,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Notice_Period_T",
+        "Recall@5": 0.6666666666666666,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Governing_Law",
+        "Recall@5": 0.5,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Termination_For",
+        "Recall@5": 0.5,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Cap_On_Liabilit",
+        "Recall@5": 0.25,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      }
+    ]
+  },
+  "mild_noise_cer_0.007": {
+    "target_CER": 0.007,
+    "queries_tested": 10,
+    "mean_Recall@5": 0.4028,
+    "mean_HitRate@5": 0.9,
+    "mean_MRR": 0.9143,
+    "per_query": [
+      {
+        "query_id": "eval_cuad_contract_00_Document_Name",
+        "Recall@5": 0.3333333333333333,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Parties",
+        "Recall@5": 0.4444444444444444,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Agreement_Date",
+        "Recall@5": 0.0,
+        "HitRate@5": 0.0,
+        "MRR": 0.14285714285714285
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Effective_Date",
+        "Recall@5": 0.3333333333333333,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Expiration_Date",
+        "Recall@5": 0.3333333333333333,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Renewal_Term",
+        "Recall@5": 0.6666666666666666,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Notice_Period_T",
+        "Recall@5": 0.6666666666666666,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Governing_Law",
+        "Recall@5": 0.5,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Termination_For",
+        "Recall@5": 0.5,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Cap_On_Liabilit",
+        "Recall@5": 0.25,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      }
+    ]
+  },
+  "medium_noise_cer_0.089": {
+    "target_CER": 0.089,
+    "queries_tested": 10,
+    "mean_Recall@5": 0.3861,
+    "mean_HitRate@5": 0.9,
+    "mean_MRR": 0.8458,
+    "per_query": [
+      {
+        "query_id": "eval_cuad_contract_00_Document_Name",
+        "Recall@5": 0.3333333333333333,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Parties",
+        "Recall@5": 0.4444444444444444,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Agreement_Date",
+        "Recall@5": 0.0,
+        "HitRate@5": 0.0,
+        "MRR": 0.125
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Effective_Date",
+        "Recall@5": 0.3333333333333333,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Expiration_Date",
+        "Recall@5": 0.3333333333333333,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Renewal_Term",
+        "Recall@5": 0.5,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Notice_Period_T",
+        "Recall@5": 0.6666666666666666,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Governing_Law",
+        "Recall@5": 0.5,
+        "HitRate@5": 1.0,
+        "MRR": 0.3333333333333333
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Termination_For",
+        "Recall@5": 0.5,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      },
+      {
+        "query_id": "eval_cuad_contract_00_Cap_On_Liabilit",
+        "Recall@5": 0.25,
+        "HitRate@5": 1.0,
+        "MRR": 1.0
+      }
+    ]
+  }
+}

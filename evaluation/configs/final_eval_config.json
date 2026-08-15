@@ -1,0 +1,16 @@
+{
+  "config_version": "1.0.0_frozen",
+  "timestamp": "2026-08-14T17:35:04Z",
+  "retrieval_confidence_threshold": 0.7,
+  "top_k_retrieval": 10,
+  "reranker_candidate_count": 15,
+  "reranker_top_n": 5,
+  "rrf_k": 60,
+  "child_chunk_tokens": 250,
+  "parent_chunk_tokens": 1200,
+  "max_retrieval_attempts": 2,
+  "max_regeneration_count": 1,
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker_model": "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+  "generation_model": "gemini-flash-latest"
+}

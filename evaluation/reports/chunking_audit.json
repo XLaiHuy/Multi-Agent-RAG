@@ -1,0 +1,45 @@
+{
+  "files_analyzed": 2,
+  "total_child_chunks": 3,
+  "total_parent_chunks": 2,
+  "child_token_distribution": {
+    "mean": 156.0,
+    "median": 131.0,
+    "p95": 246.2,
+    "min": 78,
+    "max": 259
+  },
+  "parent_token_distribution": {
+    "mean": 222.0,
+    "median": 222.0,
+    "p95": 303.9,
+    "min": 131,
+    "max": 313
+  },
+  "per_file_breakdown": [
+    {
+      "file": "contract_cuad_01.md",
+      "canonical_blocks": 11,
+      "child_chunks_count": 2,
+      "parent_chunks_count": 1,
+      "metadata_preservation": {
+        "page_number": true,
+        "parent_id_linked": true,
+        "doc_id_preserved": true,
+        "section_path_preserved": true
+      }
+    },
+    {
+      "file": "contract_cuad_02.md",
+      "canonical_blocks": 9,
+      "child_chunks_count": 1,
+      "parent_chunks_count": 1,
+      "metadata_preservation": {
+        "page_number": true,
+        "parent_id_linked": true,
+        "doc_id_preserved": true,
+        "section_path_preserved": true
+      }
+    }
+  ]
+}

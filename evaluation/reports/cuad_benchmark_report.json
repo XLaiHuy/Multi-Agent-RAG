@@ -1,0 +1,31 @@
+{
+  "run_id": "cuad_run_20260814_180134_5bcaa3",
+  "dataset_name": "CUAD (Contract Understanding Atticus Dataset)",
+  "total_queries_evaluated": 5,
+  "successful_evaluations": 5,
+  "errors_count": 0,
+  "retrieval_metrics": {
+    "Recall@5": 1.0,
+    "Recall@10": 1.0,
+    "HitRate@5": 1.0,
+    "MRR": 1.0,
+    "nDCG@5": 1.0
+  },
+  "generation_metrics": {
+    "Token_F1": 0.0,
+    "Exact_Match": 0.0,
+    "Faithfulness": 0.0,
+    "Refusal_Accuracy": 1.0
+  },
+  "citation_metrics": {
+    "Citation_Precision": 0.0,
+    "Citation_Recall": 1.0,
+    "Evidence_Coverage": 0.0
+  },
+  "latency_profile": {
+    "P50_Latency_ms": 3315.45,
+    "P95_Latency_ms": 11417.44,
+    "Min_Latency_ms": 2465.33,
+    "Max_Latency_ms": 11417.44
+  }
+}

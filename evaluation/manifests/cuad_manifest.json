@@ -1,0 +1,150 @@
+{
+  "dataset_name": "CUAD (Contract Understanding Atticus Dataset)",
+  "dataset_version": "1.0-commercial-subset",
+  "curation_source": "Atticus Project / Stanford NLP (Hendrycks et al., 2021)",
+  "license": "CC BY 4.0",
+  "created_at": "2026-08-14T17:15:00Z",
+  "random_seed": 42,
+  "contracts": [
+    {
+      "contract_id": "contract_cuad_01",
+      "contract_title": "Cooperation and License Agreement",
+      "parties": [
+        "Alpha BioTech Inc.",
+        "Beta Pharmaceuticals LLC"
+      ],
+      "effective_date": "2024-01-15",
+      "format_paths": {
+        "markdown": "tests/fixtures/cuad_small/contract_cuad_01.md",
+        "docx": "tests/fixtures/cuad_small/contract_cuad_01.docx",
+        "json": "tests/fixtures/cuad_small/contract_cuad_01.json"
+      },
+      "sha256_markdown": "2ee106e7483ad3a587c8227c74530ae113c963f5d749fcc584f097659f0f361b",
+      "char_count": 1590,
+      "clause_categories_covered": [
+        "Termination for Convenience",
+        "Limitation of Liability",
+        "Governing Law",
+        "Confidentiality",
+        "Audit Rights"
+      ]
+    },
+    {
+      "contract_id": "contract_cuad_02",
+      "contract_title": "Enterprise Cloud Services Agreement",
+      "parties": [
+        "CloudNova Systems Inc.",
+        "Global Logistics Solutions Corp."
+      ],
+      "effective_date": "2024-03-01",
+      "format_paths": {
+        "markdown": "tests/fixtures/cuad_small/contract_cuad_02.md",
+        "docx": "tests/fixtures/cuad_small/contract_cuad_02.docx",
+        "json": "tests/fixtures/cuad_small/contract_cuad_02.json"
+      },
+      "sha256_markdown": "afb9d0210c67d05d02632a7b522fb3bf910ce61b4250d7dfea32f5b27b20262d",
+      "char_count": 709,
+      "clause_categories_covered": [
+        "IP Indemnification",
+        "Service Level Agreement",
+        "Warranty Disclaimers",
+        "Data Privacy",
+        "Non-Compete (Absent)"
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "cuad_q01",
+      "contract_id": "contract_cuad_01",
+      "category": "Termination for Convenience",
+      "question": "Does the contract permit either party to terminate for convenience without cause?",
+      "ground_truth_answer": "Yes, either party may terminate this Agreement without cause upon providing at least ninety (90) days prior written notice to the other party.",
+      "target_clauses": [
+        "Section 11.2 Termination Without Cause"
+      ],
+      "is_unanswerable": false,
+      "complexity": "low"
+    },
+    {
+      "query_id": "cuad_q02",
+      "contract_id": "contract_cuad_01",
+      "category": "Limitation of Liability",
+      "question": "What is the maximum aggregate liability cap specified under the contract?",
+      "ground_truth_answer": "The total aggregate liability of either party arising out of or related to this Agreement shall not exceed the total fees paid or payable by Licensee in the twelve (12) months preceding the claim.",
+      "target_clauses": [
+        "Section 14.1 Limitation of Liability"
+      ],
+      "is_unanswerable": false,
+      "complexity": "medium"
+    },
+    {
+      "query_id": "cuad_q03",
+      "contract_id": "contract_cuad_01",
+      "category": "Governing Law",
+      "question": "Which jurisdiction's laws govern this agreement and where must disputes be resolved?",
+      "ground_truth_answer": "This Agreement is governed by the laws of the State of Delaware, and disputes must be resolved in the state or federal courts located in Wilmington, Delaware.",
+      "target_clauses": [
+        "Section 18.3 Governing Law and Jurisdiction"
+      ],
+      "is_unanswerable": false,
+      "complexity": "low"
+    },
+    {
+      "query_id": "cuad_q04",
+      "contract_id": "contract_cuad_02",
+      "category": "IP Indemnification",
+      "question": "What indemnification obligations does the Vendor provide against third-party intellectual property claims?",
+      "ground_truth_answer": "Vendor shall defend, indemnify, and hold harmless Customer against any third-party claims alleging that the Cloud Services infringe or misappropriate any patent, copyright, or trademark.",
+      "target_clauses": [
+        "Section 9.1 IP Indemnification"
+      ],
+      "is_unanswerable": false,
+      "complexity": "medium"
+    },
+    {
+      "query_id": "cuad_q05",
+      "contract_id": "contract_cuad_02",
+      "category": "Non-Compete",
+      "question": "Does the contract impose a non-compete restriction on Customer's hiring of vendor personnel?",
+      "ground_truth_answer": "The contract does not specify any non-compete or non-solicitation restrictions on Customer hiring personnel.",
+      "target_clauses": [],
+      "is_unanswerable": true,
+      "complexity": "high"
+    },
+    {
+      "query_id": "cuad_q06",
+      "contract_id": "contract_cuad_01",
+      "category": "Confidentiality",
+      "question": "What is the standard confidentiality survival period following termination?",
+      "ground_truth_answer": "Confidentiality obligations survive for a period of five (5) years following the termination or expiration of the Agreement.",
+      "target_clauses": [
+        "Section 7.1 Confidential Information"
+      ],
+      "is_unanswerable": false,
+      "complexity": "low"
+    },
+    {
+      "query_id": "cuad_q07",
+      "contract_id": "contract_cuad_02",
+      "category": "Audit Rights",
+      "question": "What are the notice requirements and frequency limitations for Customer audits of Vendor records?",
+      "ground_truth_answer": "Customer may conduct audits no more than once per calendar year upon thirty (30) business days prior written notice during normal business hours.",
+      "target_clauses": [
+        "Section 12.3 Audit Rights"
+      ],
+      "is_unanswerable": false,
+      "complexity": "medium"
+    },
+    {
+      "query_id": "cuad_q08",
+      "contract_id": "contract_cuad_01",
+      "category": "Insurance",
+      "question": "Does the contract require either party to maintain commercial general liability insurance of at least 5 million dollars?",
+      "ground_truth_answer": "The contract does not mandate a 5 million dollar insurance requirement.",
+      "target_clauses": [],
+      "is_unanswerable": true,
+      "complexity": "medium"
+    }
+  ]
+}

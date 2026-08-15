@@ -1,0 +1,35 @@
+{
+  "res_5a": {
+    "variant": "EXP-5A",
+    "queries_evaluated": 238,
+    "Recall@5": 0.0437,
+    "Recall@10": 0.0638,
+    "HitRate@5": 0.1933,
+    "HitRate@10": 0.2689,
+    "MRR": 0.1116,
+    "nDCG@5": 0.0473,
+    "Candidate_Recall_Pre_Rerank": 0.3866,
+    "Wrong_Contract_Candidate_Rate": 0.9172,
+    "P50_Latency_ms": 4436.92,
+    "P95_Latency_ms": 5595.19,
+    "Total_Indexing_Time_ms": 125637.45,
+    "Indexed_Chunks_Count": 1034
+  },
+  "res_5b": {
+    "variant": "EXP-5B",
+    "queries_evaluated": 238,
+    "Recall@5": 0.0417,
+    "Recall@10": 0.0629,
+    "HitRate@5": 0.1891,
+    "HitRate@10": 0.2605,
+    "MRR": 0.1081,
+    "nDCG@5": 0.0461,
+    "Candidate_Recall_Pre_Rerank": 0.3739,
+    "Wrong_Contract_Candidate_Rate": 0.916,
+    "P50_Latency_ms": 4756.87,
+    "P95_Latency_ms": 5988.55,
+    "Total_Indexing_Time_ms": 186529.9,
+    "Indexed_Chunks_Count": 1034
+  },
+  "decision": "REJECT"
+}

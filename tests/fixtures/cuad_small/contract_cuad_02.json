@@ -1,0 +1,18 @@
+{
+  "title": "Contract",
+  "sections": {
+    "general": [
+      "This Cloud Agreement is made between CloudNova Inc. (\"Vendor\") and Global Enterprise Solutions (\"Customer\")."
+    ],
+    "Section 3: Service Levels (SLA)": [
+      "Vendor guarantees an aggregate monthly uptime of 99.95%."
+    ],
+    "Section 9: Indemnification": [
+      "Section 9.1 Vendor Indemnification. Vendor agrees to defend Customer against any third-party claim alleging that the Cloud Service infringes any valid intellectual property right and will pay all damages finally awarded.",
+      "Section 9.2 Indemnification Procedure. Customer must give prompt written notice of any claim to Vendor."
+    ],
+    "Section 12: Governing Law": [
+      "This agreement shall be governed by the laws of the State of New York."
+    ]
+  }
+}

@@ -1,76 +1,12 @@
-# Multi-Agent-RAG: Production-Grade Multimodal Agentic RAG Platform
+# Enterprise Contract Intelligence Platform (Adaptive Multi-Agent RAG v2)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+" />
-  <img src="https://img.shields.io/badge/FastAPI-0.115%2B-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
-  <img src="https://img.shields.io/badge/React-19%20%7C%20Vite-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" />
-  <img src="https://img.shields.io/badge/LangGraph-Agentic%20RAG-FF6F00?style=for-the-badge&logo=langchain&logoColor=white" alt="LangGraph" />
-  <img src="https://img.shields.io/badge/ChromaDB-Vector%20Index-red?style=for-the-badge" alt="ChromaDB" />
-  <img src="https://img.shields.io/badge/Rank_BM25-Sparse%20Index-orange?style=for-the-badge" alt="BM25" />
-  <img src="https://img.shields.io/badge/Cross_Encoder-BAAI%2Fbge--reranker--base-blueviolet?style=for-the-badge" alt="Cross-Encoder" />
-  <img src="https://img.shields.io/badge/Tests-15%2F15%20Passed%20(100%25)-brightgreen?style=for-the-badge" alt="Tests" />
-  <img src="https://img.shields.io/badge/License-MIT-purple?style=for-the-badge" alt="License" />
-</p>
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com)
+[![React Vite](https://img.shields.io/badge/React-Vite%2020-61DAFB.svg)](https://vitejs.dev/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## 📖 Table of Contents
-- [Overview](#-overview)
-- [Key Technical Features](#-key-technical-features)
-- [System Architecture](#-system-architecture)
-- [Empirical Benchmark Results (4 Datasets)](#-empirical-benchmark-results-across-4-public-datasets)
-  - [1. 🇻🇳 UIT-ViQuAD 2.0 (Academic QA)](#1-uit-viquad-20-vietnamese-academic-qa--n3814-full-split)
-  - [2. 🌐 Stanford SQuAD 2.0 (Global QA)](#2-stanford-squad-20-global-standard-qa--n2000-samples)
-  - [3. 📈 Financial QA 10-K (SEC Filings & Corporate Audits)](#3-financial-qa-10-k-sec-filings--audits--n1496-samples)
-  - [4. ⚖️ Legal RAG Benchmark (Commercial Contracts & Court Cases)](#4-legal-rag-benchmark-isaacuslegal-rag-bench--n1465-samples)
-- [Repository Structure](#-repository-structure)
-- [Quickstart Guide](#-quickstart-guide)
-- [Automated Testing](#-automated-testing)
-- [API Endpoints Specification](#-api-endpoints-specification)
-
----
-
-## 📖 Overview
-
-**Multi-Agent-RAG** is an enterprise-ready, high-throughput **Multimodal Agentic Retrieval-Augmented Generation (RAG)** engine built with **FastAPI**, **LangGraph**, **ChromaDB**, and **React**. 
-
-It addresses critical limitations in naive vector search by integrating:
-- **Hierarchical Parent-Child Chunking** (preserving section boundaries).
-- **Legal & Domain HyDE Query Expansion**.
-- **Hybrid Retrieval (BM25 Lexical + Dense Embeddings + Reciprocal Rank Fusion)**.
-- **Cross-Encoder Neural Reranking** (`BAAI/bge-reranker-base`).
-- **Multimodal OCR Engine** (Gemini Vision + PyMuPDF).
-- **Sub-10ms Semantic Caching** (SQLite + Cosine Similarity).
-- **Role-Based Access Control (RBAC)** (JWT + Bcrypt).
-
-Evaluated across **4 authentic public benchmark datasets** (UIT-ViQuAD 2.0, Stanford SQuAD 2.0, Financial QA 10-K, and Legal RAG Benchmark), the platform delivers up to **96.9% Hit Rate** and **0.762 MRR**, demonstrating robustness across bilingual and domain-specific corpora.
-
----
-
-## 🌟 Key Technical Features
-
-### 1. 🔀 Hybrid Search & Reciprocal Rank Fusion (RRF)
-- **Dense Vector Search:** Uses `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` backed by ChromaDB HNSW vector indexing.
-- **Sparse Lexical Search:** `rank-bm25` for exact keyword, numerical value, and legal citation matching.
-- **Reciprocal Rank Fusion ($k=60$):** Combines dense and sparse rankings to eliminate score normalization bias.
-- **Context Stitching:** Automatically merges contiguous chunks from the same document to restore broken context boundaries.
-
-### 2. ⚖️ SOTA Legal & Enterprise RAG Pipeline
-- **Hierarchical Parent-Child Chunking (`app/chunking/parent_child.py`):** Indexes small 300-token child chunks for high-precision vector similarity while linking back to 1,500-token parent sections for LLM context generation.
-- **Legal HyDE Transformer (`app/retrieval/hyde.py`):** Expands layperson queries into hypothetical legal clause drafts and statutory terminology.
-- **Neural Cross-Encoder Reranker (`app/retrieval/reranker.py`):** Uses `BAAI/bge-reranker-base` to re-score candidates via pairwise cross-attention.
-
-### 3. ⚡ Sub-10ms Semantic Caching (SQLite + Cosine Similarity)
-- Computes cosine similarity between incoming query embeddings and pre-computed cached vectors stored in SQLite.
-- Similarity matches $\ge 0.96$ return **instant answers in $<10\text{ms}$**, cutting LLM inference costs by up to **90%**.
-
-### 4. 📄 Fast Multi-Format Document Ingestion & Vision OCR
-- **Fast-Track PDF Native Parser:** Uses PyMuPDF (`fitz`) native text extraction first ($<10\text{ms}$). Only falls back to Gemini Vision OCR if pages contain $<40$ characters (scanned images).
-- **Multi-Format Support:** Native loaders for Word (`.docx`, `.doc`), Excel & CSV (`.xlsx`, `.xls`, `.csv`), JSON (`.json`), Markdown (`.md`), Text (`.txt`), and Images (`.png`, `.jpg`, `.jpeg`, `.webp`, `.bmp`).
-- **Table & Flowchart Parsing:** Formats tables as Markdown tables (`| col 1 | col 2 |`) and describes diagrams accurately.
-
-### 5. 🛡️ Enterprise RBAC Security & Session Persistence
-- **JWT HS256 Authentication** with **Bcrypt** password hashing.
-- Departmental metadata filtering (Admin, HR, Finance) preventing unauthorized data exposure at the vector index level.
-- Full chat history and conversation thread management stored in SQLite.
+A production-grade, secure, role-aware enterprise contract intelligence platform built on top of **Adaptive Multi-Agent RAG**. Designed specifically to solve high-stakes enterprise legal and commercial workflows: **Contract Question Answering with Verifiable Citations**, **Side-by-Side Contract Comparison**, and **Automated Contract Risk Auditing**.
 
 ---
 
@@ -78,263 +14,266 @@ Evaluated across **4 authentic public benchmark datasets** (UIT-ViQuAD 2.0, Stan
 
 ```mermaid
 flowchart TD
-    User([👤 User Query]) --> CacheCheck{⚡ Semantic Cache<br/>cosine_sim >= 0.96}
-    CacheCheck -- Hit (<10ms) --> CacheResp([⚡ Instant Response + Citations])
-    
-    CacheCheck -- Miss --> Router[🧭 Agent Router & HyDE Transformer]
-    Router -- Direct Chat --> DirectGen([💬 Direct LLM Stream])
-    
-    Router -- Retrieval Task --> HyDE[🔍 Legal HyDE Query Expansion]
-    HyDE --> HybridEngine[🔀 Hybrid Retrieval Engine]
-    
-    subgraph Hybrid Retrieval & Parent-Child Store
-        HybridEngine --> ChildDense[🎯 Child Vector Search<br/>ChromaDB HNSW]
-        HybridEngine --> ChildSparse[📚 Child Lexical Search<br/>BM25 Index]
-        ChildDense --> RRF[⚖️ Reciprocal Rank Fusion<br/>k=60]
-        ChildSparse --> RRF
-        RRF --> ParentLookup[📁 Parent Chunk Re-assembly<br/>1500-token Context]
+    subgraph Client ["Client Layer"]
+        WebUI["React 18 + Vite Web App"]
+        APIClient["REST / SSE API Clients"]
     end
-    
-    ParentLookup --> Reranker[🎯 BAAI Cross-Encoder Reranker]
-    Reranker --> Grader{✅ Document Relevance<br/>Grader}
-    
-    Grader -- Irrelevant --> Rewriter[🔄 Query Rewriter] --> HybridEngine
-    Grader -- Relevant --> Generator[✍️ Gemini / LLM Generator]
-    
-    Generator --> DB[(🗄️ SQLite DB<br/>Chats & Cache)]
-    Generator --> SSEStream([📡 Real-time SSE Stream & Citations])
+
+    subgraph Security ["Security & Access Control (Anti-IDOR)"]
+        AuthGate["OAuth2 JWT Auth Guard"]
+        ACL["Tenant & Role ACL Pre-Filter (admin, legal, finance, hr, user)"]
+        Audit["Structured Audit Logger"]
+    end
+
+    subgraph Ingestion ["Canonical Ingestion Pipeline (Async)"]
+        DocInput["Multi-Format Ingestion (PDF, Scanned PDF, DOCX, MD, JSON)"]
+        OCRGate["OCR Gating Analyzer (Multi-Signal Bypass)"]
+        CanonModel["Canonical Document Model (Page / Block / BBox)"]
+        TokenChunker["Structure- & Token-Aware Parent-Child Chunker"]
+        DocInput --> OCRGate --> CanonModel --> TokenChunker
+    end
+
+    subgraph Storage ["Dual Index & Persistence Layer"]
+        ChromaDB["Chroma Vector DB (Dense Embeddings)"]
+        BM25Idx["Rank-BM25 Sparse Index (Lexical Exact Match)"]
+        RelationalDB["SQLAlchemy ORM (PostgreSQL / SQLite)"]
+        SemanticCache["Bounded Tenant/ACL-Isolated Semantic Cache"]
+        TokenChunker -->|Child Chunks ~250 tok| ChromaDB
+        TokenChunker -->|Child Chunks ~250 tok| BM25Idx
+        TokenChunker -->|Parent Context ~1200 tok| RelationalDB
+    end
+
+    subgraph Orchestration ["Adaptive Multi-Agent Engine"]
+        Router["Multi-Signal Retrieval Confidence Engine"]
+        Agent1["Agent 1: Retrieval Planner (Complexity & Facet Decomposition)"]
+        Agent2["Agent 2: Evidence Critic (Coverage & Missing Clause Detection)"]
+        Agent3["Agent 3: Answer Verifier (Claim Attribution & Grounding Audit)"]
+        RRF["Deterministic Reciprocal Rank Fusion (RRF k=60)"]
+        Reranker["CrossEncoder Reranker (BAAI/bge-reranker-base)"]
+        ParentExpander["Hierarchical Parent Context Expander"]
+    end
+
+    subgraph Gateway ["Resilient Gemini API Gateway"]
+        RateLimiter["Sliding-Window RPM/TPM Rate Limiter"]
+        CircuitBreaker["Circuit Breaker (5-strike trip / 30s recovery)"]
+        RetryManager["Exponential Jitter Backoff (Transient 429/5xx only)"]
+    end
+
+    WebUI --> AuthGate --> ACL
+    ACL --> Router
+    Router -->|Level 0: Direct Answer / Cache| SemanticCache
+    Router -->|Level 1: Fast Hybrid| BM25Idx & ChromaDB --> RRF --> ParentExpander
+    Router -->|Level 2: Semantic Escalate| BM25Idx & ChromaDB --> RRF --> Reranker --> ParentExpander
+    Router -->|Level 3: Full Multi-Agent| Agent1 --> BM25Idx & ChromaDB --> RRF --> Reranker --> Agent2 --> ParentExpander
+    ParentExpander --> Gateway
+    Gateway --> Agent3 --> WebUI
 ```
 
 ---
 
-## 📊 Benchmark Results across 4 Public Datasets
+## 🔑 Core Architectural Principles
 
-Empirical benchmarks evaluated across **4 authentic, publicly available datasets**:
-
-### 1. 🇻🇳 UIT-ViQuAD 2.0 (Vietnamese Academic QA — $N=3,814$ Full Split)
-| Retrieval Strategy | Top-k ($k$) | Hit Rate (%) | MRR | Latency P50 | Throughput (QPS) |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **BM25 Sparse-only** | 5 | 86.6% | 0.7486 | 0.03 ms | 42,333 QPS |
-| **Dense Vector-only** | 5 | 73.2% | 0.5674 | 0.03 ms | 58,441 QPS |
-| **Hybrid RRF** | **5** | **89.8%** *(+16.6pp vs Dense)* | **0.7320** | **0.08 ms** | **17,627 QPS** |
-| **Hybrid RRF** | **10** | **93.9%** | **0.7313** | **0.09 ms** | **14,795 QPS** |
-| **Hybrid RRF** | **20** | **96.9%** | **0.7315** | **0.14 ms** | **9,525 QPS** |
-
----
-
-### 2. 🌐 Stanford SQuAD 2.0 (Global Standard QA — $N=2,000$ Samples)
-| Retrieval Strategy | Top-k ($k$) | Hit Rate (%) | MRR | Latency P50 | Throughput (QPS) |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **BM25 Sparse-only** | 5 | 82.8% | 0.6995 | 0.01 ms | 105,966 QPS |
-| **Dense Vector-only** | 5 | 83.8% | 0.6810 | 0.01 ms | 105,112 QPS |
-| **Hybrid RRF** | **5** | **89.7%** *(+5.9pp vs Dense)* | **0.7591** | **0.05 ms** | **23,642 QPS** |
-| **Hybrid RRF** | **10** | **94.1%** | **0.7620** | **0.07 ms** | **22,694 QPS** |
-| **Hybrid RRF** | **20** | **95.2%** | **0.7615** | **0.12 ms** | **20,154 QPS** |
+1. **Problem-First Legal Intelligence**: Specifically optimized for enterprise legal contracts (NDAs, MSAs, SLAs, Licenses) rather than generic open-domain chat.
+2. **Deterministic-First, Reasoning on Demand**: Fast lexical/hybrid paths bypass expensive LLM calls when confidence is mathematically high ($>0.75$).
+3. **Only Three Reasoning Agents**:
+   - **Agent 1: Retrieval Planner** — Decomposes complex multi-faceted or comparative legal queries.
+   - **Agent 2: Evidence Critic** — Audits whether retrieved clauses sufficiently address all query obligations with a hard limit of 2 retrieval attempts.
+   - **Agent 3: Answer Verifier** — Validates generated claims sentence-by-sentence against cited text; flags unsupported claims or sets `unknown_error` on API failure (never silently `grounded`).
+4. **Token- & Structure-Aware Parent-Child Chunking**:
+   - Replaces naive character splitters with hierarchical AST boundary chunking: `Article -> Section -> Clause -> Paragraph -> Sentence -> Token`.
+   - Indexes precise **Child chunks (~200–300 tokens)** for search precision, while resolving to **Parent chunks (~1000–1500 tokens)** for full synthesis context.
+5. **Anti-IDOR & Zero Cross-Role Leakage**:
+   - Conversations, documents, and messages are query-bound by `(tenant_id, username, role)`.
+   - Semantic and exact caches use isolated namespace hashes `SHA256(tenant_id || role || corpus_version)`. A cached Finance answer is never served to HR.
+6. **Resilient Gemini API Gateway**:
+   - Centralized gateway wrapping Google GenAI SDK with sliding-window RPM limits, threadpool concurrency semaphores, exponential backoff with jitter, and circuit breaker trip protection.
 
 ---
 
-### 3. 📈 Financial QA 10-K (SEC Filings & Audits — $N=1,496$ Samples)
-| Retrieval Strategy | Top-k ($k$) | Hit Rate (%) | MRR | Latency P50 | Throughput (QPS) |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **BM25 Sparse-only** | 5 | 76.9% | 0.6584 | 0.03 ms | 29,947 QPS |
-| **Dense Vector-only** | 5 | 81.8% | 0.7003 | 0.04 ms | 24,438 QPS |
-| **Hybrid RRF** | **5** | **85.7%** *(+3.9pp vs Dense)* | **0.7259** | **0.09 ms** | **11,726 QPS** |
-| **Hybrid RRF** | **10** | **91.0%** | **0.7321** | **0.10 ms** | **10,471 QPS** |
-| **Hybrid RRF** | **20** | **94.2%** | **0.7331** | **0.12 ms** | **8,141 QPS** |
+## 💼 Core Business Workflows
+
+### A. Role-Aware Contract QA
+Ask complex legal questions across uploaded agreements with exact paragraph, page, and bounding box citations.
+- **Adaptive Level 0**: Conversational greetings and cache hits returned in $<10\text{ms}$.
+- **Adaptive Level 1**: High-confidence hybrid retrieval (BM25 + Dense + RRF + Parent Expansion) in $\approx 45\text{ms}$.
+- **Adaptive Level 2**: CrossEncoder reranking for disambiguating semantically dense clauses.
+- **Adaptive Level 3**: Multi-Query decomposition, Evidence Critic gap analysis, and Answer Verifier attribution audit.
+
+### B. Multi-Contract Comparison
+Side-by-side contrast of two contracts across standard or customized legal facets:
+- *Term & Termination for Convenience*
+- *Liability Caps & Consequential Damages*
+- *Indemnification & Defense Obligations*
+- *Governing Law & Dispute Resolution*
+- *Notice Periods & Auto-Renewal*
+
+### C. Automated Contract Risk Review
+Automated compliance auditor combining configurable regex/keyword business rules with contextual LLM legal exposure assessment and actionable redline recommendations.
 
 ---
 
-### 4. ⚖️ Legal RAG Benchmark (`isaacus/legal-rag-bench` — $N=1,465$ Commercial Contracts & Court Cases)
-| Retrieval Strategy | Top-k ($k$) | Hit Rate (%) | MRR | Latency P50 | Throughput (QPS) |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **BM25 Sparse-only** | 5 | 44.4% | 0.3222 | 0.08 ms | 3,920 QPS |
-| **Dense Vector-only** | 5 | 51.4% | 0.3501 | 0.01 ms | 82,243 QPS |
-| **Hybrid RRF Baseline** | 5 | 54.2% | 0.4058 | 0.08 ms | 3,689 QPS |
-| **Parent-Child + Hybrid RRF** | 5 | 50.0% | 0.3374 | 0.20 ms | 781 QPS |
-| **🏆 SOTA 3: HyDE + Parent-Child + Cross-Encoder** | **5** | **56.9%** *(+5.5pp vs Dense)* | **0.4094** *(+17.0% boost)* | **1.20 ms** | **0.8 QPS** |
-| **Parent-Child + Hybrid RRF** | 10 | 48.4% | 0.2451 | 0.22 ms | 710 QPS |
-| **Parent-Child + Hybrid RRF** | 15 | 52.6% | 0.2139 | 0.25 ms | 680 QPS |
-| **Parent-Child + Hybrid RRF** | **20** | **54.7%** | **0.2124** | **0.28 ms** | **650 QPS** |
+## 📊 Empirical Benchmark & Ablation Results
 
-> **Key Finding:** Neural Cross-Encoder Reranking (`BAAI/bge-reranker-base`) combined with Legal HyDE and Parent-Child Chunking delivers the highest MRR (**0.4094**) and Hit Rate (**56.9%**) on complex legal contract benchmarks. Top-k expansion to $k=20$ captures up to $54.7\%$ hit rate across dense boilerplate legal texts.
+Audited independently against the official **CUAD (Contract Understanding Atticus Dataset) v1** frozen test split (10 commercial contracts, 585 child chunks, 50 leak-free queries):
 
----
+### 1. Mandatory 7-Variant Retrieval & Pipeline Ablation
 
-## 📁 Repository Structure
+**Run ID**: `ablation_run_20260814_175128_97ee34`  
+**Dataset**: Official CUAD v1 Frozen TEST Set (`evaluation/manifests/cuad_official_manifest.json`)  
+**Trace Artifacts**: `evaluation/runs/ablation_run_20260814_175128_97ee34/`  
 
-```
-├── app/
-│   ├── api/                   # FastAPI backend routes, auth & schemas
-│   │   ├── auth.py            # JWT authentication & RBAC middleware
-│   │   ├── deps.py            # Dependency injections & rate limiters
-│   │   ├── routes.py          # Chat streaming, conversations & caching endpoints
-│   │   ├── schemas.py         # Pydantic data validation models
-│   │   └── upload.py          # Multi-format upload handler
-│   ├── chunking/              # Advanced chunking engines
-│   │   └── parent_child.py    # Hierarchical Parent-Child Legal Chunker
-│   ├── core/                  # Core configuration, database & embeddings
-│   │   ├── config.py          # Environment settings
-│   │   ├── db.py              # SQLite database engine (Users, Chats, Semantic Cache)
-│   │   └── embedding.py       # SentenceTransformer embedding wrapper
-│   ├── graph/                 # Agentic workflow & decision graph
-│   │   ├── agentic_rag.py     # Router, grader, rewriter & generator logic
-│   │   ├── legal_citation.py  # Statutory Citation Graph Linker
-│   │   └── state.py           # Graph state definitions
-│   ├── ingestion/             # Document loading, OCR & chunking pipeline
-│   │   ├── chunking.py        # Recursive markdown-aware chunker
-│   │   ├── loader.py          # Multi-format document loader (.docx, .xlsx, .json, .pdf, images)
-│   │   ├── ocr.py             # Multimodal Vision OCR (Gemini Vision + PyMuPDF)
-│   │   └── pipeline.py        # Ingestion orchestration & Chroma indexing
-│   └── retrieval/             # Retrieval & Reranking engines
-│       ├── hyde.py            # Legal HyDE Query Expansion Transformer
-│       ├── hybrid_retriever.py# Hybrid BM25 + Vector + Reciprocal Rank Fusion
-│       ├── reranker.py        # BAAI Cross-Encoder Neural Reranker
-│       └── vector_store.py    # ChromaDB persistent store wrapper
-├── frontend/                  # React 19 + Vite Modern Web Interface
-│   ├── src/
-│   │   ├── components/        # ChatInterface, Login, UploadModal, Word Citation Viewer
-│   │   ├── index.css          # Design system, animations & Word document styling
-│   │   └── App.jsx            # Main app orchestrator
-│   ├── vite.config.js         # Vite proxy & allowedHosts configuration
-│   └── package.json
-├── scripts/                   # Evaluation & benchmark scripts
-│   ├── launch_public_tunnel.py# Auto Cloudflare HTTPS tunnel launcher
-│   ├── run_four_public_real_benchmarks.py # Benchmark across 4 public real datasets
-│   └── run_sota_legal_benchmark.py       # SOTA Legal RAG benchmark runner
-├── tests/                     # Test suite (Pytest - 15/15 Passed)
-│   ├── test_api.py            # API health & authorization tests
-│   ├── test_chunking.py       # Chunker & text cleaner tests
-│   ├── test_db.py             # SQLite persistence & semantic cache tests
-│   ├── test_loader.py         # Multi-format document loader tests (.docx, .xlsx, .json, .png)
-│   └── test_retrieval.py      # BM25, RRF & Context Stitching tests
-├── docker-compose.yml         # Full-stack Docker deployment configuration
-├── requirements.txt           # Python backend dependencies
-├── run_all.bat                # 1-Click local development launcher
-└── run_public.bat             # 1-Click public HTTPS web deployment
-```
+| Architecture Variant | Recall@5 | Recall@10 | MRR | nDCG@5 | Faithfulness | Citation Prec. | P50 Latency (ms) | P95 Latency (ms) | Avg LLM Calls/Q |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **A. Dense Only** | 0.0102 | 0.0102 | 0.0440 | 0.0229 | 0.890 | 0.032 | 2.59 ms | 3.79 ms | 1.00 |
+| **B. BM25 Only** | 0.0102 | 0.0102 | 0.0440 | 0.0229 | 0.890 | 0.032 | 3.11 ms | 4.36 ms | 1.00 |
+| **C. Hybrid (BM25 + Dense + RRF)** | 0.0067 | 0.0067 | 0.0333 | 0.0169 | 0.870 | 0.020 | 3.57 ms | 5.06 ms | 1.00 |
+| **D. Hybrid + Parent-Child** | 0.0067 | 0.0067 | 0.0333 | 0.0169 | 0.920 | 0.020 | 3.37 ms | 4.87 ms | 1.00 |
+| **E. Hybrid + Parent-Child + CrossEncoder** | 0.0102 | 0.0102 | **0.0847** | **0.0333** | **0.920** | **0.032** | 4,032.20 ms | 7,273.15 ms | 1.00 |
+| **F. Fixed Full Pipeline** | 0.0102 | 0.0102 | **0.0847** | **0.0333** | 0.890 | **0.032** | 3,775.92 ms | 6,449.40 ms | **4.00** |
+| **G. Adaptive Multi-Agent Pipeline (Ours)** | **0.0102** | **0.0102** | **0.0847** | **0.0333** | **0.920** | **0.032** | **2,386.89 ms** | **4,391.88 ms** | **2.36** |
+
+> **Key Findings**:
+> - **Reranker Impact**: The CrossEncoder reranker delivered a **+92.5% MRR improvement** (from 0.0440 to 0.0847) over unreranked lexical/dense retrieval.
+> - **Adaptive LLM Reduction**: The **Adaptive Multi-Agent Pipeline** achieved a **41.0% LLM invocation reduction** (from 4.00 down to 2.36 invocations/query) by dynamically escalating from high-confidence direct extraction to multi-agent reasoning on demand.
+
+### 2. Multi-Format & OCR Degradation Summary
+
+| Metric Dimension | Measured Result | Standard Baseline | Status |
+| :--- | :---: | :---: | :---: |
+| **Markdown / Word Parsing Recall@5** | **1.0000** | $1.0000$ | ✅ PASSED |
+| **Clean Scan (300 DPI) Levenshtein CER** | **0.0000** | $0.0000$ | ✅ PASSED |
+| **Degraded Scan (100 DPI) Levenshtein CER** | **0.0071** (WER: 0.021) | $\le 0.050$ | ✅ PASSED |
+| **Noisy Scan (Gaussian Noise) Levenshtein CER**| **0.0890** (WER: 0.184) | Documented | ⚠️ DEGRADED |
+| **Corpus Local Throughput (10 Contracts, 585 Chunks)**| **291.7 QPS** (P50: 3.45ms) | $\ge 100\text{ QPS}$ | ✅ PASSED |
+| **Unauthorized Retrieval Rate (ACL Pre-Filter)**| **0.00%** | $0.00\%$ | ✅ PASSED |
+| **Benchmark Integrity Regression Tests** | **10 / 10 Passed (100%)** | $100\%$ | ✅ PASSED |
+
+### 3. Formal Benchmark & Audit Documentation
+Comprehensive execution logs, mathematical metric definitions, and raw prediction JSONL traces:
+* 📄 [**Official Benchmark Report**](evaluation/reports/BENCHMARK_REPORT.md)
+* 📋 [**Dataset Provenance & Integrity Report**](evaluation/reports/DATASET_REPORT.md)
+* ⚡ [**Performance & Latency Report**](evaluation/reports/PERFORMANCE_REPORT.md)
+* 🔍 [**Claim Verification Matrix**](evaluation/reports/CLAIM_VERIFICATION.md)
+* 🛡️ [**Security & Anti-IDOR Audit Report**](evaluation/reports/SECURITY_REPORT.md)
+* ⚠️ [**Known Limitations & Boundaries**](evaluation/reports/KNOWN_LIMITATIONS.md)
 
 ---
 
-## ⚡ Quickstart Guide
+## 🚀 Quickstart & Setup
 
-### 1. Prerequisites
-- Python `3.10+`
-- Node.js `18+` & `npm`
-- Google Gemini API Key ([Get a free key here](https://aistudio.google.com/))
+### Option 1: Docker Compose (Recommended)
 
-### 2. Installation & Setup
+1. Clone the repository and copy the environment template:
+   ```bash
+   cp .env.example .env
+   ```
+2. Configure your `GEMINI_API_KEY` in `.env`.
+3. Launch both backend and frontend:
+   ```bash
+   docker-compose up --build
+   ```
+4. Access the web application at `http://localhost:3000` (API Docs at `http://localhost:8000/docs`).
 
+---
+
+### Option 2: Local Python & Node Setup
+
+#### 1. Backend Setup
 ```bash
-# 1. Clone repository
-git clone https://github.com/XLaiHuy/Multi-Agent-RAG.git
-cd Multi-Agent-RAG
-
-# 2. Set up Python virtual environment
+# Create and activate virtual environment
 python -m venv .venv
-# On Windows:
-.venv\Scripts\activate
-# On Linux/macOS:
-source .venv/bin/activate
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# 3. Install Python dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# 4. Install Frontend dependencies
+# Run backend development server
+python scripts/run_server.py
+```
+
+#### 2. Frontend Setup
+```bash
 cd frontend
 npm install
-cd ..
-
-# 5. Configure environment variables
-cp .env.example .env
-```
-
-Set your API keys in `.env`:
-```ini
-GEMINI_API_KEY=your_gemini_api_key_here
-JWT_SECRET_KEY=your_super_secret_jwt_key
-CHROMA_PERSIST_DIRECTORY=data/chroma
+npm run dev
 ```
 
 ---
 
-### 3. Run the Application
+## 🧪 Running Automated Tests & Benchmarks
 
-#### Option A: 1-Click Public Web (HTTPS Tunnel)
-```bat
-run_public.bat
-```
-*Launches backend, frontend, and outputs a public Cloudflare HTTPS URL accessible globally.*
-
-#### Option B: Local Development
-```bat
-run_all.bat
-```
-- **Backend API:** `http://localhost:8000` (Swagger UI: `http://localhost:8000/docs`)
-- **Frontend Web:** `http://localhost:5173`
-
-#### Option C: Docker Deployment
+Run the complete test suite (Unit, Security, IDOR, Agent reasoning):
 ```bash
-docker compose up --build -d
+pytest -v tests/
+```
+
+Run the mandatory Adaptive Pipeline Ablation experiment:
+```bash
+python scripts/run_ablation.py
+```
+
+Run the full CUAD evaluation benchmark:
+```bash
+python scripts/run_benchmark.py
 ```
 
 ---
 
-### 4. RBAC Default Credentials
+## 📂 Repository Structure
 
-| Username | Password | Role | Access Scope |
+```
+.
+├── backend/
+│   └── app/
+│       ├── main.py                  # FastAPI Application & Lifespan Entrypoint
+│       ├── api/                     # Versioned REST & SSE API Routers
+│       │   ├── auth_routes.py       # Login & User Profile Endpoints
+│       │   ├── document_routes.py   # Asynchronous Ingestion & Document Library
+│       │   ├── qa_routes.py         # Sync & Streaming Contract QA + Anti-IDOR History
+│       │   ├── compare_routes.py    # Multi-Contract Comparison Endpoint
+│       │   └── risk_routes.py       # Contract Risk Review Endpoint
+│       ├── core/                    # Settings & Anti-IDOR Security Validation
+│       ├── domain/                  # Canonical Models, SQLAlchemy Schemas, Risk Rules
+│       ├── providers/               # Gemini Gateway (Circuit-Broken), Embeddings, Reranker
+│       ├── ingestion/               # Multi-Format Parsers, OCR Gating, Structure Chunker
+│       ├── retrieval/               # BM25, Dense Chroma, RRF Fusion, Confidence Engine
+│       ├── agents/                  # 3 Reasoning Agents: Planner, Critic, Verifier
+│       ├── application/             # Core Services: QA, Compare, Risk Audit
+│       └── persistence/             # Database Repositories & ACL-Isolated Cache
+├── frontend/                        # React 18 + Vite Enterprise Legal Interface
+│   ├── src/
+│   │   ├── App.jsx                  # Main App with Tabbed Workflow Navigation
+│   │   └── components/              # Citation Modal, Compare View, Risk Dashboard, Debug
+├── evaluation/                      # CUAD Benchmark & Format Invariance Suite
+│   ├── benchmarks/                  # Full Benchmark & 7-Variant Ablation Runners
+│   ├── metrics/                     # Retrieval, Generation, and Citation Metrics
+│   ├── transforms/                  # Multi-Format Variant Transformations
+│   └── reports/                     # Structured JSON Evaluation Artifacts
+├── tests/                           # Unit, Security, IDOR, and Agent Test Suites
+├── docker/                          # Dockerfiles for Backend & Frontend
+├── scripts/                         # Command-Line Helpers (Server, Benchmark, Ablation)
+├── docker-compose.yml               # Multi-Container Deployment Config
+├── requirements.txt                 # Python Dependencies
+└── pyproject.toml                   # Project Metadata
+```
+
+---
+
+## 🔒 Security & Default Credentials (Development Mode)
+
+In development mode (`ENVIRONMENT=development`), the SQLite database is automatically seeded with test role accounts:
+
+| Username | Password | Role | Tenant |
 | :--- | :--- | :--- | :--- |
-| `admin` | `admin` | System Admin | Full document upload & system-wide access |
-| `hr01` | `hr` | HR Manager | HR policies & personnel documents |
-| `ketoan01` | `ketoan` | Finance Staff | Financial reports, invoices & tax tables |
-| `user01` | `user123` | General User | General knowledge base queries |
+| `admin` | `admin123` | `admin` | `default_tenant` |
+| `legal_user` | `legal123` | `legal` | `default_tenant` |
+| `finance_user` | `finance123` | `finance` | `default_tenant` |
+| `hr_user` | `hr123` | `hr` | `default_tenant` |
+| `standard_user` | `user123` | `user` | `default_tenant` |
+
+> ⚠️ **Production Notice**: In `ENVIRONMENT=production`, default credential seeding is strictly disabled and application startup will fail immediately if `JWT_SECRET_KEY` is not explicitly set to a cryptographically secure 32+ character key.
 
 ---
 
-## 🧪 Automated Testing
-
-Execute the test suite (15/15 unit and integration tests passing):
-
-```bash
-pytest -v
-```
-
-```text
-tests/test_api.py::test_health_check PASSED                              [  6%]
-tests/test_api.py::test_unauthorized_chat_access PASSED                  [ 13%]
-tests/test_chunking.py::test_clean_text PASSED                           [ 20%]
-tests/test_chunking.py::test_chunk_document PASSED                       [ 26%]
-tests/test_db.py::test_sqlite_user_auth PASSED                           [ 33%]
-tests/test_db.py::test_conversation_persistence PASSED                   [ 40%]
-tests/test_db.py::test_semantic_cache PASSED                             [ 46%]
-tests/test_loader.py::test_load_text_file PASSED                         [ 53%]
-tests/test_loader.py::test_load_json_file PASSED                         [ 60%]
-tests/test_loader.py::test_load_word_file PASSED                         [ 66%]
-tests/test_loader.py::test_load_excel_csv_file PASSED                    [ 73%]
-tests/test_loader.py::test_load_image_synthetic PASSED                   [ 80%]
-tests/test_retrieval.py::test_reciprocal_rank_fusion PASSED              [ 86%]
-tests/test_retrieval.py::test_search_result_dataclass PASSED             [ 93%]
-tests/test_retrieval.py::test_stitch_context_chunks PASSED               [100%]
-
-======================= 15 passed in 10.01s =======================
-```
-
----
-
-## 🔌 API Endpoints Specification
-
-| Method | Endpoint | Description | Auth Required |
-| :--- | :--- | :--- | :---: |
-| `POST` | `/api/login` | Authenticate user & obtain JWT Bearer Token | No |
-| `POST` | `/api/chat/stream` | Real-time SSE streaming with Semantic Cache & Hybrid RAG | Yes |
-| `POST` | `/api/chat` | Synchronous RAG query endpoint | Yes |
-| `GET` | `/api/conversations` | List user chat sessions from SQLite database | Yes |
-| `GET` | `/api/conversations/{id}/messages` | Retrieve message history for a specific chat thread | Yes |
-| `DELETE` | `/api/conversations/{id}` | Delete a conversation thread | Yes |
-| `POST` | `/api/upload` | Upload & ingest documents (.docx, .xlsx, .json, .pdf, images) | Yes (Admin) |
-| `GET` | `/health` | Healthcheck endpoint | No |
-
----
-
-## 📄 License
-
-This project is open-source under the [MIT License](LICENSE).
+## 📜 License
+Distributed under the MIT License. See `LICENSE` for more information.

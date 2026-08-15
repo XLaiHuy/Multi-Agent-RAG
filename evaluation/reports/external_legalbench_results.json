@@ -1,0 +1,18 @@
+{
+  "benchmark_name": "LegalBench-RAG (Standardized CUAD Clause Retrieval Benchmark)",
+  "protocol": "Zero-Shot Multi-Contract Clause Retrieval",
+  "total_contracts": 25,
+  "total_chunks_indexed": 1221,
+  "total_queries_evaluated": 293,
+  "Recall@1": 0.0068,
+  "Recall@5": 0.0268,
+  "Recall@10": 0.0459,
+  "HitRate@1": 0.041,
+  "HitRate@5": 0.1468,
+  "HitRate@10": 0.2355,
+  "MRR": 0.0896,
+  "nDCG@5": 0.0341,
+  "P50_Latency_ms": 4122.34,
+  "P95_Latency_ms": 5971.97,
+  "Indexing_Duration_ms": 500.49
+}

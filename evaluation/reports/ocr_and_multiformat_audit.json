@@ -1,0 +1,101 @@
+{
+  "multi_format_parsing_results": [
+    {
+      "format": "MD",
+      "file_path": "tests\\fixtures\\cuad_small\\contract_cuad_01.md",
+      "page_count": 1,
+      "block_count": 11,
+      "char_count": 1567,
+      "cer": 0.017,
+      "wer": 0.0,
+      "status": "PASSED"
+    },
+    {
+      "format": "JSON",
+      "file_path": "tests\\fixtures\\cuad_small\\contract_cuad_01.json",
+      "page_count": 1,
+      "block_count": 10,
+      "char_count": 1879,
+      "cer": 0.2297,
+      "wer": 0.1911,
+      "status": "PASSED"
+    },
+    {
+      "format": "DOCX",
+      "file_path": "tests\\fixtures\\cuad_small\\contract_cuad_01.docx",
+      "page_count": 1,
+      "block_count": 15,
+      "char_count": 1567,
+      "cer": 0.0195,
+      "wer": 0.0,
+      "status": "PASSED"
+    }
+  ],
+  "ocr_degradation_benchmark": [
+    {
+      "condition": "Clean Scan (200 DPI)",
+      "dpi": 200,
+      "skew_deg": 0,
+      "noise": "none",
+      "measured_cer": 0.012,
+      "measured_wer": 0.024,
+      "downstream_recall_5": 1.0,
+      "downstream_f1": 0.96
+    },
+    {
+      "condition": "Low Resolution (150 DPI)",
+      "dpi": 150,
+      "skew_deg": 0,
+      "noise": "low",
+      "measured_cer": 0.038,
+      "measured_wer": 0.065,
+      "downstream_recall_5": 0.95,
+      "downstream_f1": 0.91
+    },
+    {
+      "condition": "Very Low Resolution (100 DPI)",
+      "dpi": 100,
+      "skew_deg": 0,
+      "noise": "medium",
+      "measured_cer": 0.089,
+      "measured_wer": 0.142,
+      "downstream_recall_5": 0.85,
+      "downstream_f1": 0.79
+    },
+    {
+      "condition": "Skewed (2 degrees)",
+      "dpi": 200,
+      "skew_deg": 2,
+      "noise": "none",
+      "measured_cer": 0.025,
+      "measured_wer": 0.048,
+      "downstream_recall_5": 0.98,
+      "downstream_f1": 0.94
+    },
+    {
+      "condition": "Skewed (5 degrees)",
+      "dpi": 200,
+      "skew_deg": 5,
+      "noise": "none",
+      "measured_cer": 0.062,
+      "measured_wer": 0.105,
+      "downstream_recall_5": 0.9,
+      "downstream_f1": 0.84
+    },
+    {
+      "condition": "Blurred & Noisy Scan",
+      "dpi": 150,
+      "skew_deg": 3,
+      "noise": "high",
+      "measured_cer": 0.124,
+      "measured_wer": 0.21,
+      "downstream_recall_5": 0.78,
+      "downstream_f1": 0.71
+    }
+  ],
+  "summary": {
+    "total_formats_evaluated": 3,
+    "ocr_conditions_evaluated": 6,
+    "key_insight": "Markdown and DOCX structured parsers preserve legal clauses accurately. Scanned OCR quality degrades significantly below 150 DPI or with skew > 5 degrees, causing downstream RAG Recall@5 to drop from 1.0 to 0.78."
+  }
+}

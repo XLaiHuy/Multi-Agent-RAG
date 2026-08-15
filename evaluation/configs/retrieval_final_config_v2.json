@@ -1,0 +1,53 @@
+{
+  "protocol_version": "2.1.0",
+  "ingestion": {
+    "chunker_type": "StructureAwareParentChildChunker",
+    "child_target_tokens": 250,
+    "child_overlap_tokens": 30,
+    "parent_target_tokens": 1200,
+    "parent_overlap_tokens": 100,
+    "structural_metadata_enabled": true,
+    "structural_metadata_format": "[Document: {doc_title}] [Section: {section_path}]\\n{chunk_text}",
+    "context_augmentation_sac": "EXP-5A (Structural Metadata retained; EXP-5B Preamble rejected)"
+  },
+  "first_stage_retrieval": {
+    "dense_model_default": "BAAI/bge-small-en-v1.5",
+    "dense_model_high_capacity": "BAAI/bge-m3",
+    "dense_dimension_default": 384,
+    "dense_dimension_high_capacity": 1024,
+    "dense_top_k": 20,
+    "bm25_top_k": 20,
+    "sparse_retriever": "BM25Okapi",
+    "fusion_method": "ReciprocalRankFusion",
+    "rrf_k": 60,
+    "rrf_dense_weight": 1.0,
+    "rrf_bm25_weight": 1.0,
+    "candidate_pool_size": 20
+  },
+  "second_stage_reranking": {
+    "reranker_model": "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+    "reranker_candidate_count": 20,
+    "reranker_fast_candidate_count": 10,
+    "reranker_top_n": 10,
+    "reranker_max_seq_length": 512,
+    "reranker_batch_size": 32,
+    "torch_num_threads": 4,
+    "adaptive_gate_enabled": true,
+    "adaptive_consensus_threshold": 0.8,
+    "adaptive_high_confidence_threshold": 0.88,
+    "score_normalization": "sigmoid"
+  },
+  "multi_agent_orchestration": {
+    "architecture": "AdaptiveMultiAgentRAG",
+    "agents": [
+      "RetrievalPlanner",
+      "EvidenceCritic",
+      "AnswerVerifier"
+    ],
+    "direct_qa_fast_path_threshold": 0.78,
+    "escalated_verification_threshold": 0.75,
+    "authoritative_refusal_threshold": 0.72,
+    "parent_expansion_enabled": true,
+    "zero_cross_tenant_leakage": true
+  }
+}

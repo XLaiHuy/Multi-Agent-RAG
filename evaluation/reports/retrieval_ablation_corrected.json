@@ -1,0 +1,93 @@
+{
+  "A_Dense_Only": {
+    "variant": "A_Dense_Only",
+    "queries_evaluated": 19,
+    "Recall@5": 0.0526,
+    "Recall@10": 0.0848,
+    "HitRate@5": 0.2632,
+    "HitRate@10": 0.3684,
+    "MRR": 0.133,
+    "nDCG@5": 0.0591,
+    "P50_Latency_ms": 33.09,
+    "P95_Latency_ms": 50.66,
+    "Avg_LLM_Calls_Per_Query": 1.0
+  },
+  "B_BM25_Only": {
+    "variant": "B_BM25_Only",
+    "queries_evaluated": 19,
+    "Recall@5": 0.0453,
+    "Recall@10": 0.0576,
+    "HitRate@5": 0.2632,
+    "HitRate@10": 0.3684,
+    "MRR": 0.1048,
+    "nDCG@5": 0.0458,
+    "P50_Latency_ms": 34.94,
+    "P95_Latency_ms": 43.88,
+    "Avg_LLM_Calls_Per_Query": 1.0
+  },
+  "C_Hybrid_RRF": {
+    "variant": "C_Hybrid_RRF",
+    "queries_evaluated": 19,
+    "Recall@5": 0.0439,
+    "Recall@10": 0.0673,
+    "HitRate@5": 0.2105,
+    "HitRate@10": 0.3684,
+    "MRR": 0.15,
+    "nDCG@5": 0.0585,
+    "P50_Latency_ms": 32.18,
+    "P95_Latency_ms": 58.64,
+    "Avg_LLM_Calls_Per_Query": 1.0
+  },
+  "D_Hybrid_ParentChild": {
+    "variant": "D_Hybrid_ParentChild",
+    "queries_evaluated": 19,
+    "Recall@5": 0.0439,
+    "Recall@10": 0.0673,
+    "HitRate@5": 0.2105,
+    "HitRate@10": 0.3684,
+    "MRR": 0.15,
+    "nDCG@5": 0.0585,
+    "P50_Latency_ms": 32.16,
+    "P95_Latency_ms": 36.08,
+    "Avg_LLM_Calls_Per_Query": 1.0
+  },
+  "E_Hybrid_ParentChild_Reranker": {
+    "variant": "E_Hybrid_ParentChild_Reranker",
+    "queries_evaluated": 19,
+    "Recall@5": 0.0576,
+    "Recall@10": 0.1073,
+    "HitRate@5": 0.3684,
+    "HitRate@10": 0.4737,
+    "MRR": 0.2527,
+    "nDCG@5": 0.093,
+    "P50_Latency_ms": 9951.98,
+    "P95_Latency_ms": 17197.31,
+    "Avg_LLM_Calls_Per_Query": 1.0
+  },
+  "F_Fixed_Full_Pipeline": {
+    "variant": "F_Fixed_Full_Pipeline",
+    "queries_evaluated": 19,
+    "Recall@5": 0.0576,
+    "Recall@10": 0.1073,
+    "HitRate@5": 0.3684,
+    "HitRate@10": 0.4737,
+    "MRR": 0.2527,
+    "nDCG@5": 0.093,
+    "P50_Latency_ms": 12319.88,
+    "P95_Latency_ms": 18903.46,
+    "Avg_LLM_Calls_Per_Query": 4.0
+  },
+  "G_Adaptive_MultiAgent": {
+    "variant": "G_Adaptive_MultiAgent",
+    "queries_evaluated": 19,
+    "Recall@5": 0.0576,
+    "Recall@10": 0.1073,
+    "HitRate@5": 0.3684,
+    "HitRate@10": 0.4737,
+    "MRR": 0.2527,
+    "nDCG@5": 0.093,
+    "P50_Latency_ms": 14142.39,
+    "P95_Latency_ms": 22655.45,
+    "Avg_LLM_Calls_Per_Query": 2.16
+  }
+}

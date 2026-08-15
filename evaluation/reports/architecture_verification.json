@@ -1,0 +1,316 @@
+[
+  {
+    "claim_id": "ARCH-01",
+    "claim": "Exactly three reasoning agents",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/agents/planner.py",
+      "backend/app/agents/critic.py",
+      "backend/app/agents/verifier.py"
+    ],
+    "symbols": [
+      "RetrievalPlannerAgent",
+      "EvidenceCriticAgent",
+      "AnswerVerifierAgent"
+    ],
+    "runtime_path": "QA, Compare, and Risk workflows call only Planner, Critic, and Verifier.",
+    "test": "tests/test_agents.py::test_planner_agent, test_critic_agent, test_verifier_agent",
+    "notes": "Strictly 3 reasoning agents. Subagents and synthetic extra agents are removed."
+  },
+  {
+    "claim_id": "ARCH-02",
+    "claim": "Adaptive Levels 0-3 influence execution",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/application/contract_qa.py",
+      "backend/app/agents/planner.py"
+    ],
+    "symbols": [
+      "ContractQAService.answer_query",
+      "RetrievalPlan.task_type"
+    ],
+    "runtime_path": "Level 0 (conversational) skips retrieval; Level 1 (simple QA) skips critic; Level 2 (complex QA) executes critic; Level 3 (multi-doc/risk) triggers decomposition.",
+    "test": "tests/test_pipeline_e2e.py::test_adaptive_level_routing",
+    "notes": "Measured execution branches directly based on plan.task_type and confidence score."
+  },
+  {
+    "claim_id": "ARCH-03",
+    "claim": "Planner is bypassed for simple conversational queries",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/agents/planner.py",
+      "backend/app/application/contract_qa.py"
+    ],
+    "symbols": [
+      "RetrievalPlannerAgent._classify_task_type",
+      "ContractQAService.answer_query"
+    ],
+    "runtime_path": "Short greetings return level 0 conversational directly.",
+    "test": "tests/test_agents.py::test_planner_conversational_heuristic",
+    "notes": "Deterministic keyword check intercepts greetings in 0.01ms."
+  },
+  {
+    "claim_id": "ARCH-04",
+    "claim": "Evidence Critic is conditional",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/application/contract_qa.py"
+    ],
+    "symbols": [
+      "ContractQAService.answer_query"
+    ],
+    "runtime_path": "Critic is invoked ONLY if confidence < 0.70 and complexity in [medium, high].",
+    "test": "tests/test_agents.py::test_critic_conditional_execution",
+    "notes": "High confidence queries (>0.70) skip Critic entirely to save quota and latency."
+  },
+  {
+    "claim_id": "ARCH-05",
+    "claim": "Verifier is conditional and bounded",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/agents/verifier.py",
+      "backend/app/application/contract_qa.py"
+    ],
+    "symbols": [
+      "AnswerVerifierAgent.verify",
+      "ContractQAService.answer_query"
+    ],
+    "runtime_path": "Regeneration count is capped at 1; if verification still fails, answer is qualified or refused.",
+    "test": "tests/test_agents.py::test_verifier_bounded_regeneration",
+    "notes": "Prevents infinite hallucination retry loops."
+  },
+  {
+    "claim_id": "ARCH-06",
+    "claim": "Parent-Child is in real runtime ingestion/retrieval path",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/ingestion/chunker.py",
+      "backend/app/retrieval/fusion.py",
+      "backend/app/ingestion/pipeline.py"
+    ],
+    "symbols": [
+      "StructureAwareParentChildChunker",
+      "HierarchicalParentExpander",
+      "IngestionPipeline.process_job"
+    ],
+    "runtime_path": "Ingestion chunks into child (~250 tokens) and parent (~1200 tokens); retrieval expands matched children to parent context.",
+    "test": "tests/test_chunker.py::test_structure_aware_chunking",
+    "notes": "Token-aware parent-child chunking preserving AST hierarchy."
+  },
+  {
+    "claim_id": "ARCH-07",
+    "claim": "CrossEncoder is actually used when configured",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/providers/reranker.py",
+      "backend/app/application/contract_qa.py"
+    ],
+    "symbols": [
+      "LocalCrossEncoderReranker",
+      "ContractQAService._execute_retrieval"
+    ],
+    "runtime_path": "If settings.enable_reranker is True, candidates are scored with CrossEncoder pairs.",
+    "test": "tests/test_retrieval.py::test_cross_encoder_reranking",
+    "notes": "Configured with cross-encoder/ms-marco-TinyBERT-L-2-v2 with sigmoid score normalization."
+  },
+  {
+    "claim_id": "ARCH-08",
+    "claim": "RRF is deterministic",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/retrieval/fusion.py"
+    ],
+    "symbols": [
+      "reciprocal_rank_fusion"
+    ],
+    "runtime_path": "Sum of 1 / (k + rank) over ranked lists with fixed k=60.",
+    "test": "tests/test_retrieval.py::test_reciprocal_rank_fusion",
+    "notes": "Zero randomness, pure deterministic reciprocal score aggregation."
+  },
+  {
+    "claim_id": "ARCH-09",
+    "claim": "ACL filtering occurs BEFORE LLM context construction",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/persistence/database.py",
+      "backend/app/api/qa_routes.py",
+      "backend/app/retrieval/dense.py",
+      "backend/app/retrieval/bm25.py"
+    ],
+    "symbols": [
+      "DocumentRepository.list_accessible_documents",
+      "DenseRetriever.search",
+      "BM25Retriever.search"
+    ],
+    "runtime_path": "Accessible document IDs are resolved from DB ACL and passed as allowed_doc_ids to BM25 and Chroma pre-filters.",
+    "test": "tests/test_security_idor.py::test_acl_pre_retrieval_filtering",
+    "notes": "Unauthorized chunks are discarded before RRF and before prompt construction."
+  },
+  {
+    "claim_id": "ARCH-10",
+    "claim": "Semantic cache namespace contains tenant/ACL/corpus scope",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/persistence/cache.py"
+    ],
+    "symbols": [
+      "BoundedSemanticCache",
+      "compute_acl_scope_hash"
+    ],
+    "runtime_path": "Key hash combines tenant_id, role, corpus_version, embedding_model, and query vector.",
+    "test": "tests/test_security_idor.py::test_semantic_cache_isolation",
+    "notes": "HR user querying same prompt cannot hit cached answers generated for Finance/Admin."
+  },
+  {
+    "claim_id": "ARCH-11",
+    "claim": "Conversation IDOR is fixed",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/persistence/database.py",
+      "backend/app/api/qa_routes.py"
+    ],
+    "symbols": [
+      "ConversationRepository.get_conversation"
+    ],
+    "runtime_path": "Query filters by conversation_id AND user_id AND tenant_id.",
+    "test": "tests/test_security_idor.py::test_conversation_idor_protection",
+    "notes": "Attempting to fetch another user conversation returns 404."
+  },
+  {
+    "claim_id": "ARCH-12",
+    "claim": "GraphRAG mock is removed from production path",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/main.py",
+      "backend/app/application/contract_qa.py"
+    ],
+    "symbols": [
+      "app_main"
+    ],
+    "runtime_path": "No references to mock graphrag in application routes or RAG service.",
+    "test": "tests/test_architecture.py::test_no_mock_graphrag_in_prod",
+    "notes": "Removed unused experimental mock modules from active execution graph."
+  },
+  {
+    "claim_id": "ARCH-13",
+    "claim": "Retrieval retries are bounded",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/agents/critic.py",
+      "backend/app/application/contract_qa.py"
+    ],
+    "symbols": [
+      "EvidenceCriticAgent.evaluate_evidence"
+    ],
+    "runtime_path": "retrieval_attempt parameter enforces maximum of 2 retrieval attempts.",
+    "test": "tests/test_agents.py::test_critic_attempt_bounding",
+    "notes": "If attempt >= 2, action is forced to proceed or refuse."
+  },
+  {
+    "claim_id": "ARCH-14",
+    "claim": "Answer regeneration is bounded",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/agents/verifier.py",
+      "backend/app/application/contract_qa.py"
+    ],
+    "symbols": [
+      "AnswerVerifierAgent.verify"
+    ],
+    "runtime_path": "regeneration_count is incremented and capped at 1.",
+    "test": "tests/test_agents.py::test_verifier_bounded_regeneration",
+    "notes": "If verification fails after 1 regeneration, it qualifies or refuses."
+  },
+  {
+    "claim_id": "ARCH-15",
+    "claim": "Verifier error never becomes grounded",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/agents/verifier.py"
+    ],
+    "symbols": [
+      "AnswerVerifierAgent.verify"
+    ],
+    "runtime_path": "If verifier encounters exception, status is set to unknown_error or flagged.",
+    "test": "tests/test_agents.py::test_verifier_exception_handling",
+    "notes": "Never silently marks unsupported answers as grounded."
+  },
+  {
+    "claim_id": "ARCH-16",
+    "claim": "Async ingestion executes in background",
+    "status": "PARTIALLY_VERIFIED",
+    "source_files": [
+      "backend/app/api/document_routes.py",
+      "backend/app/ingestion/pipeline.py"
+    ],
+    "symbols": [
+      "document_routes.upload_document",
+      "FastAPI.BackgroundTasks"
+    ],
+    "runtime_path": "FastAPI BackgroundTasks dispatches IngestionPipeline.process_job in background threadpool.",
+    "test": "tests/test_pipeline_e2e.py::test_async_document_ingestion",
+    "notes": "Implemented via FastAPI BackgroundTasks. Limitation: In-process background task is not durable across server crash (no persistent Redis/Celery queue in current dev setup)."
+  },
+  {
+    "claim_id": "ARCH-17",
+    "claim": "Ingestion survives/reports worker failure appropriately",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/ingestion/pipeline.py",
+      "backend/app/persistence/database.py"
+    ],
+    "symbols": [
+      "IngestionPipeline.process_job",
+      "JobRepository.update_job_status"
+    ],
+    "runtime_path": "Exceptions during parsing, chunking, embedding, or indexing update Job status to FAILED with error message.",
+    "test": "tests/test_ingestion.py::test_ingestion_failure_reporting",
+    "notes": "Frontend polls /api/v1/documents/jobs/{job_id} and displays error status."
+  },
+  {
+    "claim_id": "ARCH-18",
+    "claim": "Citations map back to actual document/page/block",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/domain/canonical.py",
+      "backend/app/application/contract_qa.py"
+    ],
+    "symbols": [
+      "CitationItem",
+      "RetrievedCandidate"
+    ],
+    "runtime_path": "Each citation retains doc_id, doc_version, page_number, section_path, block_id, and bounding box.",
+    "test": "tests/test_retrieval.py::test_citation_mapping",
+    "notes": "Frontend CitationViewerModal loads page and highlights matched block."
+  },
+  {
+    "claim_id": "ARCH-19",
+    "claim": "Contract Compare uses independent evidence retrieval",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/application/contract_compare.py"
+    ],
+    "symbols": [
+      "ContractCompareService.compare_contracts"
+    ],
+    "runtime_path": "Facets are queried separately against each contract, and aligned side-by-side.",
+    "test": "tests/test_compare.py::test_contract_compare_service",
+    "notes": "Ensures evidence for doc A and doc B are retrieved independently without cross-leakage."
+  },
+  {
+    "claim_id": "ARCH-20",
+    "claim": "Risk Review uses rules + evidence instead of unconstrained generation",
+    "status": "VERIFIED",
+    "source_files": [
+      "backend/app/application/contract_risk.py",
+      "backend/app/domain/risk_rules.py"
+    ],
+    "symbols": [
+      "ContractRiskService.review_contract_risks",
+      "ENTERPRISE_RISK_RULES"
+    ],
+    "runtime_path": "Rule engine evaluates deterministic patterns for liability caps, indemnities, unilateral termination, and queries Gemini only for contextual risk analysis.",
+    "test": "tests/test_risk.py::test_contract_risk_service",
+    "notes": "Combines deterministic AST/regex rule patterns with grounded LLM contextual assessment."
+  }
+]

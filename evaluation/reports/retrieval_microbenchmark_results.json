@@ -1,0 +1,41 @@
+{
+  "scale_1_contracts": {
+    "contracts_count": 1,
+    "total_child_chunks": 16,
+    "total_parent_blocks": 3,
+    "parse_and_chunk_time_s": 0.003,
+    "bm25_indexing_time_s": 0.0025,
+    "sample_vector_embed_time_s": 16.856,
+    "P50_latency_ms": 0.312,
+    "P95_latency_ms": 0.643,
+    "avg_latency_ms": 0.344,
+    "estimated_QPS": 2907.6,
+    "memory_usage_mb": 180.0
+  },
+  "scale_5_contracts": {
+    "contracts_count": 5,
+    "total_child_chunks": 71,
+    "total_parent_blocks": 15,
+    "parse_and_chunk_time_s": 0.016,
+    "bm25_indexing_time_s": 0.0131,
+    "sample_vector_embed_time_s": 8.519,
+    "P50_latency_ms": 0.603,
+    "P95_latency_ms": 0.988,
+    "avg_latency_ms": 0.647,
+    "estimated_QPS": 1545.0,
+    "memory_usage_mb": 180.0
+  },
+  "scale_10_contracts": {
+    "contracts_count": 10,
+    "total_child_chunks": 585,
+    "total_parent_blocks": 110,
+    "parse_and_chunk_time_s": 0.243,
+    "bm25_indexing_time_s": 0.1093,
+    "sample_vector_embed_time_s": 8.046,
+    "P50_latency_ms": 3.446,
+    "P95_latency_ms": 5.456,
+    "avg_latency_ms": 3.429,
+    "estimated_QPS": 291.7,
+    "memory_usage_mb": 180.0
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "res_small": {
+    "model_name": "BAAI/bge-small-en-v1.5",
+    "embedding_dimension": 384,
+    "index_size_kb": 1551.0,
+    "indexing_time_ms": 191509.68,
+    "queries_evaluated": 238,
+    "Recall@5": 0.0407,
+    "Recall@10": 0.0642,
+    "HitRate@5": 0.1807,
+    "HitRate@10": 0.2689,
+    "MRR": 0.1075,
+    "nDCG@5": 0.0461,
+    "Candidate_Recall_Pre_Rerank": 0.3866,
+    "P50_Latency_ms": 5261.02,
+    "P95_Latency_ms": 6629.11,
+    "Mean_Relevant_Similarity": 0.7233,
+    "Mean_Non_Relevant_Similarity": 0.7171,
+    "Mean_Top1_Score": 0.7557,
+    "Mean_Top1_Top2_Margin": 0.0108
+  },
+  "res_m3": {
+    "model_name": "BAAI/bge-m3",
+    "embedding_dimension": 1024,
+    "index_size_kb": 4136.0,
+    "indexing_time_ms": 1975998.44,
+    "queries_evaluated": 238,
+    "Recall@5": 0.0434,
+    "Recall@10": 0.0717,
+    "HitRate@5": 0.1807,
+    "HitRate@10": 0.2857,
+    "MRR": 0.1101,
+    "nDCG@5": 0.0477,
+    "Candidate_Recall_Pre_Rerank": 0.4076,
+    "P50_Latency_ms": 3964.56,
+    "P95_Latency_ms": 5012.59,
+    "Mean_Relevant_Similarity": 0.5838,
+    "Mean_Non_Relevant_Similarity": 0.5735,
+    "Mean_Top1_Score": 0.6236,
+    "Mean_Top1_Top2_Margin": 0.0204
+  },
+  "decision": "KEEP"
+}

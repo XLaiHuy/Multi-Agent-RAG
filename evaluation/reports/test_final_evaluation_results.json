@@ -1,0 +1,31 @@
+{
+  "test_before_baseline": {
+    "Recall@5": 0.0687,
+    "Recall@10": 0.0863,
+    "HitRate@5": 0.3684,
+    "HitRate@10": 0.4211,
+    "MRR": 0.2693,
+    "nDCG@5": 0.1097,
+    "P50_ms": 4809.03,
+    "P95_ms": 5016.36,
+    "Rerank_Rate": 1.0
+  },
+  "test_after_optimized": {
+    "Recall@5": 0.0629,
+    "Recall@10": 0.0804,
+    "HitRate@5": 0.3684,
+    "HitRate@10": 0.4211,
+    "MRR": 0.2693,
+    "nDCG@5": 0.0984,
+    "P50_ms": 4917.98,
+    "P95_ms": 5774.8,
+    "Rerank_Rate": 1.0
+  },
+  "unanswerable_query_evaluation": {
+    "total_unanswerable_queries": 31,
+    "correct_refusal_count": 12,
+    "correct_refusal_rate": 0.3871,
+    "false_answer_rate": 0.6129,
+    "mean_top_retrieval_score": 0.7208
+  }
+}

@@ -1,5 +1,32 @@
+# Environment & Secrets
 .env
+.env.*
+
+# Python & Virtual Envs
 .venv/
+venv/
+ENV/
 __pycache__/
-*.pyc
-data/chroma/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node & Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Large Datasets & Temporary Run Outputs
+evaluation/datasets/cuad/raw/
+evaluation/runs/
+data/
+*.zip
+*.tar.gz
+
+# IDE & OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

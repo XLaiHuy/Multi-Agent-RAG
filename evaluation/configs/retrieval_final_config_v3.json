@@ -1,0 +1,52 @@
+{
+  "protocol_version": "3.0.0",
+  "ingestion": {
+    "chunker_type": "StructureAwareParentChildChunker",
+    "child_target_tokens": 250,
+    "child_overlap_tokens": 30,
+    "parent_target_tokens": 1200,
+    "parent_overlap_tokens": 100,
+    "structural_metadata_enabled": true,
+    "structural_metadata_format": "[Document: {doc_title}] [Section: {section_path}]\\n{chunk_text}",
+    "context_augmentation_sac": "EXP-5A Structural Metadata retained; EXP-5B Preamble rejected"
+  },
+  "first_stage_retrieval": {
+    "dense_model_default": "BAAI/bge-m3",
+    "dense_model_lightweight": "BAAI/bge-small-en-v1.5",
+    "dense_dimension": 1024,
+    "sparse_retriever": "BM25Okapi",
+    "broad_candidate_pool_size": 100,
+    "soft_routing_boost": {
+      "enabled": false,
+      "status": "KEEP_OPTIONAL / MARGINAL (evaluated on DEV, +0.42% delta represents only 1 query gain)",
+      "document_title_alpha": 0.1,
+      "section_heading_beta": 0.1
+    },
+    "fusion_method": "ReciprocalRankFusion_k60 (Equal RRF validated as equivalent/superior to Union at identical candidate budgets)"
+  },
+  "two_stage_candidate_pruning": {
+    "enabled": true,
+    "broad_first_stage_k": 100,
+    "pruned_reranker_input_k": 20,
+    "duplicate_suppression_rule": "Max 2 child chunks per parent context block (preserves 98.2% of Top-100 recall)",
+    "consensus_gate_threshold": 0.88
+  },
+  "second_stage_reranking": {
+    "reranker_model": "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+    "candidate_input_count": 20,
+    "top_n_output": 10,
+    "max_seq_length": 512,
+    "score_normalization": "sigmoid",
+    "adaptive_bypass_enabled": true
+  },
+  "multi_agent_orchestration": {
+    "architecture": "AdaptiveMultiAgentRAG",
+    "agents": [
+      "RetrievalPlanner",
+      "EvidenceCritic",
+      "AnswerVerifier"
+    ],
+    "correct_refusal_rate": 1.0,
+    "zero_cross_tenant_leakage": true
+  }
+}
