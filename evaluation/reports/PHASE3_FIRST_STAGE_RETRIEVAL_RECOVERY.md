@@ -87,7 +87,7 @@ At **identical candidate budgets**, Equal RRF is equal to or slightly superior t
 18. **Which techniques were rejected?**  
     Preamble SAC (EXP-5B), Weighted RRF ($k=30$), SPLADE, GraphRAG / Default HyDE, and Union superiority claim.
 19. **What is final retrieval config?**  
-    Frozen in [`evaluation/configs/retrieval_final_config_v3.json`](file:///c:/Users/HUY/Documents/RAG-Agent/evaluation/configs/retrieval_final_config_v3.json).
+    Frozen in [`evaluation/configs/retrieval_final_config_v3.json`](evaluation/configs/retrieval_final_config_v3.json).
 20. **Is retrieval quality now good enough for README?**  
     Yes, backed by real local executions and transparent waterfall metrics.
 21. **Is any retrieval metric now safe for CV?**  

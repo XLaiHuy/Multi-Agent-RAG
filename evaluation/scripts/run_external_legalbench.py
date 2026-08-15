@@ -1,29 +1,26 @@
 #!/usr/bin/env python3
 """
-External Standard Legal Benchmark: LegalBench-RAG (CUAD Component).
-Evaluates the retrieval pipeline against the standardized LegalBench-RAG evaluation protocol.
-Measures Recall@1, Recall@5, Recall@10, HitRate@5, MRR, nDCG@5, and P50 Latency.
-Saves independent audit artifact to evaluation/reports/EXTERNAL_LEGAL_BENCHMARK.md.
+Evaluation on Frozen CUAD Holdout v2 Split (25 holdout contracts, 682 total queries, 294 answerable).
+NOTE: This is a custom multi-contract holdout split from CUAD v1, designated as CUSTOM_CUAD_HOLDOUT_V2 (not an external third-party suite).
 """
 import os
 import sys
 import time
 import json
-import hashlib
 from pathlib import Path
-from typing import List, Dict, Any, Set, Tuple
+from typing import List, Dict, Any, Set
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.environ["OMP_NUM_THREADS"] = "4"
-os.environ["MKL_NUM_THREADS"] = "4"
 
-sys.path.insert(0, os.getcwd())
-sys.path.insert(0, r"c:\Users\HUY\Documents\RAG-Agent")
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
 
 import torch
 torch.set_num_threads(4)
 import numpy as np
 
+from evaluation.config_loader import get_retrieval_config
 from backend.app.retrieval.bm25 import BM25Retriever
 from backend.app.retrieval.fusion import reciprocal_rank_fusion
 from backend.app.providers.reranker import LocalCrossEncoderReranker
@@ -31,41 +28,38 @@ from backend.app.ingestion.parsers import MasterDocumentParser
 from backend.app.ingestion.chunker import StructureAwareParentChildChunker, IndexedChunk
 from evaluation.dense_retriever_local import InMemoryDenseRetriever
 from evaluation.metrics.retrieval_metrics import (
-    compute_recall_at_k, compute_hit_rate_at_k, compute_reciprocal_rank, compute_ndcg_at_k
+    compute_candidate_hit_rate_at_k, compute_true_chunk_recall_at_k, compute_reciprocal_rank
 )
 
-CONTRACTS_DIR = Path("evaluation/datasets/cuad/processed/contracts")
-TEST_V2_MANIFEST = Path("evaluation/manifests/cuad_locked_test_v2_manifest.json")
-REPORT_PATH = Path("evaluation/reports/EXTERNAL_LEGAL_BENCHMARK.md")
+cfg = get_retrieval_config()
+MANIFEST_PATH = REPO_ROOT / "evaluation" / "manifests" / "cuad_locked_test_v2_manifest.json"
+CONTRACTS_DIR = REPO_ROOT / "evaluation" / "datasets" / "cuad" / "processed" / "contracts"
+REPORT_PATH = REPO_ROOT / "evaluation" / "reports" / "EXTERNAL_LEGAL_BENCHMARK.md"
 
-def run_legalbench_benchmark(dense_model: str = "BAAI/bge-small-en-v1.5", candidate_k: int = 20):
+def run_custom_holdout_benchmark():
     print("=" * 80)
-    print("RUNNING EXTERNAL LEGALBENCH-RAG RETRIEVAL BENCHMARK")
+    print("EVALUATING ON CUSTOM CUAD HOLDOUT V2 (25 HOLD-OUT CONTRACTS)")
+    print(f"Dense: {cfg.dense_model} | Reranker: {cfg.reranker_model} (strict=True)")
     print("=" * 80)
 
-    if not TEST_V2_MANIFEST.exists():
-        raise FileNotFoundError(f"Missing {TEST_V2_MANIFEST}")
-
-    manifest_data = json.loads(TEST_V2_MANIFEST.read_text(encoding="utf-8"))
+    manifest_data = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     contracts_info = manifest_data["contracts"]
     queries = manifest_data["queries"]
     ans_queries = [q for q in queries if not q.get("is_unanswerable", False)]
 
-    print(f"Benchmark Scope: {len(contracts_info)} Contracts, {len(ans_queries)} Answerable Queries")
-
     chunker = StructureAwareParentChildChunker(
-        child_target_tokens=250, child_overlap_tokens=30,
-        parent_target_tokens=1200, parent_overlap_tokens=100
+        child_target_tokens=cfg.child_target_tokens, child_overlap_tokens=cfg.child_overlap_tokens,
+        parent_target_tokens=cfg.parent_target_tokens, parent_overlap_tokens=cfg.parent_overlap_tokens
     )
-    reranker = LocalCrossEncoderReranker()
-    reranker.rerank("warmup", ["warmup doc"], top_n=1)
+    reranker = LocalCrossEncoderReranker(
+        model_name=cfg.reranker_model, max_length=cfg.reranker_max_seq_length, strict=True
+    )
+    reranker.rerank("warmup", ["warmup text"], top_n=1)
 
-    # Indexing
     all_ids, all_texts, all_metas = [], [], []
-    indexed_children, indexed_parents = [], []
+    indexed_children = []
     chunk_dict = {}
 
-    t0_index = time.perf_counter()
     for c_info in contracts_info:
         md_file = CONTRACTS_DIR / c_info["filename"]
         txt_file = CONTRACTS_DIR / c_info["filename"].replace(".md", ".txt")
@@ -73,172 +67,127 @@ def run_legalbench_benchmark(dense_model: str = "BAAI/bge-small-en-v1.5", candid
         doc = MasterDocumentParser.parse(target_file, doc_id=c_info["source_contract_id"])
         c_chunks, p_chunks = chunker.chunk_canonical_document(doc, doc_version=1)
         indexed_children.extend(c_chunks)
-        indexed_parents.extend(p_chunks)
 
         doc_title = c_info.get("original_title", "").replace("_", " ").replace("-", " ")
         for c in c_chunks:
             chunk_dict[c.chunk_id] = c
             all_ids.append(c.chunk_id)
             sec_str = " > ".join(c.section_path) if c.section_path else "General"
-            enriched = f"[Document: {doc_title}] [Section: {sec_str}]\n{c.text}"
+            enriched = f"[Document: {doc_title}] [Section: {sec_str}]
+{c.text}"
             all_texts.append(enriched)
             all_metas.append(c.metadata)
-
-    indexing_duration_ms = (time.perf_counter() - t0_index) * 1000.0
 
     bm25 = BM25Retriever()
     bm25.build_index(all_ids, all_texts, all_metas)
 
-    dense = InMemoryDenseRetriever(model_name=dense_model)
+    dense = InMemoryDenseRetriever(model_name=cfg.dense_model)
     dense.build_index(all_ids, all_texts)
 
-    # Evaluation
     all_questions = [q["question"] for q in ans_queries]
-    print(f"  [Dense] Batch-encoding {len(all_questions)} queries with {dense_model}...")
+    print(f"  [Dense] Batch-encoding {len(all_questions)} queries with {cfg.dense_model}...")
     q_vecs = dense.embedder.embed_documents_batch(all_questions, batch_size=64)
     q_arr = np.array(q_vecs, dtype=np.float32)
     q_norms = np.linalg.norm(q_arr, axis=1, keepdims=True)
     q_norms = np.where(q_norms == 0, 1.0, q_norms)
     q_arr = q_arr / q_norms
 
-    recalls_1, recalls_5, recalls_10 = [], [], []
-    hits_1, hits_5, hits_10 = [], [], []
-    mrrs, ndcgs_5 = [], []
-    latencies = []
-    category_metrics = {}
+    hr1_list, hr5_list, hr10_list, mrr_list, c100_list = [], [], [], [], []
+    valid_queries = 0
 
     for q_idx, q in enumerate(ans_queries):
         question = q["question"]
         cid = q["source_contract_id"]
-        cat = q.get("category", "General")
         gold_ev = q.get("gold_evidence", "").strip().lower()
 
         gt_ids = set()
         for c in indexed_children:
             if c.doc_id != cid:
                 continue
-            if gold_ev in c.text.lower():
-                gt_ids.add(c.chunk_id)
-            p_text = c.metadata.get("parent_text", "").lower() if c.metadata else ""
-            if gold_ev in p_text:
+            if gold_ev in c.text.lower() or (c.metadata and gold_ev in c.metadata.get("parent_text", "").lower()):
                 gt_ids.add(c.chunk_id)
 
         if not gt_ids:
             continue
+        valid_queries += 1
 
-        t0 = time.perf_counter()
-        b_hits = bm25.search(question, top_k=candidate_k)
+        b_hits = bm25.search(question, top_k=100)
         b_ids = [h[0] for h in b_hits]
 
-        # Fast Vectorized Dense search
         q_vec = q_arr[q_idx]
         sims = dense.embeddings @ q_vec
-        top_idxs = np.argsort(sims)[::-1][:candidate_k]
+        top_idxs = np.argsort(sims)[::-1][:100]
         d_ids = [dense.chunk_ids[idx] for idx in top_idxs]
 
-        fused = reciprocal_rank_fusion([b_ids, d_ids], k=60)
-        cand_ids = [c_id for c_id, _ in fused[:candidate_k]]
+        fused = reciprocal_rank_fusion([b_ids, d_ids], k=cfg.rrf_k)
+        cand_ids_100 = [c_id for c_id, _ in fused[:100]]
 
-        cand_texts = [chunk_dict[c_id].text[:400] for c_id in cand_ids if c_id in chunk_dict]
-        rerank_hits = reranker.rerank(question, cand_texts, top_n=10)
-        final_ids = [cand_ids[idx] for idx, _ in rerank_hits if idx < len(cand_ids)]
+        c100_list.append(compute_candidate_hit_rate_at_k(cand_ids_100, gt_ids, k=100))
 
-        lat_ms = (time.perf_counter() - t0) * 1000.0
-        latencies.append(lat_ms)
+        # Parent dedup + Top-20 truncation
+        dedup_candidates = []
+        parent_count = {}
+        for c_id in cand_ids_100:
+            c_obj = chunk_dict.get(c_id)
+            p_id = c_obj.parent_id if c_obj else None
+            if p_id:
+                if parent_count.get(p_id, 0) >= cfg.max_child_chunks_per_parent:
+                    continue
+                parent_count[p_id] = parent_count.get(p_id, 0) + 1
+            dedup_candidates.append(c_id)
 
-        r1 = compute_recall_at_k(final_ids, gt_ids, k=1)
-        r5 = compute_recall_at_k(final_ids, gt_ids, k=5)
-        r10 = compute_recall_at_k(final_ids, gt_ids, k=10)
-        h1 = compute_hit_rate_at_k(final_ids, gt_ids, k=1)
-        h5 = compute_hit_rate_at_k(final_ids, gt_ids, k=5)
-        h10 = compute_hit_rate_at_k(final_ids, gt_ids, k=10)
-        mrr = compute_reciprocal_rank(final_ids, gt_ids)
-        ndcg5 = compute_ndcg_at_k(final_ids, gt_ids, k=5)
+        pruned_top20 = dedup_candidates[:cfg.reranker_input_budget]
 
-        recalls_1.append(r1)
-        recalls_5.append(r5)
-        recalls_10.append(r10)
-        hits_1.append(h1)
-        hits_5.append(h5)
-        hits_10.append(h10)
-        mrrs.append(mrr)
-        ndcgs_5.append(ndcg5)
+        # CrossEncoder Rerank
+        cand_texts = [chunk_dict[c_id].text for c_id in pruned_top20 if c_id in chunk_dict]
+        rerank_hits = reranker.rerank(question, cand_texts, top_n=cfg.reranker_top_n)
+        final_ids = [pruned_top20[idx] for idx, _ in rerank_hits if idx < len(pruned_top20)]
 
-        category_metrics.setdefault(cat, {"hits5": [], "mrrs": []})
-        category_metrics[cat]["hits5"].append(h5)
-        category_metrics[cat]["mrrs"].append(mrr)
+        hr1_list.append(compute_candidate_hit_rate_at_k(final_ids, gt_ids, k=1))
+        hr5_list.append(compute_candidate_hit_rate_at_k(final_ids, gt_ids, k=5))
+        hr10_list.append(compute_candidate_hit_rate_at_k(final_ids, gt_ids, k=10))
+        mrr_list.append(compute_reciprocal_rank(final_ids, gt_ids))
 
-    summary = {
-        "benchmark_name": "LegalBench-RAG (Standardized CUAD Clause Retrieval Benchmark)",
-        "protocol": "Zero-Shot Multi-Contract Clause Retrieval",
-        "total_contracts": len(contracts_info),
-        "total_chunks_indexed": len(all_ids),
-        "total_queries_evaluated": len(hits_5),
-        "Recall@1": round(float(np.mean(recalls_1)), 4),
-        "Recall@5": round(float(np.mean(recalls_5)), 4),
-        "Recall@10": round(float(np.mean(recalls_10)), 4),
-        "HitRate@1": round(float(np.mean(hits_1)), 4),
-        "HitRate@5": round(float(np.mean(hits_5)), 4),
-        "HitRate@10": round(float(np.mean(hits_10)), 4),
-        "MRR": round(float(np.mean(mrrs)), 4),
-        "nDCG@5": round(float(np.mean(ndcgs_5)), 4),
-        "P50_Latency_ms": round(float(np.percentile(latencies, 50)), 2),
-        "P95_Latency_ms": round(float(np.percentile(latencies, 95)), 2),
-        "Indexing_Duration_ms": round(indexing_duration_ms, 2),
-    }
+    c100 = np.mean(c100_list) * 100
+    hr1 = np.mean(hr1_list) * 100
+    hr5 = np.mean(hr5_list) * 100
+    hr10 = np.mean(hr10_list) * 100
+    mrr = np.mean(mrr_list)
 
-    # Generate Markdown Report
-    cat_rows = []
-    for cat, val in sorted(category_metrics.items()):
-        mean_h5 = np.mean(val["hits5"]) * 100
-        mean_mrr = np.mean(val["mrrs"])
-        cat_rows.append(f"| {cat:30s} | {len(val['hits5']):3d} | {mean_h5:6.1f}% | {mean_mrr:.4f} |")
-    cat_table_str = "\n".join(cat_rows)
+    print(f"\n--- CUSTOM CUAD HOLDOUT V2 RESULTS (N = {valid_queries} Answerable Queries) ---")
+    print(f"  CandidateHitRate @100: {c100:.2f}%")
+    print(f"  HitRate @1:            {hr1:.2f}%")
+    print(f"  HitRate @5:            {hr5:.2f}%")
+    print(f"  HitRate @10:           {hr10:.2f}%")
+    print(f"  MRR:                   {mrr:.4f}")
 
-    report_md = f"""# External Standard Benchmark: LegalBench-RAG Evaluation Report
+    report_md = f"""# Custom CUAD Holdout v2 Evaluation Report
 
-**Benchmark:** LegalBench-RAG (Stanford RegLab / Guha et al. 2023 - CUAD Component)  
-**Corpus Scope:** 25 Multi-Domain Legal Contracts (Zero-Shot Multi-Contract Index, {len(all_ids)} chunks)  
-**Evaluation Set:** {len(hits_5)} Answerable Standard Legal Queries  
-**Evaluation Protocol:** REAL_LOCAL Deterministic Vector & Sparse Retrieval + CrossEncoder Reranking  
+> **Dataset Classification Notice:**  
+> This benchmark evaluates a custom 25-contract holdout split from **CUAD v1** (`evaluation/manifests/cuad_locked_test_v2_manifest.json`).  
+> It is **NOT** the official LegalBench-RAG benchmark. Unverified external published baselines have been removed.
+
+**Corpus Scope:** 25 Holdout Commercial Contracts (1,221 child chunks, {valid_queries} evaluated answerable queries)  
+**Configuration Source:** `evaluation/configs/retrieval_final_config_v3_1.json`  
+**Dense Model:** `{cfg.dense_model}` ({cfg.dense_dimension}-d)  
+**Reranker Model:** `{cfg.reranker_model}` (strict mode, full text input)  
 **Timestamp:** {time.strftime('%Y-%m-%d %H:%M:%SZ')}
 
 ---
 
-## 1. Overall Benchmark Performance
+## 1. Measured Performance on CUSTOM_CUAD_HOLDOUT_V2
 
-| Metric | Measured Result | Standard Baseline (BM25 Only) | Published Reference (BGE Baseline) |
-|:---|:---:|:---:|:---:|
-| **HitRate@1 (Top-1 Accuracy)** | **{summary['HitRate@1']*100:.2f}%** | 12.4% | 18.2% |
-| **HitRate@5** | **{summary['HitRate@5']*100:.2f}%** | 22.8% | 29.5% |
-| **HitRate@10** | **{summary['HitRate@10']*100:.2f}%** | 31.2% | 38.1% |
-| **Mean Reciprocal Rank (MRR)** | **{summary['MRR']:.4f}** | 0.1420 | 0.2010 |
-| **nDCG@5** | **{summary['nDCG@5']:.4f}** | 0.1650 | 0.2240 |
-| **P50 Query Latency (CPU)** | **{summary['P50_Latency_ms']:.1f} ms** | 35.0 ms | 4,200 ms |
-
----
-
-## 2. Clause-Category Breakdown
-
-| Clause Category | Query Count | HitRate@5 | MRR |
-|:---|:---:|:---:|:---:|
-{cat_table_str}
-
----
-
-## 3. Benchmark Defensibility & Integrity Statement
-
-1. **Zero Data Contamination:** Evaluated exclusively on holdout contracts disjoint from all development/tuning sets.
-2. **Standard Evaluation:** Exact character-level substring matching and token-level boundary verification.
-3. **Reproducibility:** Frozen manifest with SHA256 checksums preserved in `evaluation/manifests/cuad_locked_test_v2_manifest.json`.
+| Metric | Measured Value | Scope / Definition |
+|:---|:---:|:---|
+| **CandidateHitRate@100** | **{c100:.2f}%** | First-Stage $RRF_{{60}}$ Broad Pool ($k=100$) |
+| **HitRate@1** | **{hr1:.2f}%** | Post-Rerank Top-1 Exact Accuracy |
+| **HitRate@5** | **{hr5:.2f}%** | Post-Rerank Top-5 Context Window |
+| **HitRate@10** | **{hr10:.2f}%** | Post-Rerank Top-10 Output |
+| **MRR** | **{mrr:.4f}** | Mean Reciprocal Rank over final reranked list |
 """
-
     REPORT_PATH.write_text(report_md.strip() + "\n", encoding="utf-8")
-    print(f"[OK] Wrote external benchmark report to {REPORT_PATH}")
-    print(f"Overall Results: Hit@5={summary['HitRate@5']*100:.2f}%, Hit@10={summary['HitRate@10']*100:.2f}%, MRR={summary['MRR']:.4f}")
-
-    out_json = Path("evaluation/reports/external_legalbench_results.json")
-    out_json.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    print(f"
+[OK] Wrote report to {REPORT_PATH}")
 
 if __name__ == "__main__":
-    run_legalbench_benchmark()
+    run_custom_holdout_benchmark()

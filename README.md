@@ -1,4 +1,4 @@
-# Enterprise Contract Intelligence Platform (Adaptive Multi-Agent RAG v2)
+# Enterprise Contract Intelligence Platform (Adaptive Multi-Agent RAG v3.1)
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com)
@@ -49,7 +49,7 @@ flowchart TD
         Agent2["Agent 2: Evidence Critic (Coverage & Missing Clause Detection)"]
         Agent3["Agent 3: Answer Verifier (Claim Attribution & Grounding Audit)"]
         RRF["Deterministic Reciprocal Rank Fusion (RRF k=60)"]
-        Reranker["CrossEncoder Reranker (BAAI/bge-reranker-base)"]
+        Reranker["CrossEncoder Reranker (cross-encoder/ms-marco-TinyBERT-L-2-v2)"]
         ParentExpander["Hierarchical Parent Context Expander"]
     end
 
@@ -146,7 +146,7 @@ Audited independently against the official **CUAD (Contract Understanding Atticu
 | **Noisy Scan (Gaussian Noise) Levenshtein CER**| **0.0890** (WER: 0.184) | Documented | ⚠️ DEGRADED |
 | **Corpus Local Throughput (10 Contracts, 585 Chunks)**| **291.7 QPS** (P50: 3.45ms) | $\ge 100\text{ QPS}$ | ✅ PASSED |
 | **Unauthorized Retrieval Rate (ACL Pre-Filter)**| **0.00%** | $0.00\%$ | ✅ PASSED |
-| **Benchmark Integrity Regression Tests** | **10 / 10 Passed (100%)** | $100\%$ | ✅ PASSED |
+| **Benchmark Integrity Regression Tests** | **41 / 41 Passed (100%)** | $100\%$ | ✅ PASSED |
 
 ### 3. Formal Benchmark & Audit Documentation
 Comprehensive execution logs, mathematical metric definitions, and raw prediction JSONL traces:

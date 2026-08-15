@@ -17,7 +17,8 @@ RAW_JSON_PATH = Path("evaluation/datasets/cuad/raw/CUADv1.json")
 CONTRACTS_DIR = Path("evaluation/datasets/cuad/processed/contracts")
 MANIFEST_DIR = Path("evaluation/manifests")
 
-sys.path.insert(0, r"C:\Users\HUY\.gemini\antigravity-ide\brain\b3fc2c97-4747-4204-8666-5a9ef508e9a8\scratch")
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
 from build_dev_split import CLAUSE_QUERY_MAP
 
 def build_locked_test_v2():

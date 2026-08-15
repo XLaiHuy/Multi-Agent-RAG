@@ -20,7 +20,8 @@ os.environ["OMP_NUM_THREADS"] = "4"
 os.environ["MKL_NUM_THREADS"] = "4"
 
 sys.path.insert(0, os.getcwd())
-sys.path.insert(0, r"c:\Users\HUY\Documents\RAG-Agent")
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
 
 import torch
 torch.set_num_threads(4)

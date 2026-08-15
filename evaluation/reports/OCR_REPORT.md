@@ -3,7 +3,7 @@
 **Benchmark Run ID**: `ocr_run_20260814_173537_3e436a`  
 **Source Dataset**: Official CUAD v1 (`cuad_contract_003_CENTRACKINTERNATIONALINC_10_29`)  
 **Auditor Mode**: STRICT BENCHMARK-INTEGRITY REPAIR MODE  
-**Raw Artifacts**: [`evaluation/runs/ocr_run_20260814_173537_3e436a/ocr/`](file:///c:/Users/HUY/Documents/RAG-Agent/evaluation/runs/ocr_run_20260814_173537_3e436a/ocr/)  
+**Raw Artifacts**: [`evaluation/runs/ocr_run_20260814_173537_3e436a/ocr/`](evaluation/runs/ocr_run_20260814_173537_3e436a/ocr/)  
 
 ---
 

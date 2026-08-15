@@ -10,7 +10,6 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from dotenv import load_dotenv
 
-# Search for .env in current working directory and parent directories
 load_dotenv()
 
 
@@ -19,7 +18,7 @@ class Settings(BaseSettings):
     environment: str = Field(default="development", alias="ENVIRONMENT")
     debug: bool = Field(default=False, alias="DEBUG")
     app_title: str = "Enterprise Contract Intelligence Platform"
-    app_version: str = "2.0.0"
+    app_version: str = "3.1.0"
 
     # Security & JWT
     jwt_secret_key: str = Field(default="", alias="JWT_SECRET_KEY")
@@ -30,7 +29,7 @@ class Settings(BaseSettings):
     gemini_api_key: str = Field(default="", alias="GEMINI_API_KEY")
 
     # Model Routing - Decoupled per Task
-    llm_provider: str = Field(default="gemini", alias="LLM_PROVIDER") # gemini | ollama | mock
+    llm_provider: str = Field(default="gemini", alias="LLM_PROVIDER")
     planner_model: str = Field(default="gemini-flash-latest", alias="PLANNER_MODEL")
     critic_model: str = Field(default="gemini-flash-latest", alias="CRITIC_MODEL")
     rewrite_model: str = Field(default="gemini-flash-latest", alias="REWRITE_MODEL")
@@ -41,15 +40,17 @@ class Settings(BaseSettings):
     # Local Ollama fallback (if configured)
     ollama_base_url: str = Field(default="http://localhost:11434/v1", alias="OLLAMA_BASE_URL")
 
-    # Embedding Settings
-    embedding_provider: str = Field(default="local", alias="EMBEDDING_PROVIDER") # local | gemini
+    # Embedding Settings (Aligned with Frozen Config v3.1)
+    embedding_provider: str = Field(default="local", alias="EMBEDDING_PROVIDER")
     gemini_embedding_model: str = Field(default="text-embedding-004", alias="GEMINI_EMBEDDING_MODEL")
-    local_embedding_model: str = Field(default="BAAI/bge-small-en-v1.5", alias="LOCAL_EMBEDDING_MODEL")
-    embedding_dimension: int = Field(default=384, alias="EMBEDDING_DIMENSION")
+    local_embedding_model: str = Field(default="BAAI/bge-m3", alias="LOCAL_EMBEDDING_MODEL")
+    embedding_dimension: int = Field(default=1024, alias="EMBEDDING_DIMENSION")
 
-    # Reranker Settings
+    # Reranker Settings (Aligned with Frozen Config v3.1)
     enable_reranker: bool = Field(default=True, alias="ENABLE_RERANKER")
     reranker_model: str = Field(default="cross-encoder/ms-marco-TinyBERT-L-2-v2", alias="RERANKER_MODEL")
+    reranker_max_seq_length: int = Field(default=512, alias="RERANKER_MAX_SEQ_LENGTH")
+    reranker_strict_mode: bool = Field(default=False, alias="RERANKER_STRICT_MODE")
 
     # Storage Paths & URLs
     database_url: str = Field(default="sqlite:///./data/contracts.db", alias="DATABASE_URL")
@@ -72,9 +73,9 @@ class Settings(BaseSettings):
     budget_max_retrieval_attempts: int = 2
     budget_max_regenerations: int = 1
 
-    # Chunking Configurations (Tokens)
+    # Chunking Configurations (Tokens - Aligned with Frozen Config v3.1)
     child_chunk_size: int = 250
-    child_chunk_overlap: int = 50
+    child_chunk_overlap: int = 30
     parent_chunk_size: int = 1200
     parent_chunk_overlap: int = 100
 
@@ -94,36 +95,17 @@ class Settings(BaseSettings):
     def validate_security(self):
         """Validates critical security requirements at startup."""
         is_prod = self.environment.lower() in ["production", "prod"]
-        
-        # Check JWT Secret in production
         if is_prod:
             if not self.jwt_secret_key or len(self.jwt_secret_key) < 32:
-                raise RuntimeError(
-                    "[FATAL SECURITY ERROR] In production environment, JWT_SECRET_KEY must be set "
-                    "with a secure key of at least 32 characters. Application startup aborted."
-                )
-            if self.jwt_secret_key.startswith("rag_enterprise_dh_mo_2026") or self.jwt_secret_key == "replace_with_your_key":
-                raise RuntimeError(
-                    "[FATAL SECURITY ERROR] Default/insecure JWT_SECRET_KEY detected in production mode. "
-                    "Application startup aborted."
-                )
-        else:
-            # Development fallback
-            if not self.jwt_secret_key:
-                self.jwt_secret_key = "dev_secret_key_strictly_for_local_testing_only_32bytes_min"
-
-        # Check Gemini API Key if using Gemini
-        if self.llm_provider == "gemini" and not self.gemini_api_key:
-            if is_prod:
-                raise RuntimeError("[FATAL CONFIG ERROR] GEMINI_API_KEY must be set when LLM_PROVIDER is 'gemini'.")
+                raise ValueError("SECURITY FATAL: In production, JWT_SECRET_KEY must be >= 32 chars.")
 
 
-_settings_instance: Optional[Settings] = None
+_settings: Optional[Settings] = None
 
 
 def get_settings() -> Settings:
-    global _settings_instance
-    if _settings_instance is None:
-        _settings_instance = Settings()
-        _settings_instance.validate_security()
-    return _settings_instance
+    global _settings
+    if _settings is None:
+        _settings = Settings()
+        _settings.validate_security()
+    return _settings

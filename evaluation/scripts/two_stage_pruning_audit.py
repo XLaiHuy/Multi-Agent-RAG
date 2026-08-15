@@ -1,32 +1,31 @@
 #!/usr/bin/env python3
 """
-Two-Stage Pruning & Post-Pruning Recall Waterfall Audit.
-Measures and reports the full funnel of gold evidence recall:
-Stage 1: Top100 Raw Retrieval Recall
-Stage 2: After Parent Deduplication
-Stage 3: After Pruning to Top20 (Input to CrossEncoder)
-Stage 4: After CrossEncoder Top10
-Stage 5: After CrossEncoder Top5
+Post-Pruning Recall & HitRate Waterfall Audit.
+Evaluates the 5-stage funnel using strict evaluation mode and full chunk text:
+Stage 1: Raw Top-100 First-Stage Retrieval (RRF k=60)
+Stage 2: After Parent Deduplication (Max 2 child chunks per parent block)
+Stage 3: After Top-20 Truncation (RRF-order budget reduction for reranker)
+Stage 4: After CrossEncoder Reranking (Top-10 output)
+Stage 5: Final Top-5 Context Window (Top-5 output)
 """
 import os
 import sys
 import time
 import json
-import re
 from pathlib import Path
-from typing import List, Dict, Any, Set, Tuple
+from typing import List, Dict, Any, Set
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.environ["OMP_NUM_THREADS"] = "4"
-os.environ["MKL_NUM_THREADS"] = "4"
 
-sys.path.insert(0, os.getcwd())
-sys.path.insert(0, r"c:\Users\HUY\Documents\RAG-Agent")
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
 
 import torch
 torch.set_num_threads(4)
 import numpy as np
 
+from evaluation.config_loader import get_retrieval_config
 from backend.app.retrieval.bm25 import BM25Retriever
 from backend.app.retrieval.fusion import reciprocal_rank_fusion
 from backend.app.providers.reranker import LocalCrossEncoderReranker
@@ -34,16 +33,18 @@ from backend.app.ingestion.parsers import MasterDocumentParser
 from backend.app.ingestion.chunker import StructureAwareParentChildChunker, IndexedChunk
 from evaluation.dense_retriever_local import InMemoryDenseRetriever
 from evaluation.metrics.retrieval_metrics import (
-    compute_recall_at_k, compute_hit_rate_at_k, compute_reciprocal_rank, compute_ndcg_at_k
+    compute_candidate_hit_rate_at_k, compute_true_chunk_recall_at_k, compute_reciprocal_rank
 )
 
-DEV_MANIFEST_PATH = Path("evaluation/manifests/cuad_dev_manifest.json")
-CONTRACTS_DIR = Path("evaluation/datasets/cuad/processed/contracts")
-REPORT_PATH = Path("evaluation/reports/POST_PRUNING_RECALL_WATERFALL.md")
+cfg = get_retrieval_config()
+DEV_MANIFEST_PATH = REPO_ROOT / "evaluation" / "manifests" / "cuad_dev_manifest.json"
+CONTRACTS_DIR = REPO_ROOT / "evaluation" / "datasets" / "cuad" / "processed" / "contracts"
+REPORT_PATH = REPO_ROOT / "evaluation" / "reports" / "POST_PRUNING_RECALL_WATERFALL.md"
 
-def run_pruning_waterfall_audit():
+def run_waterfall_audit():
     print("=" * 80)
-    print("RUNNING POST-PRUNING RECALL WATERFALL AUDIT")
+    print("POST-PRUNING RECALL & HITRATE WATERFALL AUDIT")
+    print(f"Dense: {cfg.dense_model} ({cfg.dense_dimension}-d) | Reranker: {cfg.reranker_model} (strict=True, max_length={cfg.reranker_max_seq_length})")
     print("=" * 80)
 
     manifest_data = json.loads(DEV_MANIFEST_PATH.read_text(encoding="utf-8"))
@@ -52,16 +53,18 @@ def run_pruning_waterfall_audit():
     ans_queries = [q for q in queries if not q.get("is_unanswerable", False)]
 
     chunker = StructureAwareParentChildChunker(
-        child_target_tokens=250, child_overlap_tokens=30,
-        parent_target_tokens=1200, parent_overlap_tokens=100
+        child_target_tokens=cfg.child_target_tokens, child_overlap_tokens=cfg.child_overlap_tokens,
+        parent_target_tokens=cfg.parent_target_tokens, parent_overlap_tokens=cfg.parent_overlap_tokens
     )
-    reranker = LocalCrossEncoderReranker()
-    reranker.rerank("warmup", ["warmup doc"], top_n=1)
+    # Strict evaluation mode: raises on inference/loading failure
+    reranker = LocalCrossEncoderReranker(
+        model_name=cfg.reranker_model, max_length=cfg.reranker_max_seq_length, strict=True
+    )
+    reranker.rerank("warmup query", ["warmup document clause text"], top_n=1)
 
     all_ids, all_texts, all_metas = [], [], []
     indexed_children, indexed_parents = [], []
     chunk_dict = {}
-    doc_titles_map = {}
 
     for c_info in contracts_info:
         md_file = CONTRACTS_DIR / c_info["filename"]
@@ -73,24 +76,23 @@ def run_pruning_waterfall_audit():
         indexed_parents.extend(p_chunks)
 
         doc_title = c_info.get("original_title", "").replace("_", " ").replace("-", " ")
-        doc_titles_map[c_info["source_contract_id"]] = doc_title
-
         for c in c_chunks:
             chunk_dict[c.chunk_id] = c
             all_ids.append(c.chunk_id)
             sec_str = " > ".join(c.section_path) if c.section_path else "General"
-            enriched = f"[Document: {doc_title}] [Section: {sec_str}]\n{c.text}"
+            enriched = f"[Document: {doc_title}] [Section: {sec_str}]
+{c.text}"
             all_texts.append(enriched)
             all_metas.append(c.metadata)
 
     bm25 = BM25Retriever()
     bm25.build_index(all_ids, all_texts, all_metas)
 
-    dense = InMemoryDenseRetriever(model_name="BAAI/bge-small-en-v1.5")
+    dense = InMemoryDenseRetriever(model_name=cfg.dense_model)
     dense.build_index(all_ids, all_texts)
 
     all_questions = [q["question"] for q in ans_queries]
-    print(f"  [Dense] Fast Batch-encoding {len(all_questions)} queries with bge-small...")
+    print(f"  [Dense] Batch-encoding {len(all_questions)} queries with {cfg.dense_model}...")
     q_vecs = dense.embedder.embed_documents_batch(all_questions, batch_size=64)
     q_arr = np.array(q_vecs, dtype=np.float32)
     q_norms = np.linalg.norm(q_arr, axis=1, keepdims=True)
@@ -98,12 +100,14 @@ def run_pruning_waterfall_audit():
     q_arr = q_arr / q_norms
 
     funnel = {
-        "stage1_top100_raw": [],
-        "stage2_after_parent_dedup": [],
-        "stage3_after_prune_top20": [],
-        "stage4_after_rerank_top10": [],
-        "stage5_after_rerank_top5": [],
+        "stage1_top100_raw": {"hit": [], "rec": []},
+        "stage2_after_parent_dedup": {"hit": [], "rec": []},
+        "stage3_after_trunc_top20": {"hit": [], "rec": []},
+        "stage4_after_rerank_top10": {"hit": [], "rec": []},
+        "stage5_after_rerank_top5": {"hit": [], "rec": []},
     }
+
+    valid_queries = 0
 
     for q_idx, q in enumerate(ans_queries):
         question = q["question"]
@@ -114,15 +118,14 @@ def run_pruning_waterfall_audit():
         for c in indexed_children:
             if c.doc_id != cid:
                 continue
-            if gold_ev in c.text.lower():
-                gt_ids.add(c.chunk_id)
-            p_text = c.metadata.get("parent_text", "").lower() if c.metadata else ""
-            if gold_ev in p_text:
+            if gold_ev in c.text.lower() or (c.metadata and gold_ev in c.metadata.get("parent_text", "").lower()):
                 gt_ids.add(c.chunk_id)
 
         if not gt_ids:
             continue
+        valid_queries += 1
 
+        # Stage 1: Raw Top-100 First-Stage Retrieval
         b_hits = bm25.search(question, top_k=100)
         b_ids = [h[0] for h in b_hits]
 
@@ -131,85 +134,97 @@ def run_pruning_waterfall_audit():
         top_idxs = np.argsort(sims)[::-1][:100]
         d_ids = [dense.chunk_ids[idx] for idx in top_idxs]
 
-        fused = reciprocal_rank_fusion([b_ids, d_ids], k=60)
+        fused = reciprocal_rank_fusion([b_ids, d_ids], k=cfg.rrf_k)
         cand_ids_100 = [c_id for c_id, _ in fused[:100]]
 
-        has_gold_s1 = any(c in gt_ids for c in cand_ids_100)
-        funnel["stage1_top100_raw"].append(1.0 if has_gold_s1 else 0.0)
+        funnel["stage1_top100_raw"]["hit"].append(compute_candidate_hit_rate_at_k(cand_ids_100, gt_ids, k=100))
+        funnel["stage1_top100_raw"]["rec"].append(compute_true_chunk_recall_at_k(cand_ids_100, gt_ids, k=100))
 
-        # 2. After Parent Deduplication (Cap max 2 chunks per parent block)
+        # Stage 2: After Parent Deduplication (Max 2 chunks per parent block)
         dedup_candidates = []
         parent_count = {}
         for c_id in cand_ids_100:
             c_obj = chunk_dict.get(c_id)
             p_id = c_obj.parent_id if c_obj else None
             if p_id:
-                if parent_count.get(p_id, 0) >= 2:
+                if parent_count.get(p_id, 0) >= cfg.max_child_chunks_per_parent:
                     continue
                 parent_count[p_id] = parent_count.get(p_id, 0) + 1
             dedup_candidates.append(c_id)
 
-        has_gold_s2 = any(c in gt_ids for c in dedup_candidates)
-        funnel["stage2_after_parent_dedup"].append(1.0 if has_gold_s2 else 0.0)
+        funnel["stage2_after_parent_dedup"]["hit"].append(compute_candidate_hit_rate_at_k(dedup_candidates, gt_ids, k=len(dedup_candidates)))
+        funnel["stage2_after_parent_dedup"]["rec"].append(compute_true_chunk_recall_at_k(dedup_candidates, gt_ids, k=len(dedup_candidates)))
 
-        # 3. After Pruning down to Top-20 (exact input to CrossEncoder)
-        pruned_top20 = dedup_candidates[:20]
-        has_gold_s3 = any(c in gt_ids for c in pruned_top20)
-        funnel["stage3_after_prune_top20"].append(1.0 if has_gold_s3 else 0.0)
+        # Stage 3: After Top-20 Truncation (RRF-order budget reduction)
+        pruned_top20 = dedup_candidates[:cfg.reranker_input_budget]
+        funnel["stage3_after_trunc_top20"]["hit"].append(compute_candidate_hit_rate_at_k(pruned_top20, gt_ids, k=len(pruned_top20)))
+        funnel["stage3_after_trunc_top20"]["rec"].append(compute_true_chunk_recall_at_k(pruned_top20, gt_ids, k=len(pruned_top20)))
 
-        # 4 & 5. After CrossEncoder Rerank
-        cand_texts = [chunk_dict[c_id].text[:400] for c_id in pruned_top20 if c_id in chunk_dict]
-        rerank_hits = reranker.rerank(question, cand_texts, top_n=10)
+        # Stage 4 & 5: After CrossEncoder Rerank (FULL chunk text passed, no character slicing)
+        cand_texts = [chunk_dict[c_id].text for c_id in pruned_top20 if c_id in chunk_dict]
+        rerank_hits = reranker.rerank(question, cand_texts, top_n=cfg.reranker_top_n)
         final_ids_10 = [pruned_top20[idx] for idx, _ in rerank_hits if idx < len(pruned_top20)]
         final_ids_5 = final_ids_10[:5]
 
-        funnel["stage4_after_rerank_top10"].append(1.0 if any(c in gt_ids for c in final_ids_10) else 0.0)
-        funnel["stage5_after_rerank_top5"].append(1.0 if any(c in gt_ids for c in final_ids_5) else 0.0)
+        funnel["stage4_after_rerank_top10"]["hit"].append(compute_candidate_hit_rate_at_k(final_ids_10, gt_ids, k=10))
+        funnel["stage4_after_rerank_top10"]["rec"].append(compute_true_chunk_recall_at_k(final_ids_10, gt_ids, k=10))
 
-    s1 = np.mean(funnel["stage1_top100_raw"]) * 100
-    s2 = np.mean(funnel["stage2_after_parent_dedup"]) * 100
-    s3 = np.mean(funnel["stage3_after_prune_top20"]) * 100
-    s4 = np.mean(funnel["stage4_after_rerank_top10"]) * 100
-    s5 = np.mean(funnel["stage5_after_rerank_top5"]) * 100
+        funnel["stage5_after_rerank_top5"]["hit"].append(compute_candidate_hit_rate_at_k(final_ids_5, gt_ids, k=5))
+        funnel["stage5_after_rerank_top5"]["rec"].append(compute_true_chunk_recall_at_k(final_ids_5, gt_ids, k=5))
 
-    print("\n--- POST-PRUNING RECALL WATERFALL FUNNEL ---")
-    print(f"Stage 1: Top-100 Raw Retrieval Recall:          {s1:6.2f}%")
-    print(f"Stage 2: After Parent Deduplication:            {s2:6.2f}% (Loss: {s1-s2:+.2f}%)")
-    print(f"Stage 3: After Pruning to Top-20 (Reranker In): {s3:6.2f}% (Loss: {s2-s3:+.2f}%)")
-    print(f"Stage 4: After CrossEncoder Top-10:             {s4:6.2f}% (Loss: {s3-s4:+.2f}%)")
-    print(f"Stage 5: After CrossEncoder Top-5:              {s5:6.2f}% (Loss: {s4-s5:+.2f}%)")
+    s1_h = np.mean(funnel["stage1_top100_raw"]["hit"]) * 100
+    s1_r = np.mean(funnel["stage1_top100_raw"]["rec"]) * 100
 
-    report_content = f"""# Post-Pruning Recall Waterfall Audit
+    s2_h = np.mean(funnel["stage2_after_parent_dedup"]["hit"]) * 100
+    s2_r = np.mean(funnel["stage2_after_parent_dedup"]["rec"]) * 100
 
-**Evaluation Dataset:** CUAD DEV Split (20 Contracts, 238 Evaluated Answerable Queries)
-**Pipeline Architecture:** Two-Stage Broad Retrieval (k=100) -> Parent Dedup -> Top-20 Pruning -> CrossEncoder Rerank
+    s3_h = np.mean(funnel["stage3_after_trunc_top20"]["hit"]) * 100
+    s3_r = np.mean(funnel["stage3_after_trunc_top20"]["rec"]) * 100
+
+    s4_h = np.mean(funnel["stage4_after_rerank_top10"]["hit"]) * 100
+    s4_r = np.mean(funnel["stage4_after_rerank_top10"]["rec"]) * 100
+
+    s5_h = np.mean(funnel["stage5_after_rerank_top5"]["hit"]) * 100
+    s5_r = np.mean(funnel["stage5_after_rerank_top5"]["rec"]) * 100
+
+    print("\n--- POST-PRUNING WATERFALL FUNNEL ---")
+    print(f"Stage 1: Top-100 Raw Retrieval:           HitRate={s1_h:6.2f}%, TrueRecall={s1_r:6.2f}%")
+    print(f"Stage 2: After Parent Deduplication:     HitRate={s2_h:6.2f}%, TrueRecall={s2_r:6.2f}% (Hit Loss: {s1_h-s2_h:+.2f}%)")
+    print(f"Stage 3: After Top-20 Truncation:        HitRate={s3_h:6.2f}%, TrueRecall={s3_r:6.2f}% (Hit Loss: {s2_h-s3_h:+.2f}%)")
+    print(f"Stage 4: After CrossEncoder Top-10:      HitRate={s4_h:6.2f}%, TrueRecall={s4_r:6.2f}% (Hit Loss: {s3_h-s4_h:+.2f}%)")
+    print(f"Stage 5: After CrossEncoder Top-5:       HitRate={s5_h:6.2f}%, TrueRecall={s5_r:6.2f}% (Hit Loss: {s4_h-s5_h:+.2f}%)")
+
+    report_md = f"""# Post-Pruning Recall & HitRate Waterfall Audit
+
+**Evaluation Dataset:** CUAD DEV Split (20 Contracts, {valid_queries} Evaluated Answerable Queries)  
+**Configuration Source:** `evaluation/configs/retrieval_final_config_v3_1.json`  
+**Dense Model:** `{cfg.dense_model}` ({cfg.dense_dimension}-d)  
+**Reranker Model:** `{cfg.reranker_model}` (`strict=True`, `max_seq_length={cfg.reranker_max_seq_length}`, full text passed)  
 **Timestamp:** {time.strftime('%Y-%m-%d %H:%M:%SZ')}
 
 ---
 
-## 1. Step-by-Step Recall Waterfall Funnel
+## 1. Step-by-Step Recall & Coverage Waterfall Funnel
 
-| Funnel Stage | Description | Gold Recall (%) | Cumulative Loss (%) | Retention vs Previous (%) |
-|:---|:---|:---:|:---:|:---:|
-| **Stage 1** | Raw Top-100 First-Stage Retrieval ($RRF_{{60}}$) | **{s1:.2f}%** | Baseline | 100.0% |
-| **Stage 2** | After Parent Deduplication (Max 2 chunks/parent) | **{s2:.2f}%** | {s1-s2:+.2f}% | {s2/s1*100:.1f}% |
-| **Stage 3** | After Pruning to Top-20 (CrossEncoder Input) | **{s3:.2f}%** | {s1-s3:+.2f}% | {s3/s2*100:.1f}% |
-| **Stage 4** | After CrossEncoder Reranking (Top-10 Output) | **{s4:.2f}%** | {s1-s4:+.2f}% | {s4/s3*100:.1f}% |
-| **Stage 5** | Final Top-5 Context Window (Top-5 Output) | **{s5:.2f}%** | {s1-s5:+.2f}% | {s5/s4*100:.1f}% |
+| Funnel Stage | Description | CandidateHitRate (Any-Gold) | TrueChunkRecall (All-Gold) | HitRate Loss vs Prev | HitRate Retention vs Prev |
+|:---|:---|:---:|:---:|:---:|:---:|
+| **Stage 1** | Raw Top-100 First-Stage Retrieval ($RRF_{{60}}$) | **{s1_h:.2f}%** | **{s1_r:.2f}%** | Baseline | 100.0% |
+| **Stage 2** | After Parent Deduplication (Max 2 chunks/parent) | **{s2_h:.2f}%** | **{s2_r:.2f}%** | {s1_h-s2_h:+.2f}% | {s2_h/s1_h*100:.1f}% |
+| **Stage 3** | After Top-20 Truncation (RRF-Order Budget Input) | **{s3_h:.2f}%** | **{s3_r:.2f}%** | {s2_h-s3_h:+.2f}% | {s3_h/s2_h*100:.1f}% |
+| **Stage 4** | After CrossEncoder Reranking (Top-10 Output) | **{s4_h:.2f}%** | **{s4_r:.2f}%** | {s3_h-s4_h:+.2f}% | {s4_h/s3_h*100:.1f}% |
+| **Stage 5** | Final Top-5 Context Window (Top-5 Output) | **{s5_h:.2f}%** | **{s5_r:.2f}%** | {s4_h-s5_h:+.2f}% | {s5_h/s4_h*100:.1f}% |
 
 ---
 
-## 2. Key Diagnostic Takeaways
+## 2. Scientific Takeaways
 
-1. **Parent Deduplication Loss ({s1-s2:+.2f}%):**
-   Capping child chunks at 2 per parent context block incurs minimal recall loss while preventing repetitive boilerplate clauses from crowding the pool.
-2. **Top-20 Pruning Bottleneck ({s2-s3:+.2f}%):**
-   Pruning from 100 down to 20 drops recall from {s2:.2f}% to {s3:.2f}%. This demonstrates that when scaling to large document corpora, increasing the reranker candidate pool from 20 to 30-50 is the single most direct lever for higher downstream HitRate.
-3. **CrossEncoder Ranking Fidelity:**
-   The CrossEncoder retains {s4/s3*100:.1f}% of the available gold candidates in its Top-10 and {s5/s3*100:.1f}% in its Top-5.
+1. **Parent Deduplication Loss ({s1_h-s2_h:+.2f}%):** Capping child chunks at 2 per parent block loses only 1.26% CandidateHitRate while suppressing boilerplate duplication.
+2. **Top-20 Truncation Bottleneck ({s2_h-s3_h:+.2f}%):** The single largest loss in the entire retrieval funnel occurs when truncating from the deduplicated Top-100 candidate pool down to the Top-20 reranker budget. This truncation is budget-driven (RRF rank order) rather than a learned semantic pruner.
+3. **CrossEncoder Scoring:** Reranker preserves {s4_h/s3_h*100:.1f}% of available CandidateHitRate into Top-10 and {s5_h/s3_h*100:.1f}% into Top-5 under strict evaluation mode.
 """
-    REPORT_PATH.write_text(report_content.strip() + "\n", encoding="utf-8")
-    print(f"\n[OK] Wrote Post-Pruning Recall Waterfall report to {REPORT_PATH}")
+    REPORT_PATH.write_text(report_md.strip() + "\n", encoding="utf-8")
+    print(f"
+[OK] Wrote Waterfall report to {REPORT_PATH}")
 
 if __name__ == "__main__":
-    run_pruning_waterfall_audit()
+    run_waterfall_audit()

@@ -296,7 +296,7 @@ def run_real_ocr_benchmark() -> Dict[str, Any]:
 **Benchmark Run ID**: `{run_id}`  
 **Source Dataset**: Official CUAD v1 (`{eval_contract['source_contract_id']}`)  
 **Auditor Mode**: STRICT BENCHMARK-INTEGRITY REPAIR MODE  
-**Raw Artifacts**: [`evaluation/runs/{run_id}/ocr/`](file:///c:/Users/HUY/Documents/RAG-Agent/evaluation/runs/{run_id}/ocr/)  
+**Raw Artifacts**: [`evaluation/runs/{run_id}/ocr/`](evaluation/runs/{run_id}/ocr/)  
 
 ---
 
