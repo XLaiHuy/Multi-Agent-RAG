@@ -1,0 +1,52 @@
+{
+  "platform": {
+    "system": "Windows",
+    "cpu_count": 8,
+    "torch_threads": 4,
+    "cuda_available": false
+  },
+  "measured_stages_ms": {
+    "T_scope_filter": {
+      "P50": 0.022099993657320738,
+      "P95": 0.07810998795321208,
+      "P99": 0.0984279852127656
+    },
+    "T_dense_search": {
+      "P50": 0.1973000034922734,
+      "P95": 0.4849500124691983,
+      "P99": 0.8299759912188163
+    },
+    "T_bm25_search": {
+      "P50": 0.6732999900123104,
+      "P95": 2.314594991912598,
+      "P99": 4.464146012323908
+    },
+    "T_rrf_fusion": {
+      "P50": 0.08035000064410269,
+      "P95": 0.16808499058242873,
+      "P99": 0.20416300452779973
+    },
+    "T_parent_dedup": {
+      "P50": 0.04600000102072954,
+      "P95": 0.11401499068597327,
+      "P99": 0.13274100288981572
+    },
+    "T_crossencoder_k20": {
+      "P50": 153.5466500063194,
+      "P95": 271.0032699964358,
+      "P99": 317.05543901713094
+    },
+    "T_total_document_scoped": {
+      "P50": 154.57805001642555,
+      "P95": 272.23478500527557,
+      "P99": 318.8580249983351
+    },
+    "T_total_global": {
+      "P50": 174.5694499986712,
+      "P95": 281.79541001009045,
+      "P99": 329.5903589954832
+    }
+  },
+  "simulated_constants_removed": true,
+  "methodology": "Measured using time.perf_counter() end-to-end around each operational step during live batch query execution."
+}

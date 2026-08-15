@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Evaluation Cache Manager for Reusable Intermediate Retrieval Artifacts.
 Caches deterministic parsed chunks, dense embeddings, BM25 indices, and candidate pools.
@@ -19,20 +20,28 @@ CACHE_DIR = Path(__file__).resolve().parent / "cache"
 
 def compute_cache_key(
     manifest_hash: str,
-    child_target_tokens: int,
-    child_overlap_tokens: int,
-    parent_target_tokens: int,
-    parent_overlap_tokens: int,
-    dense_model: str,
+    child_target_tokens: int = 250,
+    child_overlap_tokens: int = 30,
+    parent_target_tokens: int = 1200,
+    parent_overlap_tokens: int = 100,
+    dense_model: str = "BAAI/bge-m3",
+    dense_dimension: int = 1024,
+    query_encoding_protocol: str = "v1_normalized",
+    bm25_config_version: str = "v1_alphanumeric",
+    rrf_k: int = 60,
+    broad_candidate_pool_size: int = 100,
     structural_metadata_version: str = "v1",
 ) -> str:
-    """Computes a strict cryptographic cache key."""
+    """Computes a strict cryptographic cache key encompassing all configuration."""
     raw_str = (
         f"{manifest_hash}_"
         f"c{child_target_tokens}o{child_overlap_tokens}_"
         f"p{parent_target_tokens}o{parent_overlap_tokens}_"
-        f"{dense_model}_"
-        f"{structural_metadata_version}"
+        f"{dense_model}_d{dense_dimension}_"
+        f"qproto_{query_encoding_protocol}_"
+        f"bm25_{bm25_config_version}_"
+        f"rrf_{rrf_k}_pool_{broad_candidate_pool_size}_"
+        f"meta_{structural_metadata_version}"
     )
     return hashlib.sha256(raw_str.encode("utf-8")).hexdigest()[:24]
 
@@ -111,16 +120,16 @@ class EvaluationCache:
         Dict[str, List[Tuple[str, float]]],
         Dict[str, List[str]],
     ]:
-        b100 = json.loads((self.dir / "bm25_candidates_top100.json").read_text(encoding="utf-8"))
-        d100 = json.loads((self.dir / "dense_candidates_top100.json").read_text(encoding="utf-8"))
-        r100 = json.loads((self.dir / "rrf_candidates_top100.json").read_text(encoding="utf-8"))
-        gmap = json.loads((self.dir / "gold_chunk_mapping.json").read_text(encoding="utf-8"))
-        return b100, d100, r100, gmap
+        bm25_100 = json.loads((self.dir / "bm25_candidates_top100.json").read_text(encoding="utf-8"))
+        dense_100 = json.loads((self.dir / "dense_candidates_top100.json").read_text(encoding="utf-8"))
+        rrf_100 = json.loads((self.dir / "rrf_candidates_top100.json").read_text(encoding="utf-8"))
+        gold_map = json.loads((self.dir / "gold_chunk_mapping.json").read_text(encoding="utf-8"))
+        return bm25_100, dense_100, rrf_100, gold_map
 
-    def save_metadata(self, meta: Dict[str, Any]):
-        meta["cache_key"] = self.cache_key
-        meta["timestamp"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-        (self.dir / "metadata.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
+    def save_metadata(self, metadata: Dict[str, Any]):
+        (self.dir / "metadata.json").write_text(
+            json.dumps(metadata, indent=2), encoding="utf-8"
+        )
 
     def load_metadata(self) -> Dict[str, Any]:
         return json.loads((self.dir / "metadata.json").read_text(encoding="utf-8"))

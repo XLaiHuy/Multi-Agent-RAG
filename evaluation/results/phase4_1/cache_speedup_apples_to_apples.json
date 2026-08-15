@@ -1,0 +1,8 @@
+{
+  "workload": "CUAD DEV 20-Contract Retrieval Suite (238 Answerable Queries)",
+  "cold_runtime_seconds": 2443.2,
+  "warm_runtime_seconds": 25.8,
+  "speedup_ratio": 94.69767441860463,
+  "metric_identity_verified": true,
+  "details": "Deterministic intermediate embeddings and candidate pools cached; final ranking and metrics identical between cold and warm runs."
+}

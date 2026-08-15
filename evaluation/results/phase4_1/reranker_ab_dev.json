@@ -1,0 +1,36 @@
+{
+  "status": "RUN",
+  "evaluated_task_mode": "TRUE_DOCUMENT_SCOPED_QA",
+  "candidate_budget": 20,
+  "models": {
+    "cross-encoder/ms-marco-TinyBERT-L-2-v2": {
+      "classification": "FAST_DEFAULT",
+      "HitRate@1": 51.26050420168067,
+      "HitRate@5": 80.67226890756302,
+      "HitRate@10": 90.33613445378151,
+      "MRR": 0.6359210350806989,
+      "nDCG@5": 0.3424719681024286,
+      "latency_ms": {
+        "P50": 153.5466500063194,
+        "P95": 271.0032699964358,
+        "P99": 317.05543901713094
+      },
+      "load_time_seconds": 0.05
+    },
+    "BAAI/bge-reranker-base": {
+      "classification": "HIGH_ACCURACY_CANDIDATE",
+      "HitRate@1": 48.319327731092436,
+      "HitRate@5": 78.99159663865547,
+      "HitRate@10": 89.07563025210085,
+      "MRR": 0.6055605575563558,
+      "nDCG@5": 0.32071888488166034,
+      "latency_ms": {
+        "P50": 9142.17255001131,
+        "P95": 16965.62071000517,
+        "P99": 19296.87368901184
+      },
+      "load_time_seconds": 4.28107060000184
+    }
+  },
+  "decision": "TinyBERT retained as FAST_DEFAULT for low-latency production; BGE-Reranker-Base available for high-accuracy evaluation."
+}

@@ -1,0 +1,22 @@
+{
+  "CV_SAFE": [
+    "Evaluation Harness Acceleration (>90x Speedup: ~40.7 min to ~25.8s on DEV)",
+    "Observed 0 cross-tenant retrieval leakage across 7 ACL regression test suites",
+    "Real production-measured retrieval latency (P50 < 170ms on 4 CPU threads)",
+    "Parent-child chunk integrity (84.2% gold in 1 chunk, 0 orphan chunks)"
+  ],
+  "README_SAFE": [
+    "Global Multi-Contract DEV HitRate@10 (31.09%, MRR 0.1173)",
+    "Custom CUAD Holdout V2 Global CandidateHitRate@100 (74.06%)",
+    "Custom CUAD Holdout V2 Global HitRate@10 (28.67%, MRR 0.1078)"
+  ],
+  "DEV_ONLY": [
+    "True Document-Scoped QA DEV HitRate@10 (75.21%, MRR 0.5529)"
+  ],
+  "INVALIDATED": [
+    "Old Phase 4 Post-Filtered Document-Scoped claim (replaced by True Document-Scoped)",
+    "Simulated 100% refusal accuracy on unanswerables (REAL_API NOT_RUN)",
+    "Simulated 40.5% LLM call reduction (REAL_API NOT_RUN)",
+    "Simulated 94.74% generation faithfulness (REAL_API NOT_RUN)"
+  ]
+}

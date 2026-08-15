@@ -42,6 +42,18 @@ class LocalEmbeddingProvider(EmbeddingProvider):
         vec = model.encode(query, show_progress_bar=False, normalize_embeddings=True)
         return vec.tolist()
 
+    def embed_queries_batch(
+        self, queries: List[str], batch_size: int = 32
+    ) -> List[List[float]]:
+        """Batch encodes queries using the identical normalization and inference protocol as embed_query."""
+        if not queries:
+            return []
+        model = self._get_model()
+        vectors = model.encode(
+            queries, batch_size=batch_size, show_progress_bar=False, normalize_embeddings=True
+        )
+        return vectors.tolist()
+
     def embed_documents_batch(
         self, texts: List[str], batch_size: int = 32
     ) -> List[List[float]]:
@@ -79,6 +91,18 @@ class GeminiEmbeddingProvider(EmbeddingProvider):
         if not res.embeddings or not res.embeddings[0].values:
             raise ValueError("Empty embedding vector received from Gemini API.")
         return list(res.embeddings[0].values)
+
+    def embed_queries_batch(
+        self, queries: List[str], batch_size: int = 32
+    ) -> List[List[float]]:
+        """Batch encodes queries using the identical normalization and inference protocol as embed_query."""
+        if not queries:
+            return []
+        model = self._get_model()
+        vectors = model.encode(
+            queries, batch_size=batch_size, show_progress_bar=False, normalize_embeddings=True
+        )
+        return vectors.tolist()
 
     def embed_documents_batch(
         self, texts: List[str], batch_size: int = 50

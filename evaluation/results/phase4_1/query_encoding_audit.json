@@ -1,0 +1,9 @@
+{
+  "status": "QUERY_ENCODING_EQUIVALENT",
+  "model": "BAAI/bge-m3",
+  "sample_size": 5,
+  "max_absolute_difference": 2.738088369369507e-07,
+  "min_cosine_similarity": 1.0,
+  "is_equivalent": true,
+  "details": "LocalEmbeddingProvider.embed_query and embed_documents_batch invoke model.encode with normalize_embeddings=True, resulting in bitwise/float32 identical vector representations."
+}

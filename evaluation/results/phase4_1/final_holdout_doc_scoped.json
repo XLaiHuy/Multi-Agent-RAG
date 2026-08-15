@@ -1,0 +1,53 @@
+{
+  "experiment_id": "EXP_PHASE4_1_HOLDOUT_DOCUMENT_SCOPED",
+  "benchmark": "CUSTOM_CUAD_HOLDOUT_V2",
+  "total_contracts": 25,
+  "total_queries": 294,
+  "valid_evaluated_queries": 293,
+  "timestamp": "2026-08-15T18:05:00Z",
+  "searchable_chunks_per_query": {
+    "mean": 60.55631399317406,
+    "median": 45.0,
+    "p95": 119.0
+  },
+  "candidate_hit_rates": {
+    "CandidateHitRate@1": 56.655290102389074,
+    "CandidateHitRate@5": 83.95904436860067,
+    "CandidateHitRate@10": 91.80887372013652,
+    "CandidateHitRate@20": 98.29351535836177,
+    "CandidateHitRate@50": 99.31740614334471
+  },
+  "true_chunk_recalls": {
+    "TrueChunkRecall@5": 26.008387458543957,
+    "TrueChunkRecall@10": 34.02310323556469,
+    "TrueChunkRecall@20": 34.02310323556469
+  },
+  "post_rerank_metrics": {
+    "HitRate@1": 50.85324232081911,
+    "HitRate@5": 82.93515358361775,
+    "HitRate@10": 94.53924914675767,
+    "MRR": 0.6418373151308305,
+    "nDCG@5": 0.3585135166922277
+  },
+  "total_retrieval_latency_ms": {
+    "P50": 68.88690000050701,
+    "P95": 121.82082000072097,
+    "P99": 186.1615799891267
+  },
+  "measured_stages_ms": {
+    "T_scope_filter_p50": 0.013200013199821115,
+    "T_dense_search_p50": 0.13470000703819096,
+    "T_bm25_search_p50": 0.367600005120039,
+    "T_rrf_fusion_p50": 0.02710000262595713,
+    "T_parent_dedup_p50": 0.019500002963468432,
+    "T_crossencoder_k20_p50": 68.01980000454932
+  },
+  "failure_attribution": {
+    "NOT_FOUND_SCOPED_FIRST_STAGE": 2,
+    "LOST_BY_BUDGET": 1,
+    "RERANKER_DEMOTED": 1,
+    "TOP10_NOT_TOP5": 34,
+    "GOLD_MAPPING_FAILURE": 0,
+    "OTHER": 12
+  }
+}

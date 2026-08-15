@@ -1,0 +1,16 @@
+{
+  "manifest_total_answerable": 294,
+  "validly_mapped_queries": 293,
+  "excluded_query_count": 1,
+  "excluded_queries": [
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Right_Of_First_Refusal_16",
+      "contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "Right Of First Refusal",
+      "gold_evidence_text": "Right of First Refusal. If at any time after the Closing Date and prior to the third (3rd) anniversary of the Closing Date, the Company desires to issue and sell any shares of Common Stock or any securities convertible into or exchangeable for shares",
+      "gold_character_length": 235,
+      "failure_classification": "CHUNK_BOUNDARY_MAPPING_FAILURE",
+      "remedy": "Preserve strict N=293 valid benchmark subset without unverified synthetic offset patching."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "experiment_id": "EXP_PHASE4_1_TRUE_DOCUMENT_SCOPED",
+  "dataset": "CUAD DEV (20 Contracts, 238 Answerable Queries)",
+  "timestamp": "2026-08-15T17:24:45Z",
+  "global_multi_contract": {
+    "searchable_chunks_per_query": 1034,
+    "candidate_hit_rates": {
+      "CandidateHitRate@1": 4.621848739495799,
+      "CandidateHitRate@5": 18.067226890756302,
+      "CandidateHitRate@10": 27.73109243697479,
+      "CandidateHitRate@20": 42.436974789915965,
+      "CandidateHitRate@50": 62.18487394957983,
+      "CandidateHitRate@100": 77.31092436974791
+    },
+    "true_chunk_recalls": {
+      "TrueChunkRecall@5": 4.23374613003096,
+      "TrueChunkRecall@10": 7.076974330402017,
+      "TrueChunkRecall@20": 7.076974330402017
+    },
+    "post_rerank_metrics": {
+      "HitRate@1": 5.46218487394958,
+      "HitRate@5": 20.168067226890756,
+      "HitRate@10": 31.092436974789916,
+      "MRR": 0.11731025743630787,
+      "nDCG@5": 0.04772080521469599
+    },
+    "total_retrieval_latency_ms": {
+      "P50": 174.5694499986712,
+      "P95": 281.79541001009045,
+      "P99": 329.5903589954832
+    }
+  },
+  "true_document_scoped_qa": {
+    "searchable_chunks_per_query": {
+      "mean": 61.63865546218487,
+      "median": 52.0,
+      "p95": 162.39999999999964
+    },
+    "candidate_hit_rates": {
+      "CandidateHitRate@1": 52.10084033613446,
+      "CandidateHitRate@5": 82.77310924369748,
+      "CandidateHitRate@10": 91.17647058823529,
+      "CandidateHitRate@20": 94.9579831932773,
+      "CandidateHitRate@50": 99.15966386554622
+    },
+    "true_chunk_recalls": {
+      "TrueChunkRecall@5": 25.2619162981249,
+      "TrueChunkRecall@10": 33.87274712218776,
+      "TrueChunkRecall@20": 33.87274712218776
+    },
+    "post_rerank_metrics": {
+      "HitRate@1": 51.26050420168067,
+      "HitRate@5": 80.67226890756302,
+      "HitRate@10": 90.33613445378151,
+      "MRR": 0.6359210350806989,
+      "nDCG@5": 0.3424719681024286
+    },
+    "total_retrieval_latency_ms": {
+      "P50": 154.57805001642555,
+      "P95": 272.23478500527557,
+      "P99": 318.8580249983351
+    }
+  },
+  "deltas": {
+    "delta_HitRate@5": 60.504201680672274,
+    "delta_HitRate@10": 59.2436974789916,
+    "delta_MRR": 0.518610777644391,
+    "delta_nDCG@5": 0.2947511628877326
+  },
+  "failure_attribution": {
+    "NOT_FOUND_SCOPED_FIRST_STAGE": 0,
+    "LOST_BY_BUDGET": 12,
+    "RERANKER_DEMOTED": 5,
+    "TOP10_NOT_TOP5": 23,
+    "GOLD_MAPPING_FAILURE": 0,
+    "OTHER": 6
+  }
+}

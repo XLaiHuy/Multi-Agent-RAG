@@ -1,0 +1,92 @@
+{
+  "k=10": {
+    "candidate_budget_k": 10,
+    "pre_ce_candidate_hit_rate": 93.27731092436974,
+    "post_ce_HitRate@1": 50.0,
+    "post_ce_HitRate@5": 82.35294117647058,
+    "post_ce_HitRate@10": 93.27731092436974,
+    "post_ce_MRR": 0.6358726824062958,
+    "post_ce_nDCG@5": 0.3507451885104238,
+    "ce_latency_ms": {
+      "P50": 72.41244999750052,
+      "P95": 136.36974999681112,
+      "P99": 154.25797599367797
+    },
+    "pareto_classification": "FAST"
+  },
+  "k=20": {
+    "candidate_budget_k": 20,
+    "pre_ce_candidate_hit_rate": 96.63865546218487,
+    "post_ce_HitRate@1": 51.26050420168067,
+    "post_ce_HitRate@5": 81.5126050420168,
+    "post_ce_HitRate@10": 90.33613445378151,
+    "post_ce_MRR": 0.6372732426303855,
+    "post_ce_nDCG@5": 0.3435755223476141,
+    "ce_latency_ms": {
+      "P50": 124.59844999830239,
+      "P95": 264.7344250159219,
+      "P99": 364.6184599975822
+    },
+    "pareto_classification": "PARETO_OPTIMAL_DEFAULT"
+  },
+  "k=30": {
+    "candidate_budget_k": 30,
+    "pre_ce_candidate_hit_rate": 98.73949579831933,
+    "post_ce_HitRate@1": 50.84033613445378,
+    "post_ce_HitRate@5": 80.25210084033614,
+    "post_ce_HitRate@10": 89.07563025210085,
+    "post_ce_MRR": 0.631452581032413,
+    "post_ce_nDCG@5": 0.3398045410398662,
+    "ce_latency_ms": {
+      "P50": 174.54485000052955,
+      "P95": 445.5011549885967,
+      "P99": 500.19541600107914
+    },
+    "pareto_classification": "DOMINATED_BY_K20"
+  },
+  "k=40": {
+    "candidate_budget_k": 40,
+    "pre_ce_candidate_hit_rate": 100.0,
+    "post_ce_HitRate@1": 50.84033613445378,
+    "post_ce_HitRate@5": 80.25210084033614,
+    "post_ce_HitRate@10": 89.07563025210085,
+    "post_ce_MRR": 0.6319344404428439,
+    "post_ce_nDCG@5": 0.3407810127751423,
+    "ce_latency_ms": {
+      "P50": 170.7561499933945,
+      "P95": 576.2888700090116,
+      "P99": 682.4077799945369
+    },
+    "pareto_classification": "DOMINATED_BY_K20"
+  },
+  "k=50": {
+    "candidate_budget_k": 50,
+    "pre_ce_candidate_hit_rate": 100.0,
+    "post_ce_HitRate@1": 51.26050420168067,
+    "post_ce_HitRate@5": 80.25210084033614,
+    "post_ce_HitRate@10": 89.07563025210085,
+    "post_ce_MRR": 0.6338602107509671,
+    "post_ce_nDCG@5": 0.34125569649003523,
+    "ce_latency_ms": {
+      "P50": 185.50459999823943,
+      "P95": 625.5106599957797,
+      "P99": 717.1170479958528
+    },
+    "pareto_classification": "DOMINATED_BY_K20"
+  },
+  "k=75": {
+    "candidate_budget_k": 75,
+    "pre_ce_candidate_hit_rate": 100.0,
+    "post_ce_HitRate@1": 51.26050420168067,
+    "post_ce_HitRate@5": 80.25210084033614,
+    "post_ce_HitRate@10": 89.07563025210085,
+    "post_ce_MRR": 0.6337735094037615,
+    "post_ce_nDCG@5": 0.34064196392767093,
+    "ce_latency_ms": {
+      "P50": 161.72880001249723,
+      "P95": 562.4130999916815,
+      "P99": 720.521508998936
+    },
+    "pareto_classification": "DOMINATED_BY_K20"
+  }
+}
