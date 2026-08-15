@@ -308,8 +308,8 @@ def run_real_ocr_benchmark() -> Dict[str, Any]:
 
 ## 2. Empirical Findings & Threshold Guidelines
 1. **Digital & High-Res Clean Scans (>=200 DPI)**: Word Error Rate is strictly **0.00%**, preserving full downstream clause retrieval.
-2. **Moderate Degradations (150 DPI, 2° Skew, Low Blur)**: CER remains $<0.03$, causing minimal downstream retrieval impact ($\Delta\text{{Recall}} \le 0.00$).
-3. **Severe Degradations (100 DPI Low-Res, 5° Skew, Heavy Noise)**: CER rises to $0.05 - 0.09$, causing downstream retrieval to drop by up to $20.0\%$ ($\Delta\text{{Recall}} = +0.200$). Pre-processing deskewing and minimum 150 DPI resolution are essential for production OCR pipelines.
+2. **Moderate Degradations (150 DPI, 2° Skew, Low Blur)**: CER remains $<0.03$, causing minimal downstream retrieval impact ($\\Delta\text{{Recall}} \\le 0.00$).
+3. **Severe Degradations (100 DPI Low-Res, 5° Skew, Heavy Noise)**: CER rises to $0.05 - 0.09$, causing downstream retrieval to drop by up to $20.0%$ ($\\Delta\text{{Recall}} = +0.200$). Pre-processing deskewing and minimum 150 DPI resolution are essential for production OCR pipelines.
 """
 
     (REPORTS_DIR / "OCR_REPORT.md").write_text(ocr_report_md, encoding="utf-8")

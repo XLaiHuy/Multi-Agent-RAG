@@ -1,0 +1,35 @@
+{
+  "experiment_id": "EXP-17_WATERFALL",
+  "benchmark_name": "CUAD_DEV_SPLIT",
+  "timestamp": "2026-08-15T14:46:40Z",
+  "runtime_seconds": 1965.18,
+  "manifest_hash": "971abe5b7356e5c4c4be62c438f4db499b253cd2c78a27732914bd69c500331d",
+  "dense_model": "BAAI/bge-m3",
+  "reranker_model": "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+  "reranker_failure_count": 0,
+  "reranker_p50_ms": 157.94,
+  "reranker_p95_ms": 253.49,
+  "valid_answerable_queries": 238,
+  "stages": {
+    "Stage 1 - Raw Top-100": {
+      "CandidateHitRate": 77.31092436974791,
+      "TrueChunkRecall": 29.92544864113926
+    },
+    "Stage 2 - Parent Dedup": {
+      "CandidateHitRate": 77.31092436974791,
+      "TrueChunkRecall": 24.65528794528196
+    },
+    "Stage 3 - Top-20 Truncation": {
+      "CandidateHitRate": 43.27731092436975,
+      "TrueChunkRecall": 10.642431754576304
+    },
+    "Stage 4 - CrossEncoder Top-10": {
+      "CandidateHitRate": 31.092436974789916,
+      "TrueChunkRecall": 7.076974330402017
+    },
+    "Stage 5 - CrossEncoder Top-5": {
+      "CandidateHitRate": 20.168067226890756,
+      "TrueChunkRecall": 4.23374613003096
+    }
+  }
+}

@@ -3,6 +3,8 @@ Embedding Providers (Local SentenceTransformers & Gemini API).
 Decoupled implementation conforming to EmbeddingProvider interface.
 """
 import os
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 import time
 import logging
 from typing import List, Optional
@@ -28,8 +30,11 @@ class LocalEmbeddingProvider(EmbeddingProvider):
         if self._model is None:
             logger.info(f"[LocalEmbedding] Loading SentenceTransformer '{self.model_name}'...")
             from sentence_transformers import SentenceTransformer
-            self._model = SentenceTransformer(self.model_name, trust_remote_code=True)
-            self._dim = self._model.get_sentence_embedding_dimension()
+            try:
+                self._model = SentenceTransformer(self.model_name, local_files_only=True)
+            except Exception:
+                self._model = SentenceTransformer(self.model_name)
+            self._dim = self._model.get_embedding_dimension() if hasattr(self._model, "get_embedding_dimension") else self._model.get_sentence_embedding_dimension()
         return self._model
 
     def embed_query(self, query: str) -> List[float]:
@@ -38,7 +43,7 @@ class LocalEmbeddingProvider(EmbeddingProvider):
         return vec.tolist()
 
     def embed_documents_batch(
-        self, texts: List[str], batch_size: int = 64
+        self, texts: List[str], batch_size: int = 32
     ) -> List[List[float]]:
         if not texts:
             return []

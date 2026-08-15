@@ -1,38 +1,27 @@
 # Fair Comparison: Candidate Union vs Equal RRF at Identical Candidate Budgets
 
-**Dataset:** CUAD DEV Split (20 Contracts, 238 Evaluated Answerable Queries)  
-**Dense Model:** BAAI/bge-m3 (1024-dim)  
-**Sparse Model:** BM25Okapi  
-**Evaluation Scope:** Pre-rerank candidate generation recall evaluated strictly at identical budgets $k \in [20, 50, 100]$.
+**Evaluation Dataset:** CUAD DEV Split (20 Contracts, 238 Evaluated Answerable Queries)  
+**Dense Model:** `BAAI/bge-m3` (1024-d)  
+**Sparse Model:** `BM25Okapi`  
+**Evaluation Protocol:** Strict identical candidate budgets $k \in [20, 50, 100]$.  
+**Timestamp:** 2026-08-15 21:13:34Z  
+**Runtime:** 1914.50s  
 
 ---
 
-## 1. Candidate Recall at Identical Candidate Budgets
+## 1. CandidateHitRate at Identical Candidate Budgets
 
-| Candidate Strategy | Pre-Rerank Recall @20 | Pre-Rerank Recall @50 | Pre-Rerank Recall @100 | First-Stage MRR @100 |
+| Candidate Strategy | CandidateHitRate @20 | CandidateHitRate @50 | CandidateHitRate @100 | First-Stage MRR @100 |
 |:---|:---:|:---:|:---:|:---:|
-| **Dense Only (`BGE-M3`)** | 35.71% | 52.94% | 66.39% | 0.1182 |
-| **BM25 Only** | 31.93% | 46.22% | 57.98% | 0.1041 |
-| **Interleaved Union** | 35.29% | 53.78% | 67.65% | 0.1124 |
-| **Equal RRF ($k=60$)** | **35.71%** | **54.62%** | **68.91%** | **0.1246** |
+| **Dense_Only** | 43.70% | 59.24% | 71.01% | 0.1207 |
+| **BM25_Only** | 38.24% | 56.30% | 73.53% | 0.1120 |
+| **Interleaved_Union** | 40.76% | 62.18% | 78.15% | 0.1210 |
+| **Equal_RRF** | 42.44% | 62.18% | 77.31% | 0.1251 |
 
 ---
 
 ## 2. Key Scientific Findings & Analysis
 
-1. **At Identical Budget $k=20$:**
-   - Equal RRF achieves **`35.71%`** candidate recall.
-   - Interleaved Union achieves **`35.29%`**.
-   - Dense-Only achieves **`35.71%`**.
-
-2. **At Identical Budget $k=50$:**
-   - Equal RRF achieves **`54.62%`**.
-   - Interleaved Union achieves **`53.78%`**.
-
-3. **At Identical Budget $k=100$:**
-   - Equal RRF achieves **`68.91%`**.
-   - Interleaved Union achieves **`67.65%`**.
-
-### Conclusion:
-At **identical candidate budgets**, Equal RRF and Candidate Union achieve virtually identical recall (differing by less than 1 query), with RRF providing better initial rank quality (MRR 0.1246 vs 0.1124).
-The previous apparent advantage of Union was purely an artifact of comparing a **50-candidate Union pool with a 20-candidate RRF pool**!
+1. **At Identical Budget $k=20$:** Equal RRF achieves **`42.44%`** vs **`40.76%`** for Interleaved Union.
+2. **At Identical Budget $k=50$:** Equal RRF achieves **`62.18%`** vs **`62.18%`** for Interleaved Union.
+3. **At Identical Budget $k=100$:** Equal RRF achieves **`77.31%`** vs **`78.15%`** for Interleaved Union.

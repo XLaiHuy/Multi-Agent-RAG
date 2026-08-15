@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-11",
+  "benchmark_name": "CUAD_DEV_SPLIT",
+  "timestamp": "2026-08-15T13:41:14Z",
+  "runtime_seconds": 1944.39,
+  "manifest_hash": "971abe5b7356e5c4c4be62c438f4db499b253cd2c78a27732914bd69c500331d",
+  "dense_model": "BAAI/bge-m3",
+  "dense_dimension": 1024,
+  "sparse_retriever": "BM25Okapi",
+  "fusion": "RRF_k60",
+  "total_queries": 550,
+  "valid_answerable_queries": 238,
+  "metrics": {
+    "CandidateHitRate@5": 18.067226890756302,
+    "TrueChunkRecall@5": 3.895701821398416,
+    "MRR@5": 0.09362745098039216,
+    "CandidateHitRate@10": 27.73109243697479,
+    "TrueChunkRecall@10": 6.83687829198665,
+    "MRR@10": 0.10635087368280646,
+    "CandidateHitRate@20": 42.436974789915965,
+    "TrueChunkRecall@20": 11.167641838609917,
+    "MRR@20": 0.11644572052626143,
+    "CandidateHitRate@30": 51.68067226890757,
+    "TrueChunkRecall@30": 14.514254148981104,
+    "MRR@30": 0.12015855676842124,
+    "CandidateHitRate@50": 62.18487394957983,
+    "TrueChunkRecall@50": 20.68182404775401,
+    "MRR@50": 0.1228939103827293,
+    "CandidateHitRate@100": 77.31092436974791,
+    "TrueChunkRecall@100": 29.92544864113926,
+    "MRR@100": 0.12505645229428333
+  }
+}

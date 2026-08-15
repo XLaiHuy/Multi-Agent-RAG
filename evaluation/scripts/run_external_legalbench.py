@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
 Evaluation on Frozen CUAD Holdout v2 Split (25 holdout contracts, 682 total queries, 294 answerable).
-NOTE: This is a custom multi-contract holdout split from CUAD v1, designated as CUSTOM_CUAD_HOLDOUT_V2 (not an external third-party suite).
+NOTE: This is a custom multi-contract holdout split (CUSTOM_CUAD_HOLDOUT_V2) from CUAD v1.
+Exports raw JSON to evaluation/results/phase3_5_1/custom_cuad_holdout_v2.json.
 """
 import os
 import sys
 import time
 import json
+import hashlib
 from pathlib import Path
 from typing import List, Dict, Any, Set
 
@@ -35,14 +37,18 @@ cfg = get_retrieval_config()
 MANIFEST_PATH = REPO_ROOT / "evaluation" / "manifests" / "cuad_locked_test_v2_manifest.json"
 CONTRACTS_DIR = REPO_ROOT / "evaluation" / "datasets" / "cuad" / "processed" / "contracts"
 REPORT_PATH = REPO_ROOT / "evaluation" / "reports" / "EXTERNAL_LEGAL_BENCHMARK.md"
+OUTPUT_JSON_DIR = REPO_ROOT / "evaluation" / "results" / "phase3_5_1"
 
 def run_custom_holdout_benchmark():
+    start_wall_time = time.perf_counter()
     print("=" * 80)
     print("EVALUATING ON CUSTOM CUAD HOLDOUT V2 (25 HOLD-OUT CONTRACTS)")
     print(f"Dense: {cfg.dense_model} | Reranker: {cfg.reranker_model} (strict=True)")
     print("=" * 80)
 
-    manifest_data = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    manifest_raw = MANIFEST_PATH.read_bytes()
+    manifest_hash = hashlib.sha256(manifest_raw).hexdigest()
+    manifest_data = json.loads(manifest_raw.decode("utf-8"))
     contracts_info = manifest_data["contracts"]
     queries = manifest_data["queries"]
     ans_queries = [q for q in queries if not q.get("is_unanswerable", False)]
@@ -73,8 +79,7 @@ def run_custom_holdout_benchmark():
             chunk_dict[c.chunk_id] = c
             all_ids.append(c.chunk_id)
             sec_str = " > ".join(c.section_path) if c.section_path else "General"
-            enriched = f"[Document: {doc_title}] [Section: {sec_str}]
-{c.text}"
+            enriched = f"[Document: {doc_title}] [Section: {sec_str}]\n{c.text}"
             all_texts.append(enriched)
             all_metas.append(c.metadata)
 
@@ -94,6 +99,7 @@ def run_custom_holdout_benchmark():
 
     hr1_list, hr5_list, hr10_list, mrr_list, c100_list = [], [], [], [], []
     valid_queries = 0
+    reranker_failure_count = 0
 
     for q_idx, q in enumerate(ans_queries):
         question = q["question"]
@@ -124,7 +130,6 @@ def run_custom_holdout_benchmark():
 
         c100_list.append(compute_candidate_hit_rate_at_k(cand_ids_100, gt_ids, k=100))
 
-        # Parent dedup + Top-20 truncation
         dedup_candidates = []
         parent_count = {}
         for c_id in cand_ids_100:
@@ -138,9 +143,12 @@ def run_custom_holdout_benchmark():
 
         pruned_top20 = dedup_candidates[:cfg.reranker_input_budget]
 
-        # CrossEncoder Rerank
         cand_texts = [chunk_dict[c_id].text for c_id in pruned_top20 if c_id in chunk_dict]
-        rerank_hits = reranker.rerank(question, cand_texts, top_n=cfg.reranker_top_n)
+        try:
+            rerank_hits = reranker.rerank(question, cand_texts, top_n=cfg.reranker_top_n)
+        except Exception as e:
+            reranker_failure_count += 1
+            raise
         final_ids = [pruned_top20[idx] for idx, _ in rerank_hits if idx < len(pruned_top20)]
 
         hr1_list.append(compute_candidate_hit_rate_at_k(final_ids, gt_ids, k=1))
@@ -148,11 +156,12 @@ def run_custom_holdout_benchmark():
         hr10_list.append(compute_candidate_hit_rate_at_k(final_ids, gt_ids, k=10))
         mrr_list.append(compute_reciprocal_rank(final_ids, gt_ids))
 
-    c100 = np.mean(c100_list) * 100
-    hr1 = np.mean(hr1_list) * 100
-    hr5 = np.mean(hr5_list) * 100
-    hr10 = np.mean(hr10_list) * 100
-    mrr = np.mean(mrr_list)
+    elapsed_s = time.perf_counter() - start_wall_time
+    c100 = float(np.mean(c100_list) * 100)
+    hr1 = float(np.mean(hr1_list) * 100)
+    hr5 = float(np.mean(hr5_list) * 100)
+    hr10 = float(np.mean(hr10_list) * 100)
+    mrr = float(np.mean(mrr_list))
 
     print(f"\n--- CUSTOM CUAD HOLDOUT V2 RESULTS (N = {valid_queries} Answerable Queries) ---")
     print(f"  CandidateHitRate @100: {c100:.2f}%")
@@ -161,17 +170,41 @@ def run_custom_holdout_benchmark():
     print(f"  HitRate @10:           {hr10:.2f}%")
     print(f"  MRR:                   {mrr:.4f}")
 
+    # Save Machine-Readable JSON
+    OUTPUT_JSON_DIR.mkdir(parents=True, exist_ok=True)
+    raw_record = {
+        "experiment_id": "CUSTOM_CUAD_HOLDOUT_V2",
+        "benchmark_name": "CUAD_25_CONTRACT_HOLDOUT",
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "runtime_seconds": round(elapsed_s, 2),
+        "manifest_hash": manifest_hash,
+        "dense_model": cfg.dense_model,
+        "reranker_model": cfg.reranker_model,
+        "reranker_failure_count": reranker_failure_count,
+        "total_queries": len(queries),
+        "valid_answerable_queries": valid_queries,
+        "metrics": {
+            "CandidateHitRate@100": c100,
+            "HitRate@1": hr1,
+            "HitRate@5": hr5,
+            "HitRate@10": hr10,
+            "MRR": mrr,
+        }
+    }
+    json_path = OUTPUT_JSON_DIR / "custom_cuad_holdout_v2.json"
+    json_path.write_text(json.dumps(raw_record, indent=2), encoding="utf-8")
+
     report_md = f"""# Custom CUAD Holdout v2 Evaluation Report
 
 > **Dataset Classification Notice:**  
 > This benchmark evaluates a custom 25-contract holdout split from **CUAD v1** (`evaluation/manifests/cuad_locked_test_v2_manifest.json`).  
-> It is **NOT** the official LegalBench-RAG benchmark. Unverified external published baselines have been removed.
+> It is designated as CUSTOM_CUAD_HOLDOUT_V2 (not an external third-party suite). Unverified external published baselines have been removed.
 
 **Corpus Scope:** 25 Holdout Commercial Contracts (1,221 child chunks, {valid_queries} evaluated answerable queries)  
-**Configuration Source:** `evaluation/configs/retrieval_final_config_v3_1.json`  
 **Dense Model:** `{cfg.dense_model}` ({cfg.dense_dimension}-d)  
 **Reranker Model:** `{cfg.reranker_model}` (strict mode, full text input)  
-**Timestamp:** {time.strftime('%Y-%m-%d %H:%M:%SZ')}
+**Timestamp:** {time.strftime('%Y-%m-%d %H:%M:%SZ')}  
+**Runtime:** {elapsed_s:.2f}s  
 
 ---
 
@@ -186,8 +219,7 @@ def run_custom_holdout_benchmark():
 | **MRR** | **{mrr:.4f}** | Mean Reciprocal Rank over final reranked list |
 """
     REPORT_PATH.write_text(report_md.strip() + "\n", encoding="utf-8")
-    print(f"
-[OK] Wrote report to {REPORT_PATH}")
+    print(f"\n[OK] Wrote report to {REPORT_PATH} and raw JSON to {json_path}")
 
 if __name__ == "__main__":
     run_custom_holdout_benchmark()

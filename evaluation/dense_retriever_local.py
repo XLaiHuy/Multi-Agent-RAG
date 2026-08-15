@@ -27,7 +27,7 @@ class InMemoryDenseRetriever:
         self,
         chunk_ids: List[str],
         texts: List[str],
-        batch_size: int = 64,
+        batch_size: int = 16,
     ):
         """Embed all documents and build in-memory L2-normalized matrix."""
         print(f"  [DenseRetriever] Embedding {len(texts)} chunks (batch_size={batch_size})...")

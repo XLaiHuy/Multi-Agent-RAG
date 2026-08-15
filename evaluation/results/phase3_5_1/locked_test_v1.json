@@ -1,0 +1,19 @@
+{
+  "experiment_id": "LOCKED_TEST_V1",
+  "benchmark_name": "CUAD_OFFICIAL_10_CONTRACT_SPLIT",
+  "timestamp": "2026-08-15T12:28:43Z",
+  "runtime_seconds": 1093.39,
+  "manifest_hash": "98ff98d586d4de15f246bad8c2492b22b5fe5d058d4b801d6ebd740d530e36a5",
+  "dense_model": "BAAI/bge-m3",
+  "reranker_model": "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+  "reranker_failure_count": 0,
+  "total_queries": 50,
+  "valid_answerable_queries": 19,
+  "metrics": {
+    "CandidateHitRate@100": 78.94736842105263,
+    "HitRate@1": 15.789473684210526,
+    "HitRate@5": 26.31578947368421,
+    "HitRate@10": 47.368421052631575,
+    "MRR": 0.22410192147034252
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "experiment_id": "EXP-16_FAIR",
+  "benchmark_name": "CUAD_DEV_SPLIT",
+  "timestamp": "2026-08-15T14:13:34Z",
+  "runtime_seconds": 1914.5,
+  "manifest_hash": "971abe5b7356e5c4c4be62c438f4db499b253cd2c78a27732914bd69c500331d",
+  "budgets_evaluated": [
+    20,
+    50,
+    100
+  ],
+  "valid_answerable_queries": 238,
+  "results": {
+    "Dense_Only": {
+      "HitRate@20": 43.69747899159664,
+      "HitRate@50": 59.2436974789916,
+      "HitRate@100": 71.00840336134453,
+      "MRR@100": 0.12066200525792735
+    },
+    "BM25_Only": {
+      "HitRate@20": 38.23529411764706,
+      "HitRate@50": 56.30252100840336,
+      "HitRate@100": 73.52941176470588,
+      "MRR@100": 0.11197556087767642
+    },
+    "Interleaved_Union": {
+      "HitRate@20": 40.7563025210084,
+      "HitRate@50": 62.18487394957983,
+      "HitRate@100": 78.15126050420169,
+      "MRR@100": 0.12101398526988696
+    },
+    "Equal_RRF": {
+      "HitRate@20": 42.436974789915965,
+      "HitRate@50": 62.18487394957983,
+      "HitRate@100": 77.31092436974791,
+      "MRR@100": 0.12505645229428333
+    }
+  }
+}

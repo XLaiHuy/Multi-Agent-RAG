@@ -3,6 +3,9 @@ Local CrossEncoder Reranker Provider.
 Supports strict evaluation mode (fail loudly), tokenizer-aware max_length,
 and sigmoid score normalization.
 """
+import os
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 import logging
 from typing import List, Tuple, Optional
 from backend.app.core.config import get_settings

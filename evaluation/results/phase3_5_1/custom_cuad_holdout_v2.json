@@ -1,0 +1,19 @@
+{
+  "experiment_id": "CUSTOM_CUAD_HOLDOUT_V2",
+  "benchmark_name": "CUAD_25_CONTRACT_HOLDOUT",
+  "timestamp": "2026-08-15T13:08:24Z",
+  "runtime_seconds": 2359.18,
+  "manifest_hash": "1f0116f95bf24f19a0eb0750a12f889ed8b80da3c4b7644140d8a8477fd71205",
+  "dense_model": "BAAI/bge-m3",
+  "reranker_model": "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+  "reranker_failure_count": 0,
+  "total_queries": 682,
+  "valid_answerable_queries": 293,
+  "metrics": {
+    "CandidateHitRate@100": 74.06143344709898,
+    "HitRate@1": 4.778156996587031,
+    "HitRate@5": 19.112627986348123,
+    "HitRate@10": 28.668941979522184,
+    "MRR": 0.10778211170702638
+  }
+}

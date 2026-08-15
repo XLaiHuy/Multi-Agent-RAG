@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
 Evaluation on Frozen LEGACY_LOCKED_TEST_V1 (10 Contracts, 50 queries, 19 answerable).
+Exports raw JSON to evaluation/results/phase3_5_1/locked_test_v1.json.
 """
 import os
 import sys
 import time
 import json
+import hashlib
 from pathlib import Path
 from typing import List, Dict, Any, Set
 
@@ -33,14 +35,19 @@ from evaluation.metrics.retrieval_metrics import (
 cfg = get_retrieval_config()
 MANIFEST_PATH = REPO_ROOT / "evaluation" / "manifests" / "cuad_official_manifest.json"
 CONTRACTS_DIR = REPO_ROOT / "evaluation" / "datasets" / "cuad" / "processed" / "contracts"
+REPORT_PATH = REPO_ROOT / "evaluation" / "reports" / "RETRIEVAL_BENCHMARK_LOCKED_TEST.md"
+OUTPUT_JSON_DIR = REPO_ROOT / "evaluation" / "results" / "phase3_5_1"
 
 def run_legacy_test():
+    start_wall_time = time.perf_counter()
     print("=" * 80)
     print("EVALUATING ON LEGACY_LOCKED_TEST_V1 (10 CONTRACTS)")
     print(f"Dense: {cfg.dense_model} | Reranker: {cfg.reranker_model} (strict=True)")
     print("=" * 80)
 
-    manifest_data = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    manifest_raw = MANIFEST_PATH.read_bytes()
+    manifest_hash = hashlib.sha256(manifest_raw).hexdigest()
+    manifest_data = json.loads(manifest_raw.decode("utf-8"))
     contracts_info = manifest_data["contracts"]
     queries = manifest_data["queries"]
     ans_queries = [q for q in queries if not q.get("is_unanswerable", False)]
@@ -71,8 +78,7 @@ def run_legacy_test():
             chunk_dict[c.chunk_id] = c
             all_ids.append(c.chunk_id)
             sec_str = " > ".join(c.section_path) if c.section_path else "General"
-            enriched = f"[Document: {doc_title}] [Section: {sec_str}]
-{c.text}"
+            enriched = f"[Document: {doc_title}] [Section: {sec_str}]\n{c.text}"
             all_texts.append(enriched)
             all_metas.append(c.metadata)
 
@@ -92,6 +98,7 @@ def run_legacy_test():
 
     hr1_list, hr5_list, hr10_list, mrr_list, c100_list = [], [], [], [], []
     valid_queries = 0
+    reranker_failure_count = 0
 
     for q_idx, q in enumerate(ans_queries):
         question = q["question"]
@@ -122,7 +129,6 @@ def run_legacy_test():
 
         c100_list.append(compute_candidate_hit_rate_at_k(cand_ids_100, gt_ids, k=100))
 
-        # Parent dedup + Top-20 truncation
         dedup_candidates = []
         parent_count = {}
         for c_id in cand_ids_100:
@@ -136,9 +142,12 @@ def run_legacy_test():
 
         pruned_top20 = dedup_candidates[:cfg.reranker_input_budget]
 
-        # CrossEncoder Rerank
         cand_texts = [chunk_dict[c_id].text for c_id in pruned_top20 if c_id in chunk_dict]
-        rerank_hits = reranker.rerank(question, cand_texts, top_n=cfg.reranker_top_n)
+        try:
+            rerank_hits = reranker.rerank(question, cand_texts, top_n=cfg.reranker_top_n)
+        except Exception as e:
+            reranker_failure_count += 1
+            raise
         final_ids = [pruned_top20[idx] for idx, _ in rerank_hits if idx < len(pruned_top20)]
 
         hr1_list.append(compute_candidate_hit_rate_at_k(final_ids, gt_ids, k=1))
@@ -146,12 +155,66 @@ def run_legacy_test():
         hr10_list.append(compute_candidate_hit_rate_at_k(final_ids, gt_ids, k=10))
         mrr_list.append(compute_reciprocal_rank(final_ids, gt_ids))
 
+    elapsed_s = time.perf_counter() - start_wall_time
+    c100 = float(np.mean(c100_list) * 100)
+    hr1 = float(np.mean(hr1_list) * 100)
+    hr5 = float(np.mean(hr5_list) * 100)
+    hr10 = float(np.mean(hr10_list) * 100)
+    mrr = float(np.mean(mrr_list))
+
     print(f"\n--- LEGACY_LOCKED_TEST_V1 RESULTS (N = {valid_queries} Answerable Queries) ---")
-    print(f"  CandidateHitRate @100: {np.mean(c100_list)*100:.2f}%")
-    print(f"  HitRate @1:            {np.mean(hr1_list)*100:.2f}%")
-    print(f"  HitRate @5:            {np.mean(hr5_list)*100:.2f}%")
-    print(f"  HitRate @10:           {np.mean(hr10_list)*100:.2f}%")
-    print(f"  MRR:                   {np.mean(mrr_list):.4f}")
+    print(f"  CandidateHitRate @100: {c100:.2f}%")
+    print(f"  HitRate @1:            {hr1:.2f}%")
+    print(f"  HitRate @5:            {hr5:.2f}%")
+    print(f"  HitRate @10:           {hr10:.2f}%")
+    print(f"  MRR:                   {mrr:.4f}")
+
+    # Save Machine-Readable JSON
+    OUTPUT_JSON_DIR.mkdir(parents=True, exist_ok=True)
+    raw_record = {
+        "experiment_id": "LOCKED_TEST_V1",
+        "benchmark_name": "CUAD_OFFICIAL_10_CONTRACT_SPLIT",
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "runtime_seconds": round(elapsed_s, 2),
+        "manifest_hash": manifest_hash,
+        "dense_model": cfg.dense_model,
+        "reranker_model": cfg.reranker_model,
+        "reranker_failure_count": reranker_failure_count,
+        "total_queries": len(queries),
+        "valid_answerable_queries": valid_queries,
+        "metrics": {
+            "CandidateHitRate@100": c100,
+            "HitRate@1": hr1,
+            "HitRate@5": hr5,
+            "HitRate@10": hr10,
+            "MRR": mrr,
+        }
+    }
+    json_path = OUTPUT_JSON_DIR / "locked_test_v1.json"
+    json_path.write_text(json.dumps(raw_record, indent=2), encoding="utf-8")
+
+    report_md = f"""# Locked Test V1 Retrieval Benchmark Report
+
+**Dataset:** CUAD Locked Test V1 (10 Contracts, {valid_queries} Answerable Queries)  
+**Dense Model:** `{cfg.dense_model}` ({cfg.dense_dimension}-d)  
+**Reranker Model:** `{cfg.reranker_model}` (strict=True, full text input)  
+**Timestamp:** {time.strftime('%Y-%m-%d %H:%M:%SZ')}  
+**Runtime:** {elapsed_s:.2f}s  
+
+---
+
+## 1. Measured Retrieval Performance
+
+| Metric | Measured Value | Scope |
+|:---|:---:|:---|
+| **CandidateHitRate@100** | **{c100:.2f}%** | First-Stage $RRF_{{60}}$ Broad Pool |
+| **HitRate@1** | **{hr1:.2f}%** | Top-1 Exact Clause Accuracy |
+| **HitRate@5** | **{hr5:.2f}%** | Top-5 Context Window |
+| **HitRate@10** | **{hr10:.2f}%** | Top-10 Output |
+| **MRR** | **{mrr:.4f}** | Mean Reciprocal Rank |
+"""
+    REPORT_PATH.write_text(report_md.strip() + "\n", encoding="utf-8")
+    print(f"\n[OK] Wrote locked test report to {REPORT_PATH} and raw JSON to {json_path}")
 
 if __name__ == "__main__":
     run_legacy_test()

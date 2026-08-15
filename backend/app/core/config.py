@@ -1,6 +1,6 @@
 """
 Application Configuration and Settings Module.
-Implements task-specific model routing, security validation, and environment defaults.
+Derives retrieval baseline defaults from backend.app.core.retrieval_defaults.
 """
 import os
 import sys
@@ -10,6 +10,19 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from dotenv import load_dotenv
 
+from backend.app.core.retrieval_defaults import (
+    DENSE_MODEL_PRODUCTION_DEFAULT,
+    DENSE_DIMENSION_PRODUCTION_DEFAULT,
+    DENSE_MODEL_EVALUATION_SELECTED,
+    DENSE_DIMENSION_EVALUATION_SELECTED,
+    CHILD_CHUNK_SIZE,
+    CHILD_CHUNK_OVERLAP,
+    PARENT_CHUNK_SIZE,
+    PARENT_CHUNK_OVERLAP,
+    RERANKER_MODEL_DEFAULT,
+    RERANKER_MAX_SEQ_LENGTH,
+)
+
 load_dotenv()
 
 
@@ -18,7 +31,7 @@ class Settings(BaseSettings):
     environment: str = Field(default="development", alias="ENVIRONMENT")
     debug: bool = Field(default=False, alias="DEBUG")
     app_title: str = "Enterprise Contract Intelligence Platform"
-    app_version: str = "3.1.0"
+    app_version: str = "3.5.1"
 
     # Security & JWT
     jwt_secret_key: str = Field(default="", alias="JWT_SECRET_KEY")
@@ -40,16 +53,20 @@ class Settings(BaseSettings):
     # Local Ollama fallback (if configured)
     ollama_base_url: str = Field(default="http://localhost:11434/v1", alias="OLLAMA_BASE_URL")
 
-    # Embedding Settings (Aligned with Frozen Config v3.1)
+    # Embedding Settings (Derived from retrieval_defaults)
     embedding_provider: str = Field(default="local", alias="EMBEDDING_PROVIDER")
     gemini_embedding_model: str = Field(default="text-embedding-004", alias="GEMINI_EMBEDDING_MODEL")
-    local_embedding_model: str = Field(default="BAAI/bge-m3", alias="LOCAL_EMBEDDING_MODEL")
-    embedding_dimension: int = Field(default=1024, alias="EMBEDDING_DIMENSION")
+    local_embedding_model: str = Field(default=DENSE_MODEL_PRODUCTION_DEFAULT, alias="LOCAL_EMBEDDING_MODEL")
+    embedding_dimension: int = Field(default=DENSE_DIMENSION_PRODUCTION_DEFAULT, alias="EMBEDDING_DIMENSION")
 
-    # Reranker Settings (Aligned with Frozen Config v3.1)
+    # Optional high-accuracy evaluation model override
+    evaluation_dense_model: str = DENSE_MODEL_EVALUATION_SELECTED
+    evaluation_dense_dimension: int = DENSE_DIMENSION_EVALUATION_SELECTED
+
+    # Reranker Settings (Derived from retrieval_defaults)
     enable_reranker: bool = Field(default=True, alias="ENABLE_RERANKER")
-    reranker_model: str = Field(default="cross-encoder/ms-marco-TinyBERT-L-2-v2", alias="RERANKER_MODEL")
-    reranker_max_seq_length: int = Field(default=512, alias="RERANKER_MAX_SEQ_LENGTH")
+    reranker_model: str = Field(default=RERANKER_MODEL_DEFAULT, alias="RERANKER_MODEL")
+    reranker_max_seq_length: int = Field(default=RERANKER_MAX_SEQ_LENGTH, alias="RERANKER_MAX_SEQ_LENGTH")
     reranker_strict_mode: bool = Field(default=False, alias="RERANKER_STRICT_MODE")
 
     # Storage Paths & URLs
@@ -73,11 +90,11 @@ class Settings(BaseSettings):
     budget_max_retrieval_attempts: int = 2
     budget_max_regenerations: int = 1
 
-    # Chunking Configurations (Tokens - Aligned with Frozen Config v3.1)
-    child_chunk_size: int = 250
-    child_chunk_overlap: int = 30
-    parent_chunk_size: int = 1200
-    parent_chunk_overlap: int = 100
+    # Chunking Configurations (Tokens - Derived from retrieval_defaults)
+    child_chunk_size: int = CHILD_CHUNK_SIZE
+    child_chunk_overlap: int = CHILD_CHUNK_OVERLAP
+    parent_chunk_size: int = PARENT_CHUNK_SIZE
+    parent_chunk_overlap: int = PARENT_CHUNK_OVERLAP
 
     # Retrieval Confidence Weights
     confidence_weight_bm25_dense_rank: float = 0.25

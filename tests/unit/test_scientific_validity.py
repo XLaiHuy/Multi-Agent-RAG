@@ -3,7 +3,7 @@ Scientific Validity & Integrity Regression Tests.
 Verifies:
 1. Pure label-free query execution (zero label leakage).
 2. Distinction between CandidateHitRate@k (binary coverage) and TrueChunkRecall@k (set overlap).
-3. Central retrieval configuration loader consistency.
+3. Exact field-by-field retrieval configuration alignment between Settings, ConfigLoader, and retrieval_defaults.
 4. Reranker strict evaluation mode (failing loudly).
 5. Clean repository paths (zero absolute local machine paths).
 6. Custom holdout benchmark naming integrity.
@@ -44,25 +44,42 @@ def test_candidate_hitrate_vs_true_chunk_recall_distinction():
     assert hit_rate != true_recall, "HitRate and Recall must not be conflated"
 
 
-def test_evaluation_scripts_load_selected_retrieval_config():
-    """Verify that config_loader loads single source of truth."""
+def test_exact_config_alignment_across_runtime_and_evaluation():
+    """Verify exact field-by-field alignment across Settings, ConfigLoader, and retrieval_defaults."""
+    from backend.app.core.config import get_settings
     from evaluation.config_loader import get_retrieval_config
+    import backend.app.core.retrieval_defaults as defaults
 
-    cfg = get_retrieval_config()
-    assert cfg.dense_model in ["BAAI/bge-m3", "BAAI/bge-small-en-v1.5"]
-    assert cfg.dense_dimension in [1024, 384]
-    assert cfg.child_target_tokens == 250
-    assert cfg.child_overlap_tokens in [30, 50]
-    assert cfg.broad_candidate_pool_size == 100
-    assert cfg.reranker_input_budget == 20
-    assert cfg.reranker_max_seq_length == 512
+    settings = get_settings()
+    eval_cfg = get_retrieval_config()
+
+    # 1. Dense Embedding Model & Dimension
+    assert settings.local_embedding_model == defaults.DENSE_MODEL_PRODUCTION_DEFAULT == "BAAI/bge-small-en-v1.5"
+    assert settings.embedding_dimension == defaults.DENSE_DIMENSION_PRODUCTION_DEFAULT == 384
+    assert eval_cfg.dense_model == defaults.DENSE_MODEL_EVALUATION_SELECTED == "BAAI/bge-m3"
+    assert eval_cfg.dense_dimension == defaults.DENSE_DIMENSION_EVALUATION_SELECTED == 1024
+
+    # 2. Chunking Ingestion Parameters (Tokens)
+    assert settings.child_chunk_size == eval_cfg.child_target_tokens == defaults.CHILD_CHUNK_SIZE == 250
+    assert settings.child_chunk_overlap == eval_cfg.child_overlap_tokens == defaults.CHILD_CHUNK_OVERLAP == 30
+    assert settings.parent_chunk_size == eval_cfg.parent_target_tokens == defaults.PARENT_CHUNK_SIZE == 1200
+    assert settings.parent_chunk_overlap == eval_cfg.parent_overlap_tokens == defaults.PARENT_CHUNK_OVERLAP == 100
+
+    # 3. First-Stage & Reranking Defaults
+    assert eval_cfg.sparse_retriever == defaults.SPARSE_RETRIEVER_DEFAULT == "BM25Okapi"
+    assert eval_cfg.broad_candidate_pool_size == defaults.BROAD_CANDIDATE_POOL_SIZE == 100
+    assert eval_cfg.rrf_k == defaults.RRF_K_DEFAULT == 60
+    assert eval_cfg.reranker_input_budget == defaults.RERANKER_INPUT_BUDGET == 20
+
+    # 4. CrossEncoder Reranker
+    assert settings.reranker_model == eval_cfg.reranker_model == defaults.RERANKER_MODEL_DEFAULT == "cross-encoder/ms-marco-TinyBERT-L-2-v2"
+    assert settings.reranker_max_seq_length == eval_cfg.reranker_max_seq_length == defaults.RERANKER_MAX_SEQ_LENGTH == 512
 
 
 def test_benchmark_reranker_strict_mode_raises_on_inference_failure():
     """Verify that LocalCrossEncoderReranker(strict=True) fails loudly on errors."""
     from backend.app.providers.reranker import LocalCrossEncoderReranker
 
-    # Invalid model in strict mode must raise
     reranker = LocalCrossEncoderReranker(model_name="nonexistent/fake-model-xyz", strict=True)
     with pytest.raises(Exception):
         reranker.rerank("test query", ["test doc 1", "test doc 2"])
@@ -74,7 +91,7 @@ def test_no_absolute_machine_paths_exist_in_evaluation_scripts():
     assert eval_scripts_dir.exists(), f"Directory not found: {eval_scripts_dir}"
 
     bad_patterns = [
-        re.compile(r"[a-zA-Z]:[/\\](?:Users|home)[/\\][a-zA-Z0-9_-]+", re.IGNORECASE),
+        re.compile(r'[a-zA-Z]:[/\\](?:Users|home)[/\\][a-zA-Z0-9_-]+', re.IGNORECASE),
         re.compile(r"anti" + r"gravity-ide", re.IGNORECASE),
         re.compile(r"\.system_" + r"generated", re.IGNORECASE),
     ]
