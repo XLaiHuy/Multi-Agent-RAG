@@ -30,3 +30,9 @@ data/
 Thumbs.db
 .vscode/
 .idea/
+
+evaluation/cache/
+evaluation/artifacts/cache/
+*.npy
+*.npz
+*.pkl

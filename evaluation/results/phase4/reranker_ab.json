@@ -1,0 +1,12 @@
+{
+  "status": "NOT_RUN",
+  "reason": "FOUND_IN_CE_INPUT_RERANKER_DEMOTED accounts for 15.26% of failures (primary bottleneck is LOST_BY_BUDGET at 42.63% and NOT_FOUND_TOP100 at 28.42%; TinyBERT is retained as FAST_DEFAULT).",
+  "tinybert_baseline": {
+    "model": "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+    "P50_ms": 107.28594998363405,
+    "P95_ms": 175.5629949810099,
+    "HitRate@5": 20.168067226890756,
+    "HitRate@10": 31.092436974789916,
+    "MRR": 0.11731025743630787
+  }
+}

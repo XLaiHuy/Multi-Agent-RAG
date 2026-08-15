@@ -1,0 +1,20 @@
+{
+  "UNIQUE_DOCUMENT": {
+    "query_count": 3,
+    "HitRate@5": 66.66666666666666,
+    "HitRate@10": 66.66666666666666,
+    "MRR": 0.5
+  },
+  "2_TO_3_POSSIBLE_DOCUMENTS": {
+    "query_count": 7,
+    "HitRate@5": 57.14285714285714,
+    "HitRate@10": 71.42857142857143,
+    "MRR": 0.3299319727891157
+  },
+  "4_PLUS_POSSIBLE_DOCUMENTS": {
+    "query_count": 228,
+    "HitRate@5": 18.421052631578945,
+    "HitRate@10": 29.385964912280706,
+    "MRR": 0.10574700640490114
+  }
+}

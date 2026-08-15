@@ -1,0 +1,24 @@
+{
+  "total_queries_evaluated": 238,
+  "total_top5_misses": 190,
+  "counts": {
+    "NOT_FOUND_TOP100": 54,
+    "FOUND_TOP100_LOST_BY_BUDGET": 81,
+    "FOUND_IN_CE_INPUT_RERANKER_DEMOTED": 29,
+    "FOUND_TOP10_NOT_TOP5": 26,
+    "PARENT_DEDUP_LOSS": 0,
+    "DOCUMENT_AMBIGUITY": 0,
+    "GOLD_MAPPING_FAILURE": 0,
+    "OTHER": 0
+  },
+  "percentages_of_failures": {
+    "NOT_FOUND_TOP100": 28.42,
+    "FOUND_TOP100_LOST_BY_BUDGET": 42.63,
+    "FOUND_IN_CE_INPUT_RERANKER_DEMOTED": 15.26,
+    "FOUND_TOP10_NOT_TOP5": 13.68,
+    "PARENT_DEDUP_LOSS": 0.0,
+    "DOCUMENT_AMBIGUITY": 0.0,
+    "GOLD_MAPPING_FAILURE": 0.0,
+    "OTHER": 0.0
+  }
+}

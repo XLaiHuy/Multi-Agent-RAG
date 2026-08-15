@@ -1,0 +1,21 @@
+{
+  "manifest_path": "cuad_locked_test_v2_manifest.json",
+  "manifest_hash": "1f0116f95bf24f19a0eb0750a12f889ed8b80da3c4b7644140d8a8477fd71205",
+  "declared_answerable_queries": 294,
+  "valid_mapped_queries": 293,
+  "excluded_count": 1,
+  "exclusions": [
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Right_Of_First_Refusal_16",
+      "contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "Right Of First Refusal",
+      "question": "Is there a right of first refusal, first offer, or first negotiation granted?",
+      "gold_evidence_length": 235,
+      "gold_start_offset": null,
+      "gold_evidence_snippet": "Present technology acquisition opportunities for AVDU. AVDU will have 30-days to determine if they want to go forward with the technology license.\n\n  a. UTK after 30 days shall have the right to prese",
+      "in_raw_source_file": true,
+      "classification_reason": "CHUNK_BOUNDARY_MAPPING_FAILURE",
+      "root_cause_explanation": "The gold annotation string spans across chunking boundaries or contains text normalization differences between raw SQuAD JSON annotation and parsed markdown structure."
+    }
+  ]
+}

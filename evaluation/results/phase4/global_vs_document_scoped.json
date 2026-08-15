@@ -1,0 +1,38 @@
+{
+  "benchmark_name": "CUAD_DEV_SPLIT",
+  "valid_answerable_queries": 238,
+  "searchable_chunks": {
+    "global_average": 1034,
+    "document_scoped_average": 61.6
+  },
+  "GLOBAL_MULTI_CONTRACT": {
+    "CandidateHitRate@5": 18.067226890756302,
+    "CandidateHitRate@10": 27.73109243697479,
+    "CandidateHitRate@20": 42.436974789915965,
+    "CandidateHitRate@50": 62.18487394957983,
+    "CandidateHitRate@100": 77.31092436974791,
+    "TrueChunkRecall@5": 3.895701821398416,
+    "TrueChunkRecall@10": 6.83687829198665,
+    "TrueChunkRecall@20": 11.167641838609917,
+    "Post_Rerank_HitRate@1": 5.46218487394958,
+    "Post_Rerank_HitRate@5": 20.168067226890756,
+    "Post_Rerank_HitRate@10": 31.092436974789916,
+    "Post_Rerank_MRR": 0.11731025743630787,
+    "Post_Rerank_nDCG@5": 0.04772080521469599
+  },
+  "DOCUMENT_SCOPED_QA": {
+    "CandidateHitRate@5": 70.16806722689076,
+    "CandidateHitRate@10": 73.10924369747899,
+    "CandidateHitRate@20": 76.05042016806722,
+    "CandidateHitRate@50": 77.31092436974791,
+    "CandidateHitRate@100": 77.31092436974791,
+    "TrueChunkRecall@5": 22.88542210420869,
+    "TrueChunkRecall@10": 26.7981450881391,
+    "TrueChunkRecall@20": 29.197157324612643,
+    "Post_Rerank_HitRate@1": 44.957983193277315,
+    "Post_Rerank_HitRate@5": 70.58823529411765,
+    "Post_Rerank_HitRate@10": 75.21008403361344,
+    "Post_Rerank_MRR": 0.552876150460184,
+    "Post_Rerank_nDCG@5": 0.28558745987391204
+  }
+}
