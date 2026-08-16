@@ -1,29 +1,31 @@
 {
   "CV_SAFE": [
     "Strict Child HitRate@10 = 81.97% (MRR 0.5214, N=294 held-out CUAD questions across 25 contracts)",
-    "Strict Parent HitRate@10 = 94.90% (N=294 held-out CUAD questions across 25 contracts)",
-    "Balanced Answerability Accuracy = 74.50% (N=200, 100 answerable, 100 unanswerable across 25 unseen contracts)",
-    "Unanswerable Refusal Rate = 82.00% (82/100 correct refusals on unanswerable contract queries)",
-    "Answerable Acceptance Rate = 67.00% (67/100 accepted answers on answerable contract queries)",
-    "Child Citation Coverage (all answerable) = 58.00% (58/100 total answerable queries cited exact gold child chunks)",
-    "Child Citation Hit Rate (among accepted answers) = 86.57% (58/67 accepted answerable responses cited gold child chunks)",
-    "Parent Citation Hit Rate (among accepted answers) = 94.03% (63/67 accepted answerable responses cited gold parent chunks)",
-    "Citation Precision (macro) = 82.84% (exact match against verified contract clause chunks)",
-    "Citation Recall (macro) = 63.50%",
-    "Wrong Document Citation Rate = 0.00% (0 wrong-contract citations among 140 emitted citations)",
-    "Invalid Citation Mention Rate = 0.00% (0 invalid reference indices or chunk IDs)",
-    "Real API Telemetry: 3.42 calls/query, 3,971.9 tokens/query, 32.6s P50 latency across N=200 benchmark queries"
+    "Strict Parent HitRate@10 = 94.9% (N=294 held-out CUAD questions across 25 contracts)",
+    "Strict Balanced Answerability Accuracy = 72.5% (Sentinel-only, N=200)",
+    "Inclusive Balanced Answerability Accuracy = 74.5% (Prose-aware, N=200)",
+    "Strict Unanswerable Refusal Rate = 78.0% (78/100 sentinel refusals on unanswerable queries)",
+    "Inclusive Unanswerable Refusal Rate = 82.0% (82/100 total refusals on unanswerable queries)",
+    "Answerable Acceptance Rate = 67.0% (67/100 accepted answers on answerable queries)",
+    "Child Citation Coverage (all answerable) = 62.0% (58/100 total answerable queries cite verified gold child chunk)",
+    "Child Citation Hit Rate (accepted answers) = 85.07% (58/67 accepted answerable responses cite verified gold child chunk)",
+    "Parent Citation Hit Rate (accepted answers) = 92.54% (63/67 accepted answerable responses cite correct parent section)",
+    "Citation Precision (Macro) = 80.97% (exact match against verified contract clause chunks)",
+    "Citation Recall (Macro) = 63.0%",
+    "Wrong Document Citation Rate = 0.0% (0 wrong-contract citations among 140 emitted citations)",
+    "Invalid Citation Mention Rate = 0.0% (0 invalid reference indices or chunk IDs)",
+    "Real API Telemetry = 3.42 calls/query, 3971.9 tokens/query, 32.62s P50 latency across N=200 benchmark queries"
   ],
   "README_SAFE": [
     "116.8x evaluation cache acceleration (scoped strictly to 25-query, 3-contract repeated evaluation micro-benchmark)",
-    "DEV ablation: Full Agent stack improved Balanced Accuracy by +2.50% (78.75% vs 76.25%) and Child Citation Hit Rate by +4.81% (92.31% vs 87.50%) versus Base RAG at 2,473.9 tokens overhead"
+    "DEV ablation: Full Agent stack improved Balanced Accuracy by +2.5% (78.75% vs 76.25%) and Child Citation Hit Rate by +4.81% versus Base RAG at 2,473.9 tokens overhead"
   ],
   "JUDGE_BASED": [
-    "Grounded Claim Rate under judge model (evaluated against retrieved evidence)",
-    "Semantic Correctness score under judge model (evaluated against gold evidence)"
+    "Grounded Material Claim Rate: 97.93% (evaluated by gemma-4-26b-a4b-it across 145 claims in 85 answers)",
+    "Semantic Correctness: 92.54% (Mean score: 1.85/2.0 evaluated against gold reference text)"
   ],
   "DEV_ONLY": [
-    "Base RAG vs RAG+Verifier vs Full Multi-Agent ablation metrics (N=80)"
+    "Base RAG vs RAG+Verifier vs Full Multi-Agent ablation metrics (N=80 DEV split)"
   ],
   "SUPERSEDED": [
     "Phase 1 heuristic metrics",
@@ -31,10 +33,8 @@
     "Phase 4 unconstrained candidate metrics"
   ],
   "INVALIDATED": [
-    "Unqualified '100% Grounded Claim Rate' (now qualified as judge-based)",
-    "Unqualified 'Zero Hallucination' marketing claims",
-    "Unqualified 'Production Complete' / 'Perfect Execution' claims",
-    "Top-1 citation rank fallback logic"
+    "Top-1 Citation Rank Fallback Logic (removed)",
+    "Unqualified 'Zero Hallucination' / 'Production Complete' / 'SOTA' marketing claims"
   ],
   "NOT_RUN": [
     "Official LegalBench-RAG benchmark"

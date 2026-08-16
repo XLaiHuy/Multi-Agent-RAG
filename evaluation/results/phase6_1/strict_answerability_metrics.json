@@ -3,21 +3,31 @@
   "total_queries": 200,
   "answerable_total": 100,
   "unanswerable_total": 100,
-  "AnswerableAcceptanceRate": 67.0,
-  "AnswerableAcceptance_numerator": 67,
-  "AnswerableAcceptance_denominator": 100,
-  "FalseRefusalRate": 33.0,
-  "FalseRefusal_numerator": 33,
-  "FalseRefusal_denominator": 100,
-  "UnanswerableRefusalRate": 82.0,
-  "UnanswerableRefusal_numerator": 82,
-  "UnanswerableRefusal_denominator": 100,
-  "FalseAnswerRate": 18.0,
-  "FalseAnswer_numerator": 18,
-  "FalseAnswer_denominator": 100,
-  "BalancedAnswerabilityAccuracy": 74.5,
-  "AmbiguousRefusalRate": 5.0,
-  "StrictSentinelRefusalCount": 105,
-  "AmbiguousRefusalCount": 10,
-  "SystemErrorRate": 0.0
+  "breakdown": {
+    "answerable_accepted": 67,
+    "answerable_strict_refusal": 27,
+    "answerable_ambiguous_refusal": 6,
+    "unanswerable_strict_refusal": 78,
+    "unanswerable_ambiguous_refusal": 4,
+    "unanswerable_answered": 18,
+    "observed_system_errors": 0
+  },
+  "strict_conservative": {
+    "StrictAnswerableAcceptanceRate": 67.0,
+    "StrictUnanswerableRefusalRate": 78.0,
+    "StrictFalseRefusalRate": 27.0,
+    "StrictFalseAnswerRate": 22.0,
+    "StrictBalancedAnswerabilityAccuracy": 72.5,
+    "description": "Strict sentinel only: requires explicit INSUFFICIENT_EVIDENCE: sentinel prefix."
+  },
+  "inclusive_prose_aware": {
+    "InclusiveAnswerableAcceptanceRate": 67.0,
+    "InclusiveUnanswerableRefusalRate": 82.0,
+    "InclusiveFalseRefusalRate": 33.0,
+    "InclusiveFalseAnswerRate": 18.0,
+    "InclusiveBalancedAnswerabilityAccuracy": 74.5,
+    "description": "Inclusive prose-aware: includes strict sentinels plus verified explanatory prose refusals."
+  },
+  "ambiguous_refusal_rate": 5.0,
+  "observed_system_error_rate": 0.0
 }

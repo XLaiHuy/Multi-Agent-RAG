@@ -1,0 +1,79 @@
+{
+  "retrieval": {
+    "dataset": "CUAD_HELD_OUT_SPLIT",
+    "n_queries": 294,
+    "n_contracts": 25,
+    "child_hit_at_5": 68.71,
+    "child_hit_at_10": 81.97,
+    "mrr": 0.5214,
+    "parent_hit_at_10": 94.9,
+    "verification_status": "CV_SAFE"
+  },
+  "end_to_end": {
+    "dataset": "CUSTOM_CUAD_HOLDOUT_V2",
+    "n_queries": 200,
+    "n_answerable": 100,
+    "n_unanswerable": 100,
+    "n_contracts": 25,
+    "execution_path": "CASE_A_OFFLINE_RESCORE",
+    "prediction_sha256": "5bcd34525c397daaed0ed2c2b7fd50a84e5efd259df9a94e4861e4addc0dbde3",
+    "strict_conservative": {
+      "balanced_accuracy": 72.5,
+      "unanswerable_refusal_rate": 78.0,
+      "answerable_acceptance_rate": 67.0,
+      "false_refusal_rate": 27.0,
+      "false_answer_rate": 22.0
+    },
+    "inclusive_prose_aware": {
+      "balanced_accuracy": 74.5,
+      "unanswerable_refusal_rate": 82.0,
+      "answerable_acceptance_rate": 67.0,
+      "false_refusal_rate": 33.0,
+      "false_answer_rate": 18.0
+    },
+    "citations": {
+      "valid_explicit_citation_compliance": 98.51,
+      "child_hit_rate_among_accepted": 85.07,
+      "child_citation_coverage_all_answerable": 62.0,
+      "parent_hit_rate_among_accepted": 92.54,
+      "parent_citation_coverage_all_answerable": 68.0,
+      "citation_precision_macro": 80.97,
+      "citation_precision_micro": 73.53,
+      "citation_recall_macro": 63.0,
+      "invalid_citation_rate": 0.0,
+      "wrong_document_citation_rate": 0.0
+    },
+    "observed_system_errors": 0,
+    "verification_status": "CV_SAFE"
+  },
+  "judge_based": {
+    "judge_model": "gemma-4-26b-a4b-it",
+    "judge_coverage_pct": 100.0,
+    "grounded_material_claim_rate": 97.93,
+    "unsupported_claim_rate": 2.07,
+    "contradicted_claims": 0.0,
+    "semantic_correctness_normalized_pct": 92.54,
+    "mean_semantic_correctness_score": 1.85,
+    "contradiction_rate_pct": 1.49,
+    "classification": "JUDGE_BASED"
+  },
+  "telemetry": {
+    "execution_mode": "REAL_API_BENCHMARK",
+    "production_calls_per_query": 3.42,
+    "input_tokens_per_query": 3526.4,
+    "output_tokens_per_query": 445.5,
+    "total_tokens_per_query": 3971.9,
+    "latency_p50_s": 32.62,
+    "latency_p95_s": 57.13,
+    "http_429_errors": 0,
+    "http_5xx_errors": 0
+  },
+  "dev_only": {
+    "scope": "N=80 DEV split",
+    "base_rag_balanced_acc": 76.25,
+    "rag_plus_verifier_balanced_acc": 75.0,
+    "full_bounded_multi_agent_balanced_acc": 78.75,
+    "full_agent_acc_delta": 2.5,
+    "full_agent_child_citation_hit_delta": 4.81
+  }
+}
