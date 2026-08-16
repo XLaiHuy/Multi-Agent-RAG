@@ -1,0 +1,23 @@
+{
+  "benchmark": "CUSTOM_CUAD_HOLDOUT_V2",
+  "total_queries": 200,
+  "answerable_total": 100,
+  "unanswerable_total": 100,
+  "AnswerableAcceptanceRate": 67.0,
+  "AnswerableAcceptance_numerator": 67,
+  "AnswerableAcceptance_denominator": 100,
+  "FalseRefusalRate": 33.0,
+  "FalseRefusal_numerator": 33,
+  "FalseRefusal_denominator": 100,
+  "UnanswerableRefusalRate": 82.0,
+  "UnanswerableRefusal_numerator": 82,
+  "UnanswerableRefusal_denominator": 100,
+  "FalseAnswerRate": 18.0,
+  "FalseAnswer_numerator": 18,
+  "FalseAnswer_denominator": 100,
+  "BalancedAnswerabilityAccuracy": 74.5,
+  "AmbiguousRefusalRate": 5.0,
+  "StrictSentinelRefusalCount": 105,
+  "AmbiguousRefusalCount": 10,
+  "SystemErrorRate": 0.0
+}

@@ -1,0 +1,414 @@
+{
+  "judge_model": "gemma-4-26b-a4b-it",
+  "classification": "JUDGE_BASED_GOLD_EVIDENCE",
+  "answerable_answers_evaluated": 67,
+  "successful_evaluations": 67,
+  "JudgeCoverage": 100.0,
+  "MeanSemanticCorrectness": 1.8507462686567164,
+  "SemanticCorrectnessNormalizedPct": 92.53731343283582,
+  "ContradictionRate": 1.4925373134328357,
+  "details": [
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Agreement_Date_2",
+      "semantic_correctness": 1,
+      "contradiction": false,
+      "reason": "The generated answer explains the definition and conditions of the commencement date but fails to provide the specific date requested in the question."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the title 'CO-BRANDING AGREEMENT' as provided in the gold evidence, while adding specific exhibit context."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies ATR and provides the complete list of parties, including Azul, which is consistent with the context."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the effective date as March 3, 2000, matching the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_Parties_1",
+      "semantic_correctness": 1,
+      "contradiction": false,
+      "reason": "The answer correctly identifies Pelican Delivers Inc. but includes an additional party not mentioned in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the 'Affiliate' mentioned in the gold evidence and provides the specific counterparty name."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the document title as provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly includes the entity from the gold evidence and provides the additional party necessary to fully answer the question."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer includes the gold information and provides additional accurate details regarding the second party involved in the agreement."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately identifies the official title from the gold evidence and provides the additional document name requested in the question."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer is more comprehensive than the gold evidence by identifying both parties involved in the agreement, including the one mentioned in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the document name provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the 'Broker Dealer' mentioned in the gold evidence and provides the specific named parties involved in the agreement."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies that the specific execution date is not provided because the placeholder in the text is left blank."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer provides the full names of both parties and their respective roles, which encompasses and expands upon the information provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the date provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately provides the exact date specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the effective date from the gold evidence and provides additional clarifying context regarding the execution date."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer includes the party mentioned in the gold evidence and provides additional relevant details regarding the second party and entity types."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Expiration_Date_4",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately captures all the conditions and timelines provided in the gold evidence using semantically equivalent language."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Document_Name_0",
+      "semantic_correctness": 1,
+      "contradiction": false,
+      "reason": "The generated answer identifies the core title but omits the specific reference number and issue details provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the date provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the party mentioned in the gold evidence and provides additional specific details from the agreement."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately identifies the commencement date as specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_Parties_1",
+      "semantic_correctness": 1,
+      "contradiction": false,
+      "reason": "The generated answer identifies different parties and fails to include the specific entity, CURO MANAGEMENT, LLC, mentioned in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer is semantically consistent with the gold evidence and provides a more specific, detailed identification of the document name."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_Expiration_Date_4",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately captures the unlimited nature of the agreement term and provides additional relevant context regarding how termination occurs."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the effective date as March 30, 2011, matching the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Parties_1",
+      "semantic_correctness": 1,
+      "contradiction": false,
+      "reason": "The generated answer includes an additional party, Impresse Corporation, which is not mentioned in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately provides the date specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the official title as 'Strategic Alliance Agreement' as provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer is more comprehensive than the gold evidence by correctly identifying both parties involved in the agreement."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Expiration_Date_4",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately captures the commencement and duration of the initial term as specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Governing_Law_7",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer is semantically identical to the gold evidence and correctly identifies the governing jurisdiction."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the Software Publisher as a party, which aligns with the gold evidence, while providing additional context from the text."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer provides a more comprehensive and detailed list of the parties, including the entity specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately provides the date specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_Expiration_Date_4",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately captures the two conditions for termination specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately provides the effective date specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the effective date as February 1, 2018, matching the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately identifies that the Commencement Date is the date of the Agreement, matching the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Expiration_Date_4",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately captures the core information from the gold evidence and provides additional relevant detail regarding the termination notice period."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the specific entities that the gold evidence defines as the 'Parties'."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Effective_Date_3",
+      "semantic_correctness": 0,
+      "contradiction": false,
+      "reason": "The generated answer provides the condition for the effective date instead of the specific date requested in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the parties, including the entity mentioned in the gold evidence, providing a more complete and accurate response."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the date provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly includes the party mentioned in the gold evidence and provides a more comprehensive and detailed list of all parties involved in the agreement."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the effective date as March 1, 2016, which matches the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the date provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the official title from the gold evidence and provides additional relevant context from the document."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately provides the exact date specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer includes the entity mentioned in the gold evidence and provides a more complete and accurate identification of the parties."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately identifies the day and month from the gold evidence and provides the specific year."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately provides the exact title found in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately provides the effective date specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Effective_Date_3",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the date provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_Parties_1",
+      "semantic_correctness": 1,
+      "contradiction": false,
+      "reason": "The generated answer includes an additional party, MediWound, which is not mentioned in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_Expiration_Date_4",
+      "semantic_correctness": 0,
+      "contradiction": true,
+      "reason": "The generated answer incorrectly states the term terminates on the 'earlier' of two events, whereas the gold evidence specifies it continues until the 'later' of two events."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the Executive mentioned in the gold evidence and provides additional accurate information regarding the other party involved."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the date provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer accurately provides the date specified in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the document name as provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the document name provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly includes the title 'OUTSOURCING AGREEMENT' found in the gold evidence and provides additional identifying context."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Parties_1",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer provides the full legal names of the parties identified in the gold evidence without contradicting the information."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Agreement_Date_2",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly identifies the date provided in the gold evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_Document_Name_0",
+      "semantic_correctness": 2,
+      "contradiction": false,
+      "reason": "The generated answer correctly includes the title 'WEB HOSTING AGREEMENT' and provides the full document name as requested."
+    }
+  ]
+}

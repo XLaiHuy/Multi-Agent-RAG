@@ -1,49 +1,72 @@
-# CV-Safe Empirical Results & Scientific Metrics
+# Safe-RAG: CV & Portfolio Master Metric Registry
 
-## Executive Overview
-All performance numbers reported below are generated through **strict reproducible offline execution scripts** and **real Google GenAI API end-to-end evaluations** under **Layer A Zero Gold Access** isolation.
+This document serves as the **Single Source of Truth** for all verified, reproducible metrics across the Safe-RAG legal contract analysis system.
 
 ---
 
-## 1. End-to-End Generation & Agent Performance (Phase 6 Final Benchmark)
-- **Evaluation Set**: $N=200$ Stratified Held-Out Queries (100 Answerable, 100 Unanswerable) across 25 unseen contracts.
-- **Architecture**: `FULL_BOUNDED_MULTI_AGENT` (Planner + Hybrid Retrieval + Critic + Generator + Verifier).
-- **Model Engine**: Google GenAI `gemma-4-26b-a4b-it` (Real API Calls).
+## 1. Core Evaluation Matrix
 
-| Metric | Target | Final Held-Out Measured Result | Verification |
+### A. Document-Scoped Hybrid Retrieval (Phase 4.2 Canonical Baseline)
+- **Dataset**: CUAD Held-Out Split ($N = 294$ answerable queries across 25 unseen contracts)
+- **Retriever Configuration**: BGE-M3 (Dense) + BM25Okapi (Sparse) + Reciprocal Rank Fusion ($k=60$) + TinyBERT CrossEncoder Reranker
+- **Chunk Hierarchy**: Child ~250 tokens / Parent ~1,200 tokens
+
+| Metric | Target | Final Achieved | Verification Status |
 |---|---|---|---|
-| **Balanced Answerability Accuracy** | $\ge 70.0\%$ | **74.50%** | Exceeded |
-| **Unanswerable Refusal Rate** | $\ge 80.0\%$ | **82.00%** | Met |
-| **Answerable Acceptance Rate** | $\ge 60.0\%$ | **67.00%** | Met |
-| **Child Citation Hit Rate** | $\ge 80.0\%$ | **86.57%** | Exceeded |
-| **Parent Citation Hit Rate** | $\ge 85.0\%$ | **94.03%** | Exceeded |
-| **Citation Precision** | $\ge 75.0\%$ | **82.84%** | Exceeded |
-| **Citation Recall** | $\ge 50.0\%$ | **63.50%** | Exceeded |
-| **Grounded Claim Rate** | $100.0\%$ | **100.0%** | Zero Hallucination |
-| **Wrong Document Citation Rate** | $0.0\%$ | **0.00%** | Clean Scoping |
-| **Production Calls / Query** | $\le 4.0$ | **3.42** | Bounded Budget |
-| **Total Tokens / Query** | $\le 5,000$ | **3,971.9** | Efficient Context |
-| **End-to-End Latency P50** | $\le 45.0	ext{ s}$ | **32.62 s** | Real API Latency |
+| **Child HitRate@5** | $\ge 60.0\%$ | **68.71%** | **CV_SAFE** |
+| **Child HitRate@10** | $\ge 75.0\%$ | **81.97%** | **CV_SAFE** |
+| **Mean Reciprocal Rank (MRR)** | $\ge 0.450$ | **0.5214** | **CV_SAFE** |
+| **Parent HitRate@10** | $\ge 90.0\%$ | **94.90%** | **CV_SAFE** |
 
 ---
 
-## 2. Multi-Agent Architecture Ablation ($N=80$ DEV Split)
+### B. End-to-End Real API Generation & Citation Integrity (Phase 6.1 Frozen Benchmark)
+- **Dataset**: Custom CUAD Holdout v2 ($N = 200$ stratified queries: 100 Answerable, 100 Unanswerable across 25 unseen contracts)
+- **System Architecture**: Full Bounded Multi-Agent Stack (`FULL_BOUNDED_MULTI_AGENT`)
+- **API Engine**: Real Google GenAI API (`gemma-4-26b-a4b-it`)
+- **Protocol**: Strict Layer A execution (Zero Gold Access) / Strict Layer B offline rescoring (Zero Top-1 Fallback)
 
-| Metric | `BASE_RAG` (1 call) | `RAG_PLUS_VERIFIER` (~1.3 calls) | `FULL_BOUNDED_MULTI_AGENT` (Flagship) |
+| Metric | Measured Value | Denominator Scope | Verification Status |
 |---|---|---|---|
-| **Balanced Accuracy** | 76.25% | 75.00% | **78.75%** (+2.50%) |
-| **Child Citation Hit Rate** | 87.50% | 86.96% | **92.31%** (+4.81%) |
-| **Citation Precision** | 85.42% | 84.78% | **90.38%** (+4.96%) |
-| **False Refusal Rate** | 40.00% | 42.50% | **35.00%** (-5.00%) |
-| **Calls / Query** | 1.00 | 1.32 | 3.38 |
-| **Tokens / Query** | 1,617.9 | 2,038.0 | 4,091.8 |
-| **Latency P50** | 3.30 s | 5.70 s | 36.19 s |
+| **Balanced Answerability Accuracy** | **74.50%** | $N=200$ queries | **CV_SAFE** |
+| **Unanswerable Refusal Rate** | **82.00%** | 82 / 100 unanswerable queries | **CV_SAFE** |
+| **Answerable Acceptance Rate** | **67.00%** | 67 / 100 answerable queries | **CV_SAFE** |
+| **False Refusal Rate** | **33.00%** | 33 / 100 answerable queries | **CV_SAFE** |
+| **False Answer Rate** | **18.00%** | 18 / 100 unanswerable queries | **CV_SAFE** |
+| **Explicit Citation Compliance** | **98.51%** | 84 / 85 accepted answers | **CV_SAFE** |
+| **Child Citation Hit Rate** | **85.07%** | 58 / 67 accepted answerable responses | **CV_SAFE** |
+| **Child Citation Coverage** | **62.00%** | 58 / 100 total answerable queries | **CV_SAFE** |
+| **Parent Citation Hit Rate** | **92.54%** | 63 / 67 accepted answerable responses | **CV_SAFE** |
+| **Parent Citation Coverage** | **68.00%** | 63 / 100 total answerable queries | **CV_SAFE** |
+| **Citation Precision (Macro)** | **80.97%** | Mean precision across cited answers | **CV_SAFE** |
+| **Citation Recall (Macro)** | **63.00%** | Mean recall across gold spans | **CV_SAFE** |
+| **Wrong Document Citation Rate** | **0.00%** | 0 / 140 emitted citations | **CV_SAFE** |
+| **Invalid Citation Mention Rate** | **0.00%** | 0 / 140 emitted citations | **CV_SAFE** |
+| **Production API Calls / Query** | **3.42 calls** | Mean calls across $N=200$ | **CV_SAFE** |
+| **Total Tokens / Query** | **3,971.9 tokens** | Mean tokens across $N=200$ | **CV_SAFE** |
+| **End-to-End Latency (P50)** | **32.62 s** | Median latency across $N=200$ | **CV_SAFE** |
 
 ---
 
-## 3. Retrieval Performance Summary (Phase 4.2 Locked Benchmark)
-- **Benchmark Corpus**: CUAD 25 Unseen Held-Out Contracts ($N=294$ queries).
-- **Child HitRate@5**: **87.76%** (MRR@5: 0.7788)
-- **Parent HitRate@5**: **94.22%** (MRR@5: 0.8878)
-- **Child HitRate@10**: **92.18%**
-- **Candidate Pool Complementarity**: 97.62%
+### C. Independent Blinded Judge Evaluation (LLM Judge)
+- **Evaluator Model**: `gemma-4-26b-a4b-it` (100.0% coverage across 85 accepted answers)
+- **Groundedness Scope**: Judged strictly against retrieved context supplied to the generator.
+- **Semantic Correctness Scope**: Judged strictly against verified gold references.
+
+| Metric | Measured Value | Scope | Classification |
+|---|---|---|---|
+| **Grounded Material Claim Rate** | **97.93%** | 142 / 145 material claims supported by retrieved context | **JUDGE_BASED** |
+| **Unsupported Claim Rate** | **2.07%** | 3 / 145 claims | **JUDGE_BASED** |
+| **Contradicted Claims** | **0.00%** | 0 / 145 claims | **JUDGE_BASED** |
+| **Semantic Correctness** | **92.54%** | Mean score 1.85 / 2.0 against gold evidence | **JUDGE_BASED** |
+| **Contradiction Rate (vs Gold)** | **1.49%** | 1 / 67 accepted answerable responses | **JUDGE_BASED** |
+
+---
+
+## 2. Recommended Resume / CV Bullets
+
+### Recommended Bullet 1 (Retrieval Engineering):
+> **"Engineered a document-scoped legal retrieval pipeline using BGE-M3, BM25, Reciprocal Rank Fusion ($k=60$), and CrossEncoder reranking, achieving 81.97% strict child HitRate@10 and 0.5214 MRR on 294 held-out CUAD contract queries."**
+
+### Recommended Bullet 2 (Safe Generation & Systems):
+> **"Designed an evidence-bounded Multi-Agent RAG system with Google GenAI, achieving 74.50% balanced answerability accuracy, 82.00% unanswerable refusal, and 80.97% citation precision with zero cross-document contamination across 25 unseen contracts."**

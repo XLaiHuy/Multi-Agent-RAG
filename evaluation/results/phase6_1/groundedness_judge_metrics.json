@@ -1,0 +1,696 @@
+{
+  "judge_model": "gemma-4-26b-a4b-it",
+  "classification": "JUDGE_BASED_EVIDENCE_CONTEXT",
+  "answers_requiring_evaluation": 85,
+  "successful_evaluations": 85,
+  "JudgeCoverage": 100.0,
+  "TotalMaterialClaims": 145,
+  "SupportedMaterialClaims": 142,
+  "UnsupportedMaterialClaims": 3,
+  "ContradictedClaims": 0,
+  "GroundedClaimRate": 97.93103448275862,
+  "UnsupportedClaimRate": 2.0689655172413794,
+  "ContradictedClaimRate": 0.0,
+  "details": [
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Agreement_Date_2",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims made in the generated answer are directly and accurately supported by the provided evidence references."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_unans_Parties_10",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The generated answer accurately identifies both named parties as specified in the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Document_Name_0",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the document's title is directly and explicitly stated in Reference 5."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Parties_1",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both parties, including their full legal names, aliases, and descriptions, are explicitly identified in the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the effective date is directly and explicitly supported by the text in Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_unans_Parties_10",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims regarding the identified parties are directly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The identified parties and their respective roles are explicitly stated in the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The identification of Chase Bank USA, N.A. and the 'Affiliate' as the parties is directly supported by Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Document_Name_0",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim is directly supported by Reference 4, which explicitly identifies the document name as the JOINT CONTENT LICENSE AGREEMENT."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim identifying the parties is directly supported by the signature block provided in Reference 2."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_unans_Parties_10",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims regarding the named parties are directly supported by the provided evidence in Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_Parties_1",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The identification of MMI and Dragon Systems, Inc. as the contracting parties is explicitly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Document_Name_0",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both the official title and the document identifier provided in the answer are explicitly stated in Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim identifying the parties and the specific agreement is directly and explicitly supported by Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Document_Name_0",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The generated answer correctly identifies the agreement name from Reference 5 and accurately states that no other official title is present in the provided text."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_Parties_1",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims regarding the named parties are directly supported by the provided evidence in Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The generated answer accurately identifies that the effective date is not provided and correctly cites the blank placeholder found in Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The identification of the parties and their legal designations is directly supported by Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_unans_Parties_10",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The identification of MMI and Dragon Systems, Inc. as the contracting parties is explicitly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_unans_Parties_10",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claims regarding the agreement type and the identities and corporate statuses of the parties are explicitly stated in Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The effective date of September 30, 2019, is explicitly stated in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the effective date is explicitly stated and supported by Reference 2."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Agreement_Date_2",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both the effective date and the execution date mentioned in the answer are explicitly stated in the provided references."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Parties_1",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The generated answer accurately identifies both named parties as specified in the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Expiration_Date_4",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The generated answer is directly and accurately supported by the text provided in Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Document_Name_0",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The document title provided in the answer is explicitly stated in the provided evidence references."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim that the effective date is September 30, 2019, is explicitly supported by the text in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_unans_Parties_10",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both claims regarding the identity of the Executive and the Company are directly supported by the provided references."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Parties_1",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claims regarding the agreement type and the identities and corporate statuses of the parties are explicitly stated in Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim is directly supported by the text in Reference 1 regarding the commencement of the agreement term."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_Parties_1",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims regarding the identified parties are directly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Document_Name_0",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both claims regarding the document's names are directly supported by the provided text in Reference 1 and Reference 2."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_unans_Notice_Period_To_Terminate_Renewal_6",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both claims made in the generated answer are directly supported by the text provided in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_unans_Parties_10",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the identity of the parties is directly and accurately supported by Reference 2."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_Expiration_Date_4",
+      "total_claims": 4,
+      "supported_claims": 4,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims made in the generated answer are directly supported by the text provided in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_unans_Parties_10",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The identification of Chase Bank USA, N.A. and the 'Affiliate' as the parties is directly supported by Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The effective date of March 30, 2011, is explicitly stated in Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim identifying VERTICALNET, INC. and IMPRESSE CORPORATION as the parties is directly supported by the signature block in Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_unans_Parties_10",
+      "total_claims": 4,
+      "supported_claims": 4,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims regarding the entities involved and the absence of a specific 'Parties' clause are directly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the effective date is directly supported by the definitions provided in Reference 2."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Document_Name_0",
+      "total_claims": 2,
+      "supported_claims": 0,
+      "unsupported_claims": 2,
+      "contradicted_claims": 0,
+      "reason": "The provided evidence does not mention the title 'Strategic Alliance Agreement' or the identifier 'CHERRYHILLMORTGAGE'."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Parties_1",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The identified parties and their variations are explicitly supported by the provided evidence in Reference 1 and Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Expiration_Date_4",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claims regarding the commencement and duration of the initial term are directly supported by the provided evidence in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Governing_Law_7",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim is directly and accurately supported by the text in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_Parties_1",
+      "total_claims": 4,
+      "supported_claims": 4,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims regarding the entities involved and the absence of a specific 'Parties' clause are directly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Parties_1",
+      "total_claims": 4,
+      "supported_claims": 4,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claims identifying the parties and their legal jurisdictions are fully supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_unans_Parties_10",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both parties, including their full legal names, aliases, and descriptions, are explicitly identified in the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_unans_Parties_10",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The identification of the parties and their legal designations is directly supported by Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the effective date is directly supported by the text in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_Expiration_Date_4",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The generated answer accurately reflects the termination conditions specified in Section 7(a) of Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The effective date provided in the answer is explicitly stated in the first reference."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim that the effective date is February 1, 2018, is explicitly stated in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Effective_Date_3",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The definition of the Commencement Date and its role as the date the agreement comes into force are directly supported by the provided references."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Expiration_Date_4",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both claims regarding the agreement's term and the termination notice period are directly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Parties_1",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The named parties are explicitly identified in the signature block provided in Reference 5."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the effective date is directly and accurately supported by the text provided in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_unans_Parties_10",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims regarding the named parties and their legal statuses are directly supported by the provided text in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the identity of the parties is directly and accurately supported by Reference 2."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the effective date is directly and explicitly supported by the text in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_unans_Parties_10",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim identifying VERTICALNET, INC. and IMPRESSE CORPORATION as the parties is directly supported by the signature block in Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Parties_1",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims regarding the named parties and their legal statuses are directly supported by the provided text in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Effective_Date_3",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both claims regarding the effective dates of the Second Amendment and the original Services Agreement are directly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the effective start date is directly supported by the definition of 'EFFECTIVE DATE' provided in Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_Document_Name_0",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both the official title and the full document name/context are explicitly stated in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim that the agreement is effective as of March 30, 2011, is explicitly stated in Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim identifying Galacticomm and Horst Entertainment Inc. as the parties is directly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_Agreement_Date_2",
+      "total_claims": 3,
+      "supported_claims": 3,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "All claims regarding the effective date and the specific signing date of Worldwide Strategies Inc. are explicitly stated in the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Document_Name_0",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The official title provided in the answer is explicitly stated in the provided evidence context."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the effective date is explicitly stated in the provided evidence context."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Effective_Date_3",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the effective start date is directly supported by the text in Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_unans_Parties_10",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim identifying Galacticomm and Horst Entertainment Inc. as the parties is directly supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim identifying Vericel and MediWound as the parties is explicitly supported by Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_Expiration_Date_4",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The generated answer accurately reflects the termination conditions specified in Section 8.3 of Reference 3."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_Parties_1",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both claims regarding the identity of the Executive and the Company are directly supported by the provided references."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The execution date of 9/9/97 is explicitly provided in the signature section of Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_unans_Parties_10",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The named parties are explicitly identified in the signature block provided in Reference 5."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim that the effective date is November 20, 2007, is explicitly supported by Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_unans_Parties_10",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The identified parties and their variations are explicitly supported by the provided evidence in Reference 1 and Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Document_Name_0",
+      "total_claims": 2,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "Both claims regarding the document name and the contracting parties are explicitly stated in Reference 4."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Document_Name_0",
+      "total_claims": 1,
+      "supported_claims": 0,
+      "unsupported_claims": 1,
+      "contradicted_claims": 0,
+      "reason": "The document name 'MANUFACTURING DESIGN MARKETING AGREEMENT' is not mentioned anywhere in the provided evidence context."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_Document_Name_0",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The generated answer accurately identifies the agreement title as explicitly stated in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_unans_Parties_10",
+      "total_claims": 4,
+      "supported_claims": 4,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claims identifying the parties and their legal jurisdictions are fully supported by the provided evidence."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Parties_1",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The claim regarding the identity of the parties is directly and accurately supported by Reference 2."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Agreement_Date_2",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The effective date provided in the answer is explicitly stated in Reference 1."
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_Document_Name_0",
+      "total_claims": 1,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "contradicted_claims": 0,
+      "reason": "The generated answer accurately extracts the full document name directly from the provided evidence in Reference 2."
+    }
+  ]
+}

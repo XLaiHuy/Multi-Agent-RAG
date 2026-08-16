@@ -1,0 +1,9 @@
+{
+  "execution_path": "CASE_A_OFFLINE_RESCORE",
+  "reason": "Frozen predictions exist with exact SHA256 match; strict evaluation performed offline with zero new production answer calls.",
+  "final_predictions_sha256": "5bcd34525c397daaed0ed2c2b7fd50a84e5efd259df9a94e4861e4addc0dbde3",
+  "dev_predictions_sha256": "5528b6eb6f95d6bec6020d8a17a103a285e29c86d370ef6a1ffecd57f18fcfd6",
+  "new_production_answer_calls": 0,
+  "citation_fallback_removed": true,
+  "strict_refusal_sentinel_required": true
+}

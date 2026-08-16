@@ -1,0 +1,41 @@
+{
+  "BASE_RAG": {
+    "BalancedAccuracy": 76.25,
+    "AnswerableAcceptance": 60.0,
+    "UnanswerableRefusal": 92.5,
+    "ChildCitationCoverage_all_answerable": 52.5,
+    "ChildCitationHit_among_answered": 87.5,
+    "CitationPrecision_macro": 85.42,
+    "CitationRecall_macro": 43.74,
+    "CallsPerQuery": 1.0,
+    "TokensPerQuery": 1617.9,
+    "LatencyP50_ms": 3303.7,
+    "Classification": "FAST_LOW_COST"
+  },
+  "RAG_PLUS_VERIFIER": {
+    "BalancedAccuracy": 75.0,
+    "AnswerableAcceptance": 57.5,
+    "UnanswerableRefusal": 92.5,
+    "ChildCitationCoverage_all_answerable": 50.0,
+    "ChildCitationHit_among_answered": 86.96,
+    "CitationPrecision_macro": 84.78,
+    "CitationRecall_macro": 42.97,
+    "CallsPerQuery": 1.32,
+    "TokensPerQuery": 2038.0,
+    "LatencyP50_ms": 5702.0,
+    "Classification": "INTERMEDIATE"
+  },
+  "FULL_BOUNDED_MULTI_AGENT": {
+    "BalancedAccuracy": 78.75,
+    "AnswerableAcceptance": 65.0,
+    "UnanswerableRefusal": 92.5,
+    "ChildCitationCoverage_all_answerable": 60.0,
+    "ChildCitationHit_among_answered": 92.31,
+    "CitationPrecision_macro": 90.38,
+    "CitationRecall_macro": 48.27,
+    "CallsPerQuery": 3.38,
+    "TokensPerQuery": 4091.8,
+    "LatencyP50_ms": 36194.8,
+    "Classification": "HIGH_RELIABILITY_FLAGSHIP"
+  }
+}

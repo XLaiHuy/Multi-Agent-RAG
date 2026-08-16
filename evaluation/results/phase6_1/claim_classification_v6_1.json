@@ -1,0 +1,42 @@
+{
+  "CV_SAFE": [
+    "Strict Child HitRate@10 = 81.97% (MRR 0.5214, N=294 held-out CUAD questions across 25 contracts)",
+    "Strict Parent HitRate@10 = 94.90% (N=294 held-out CUAD questions across 25 contracts)",
+    "Balanced Answerability Accuracy = 74.50% (N=200, 100 answerable, 100 unanswerable across 25 unseen contracts)",
+    "Unanswerable Refusal Rate = 82.00% (82/100 correct refusals on unanswerable contract queries)",
+    "Answerable Acceptance Rate = 67.00% (67/100 accepted answers on answerable contract queries)",
+    "Child Citation Coverage (all answerable) = 58.00% (58/100 total answerable queries cited exact gold child chunks)",
+    "Child Citation Hit Rate (among accepted answers) = 86.57% (58/67 accepted answerable responses cited gold child chunks)",
+    "Parent Citation Hit Rate (among accepted answers) = 94.03% (63/67 accepted answerable responses cited gold parent chunks)",
+    "Citation Precision (macro) = 82.84% (exact match against verified contract clause chunks)",
+    "Citation Recall (macro) = 63.50%",
+    "Wrong Document Citation Rate = 0.00% (0 wrong-contract citations among 140 emitted citations)",
+    "Invalid Citation Mention Rate = 0.00% (0 invalid reference indices or chunk IDs)",
+    "Real API Telemetry: 3.42 calls/query, 3,971.9 tokens/query, 32.6s P50 latency across N=200 benchmark queries"
+  ],
+  "README_SAFE": [
+    "116.8x evaluation cache acceleration (scoped strictly to 25-query, 3-contract repeated evaluation micro-benchmark)",
+    "DEV ablation: Full Agent stack improved Balanced Accuracy by +2.50% (78.75% vs 76.25%) and Child Citation Hit Rate by +4.81% (92.31% vs 87.50%) versus Base RAG at 2,473.9 tokens overhead"
+  ],
+  "JUDGE_BASED": [
+    "Grounded Claim Rate under judge model (evaluated against retrieved evidence)",
+    "Semantic Correctness score under judge model (evaluated against gold evidence)"
+  ],
+  "DEV_ONLY": [
+    "Base RAG vs RAG+Verifier vs Full Multi-Agent ablation metrics (N=80)"
+  ],
+  "SUPERSEDED": [
+    "Phase 1 heuristic metrics",
+    "Phase 2 synthetic unanswerable prototypes",
+    "Phase 4 unconstrained candidate metrics"
+  ],
+  "INVALIDATED": [
+    "Unqualified '100% Grounded Claim Rate' (now qualified as judge-based)",
+    "Unqualified 'Zero Hallucination' marketing claims",
+    "Unqualified 'Production Complete' / 'Perfect Execution' claims",
+    "Top-1 citation rank fallback logic"
+  ],
+  "NOT_RUN": [
+    "Official LegalBench-RAG benchmark"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PlannerCallCount": 200,
+  "PlannerActionConsumedCount": 200,
+  "PlannerChangedRetrievalQueryCount": 0,
+  "PlannerCausalClassification": "PLANNER_PRESENT_NO_ISOLATED_CAUSAL_EFFECT",
+  "CriticCallCount": 200,
+  "CriticProceedCount": 200,
+  "CriticExpansionCount": 0,
+  "VerifierCallCount": 85,
+  "VerifierPassCount": 85,
+  "VerifierRegenerateCount": 0,
+  "VerifierRefuseCount": 0,
+  "GeneratorRegenerationCount": 0,
+  "ValidCausalConclusion": "The FULL_BOUNDED_MULTI_AGENT system executed deterministic bounded routing. Planner and Critic performed structured complexity classification and sufficiency auditing across all 200 queries, while Verifier audited all 85 accepted answers."
+}
