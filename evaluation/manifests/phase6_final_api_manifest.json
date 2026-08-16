@@ -1,0 +1,3515 @@
+{
+  "manifest_name": "PHASE6_FINAL_API_MANIFEST",
+  "description": "Stratified held-out real-API evaluation manifest (100 answerable, 100 unanswerable across 25 unseen contracts)",
+  "source_manifest": "cuad_locked_test_v2_manifest.json",
+  "benchmark": "CUSTOM_CUAD_HOLDOUT_V2",
+  "seed": 42,
+  "total_queries": 200,
+  "answerable_count": 100,
+  "unanswerable_count": 100,
+  "contracts_represented": 25,
+  "queries": [
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "19  DAY OF MAY , 2010",
+      "gold_answer_start": 164,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_unans_Right_Of_First_Refusal_16",
+      "source_contract_id": "cuad_contract_052_LegacyEducationAllianceInc_202",
+      "category": "Right Of First Refusal",
+      "question": "Is there a right of first refusal, first offer, or first negotiation granted?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_unans_General_8",
+      "source_contract_id": "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_unans_Parties_10",
+      "source_contract_id": "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_unans_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_051_Principal_Life_Insurance_Compa",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_Document_Name_0",
+      "source_contract_id": "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "TRANSFER AND SERVICING AGREEMENT, d",
+      "gold_answer_start": 4579,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p51_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p52_c5"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p51",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p52"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Document_Name_0",
+      "source_contract_id": "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "CO-BRANDING AGREEMENT",
+      "gold_answer_start": 72,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "May 6, 2019",
+      "gold_answer_start": 352,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Parties_1",
+      "source_contract_id": "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "ATR",
+      "gold_answer_start": 224,
+      "gold_answers_count": 7,
+      "strict_gold_child_ids": [
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0_c0",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0_c1",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0_c2",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0_c3",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p1_c1",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p1_c3",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p1_c4",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p2_c2",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p2_c3",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p2_c4",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p2_c5"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p1",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p2"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_051_Principal_Life_Insurance_Compa",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_060_PelicanDeliversInc_20200211_S_",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_unans_General_8",
+      "source_contract_id": "cuad_contract_043_AlliedEsportsEntertainmentInc_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Effective_Date_3",
+      "source_contract_id": "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX_",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "March 3, 2000",
+      "gold_answer_start": 147,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_unans_Parties_10",
+      "source_contract_id": "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_unans_General_14",
+      "source_contract_id": "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_Parties_1",
+      "source_contract_id": "cuad_contract_060_PelicanDeliversInc_20200211_S_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "PELICAN DELIVERS INC.",
+      "gold_answer_start": 16472,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_060_PelicanDeliversInc_20200211_S__v1_p4_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_060_PelicanDeliversInc_20200211_S__v1_p4"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_unans_General_8",
+      "source_contract_id": "cuad_contract_045_CreditcardscomInc_20070810_S_1",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Parties_1",
+      "source_contract_id": "cuad_contract_045_CreditcardscomInc_20070810_S_1",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "you as an \"Affiliate\"",
+      "gold_answer_start": 180,
+      "gold_answers_count": 2,
+      "strict_gold_child_ids": [
+        "cuad_contract_045_CreditcardscomInc_20070810_S_1_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_045_CreditcardscomInc_20070810_S_1_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Document_Name_0",
+      "source_contract_id": "cuad_contract_043_AlliedEsportsEntertainmentInc_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "JOINT CONTENT LICENSE AGREEMENT",
+      "gold_answer_start": 51,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_unans_General_8",
+      "source_contract_id": "cuad_contract_049_SouthernStarEnergyInc_20051202",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_Document_Name_0",
+      "source_contract_id": "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "SERVICE AGREEMENT",
+      "gold_answer_start": 33,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p0_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_Parties_1",
+      "source_contract_id": "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "TOUCHSTAR SOFTWARE CORPORATION",
+      "gold_answer_start": 29,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p0_c0",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p12_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p0",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p12"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_unans_Parties_10",
+      "source_contract_id": "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_unans_Parties_10",
+      "source_contract_id": "cuad_contract_051_Principal_Life_Insurance_Compa",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_unans_General_14",
+      "source_contract_id": "cuad_contract_052_LegacyEducationAllianceInc_202",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_Parties_1",
+      "source_contract_id": "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "MMI",
+      "gold_answer_start": 562,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p0_c0",
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p0_c1",
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p0_c2",
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p0_c3",
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p0_c4",
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p0_c5",
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p1_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p0",
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_050_ConformisInc_20191101_10_Q_EX_",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Document_Name_0",
+      "source_contract_id": "cuad_contract_045_CreditcardscomInc_20070810_S_1",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "CHASE AFFILIATE AGREEMENT",
+      "gold_answer_start": 48,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_045_CreditcardscomInc_20070810_S_1_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_045_CreditcardscomInc_20070810_S_1_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Parties_1",
+      "source_contract_id": "cuad_contract_052_LegacyEducationAllianceInc_202",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "T&B Seminars, Inc.",
+      "gold_answer_start": 341,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p0_c0",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p10_c5",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p11_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p0",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p10",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p11"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Document_Name_0",
+      "source_contract_id": "cuad_contract_052_LegacyEducationAllianceInc_202",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "REAL ESTATE EDUCATION TRAINING PROGRAM DEVELOPMENT AGREEMENT",
+      "gold_answer_start": 180,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p0_c0",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p11_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p0",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p11"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_Parties_1",
+      "source_contract_id": "cuad_contract_051_Principal_Life_Insurance_Compa",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "(collectively \"Broker Dealer\")",
+      "gold_answer_start": 518,
+      "gold_answers_count": 8,
+      "strict_gold_child_ids": [
+        "cuad_contract_051_Principal_Life_Insurance_Compa_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_051_Principal_Life_Insurance_Compa_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_unans_Parties_10",
+      "source_contract_id": "cuad_contract_043_AlliedEsportsEntertainmentInc_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "January 6th, 2016",
+      "gold_answer_start": 801,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0_c0",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p2_c5"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p2"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_051_Principal_Life_Insurance_Compa",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "this ______ day of ________________, 2013,",
+      "gold_answer_start": 205,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_051_Principal_Life_Insurance_Compa_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_051_Principal_Life_Insurance_Compa_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_unans_General_8",
+      "source_contract_id": "cuad_contract_060_PelicanDeliversInc_20200211_S_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Parties_1",
+      "source_contract_id": "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Subcontractor",
+      "gold_answer_start": 207,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0_c0",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0_c1",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0_c2",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0_c3",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0_c4",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0_c5",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p1_c0",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p1_c1",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p1_c2",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p1_c3",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p1_c4",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p2_c0",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p2_c1",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p2_c2",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p2_c3",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p2_c4",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p3_c0",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p3_c1",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p3_c3",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p3_c4",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p4_c1",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p4_c2",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p4_c4",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p4_c5",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p5_c0",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p5_c1",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p5_c2",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p5_c3",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p5_c4",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p6_c0",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p6_c1",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p6_c2",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p6_c3",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p8_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p1",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p2",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p3",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p4",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p5",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p6",
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p8"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_unans_Parties_10",
+      "source_contract_id": "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_unans_Parties_10",
+      "source_contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_050_ConformisInc_20191101_10_Q_EX_",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "September 30, 2019",
+      "gold_answer_start": 347,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Document_Name_0",
+      "source_contract_id": "cuad_contract_050_ConformisInc_20191101_10_Q_EX_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "DEVELOPMENT AGREEMENT",
+      "gold_answer_start": 241,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p0_c0",
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p12_c3",
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p12_c4"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p0",
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p12"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_unans_General_8",
+      "source_contract_id": "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_unans_General_14",
+      "source_contract_id": "cuad_contract_050_ConformisInc_20191101_10_Q_EX_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX_",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "March 3, 2000",
+      "gold_answer_start": 147,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10_",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_unans_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11_",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_064_GridironBionutrientsInc_201712",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "November 7, 2017",
+      "gold_answer_start": 127,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX_",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_045_CreditcardscomInc_20070810_S_1",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_Effective_Date_3",
+      "source_contract_id": "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "19 Jan. 1998",
+      "gold_answer_start": 7163,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p1_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_043_AlliedEsportsEntertainmentInc_",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_unans_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_060_PelicanDeliversInc_20200211_S_",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Parties_1",
+      "source_contract_id": "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "FEDERATED INVESTMENT MANAGEMENT COMPANY",
+      "gold_answer_start": 168,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Document_Name_0",
+      "source_contract_id": "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Intellectual Property Agreement",
+      "gold_answer_start": 11439,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p0_c0",
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p2_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p0",
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p2"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_unans_General_8",
+      "source_contract_id": "cuad_contract_051_Principal_Life_Insurance_Compa",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_unans_Right_Of_First_Refusal_16",
+      "source_contract_id": "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2",
+      "category": "Right Of First Refusal",
+      "question": "Is there a right of first refusal, first offer, or first negotiation granted?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Document_Name_0",
+      "source_contract_id": "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "STRATEGIC ALLIANCE AGREEMENT",
+      "gold_answer_start": 86,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_General_25",
+      "source_contract_id": "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"License Grant\" that should be reviewed by a lawyer. Details: Does the contract contain a license granted by one party to its counterparty?",
+      "is_unanswerable": false,
+      "gold_evidence": "In the event Galacticomm, Inc. chooses to terminate this agreement, Horst Entertainment Inc. will have the right to purchase a license copy of the software in the amount of $15,000.00.",
+      "gold_answer_start": 951,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX_",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_Parties_1",
+      "source_contract_id": "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Servicer",
+      "gold_answer_start": 185,
+      "gold_answers_count": 9,
+      "strict_gold_child_ids": [
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p3_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p3_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p3_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p3_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p3_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p4_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p4_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p4_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p5_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p5_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p5_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p5_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p5_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p5_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p6_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p6_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p6_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p6_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p6_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p6_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p7_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p7_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p7_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p7_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p7_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p8_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p8_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p8_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p8_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p8_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p9_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p9_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p9_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p10_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p10_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p10_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p10_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p10_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p10_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p11_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p11_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p11_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p12_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p12_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p12_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p12_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p12_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p13_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p13_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p13_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p14_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p14_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p14_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p14_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p14_c6",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p15_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p16_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p17_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p17_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p17_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p17_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p17_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p17_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p18_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p18_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p19_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p19_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p19_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p19_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p19_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p19_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p20_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p20_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p20_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p20_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p20_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p20_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p21_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p21_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p21_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p21_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p21_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p21_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p22_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p22_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p22_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p22_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p22_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p23_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p23_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p23_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p23_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p23_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p24_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p24_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p24_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p25_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p25_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p26_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p26_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p26_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p27_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p27_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p28_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p29_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p30_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p30_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p30_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p30_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p31_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p33_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p33_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p34_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p34_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p35_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p35_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p35_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p35_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p35_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p36_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p37_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p39_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p40_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p40_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p43_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p43_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p45_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p46_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p46_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p48_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p48_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p49_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p50_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p50_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p51_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p51_c2",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p51_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p52_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p52_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p52_c5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p53_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p53_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p53_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p10",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p11",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p12",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p13",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p14",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p15",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p16",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p17",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p18",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p19",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p20",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p21",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p22",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p23",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p24",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p25",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p26",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p27",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p28",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p29",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p30",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p31",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p33",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p34",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p35",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p36",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p37",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p39",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p40",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p43",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p45",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p46",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p48",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p49",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p5",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p50",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p51",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p52",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p53",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p6",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p7",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p8",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p9"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_unans_General_8",
+      "source_contract_id": "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_unans_General_14",
+      "source_contract_id": "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_unans_General_8",
+      "source_contract_id": "cuad_contract_050_ConformisInc_20191101_10_Q_EX_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": false,
+      "gold_evidence": "Unless earlier terminated as provided below, this Agreement shall remain in effect until the later to occur of the date that is (x) three (3) years from the date hereof and (y) the date on which an affiliate of Freedom Mortgage is not acting as the external manager of Cherry Hill.",
+      "gold_answer_start": 19533,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p3_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p3"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Document_Name_0",
+      "source_contract_id": "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Amendment n\u00b0 01   to the Global Maintenance Agreement ref. DS/C-3957/14 Issue 7",
+      "gold_answer_start": 23,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_Document_Name_0",
+      "source_contract_id": "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "SUPPLY AGREEMENT",
+      "gold_answer_start": 2752,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p2_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p3_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p3_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p3"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX_",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_unans_General_8",
+      "source_contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "1 October 2019",
+      "gold_answer_start": 816,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p0_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Effective_Date_3",
+      "source_contract_id": "cuad_contract_050_ConformisInc_20191101_10_Q_EX_",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "September 30, 2019",
+      "gold_answer_start": 347,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_unans_Parties_10",
+      "source_contract_id": "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Parties_1",
+      "source_contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "UTK",
+      "gold_answer_start": 170,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0_c0",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0_c1",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0_c2",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0_c3",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0_c4",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0_c5",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p1_c0",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p1_c1",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p1_c2",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p1_c3",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p1_c5",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2_c1",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2_c2",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2_c3",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2_c4",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p3_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p1",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p3"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Effective_Date_3",
+      "source_contract_id": "cuad_contract_045_CreditcardscomInc_20070810_S_1",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "The term of this Agreement will commence on the date that the Affiliate Registration Form is approved by Chase and will end when terminated by either party.",
+      "gold_answer_start": 7564,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_045_CreditcardscomInc_20070810_S_1_v1_p1_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_045_CreditcardscomInc_20070810_S_1_v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": ", 2013",
+      "gold_answer_start": 66,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_Effective_Date_3",
+      "source_contract_id": "cuad_contract_051_Principal_Life_Insurance_Compa",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "this ______ day of ________________, 2013",
+      "gold_answer_start": 205,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_051_Principal_Life_Insurance_Compa_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_051_Principal_Life_Insurance_Compa_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_unans_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_unans_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_049_SouthernStarEnergyInc_20051202",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_unans_General_8",
+      "source_contract_id": "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_unans_General_8",
+      "source_contract_id": "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_Parties_1",
+      "source_contract_id": "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "CURO MANAGEMENT, LLC",
+      "gold_answer_start": 88,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p0_c0",
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p0_c1",
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p6_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p0",
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p6"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Document_Name_0",
+      "source_contract_id": "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "SECOND AMENDMENT TO SERVICES AGREEMENT",
+      "gold_answer_start": 44,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_unans_General_8",
+      "source_contract_id": "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_unans_Parties_10",
+      "source_contract_id": "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX_",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "January 29, 2020",
+      "gold_answer_start": 238,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0_c0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0_c3",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p39_c1",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p40_c4",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p52_c5"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p0",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p39",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p40",
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p52"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_049_SouthernStarEnergyInc_20051202",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": false,
+      "gold_evidence": "This Agreement is entered into for an unlimited period of time.",
+      "gold_answer_start": 19928,
+      "gold_answers_count": 2,
+      "strict_gold_child_ids": [
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p4_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p4"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_unans_General_8",
+      "source_contract_id": "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_unans_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10_",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_unans_Parties_10",
+      "source_contract_id": "cuad_contract_045_CreditcardscomInc_20070810_S_1",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "March 30, 2011",
+      "gold_answer_start": 399,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_Parties_1",
+      "source_contract_id": "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "VerticalNet, Inc.",
+      "gold_answer_start": 208,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p0_c0",
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p7_c2",
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p7_c3",
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p8_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p0",
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p7",
+        "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX__v1_p8"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_unans_Parties_10",
+      "source_contract_id": "cuad_contract_049_SouthernStarEnergyInc_20051202",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_unans_General_8",
+      "source_contract_id": "cuad_contract_052_LegacyEducationAllianceInc_202",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "January 21st, 2002",
+      "gold_answer_start": 151,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p2_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p2"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_unans_General_8",
+      "source_contract_id": "cuad_contract_064_GridironBionutrientsInc_201712",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Document_Name_0",
+      "source_contract_id": "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Strategic Alliance Agreement",
+      "gold_answer_start": 1911,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0_c0",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_Parties_1",
+      "source_contract_id": "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Freedom Mortgage",
+      "gold_answer_start": 82,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0_c0",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0_c1",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0_c2",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0_c3",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0_c5",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p1_c0",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p1_c3",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p1_c4",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p2_c0",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p2_c1",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p2_c2",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p2_c3",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p2_c4",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p3_c2",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p3_c3",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p5_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p0",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p1",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p2",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p3",
+        "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO_v1_p5"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": false,
+      "gold_evidence": "The initial term of this Agreement shall           commence on the Effective Date and extend for three (3) years           thereafter (\"INITIAL TERM\"), with an automatic renewal for an           indefinite period of time (\"EXTENDED TERM\"), unless terminated by the           parties according to Sections 16.2. or 16.3. herein.",
+      "gold_answer_start": 125352,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p18_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p18"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Governing_Law_7",
+      "source_contract_id": "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10_",
+      "category": "Governing Law",
+      "question": "Which jurisdiction or state laws govern the interpretation of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "This Agreement shall be construed in accordance with and governed by the substantive internal laws of the State of New York.",
+      "gold_answer_start": 6590,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p1_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11_",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_unans_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_064_GridironBionutrientsInc_201712",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_049_SouthernStarEnergyInc_20051202",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_043_AlliedEsportsEntertainmentInc_",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_unans_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_060_PelicanDeliversInc_20200211_S_",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_Parties_1",
+      "source_contract_id": "cuad_contract_049_SouthernStarEnergyInc_20051202",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Software Publishers",
+      "gold_answer_start": 416,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p0_c0",
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p0_c2",
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p0_c3",
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p2_c2",
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p4_c1",
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p4_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p0",
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p2",
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p4"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Parties_1",
+      "source_contract_id": "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "American General Life Insurance Company",
+      "gold_answer_start": 543,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p0_c0",
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p2_c4",
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p2_c5",
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p3_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p0",
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p2",
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p3"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_unans_Parties_10",
+      "source_contract_id": "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_unans_General_8",
+      "source_contract_id": "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_064_GridironBionutrientsInc_201712",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_unans_Parties_10",
+      "source_contract_id": "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_unans_General_8",
+      "source_contract_id": "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Document_Name_0",
+      "source_contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Strategic Alliance Agreement",
+      "gold_answer_start": 17042,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0_c0",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2_c4",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2_c5",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p3_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p3"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Effective_Date_3",
+      "source_contract_id": "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "October 3, 2018",
+      "gold_answer_start": 338,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Effective_Date_3",
+      "source_contract_id": "cuad_contract_043_AlliedEsportsEntertainmentInc_",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "February 1, 2018",
+      "gold_answer_start": 108,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p0_c0",
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p1_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p0",
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_Document_Name_0",
+      "source_contract_id": "cuad_contract_049_SouthernStarEnergyInc_20051202",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Affiliate Program / Premium Affiliate Management General Terms and Conditions",
+      "gold_answer_start": 13,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": false,
+      "gold_evidence": "This Agreement shall continue in force until the earlier to occur of (i) the Owner no longer owns any Receivables or Participation Interests, and (ii) subject to Section 7(d), the delivery of written notice of termination by the Owner to the Servicer pursuant to Section 7(c), in each case upon which event this Agreement shall automatically terminate unless otherwise agreed in writing between the Servicer and the Owner.",
+      "gold_answer_start": 9589,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p1_c4"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_unans_Right_Of_First_Refusal_16",
+      "source_contract_id": "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1",
+      "category": "Right Of First Refusal",
+      "question": "Is there a right of first refusal, first offer, or first negotiation granted?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_Effective_Date_3",
+      "source_contract_id": "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "27 January 2020",
+      "gold_answer_start": 3022,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p1_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "March 1, 2016",
+      "gold_answer_start": 110,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_043_AlliedEsportsEntertainmentInc_",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "February 1, 2018",
+      "gold_answer_start": 108,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p0_c0",
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p1_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p0",
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Effective_Date_3",
+      "source_contract_id": "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Commencement Date means the date of this Agreement",
+      "gold_answer_start": 2374,
+      "gold_answers_count": 2,
+      "strict_gold_child_ids": [
+        "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03_v1_p0_c1",
+        "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03_v1_p0_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": false,
+      "gold_evidence": "The term of the Agreement will be for 12 months unless terminated sooner.",
+      "gold_answer_start": 3453,
+      "gold_answers_count": 2,
+      "strict_gold_child_ids": [
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0_c3",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0",
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p2"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_Parties_1",
+      "source_contract_id": "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "each a \"Party\" and together the \"Parties",
+      "gold_answer_start": 559,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_059_Az_Effective_Date_3",
+      "source_contract_id": "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "January 6th, 2016",
+      "gold_answer_start": 801,
+      "gold_answers_count": 2,
+      "strict_gold_child_ids": [
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0_c0",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p2_c5"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p0",
+        "cuad_contract_059_AzulSa_20170303_F_1A_EX_10_3_9_v1_p2"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_unans_Parties_10",
+      "source_contract_id": "cuad_contract_064_GridironBionutrientsInc_201712",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_unans_General_14",
+      "source_contract_id": "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Parties_1",
+      "source_contract_id": "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "(\"MSCI\")",
+      "gold_answer_start": 305,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_045_CreditcardscomInc_20070810_S_1",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_unans_General_8",
+      "source_contract_id": "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Effective_Date_3",
+      "source_contract_id": "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10_",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "November 20, 2007",
+      "gold_answer_start": 145,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "April 8, 2020,",
+      "gold_answer_start": 216,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p0_c0",
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p6_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p0",
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p6"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_042_Im_unans_Parties_10",
+      "source_contract_id": "cuad_contract_042_ImpresseCorp_20000322_S_1A_EX_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_Document_Name_0",
+      "source_contract_id": "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Reseller Agreement",
+      "gold_answer_start": 2383,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p0_c0",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p0_c1",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p1_c1",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p2_c1",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p2_c5",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p7_c2",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p9_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p0",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p1",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p2",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p7",
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p9"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Parties_1",
+      "source_contract_id": "cuad_contract_064_GridironBionutrientsInc_201712",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "National Football League Alumni - Northern California Chapter",
+      "gold_answer_start": 159,
+      "gold_answers_count": 7,
+      "strict_gold_child_ids": [
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_Effective_Date_3",
+      "source_contract_id": "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "March 1, 2016",
+      "gold_answer_start": 110,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Effective_Date_3",
+      "source_contract_id": "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "January 21st, 2002",
+      "gold_answer_start": 151,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p2_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p2"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_unans_General_8",
+      "source_contract_id": "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_060_Pe_Document_Name_0",
+      "source_contract_id": "cuad_contract_060_PelicanDeliversInc_20200211_S_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Software Development Agreement",
+      "gold_answer_start": 421,
+      "gold_answers_count": 2,
+      "strict_gold_child_ids": [
+        "cuad_contract_060_PelicanDeliversInc_20200211_S__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_060_PelicanDeliversInc_20200211_S__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Effective_Date_3",
+      "source_contract_id": "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "March 30, 2011",
+      "gold_answer_start": 399,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_Parties_1",
+      "source_contract_id": "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Horst Entertainment Inc",
+      "gold_answer_start": 174,
+      "gold_answers_count": 2,
+      "strict_gold_child_ids": [
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0_c0",
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_052_LegacyEducationAllianceInc_202",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_051_Pr_Document_Name_0",
+      "source_contract_id": "cuad_contract_051_Principal_Life_Insurance_Compa",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Broker Dealer Marketing and Servicing Agreement for Variable Annuity Contracts",
+      "gold_answer_start": 93,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_051_Principal_Life_Insurance_Compa_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_051_Principal_Life_Insurance_Compa_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "14 day of SEPTEMBER, 200_",
+      "gold_answer_start": 310,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_Effective_Date_3",
+      "source_contract_id": "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "May 6, 2019",
+      "gold_answer_start": 352,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_057_WO_Effective_Date_3",
+      "source_contract_id": "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "14 day of SEPTEMBER, 200_",
+      "gold_answer_start": 310,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_057_WORLDWIDESTRATEGIESINC_11_02_2_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Document_Name_0",
+      "source_contract_id": "cuad_contract_064_GridironBionutrientsInc_201712",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "ENDORSEMENT AGREEMENT ADDENDUM I",
+      "gold_answer_start": 15,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0_c0",
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0_c1",
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0_c2"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_064_Gr_Effective_Date_3",
+      "source_contract_id": "cuad_contract_064_GridironBionutrientsInc_201712",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "November 7, 2017",
+      "gold_answer_start": 127,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_064_GridironBionutrientsInc_201712_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_unans_Right_Of_First_Refusal_16",
+      "source_contract_id": "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC",
+      "category": "Right Of First Refusal",
+      "question": "Is there a right of first refusal, first offer, or first negotiation granted?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_unans_General_14",
+      "source_contract_id": "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Effective_Date_3",
+      "source_contract_id": "cuad_contract_052_LegacyEducationAllianceInc_202",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "12-23-2019",
+      "gold_answer_start": 516,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p0_c0",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p11_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p0",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p11"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_unans_Parties_10",
+      "source_contract_id": "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_Parties_1",
+      "source_contract_id": "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Vericel",
+      "gold_answer_start": 1657,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p1_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p1_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p1_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p2_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p2_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p2_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p2_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p3_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p3_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p3_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p3_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p3_c5",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p4_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p4_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p4_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p4_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p5_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p5_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p5_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p5_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p5_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p6_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p6_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p6_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p6_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p6_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p6_c5",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p7_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p7_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p7_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p7_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p7_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p7_c5",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p8_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p8_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p8_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p8_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p8_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p8_c5",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p9_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p9_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p9_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p9_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p9_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p10_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p10_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p10_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p10_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p10_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p10_c5",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p11_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p11_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p11_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p11_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p12_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p12_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p12_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p12_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p12_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p14_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p14_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p14_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p14_c4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p14_c5",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p15_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p15_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p15_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p15_c3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p16_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p16_c1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p17_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p18_c0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p18_c2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p18_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p0",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p1",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p10",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p11",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p12",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p14",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p15",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p16",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p17",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p18",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p2",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p3",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p4",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p5",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p6",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p7",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p8",
+        "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1_v1_p9"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_unans_General_8",
+      "source_contract_id": "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_Expiration_Date_4",
+      "source_contract_id": "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX_",
+      "category": "Expiration Date",
+      "question": "When does the initial term of this agreement expire or terminate?",
+      "is_unanswerable": false,
+      "gold_evidence": "Cellco's appointment as custodian is effective as of the Initial Cutoff Date and will continue until the later of (i) the date on which all obligations of the Issuer have been paid in full and (ii) the date on which such appointment is terminated under this Section 3.10(f).",
+      "gold_answer_start": 48792,
+      "gold_answers_count": 2,
+      "strict_gold_child_ids": [
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p9_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX__v1_p9"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_unans_Price_Restriction_20",
+      "source_contract_id": "cuad_contract_050_ConformisInc_20191101_10_Q_EX_",
+      "category": "Price Restriction",
+      "question": "Are there price restrictions, most favored nation pricing, or minimum price obligations?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_055_WP_Parties_1",
+      "source_contract_id": "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Executive",
+      "gold_answer_start": 205,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p0_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p0_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p0_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p1_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p1_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p2_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p2_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p2_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p2_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p2_c4",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p2_c5",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p3_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p3_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p3_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p3_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p3_c4",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p3_c5",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p4_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p4_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p4_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p4_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p5_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p5_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p6_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p6_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p6_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p7_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p7_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p7_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p7_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p8_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p8_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p8_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p8_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p8_c4",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p9_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p9_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p9_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p9_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p9_c4",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p9_c5",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p10_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p10_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p10_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p10_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p10_c4",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p10_c5",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11_c4",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11_c5",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p12_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p12_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p12_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p12_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p12_c4",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p12_c5",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p12_c6",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p13_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p14_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p14_c1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p14_c2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p14_c3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p14_c4",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p14_c5",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p15_c0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p15_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p0",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p1",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p10",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p11",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p12",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p13",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p14",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p15",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p2",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p3",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p4",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p5",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p6",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p7",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p8",
+        "cuad_contract_055_WPPPLC_04_30_2020_EX_4_28_SERV_v1_p9"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Document_Name_0",
+      "source_contract_id": "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "MANUFACTURING OUTSOURCING AGREEMENT",
+      "gold_answer_start": 36,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p21_c4"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p21"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "19 Jan. 1998",
+      "gold_answer_start": 7163,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p1_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_unans_General_8",
+      "source_contract_id": "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11_",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "9/9/97",
+      "gold_answer_start": 1366,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_unans_General_8",
+      "source_contract_id": "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_056_WA_unans_Parties_10",
+      "source_contract_id": "cuad_contract_056_WASTE2ENERGYHOLDINGS_INC_06_03",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_040_MS_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10_",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "November 20, 2007",
+      "gold_answer_start": 145,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_040_MSCIINC_02_28_2008_EX_10_10__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_058_FE_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_058_FEDERATEDGOVERNMENTINCOMESECUR",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_unans_Parties_10",
+      "source_contract_id": "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_044_CH_unans_General_8",
+      "source_contract_id": "cuad_contract_044_CHERRYHILLMORTGAGEINVESTMENTCO",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_049_So_Effective_Date_3",
+      "source_contract_id": "cuad_contract_049_SouthernStarEnergyInc_20051202",
+      "category": "Effective Date",
+      "question": "What is the designated effective start date specified in the agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "The term of this Agreement will begin upon acceptance of Affiliate's Program application and will end when terminated by either party of this Agreement.",
+      "gold_answer_start": 19775,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p4_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_049_SouthernStarEnergyInc_20051202_v1_p4"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_045_Cr_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_045_CreditcardscomInc_20070810_S_1",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "April 6, 2007",
+      "gold_answer_start": 30,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_045_CreditcardscomInc_20070810_S_1_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_045_CreditcardscomInc_20070810_S_1_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_Document_Name_0",
+      "source_contract_id": "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Unconditional Capital Maintenance Agreement",
+      "gold_answer_start": 293,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Document_Name_0",
+      "source_contract_id": "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "MANUFACTURING, DESIGN AND MARKETING AGREEMENT (t",
+      "gold_answer_start": 64,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_Document_Name_0",
+      "source_contract_id": "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "SERVICING AGREEMENT",
+      "gold_answer_start": 155,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p0_c0",
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p0_c2",
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p2_c4",
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p2_c5"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p0",
+        "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20_v1_p2"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_048_CU_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_048_CUROGROUPHOLDINGSCORP_05_04_20",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_062_DR_Document_Name_0",
+      "source_contract_id": "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "OUTSOURCING AGREEMENT",
+      "gold_answer_start": 252,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_062_DRAGONSYSTEMSINC_01_08_1999_EX_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_unans_General_14",
+      "source_contract_id": "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_063_SE_unans_Parties_10",
+      "source_contract_id": "cuad_contract_063_SEPARATEACCOUNTIIOFAGL_05_02_2",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_041_NI_Parties_1",
+      "source_contract_id": "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "CONTRACTOR",
+      "gold_answer_start": 554,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p1_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p1_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p1_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p1_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p1_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p2_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p2_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p2_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p3_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p3_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p3_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p3_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p3_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p4_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p4_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p4_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p4_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p4_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p5_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p5_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p5_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p5_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p5_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p6_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p6_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p6_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p6_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p6_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p7_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p7_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p7_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p7_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p7_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p7_c5",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p8_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p8_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p8_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p8_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p8_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p8_c5",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p9_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p9_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p9_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p9_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p9_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p10_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p10_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p10_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p10_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p10_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p10_c5",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p11_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p11_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p11_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p11_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p11_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p12_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p12_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p12_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p12_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p12_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p12_c5",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p13_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p13_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p13_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p13_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p13_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p14_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p14_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p14_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p14_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p14_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p15_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p15_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p15_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p15_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p15_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p15_c5",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p16_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p16_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p16_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p16_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p16_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p16_c5",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p17_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p17_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p17_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p17_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p18_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p18_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p18_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p18_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p18_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p18_c5",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p19_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p19_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p19_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p19_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p19_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p20_c0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p20_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p20_c3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p20_c4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p21_c1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p21_c2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p21_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p0",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p1",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p10",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p11",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p12",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p13",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p14",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p15",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p16",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p17",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p18",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p19",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p2",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p20",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p21",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p3",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p4",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p5",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p6",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p7",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p8",
+        "cuad_contract_041_NICELTD_06_26_2003_EX_4_5_OUTS_v1_p9"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX_",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_050_Co_Parties_1",
+      "source_contract_id": "cuad_contract_050_ConformisInc_20191101_10_Q_EX_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Stryker and Conformis are collectively referred to herein as the \"Parties\" and   individually as a \"Party.\"",
+      "gold_answer_start": 661,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_050_ConformisInc_20191101_10_Q_EX__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_047_Zo_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "October 3, 2018",
+      "gold_answer_start": 338,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_047_Zounds_Hearing__Inc____MANUFAC_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_052_Le_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_052_LegacyEducationAllianceInc_202",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "12-23-2019",
+      "gold_answer_start": 516,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p0_c0",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p11_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p0",
+        "cuad_contract_052_LegacyEducationAllianceInc_202_v1_p11"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_061_OR_Agreement_Date_2",
+      "source_contract_id": "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S",
+      "category": "Agreement Date",
+      "question": "What is the effective execution date of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "9th day of September 200",
+      "gold_answer_start": 109,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_061_ORBSATCORP_08_17_2007_EX_7_3_S_v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_054_VE_unans_Price_Restriction_20",
+      "source_contract_id": "cuad_contract_054_VERICELCORP_08_06_2019_EX_10_1",
+      "category": "Price Restriction",
+      "question": "Are there price restrictions, most favored nation pricing, or minimum price obligations?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_046_GA_Document_Name_0",
+      "source_contract_id": "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "WEB HOSTING AGREEMENT",
+      "gold_answer_start": 44,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0_c0",
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_046_GALACTICOMMTECHNOLOGIESINC_11__v1_p0"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_043_Al_Parties_1",
+      "source_contract_id": "cuad_contract_043_AlliedEsportsEntertainmentInc_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "ZYNGA GAME IRELAND LIMITED",
+      "gold_answer_start": 419,
+      "gold_answers_count": 6,
+      "strict_gold_child_ids": [
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p0_c0",
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p0_c4",
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p1_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p0",
+        "cuad_contract_043_AlliedEsportsEntertainmentInc__v1_p1"
+      ]
+    },
+    {
+      "query_id": "test_v2_cuad_cuad_contract_053_Ve_unans_Parties_10",
+      "source_contract_id": "cuad_contract_053_VerizonAbsLlc_20200123_8_K_EX_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    }
+  ]
+}

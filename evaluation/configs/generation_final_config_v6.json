@@ -1,0 +1,60 @@
+{
+  "phase": "6.0",
+  "title": "Real API End-to-End Generation & Multi-Agent Architecture Configuration",
+  "frozen_at_utc": "2026-08-16T12:05:00Z",
+  "selected_architecture": "FULL_BOUNDED_MULTI_AGENT",
+  "models": {
+    "planner_model": "gemma-4-26b-a4b-it",
+    "critic_model": "gemma-4-26b-a4b-it",
+    "generation_model": "gemma-4-26b-a4b-it",
+    "verifier_model": "gemma-4-26b-a4b-it",
+    "judge_model": "gemma-4-26b-a4b-it"
+  },
+  "hyperparameters": {
+    "temperature": 0.0,
+    "max_output_tokens": 2048,
+    "top_k_retrieval": 5,
+    "finite_expansion_budget": 1,
+    "expansion_top_k": 3,
+    "inter_call_pacing_seconds": 1.0,
+    "max_api_retries": 5
+  },
+  "retrieval_protocol_locked_phase4_2": {
+    "dense_model": "BAAI/bge-m3",
+    "sparse_model": "BM25Okapi",
+    "hybrid_fusion": "ReciprocalRankFusion",
+    "rrf_k": 60,
+    "reranker": "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+    "candidate_budget": 20
+  },
+  "dev_ablation_summary": {
+    "BASE_RAG": {
+      "balanced_accuracy": 0.7625,
+      "unanswerable_refusal_rate": 0.925,
+      "child_citation_hit_rate": 0.875,
+      "citation_precision": 0.8542,
+      "avg_calls_per_query": 1.0,
+      "avg_tokens_per_query": 1617.9,
+      "latency_p50_ms": 3303.7
+    },
+    "RAG_PLUS_VERIFIER": {
+      "balanced_accuracy": 0.75,
+      "unanswerable_refusal_rate": 0.925,
+      "child_citation_hit_rate": 0.8696,
+      "citation_precision": 0.8478,
+      "avg_calls_per_query": 1.32,
+      "avg_tokens_per_query": 2038.0,
+      "latency_p50_ms": 5702.0
+    },
+    "FULL_BOUNDED_MULTI_AGENT": {
+      "balanced_accuracy": 0.7875,
+      "unanswerable_refusal_rate": 0.925,
+      "child_citation_hit_rate": 0.9231,
+      "citation_precision": 0.9038,
+      "avg_calls_per_query": 3.38,
+      "avg_tokens_per_query": 4091.8,
+      "latency_p50_ms": 36194.8
+    }
+  },
+  "selection_rationale": "FULL_BOUNDED_MULTI_AGENT delivers the highest child citation hit rate (92.31% vs 87.50%), highest citation precision (90.38% vs 85.42%), and lowest false refusal rate (35.00% vs 40.00%) on complex legal agreements with complete multi-turn reasoning and verification traces."
+}

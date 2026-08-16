@@ -1,0 +1,380 @@
+{
+  "run_id": "phase6_smoke_20260816_091712",
+  "variants": {
+    "BASE_RAG": {
+      "queries_evaluated": 20,
+      "answerable_count": 10,
+      "unanswerable_count": 10,
+      "answerability_metrics": {
+        "AnswerableAcceptanceRate": 100.0,
+        "FalseRefusalRate": 0.0,
+        "UnanswerableRefusalRate": 90.0,
+        "FalseAnswerRate": 10.0,
+        "BalancedAnswerabilityAccuracy": 95.0,
+        "SystemErrorRate": 0.0
+      },
+      "citation_metrics": {
+        "ChildCitationHitRate": 60.0,
+        "CitationPrecision": 60.0,
+        "CitationRecall": 10.14,
+        "ParentCitationHitRate": 60.0,
+        "WrongDocumentCitationRate": 0.0,
+        "InvalidCitationRate": 0.0
+      },
+      "grounding_and_correctness": {
+        "TokenOverlapF1": 3.22,
+        "GroundedClaimRate": 100.0,
+        "UnsupportedClaimRate": 0.0,
+        "JudgeSemanticCorrectness": 0.0,
+        "JudgeModel": "NOT_RUN"
+      },
+      "api_telemetry": {
+        "MeanProductionCallsPerQuery": 1.0,
+        "MeanInputTokensPerQuery": 1277.4,
+        "MeanOutputTokensPerQuery": 52.5,
+        "MeanTotalTokensPerQuery": 1814.0,
+        "P50_TotalLatencyMs": 8862.0,
+        "P95_TotalLatencyMs": 22456.8,
+        "P99_TotalLatencyMs": 27113.9,
+        "Retrieval_P50_Ms": 289.5,
+        "Generator_P50_Ms": 8565.0,
+        "Verifier_P50_Ms": 0.0,
+        "Count_429": 22,
+        "Count_5xx": 1,
+        "Count_Retries": 19
+      },
+      "scored_items": [
+        {
+          "query_id": "dev_cuad_cuad_contract_016_Re_Document_Name_0",
+          "question": "What is the official title and full document name of this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "MASTER SUPPLY AGREEMENT",
+          "decision": "ANSWER",
+          "answer": "Based on the provided reference excerpts, the agreement is referred to in the text as \"this Agreement\" or \"Agreement\" [Reference 4: cuad_contract_016_ReynoldsConsumerProductsInc",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p12_c0",
+              "parent_id": "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p12",
+              "document_id": "cuad_contract_016_ReynoldsConsumerProductsInc_20",
+              "section_path": [
+                "ReynoldsConsumerProductsInc_20191115_S-1_EX-10.18_11896469_EX-10.18_Supply Agreement"
+              ],
+              "supporting_text": "12. Miscellaneous. a. Entire Agreement. This Agreement, including its appended Exhibits and Purchase Schedules entered into during the Term, constitutes the entire agreement between the Parties with respect to the sale of products by Seller to Buyer and the purchase of products by Buyer from Seller."
+            }
+          ],
+          "total_latency_ms": 22150.404399988474,
+          "total_tokens": 2554
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_031_CO_Document_Name_0",
+          "question": "What is the official title and full document name of this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "License and Hosting Agreement",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, the official title and full document name of the agreement is the **LICENSE AND HOSTING AGREEMENT** (also identified in the document headers as **CORIOINC_07_20_2000-EX-10.5-LICENSE AND HOSTING AGREEMENT**) [Reference 1: Section, Reference 3: Section].",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p4_c2",
+              "parent_id": "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p4",
+              "document_id": "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI",
+              "section_path": [
+                "CORIOINC_07_20_2000-EX-10.5-LICENSE AND HOSTING AGREEMENT"
+              ],
+              "supporting_text": "Confidential treatment has been requested with respect to     the omitted portions. 7 8 7       WARRANTIES AND DISCLAIMER. 7.1     No Conflict. Each party represents and warrants to the other party that         it is under no current obligation or restriction, nor will it knowingly         assume an"
+            }
+          ],
+          "total_latency_ms": 7637.411600007908,
+          "total_tokens": 2528
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_016_Re_Parties_1",
+          "question": "Who are the named parties entering into this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "Seller",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, the named parties entering into this agreement are:\n\n* **REYNOLDS CONSUMER PRODUCTS LLC** (acting as the Seller) [Reference 3: cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p14_c3]\n* **PACTIV LLC** (acting as the Buyer) [Reference 3: cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p14_c3]",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p14_c3",
+              "parent_id": "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p14",
+              "document_id": "cuad_contract_016_ReynoldsConsumerProductsInc_20",
+              "section_path": [
+                "ReynoldsConsumerProductsInc_20191115_S-1_EX-10.18_11896469_EX-10.18_Supply Agreement"
+              ],
+              "supporting_text": "Accordingly, the Parties acknowledge and agree that the Agreement is not a contract of adhesion and that ambiguities in the Agreement, if any, shall not be construed strictly or in favor of or against either Party, but rather shall be given a fair and reasonable construction. m. Execution. This Agre"
+            }
+          ],
+          "total_latency_ms": 6874.228699976811,
+          "total_tokens": 1923
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_021_BO_Parties_1",
+          "question": "Who are the named parties entering into this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "Notes Trustee",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, the specific legal names of the parties entering into the agreement are not fully disclosed. The excerpts only refer to the parties by their defined terms: **Merchant**, **Purchaser",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p14_c2",
+              "parent_id": "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p14",
+              "document_id": "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX_",
+              "section_path": [
+                "BONTONSTORESINC_04_20_2018-EX-99.3-AGENCY AGREEMENT"
+              ],
+              "supporting_text": "(iii) All of the Parties shall have executed this Agreement. (b) The willingness of Merchant to enter into the transactions contemplated under this Agreement, and the occurrence of the Closing, are directly conditioned upon the satisfaction of the following conditions at the time or during the time "
+            }
+          ],
+          "total_latency_ms": 12807.54270000034,
+          "total_tokens": 2607
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_015_Th_Document_Name_0",
+          "question": "What is the official title and full document name of this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "ENDORSEMENT",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, the document is identified as the **Endorsement Agreement** (with the full document name/header listed as **ThriventVariableInsuranceAccountB_",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0_c3",
+              "parent_id": "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0",
+              "document_id": "cuad_contract_015_ThriventVariableInsuranceAccou",
+              "section_path": [
+                "ThriventVariableInsuranceAccountB_20190701_N-6_EX-99.D(IV)_11720968_EX-99.D(IV)_Endorsement Agreement"
+              ],
+              "supporting_text": "The Entire Contract consists of: 1) This contract including any attached riders, amendments, or endorsements; 2) The Application attached to this contract; and 3) The Articles of Incorporation and Bylaws of the Society and all amendments to them. Benefits will not be reduced or eliminated by any fut"
+            }
+          ],
+          "total_latency_ms": 7669.148100016173,
+          "total_tokens": 1888
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_026_ZE_Parties_1",
+          "question": "Who are the named parties entering into this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "Zebra Technologies Corporation",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, the named parties entering into this agreement are:\n\n1. **MOTOROLA SOLUTIONS, INC.** [Reference 1: cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p23_c4]\n2. **ZEBRA TECHNOLOGIES CORPORATION** [Reference 1: cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p23_c4]",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p23_c4",
+              "parent_id": "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p23",
+              "document_id": "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20",
+              "section_path": [
+                "ZEBRATECHNOLOGIESCORP_04_16_2014-EX-10.1-INTELLECTUAL PROPERTY AGREEMENT"
+              ],
+              "supporting_text": "Henry Kleeman R. Scott Falk, P.C. Section 6.13 No Joint Venture. Nothing in this IP Agreement creates a joint venture or partnership between the parties. This IP Agreement does not authorize any party (i) to bind or commit, or to act as an agent, employee or legal representative of, another party, e"
+            }
+          ],
+          "total_latency_ms": 7942.871899984311,
+          "total_tokens": 1958
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_025_BO_Parties_1",
+          "question": "Who are the named parties entering into this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "JVLS, LLC",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, the named parties entering into this agreement are:\n\n1. **BorrowMoney.com, inc** (located at 512 Bayshore DR, suite 201, Fort Lauderdale, FL 33304) [Reference 1: cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0_c0]\n2. **JVLS, LLC dba Vaccines 2Go** (located at 4060 Johns Creek Parkway, Suite H, Suwanee, GA 30024) [Reference 1: cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0_c0]",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0_c0",
+              "parent_id": "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0",
+              "document_id": "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020_",
+              "section_path": [
+                "BORROWMONEYCOM,INC_06_11_2020-EX-10.1-JOINT VENTURE AGREEMENT"
+              ],
+              "supporting_text": "BORROWMONEYCOM,INC_06_11_2020-EX-10.1-JOINT VENTURE AGREEMENT Exhibit 10.1 JOINT VENTURE AGREEMENT THIS JOINT VENTURE AGREEMENT (the \"Agreement\") made and entered into this 20th day of Friday, March 2020 (the \"Execution Date\"), BETWEEN: BorrowMoney.com, inc of 512 Bayshore DR, suite 201 Fort Lauderd"
+            }
+          ],
+          "total_latency_ms": 6217.161200009286,
+          "total_tokens": 2074
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_031_CO_Parties_1",
+          "question": "Who are the named parties entering into this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "CORIO",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, the named parties entering into this agreement are:\n\n1. **Corio Inc.** (referred to as \"CORIO\"), a Delaware corporation [Reference 4: cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0_c0].\n2. **Commerce One, Inc.** (referred to as \"COMMERCE ONE\"), a Delaware corporation [Reference 4: cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0_c0].",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0_c0",
+              "parent_id": "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0",
+              "document_id": "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI",
+              "section_path": [
+                "CORIOINC_07_20_2000-EX-10.5-LICENSE AND HOSTING AGREEMENT"
+              ],
+              "supporting_text": "CORIOINC_07_20_2000-EX-10.5-LICENSE AND HOSTING AGREEMENT 1                                                                     EXHIBIT 10.5 CORIO INC. LICENSE AND HOSTING AGREEMENT This License and Hosting Agreement (the \"AGREEMENT\") is made and entered into as of October 29, 1999 (\"EFFECTIVE DATE\""
+            }
+          ],
+          "total_latency_ms": 4671.677800011821,
+          "total_tokens": 2338
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_022_ON_Parties_1",
+          "question": "Who are the named parties entering into this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "On2",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, the named parties entering into this agreement are:\n\n1. **On2 Technologies, Inc.** [Reference 4: cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6_c1]\n2. **Wildform, Inc.** [Reference 4: cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6_c1]",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6_c1",
+              "parent_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6",
+              "document_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006",
+              "section_path": [
+                "ON2TECHNOLOGIES,INC_11_17_2006-EX-10.3-SUPPORT AND MAINTENANCE AGREEMENT"
+              ],
+              "supporting_text": "10.13 Captions, Gender and Number. The captions appearing in this Agreement are inserted only as a matter of convenience and for reference and in no way define, limit or describe the scope and intent of this Agreement or any of the provisions hereof. 10.14 UN Convention Does Not Apply. The United Na"
+            }
+          ],
+          "total_latency_ms": 5093.635199998971,
+          "total_tokens": 1905
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_027_Ch_Parties_1",
+          "question": "Who are the named parties entering into this agreement?",
+          "is_unanswerable": false,
+          "gold_text": "Beijing Yisheng Leju Information Services Co., Ltd.",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, the specific corporate identities of the \"Licensor\" and \"Licensee\" entering into the Content License Agreement are not fully defined in the text. However,",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p9_c0",
+              "parent_id": "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p9",
+              "document_id": "cuad_contract_027_ChinaRealEstateInformationCorp",
+              "section_path": [
+                "ChinaRealEstateInformationCorp_20090929_F-1_EX-10.32_4771615_EX-10.32_Content License Agreement"
+              ],
+              "supporting_text": "5. This Termination Agreement shall be binding upon and inure to the benefit of the parties hereto and their respective successors and assigns. [SIGNATURES ON NEXT PAGE] 18 Source: CHINA REAL ESTATE INFORMATION CORP, F-1, 9/29/2009 IN WITNESS WHEREOF, the undersigned have executed this Termination A"
+            }
+          ],
+          "total_latency_ms": 10077.611499989871,
+          "total_tokens": 2602
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_034_SE_unans_General_28",
+          "question": "Highlight the parts (if any) of this contract related to \"Affiliate License-Licensee\" that should be reviewed by a lawyer. Details: Does the contract contain a license grant to a licensee (incl. sublicensor) and the affiliates of such licensee/sublicensor?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "INSUFFICIENT_EVIDENCE",
+          "answer": "INSUFFICIENT_EVIDENCE: The provided contract excerpts do not contain information to answer this question.",
+          "citations": [],
+          "total_latency_ms": 8250.747900019633,
+          "total_tokens": 2382
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_027_Ch_unans_Right_Of_First_Refusal_16",
+          "question": "Is there a right of first refusal, first offer, or first negotiation granted?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "INSUFFICIENT_EVIDENCE",
+          "answer": "INSUFFICIENT_EVIDENCE: The provided contract excerpts do not contain information to answer this question.",
+          "citations": [],
+          "total_latency_ms": 17355.707300012,
+          "total_tokens": 2706
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_031_CO_unans_General_36",
+          "question": "Highlight the parts (if any) of this contract related to \"Liquidated Damages\" that should be reviewed by a lawyer. Details: Does the contract contain a clause that would award either party liquidated damages for breach or a fee upon the termination of a contract (termination fee)?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "INSUFFICIENT_EVIDENCE",
+          "answer": "INSUFFICIENT_EVIDENCE: The provided contract excerpts do not contain information to answer this question.",
+          "citations": [],
+          "total_latency_ms": 9083.14010000322,
+          "total_tokens": 2345
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_017_In_unans_General_40",
+          "question": "Highlight the parts (if any) of this contract related to \"Third Party Beneficiary\" that should be reviewed by a lawyer. Details: Is there a non-contracting party who is a beneficiary to some or all of the clauses in the contract and therefore can enforce its rights against a contracting party?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "ANSWER",
+          "answer": "Based on the provided contract excerpts, there is no explicit \"Third Party Beneficiary\" clause. However, there are specific provisions where non-contracting parties are designated as beneficiaries of certain rights or protections",
+          "citations": [
+            {
+              "chunk_id": "cuad_contract_017_IntegrityFunds_20200121_485BPO_v1_p3_c3",
+              "parent_id": "cuad_contract_017_IntegrityFunds_20200121_485BPO_v1_p3",
+              "document_id": "cuad_contract_017_IntegrityFunds_20200121_485BPO",
+              "section_path": [
+                "IntegrityFunds_20200121_485BPOS_EX-99.E UNDR CONTR_11948727_EX-99.E UNDR CONTR_Service Agreement"
+              ],
+              "supporting_text": "If the indemnifying party opts to assume the defense of such action, the indemnifying party will not be liable to the indemnified party for any legal or other expenses subsequently incurred by the indemnified party in connection with the defense thereof other than (a) reasonable costs of investigati"
+            }
+          ],
+          "total_latency_ms": 16683.35060001118,
+          "total_tokens": 2870
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_028_HE_unans_Post-Termination_Services_32",
+          "question": "What post-termination transition or wind-down services must be provided?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "INSUFFICIENT_EVIDENCE",
+          "answer": "INSUFFICIENT_EVIDENCE: The provided contract excerpts do not contain information to answer this question.",
+          "citations": [],
+          "total_latency_ms": 6764.686399983475,
+          "total_tokens": 2210
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_022_ON_unans_General_26",
+          "question": "Highlight the parts (if any) of this contract related to \"Non-Transferable License\" that should be reviewed by a lawyer. Details: Does the contract limit the ability of a party to transfer the license being granted to a third party?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "INSUFFICIENT_EVIDENCE",
+          "answer": "",
+          "citations": [],
+          "total_latency_ms": 28278.236699989066,
+          "total_tokens": 0
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_019_SI_unans_Insurance_38",
+          "question": "What commercial general liability or professional insurance coverage must be maintained?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "INSUFFICIENT_EVIDENCE",
+          "answer": "INSUFFICIENT_EVIDENCE: The provided contract excerpts do not contain information to answer this question.",
+          "citations": [],
+          "total_latency_ms": 16218.268099997658,
+          "total_tokens": 1389
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_019_SI_unans_Right_Of_First_Refusal_16",
+          "question": "Is there a right of first refusal, first offer, or first negotiation granted?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "INSUFFICIENT_EVIDENCE",
+          "answer": "",
+          "citations": [],
+          "total_latency_ms": 8640.843400004087,
+          "total_tokens": 0
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_015_Th_unans_General_36",
+          "question": "Highlight the parts (if any) of this contract related to \"Liquidated Damages\" that should be reviewed by a lawyer. Details: Does the contract contain a clause that would award either party liquidated damages for breach or a fee upon the termination of a contract (termination fee)?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "INSUFFICIENT_EVIDENCE",
+          "answer": "",
+          "citations": [],
+          "total_latency_ms": 10288.583900022786,
+          "total_tokens": 0
+        },
+        {
+          "query_id": "dev_cuad_cuad_contract_022_ON_unans_General_8",
+          "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+          "is_unanswerable": true,
+          "gold_text": "",
+          "decision": "INSUFFICIENT_EVIDENCE",
+          "answer": "",
+          "citations": [],
+          "total_latency_ms": 10538.161999982549,
+          "total_tokens": 0
+        }
+      ]
+    }
+  }
+}

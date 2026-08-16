@@ -1,0 +1,1348 @@
+{
+  "manifest_name": "PHASE6_DEV_API_MANIFEST",
+  "description": "Stratified DEV real-API evaluation manifest for agent ablation (40 answerable, 40 unanswerable)",
+  "source_manifest": "cuad_dev_manifest.json",
+  "seed": 42,
+  "total_queries": 80,
+  "answerable_count": 40,
+  "unanswerable_count": 40,
+  "contracts_represented": 20,
+  "queries": [
+    {
+      "query_id": "dev_cuad_cuad_contract_016_Re_Document_Name_0",
+      "source_contract_id": "cuad_contract_016_ReynoldsConsumerProductsInc_20",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "MASTER SUPPLY AGREEMENT",
+      "gold_answer_start": 40,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p0_c0",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p14_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p0",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p14"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_031_CO_Document_Name_0",
+      "source_contract_id": "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "License and Hosting Agreement",
+      "gold_answer_start": 194,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_016_Re_Parties_1",
+      "source_contract_id": "cuad_contract_016_ReynoldsConsumerProductsInc_20",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Seller",
+      "gold_answer_start": 277,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p0_c0",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p0_c2",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p0_c3",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p2_c0",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p2_c1",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p2_c2",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p2_c3",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p3_c0",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p3_c1",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p3_c2",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p3_c3",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p3_c4",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p6_c1",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p7_c0",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p7_c1",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p11_c3",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p11_c4",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p12_c0",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p13_c0",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p13_c2",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p14_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p0",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p11",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p12",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p13",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p14",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p2",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p3",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p6",
+        "cuad_contract_016_ReynoldsConsumerProductsInc_20_v1_p7"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_021_BO_Parties_1",
+      "source_contract_id": "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Notes Trustee",
+      "gold_answer_start": 675,
+      "gold_answers_count": 12,
+      "strict_gold_child_ids": [
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p0_c0",
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p0_c1",
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p4_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p0",
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p4"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_015_Th_Document_Name_0",
+      "source_contract_id": "cuad_contract_015_ThriventVariableInsuranceAccou",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "ENDORSEMENT",
+      "gold_answer_start": 30,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0_c0",
+        "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0_c2",
+        "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_034_SE_unans_General_28",
+      "source_contract_id": "cuad_contract_034_SENMIAOTECHNOLOGYLTD_02_19_201",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Affiliate License-Licensee\" that should be reviewed by a lawyer. Details: Does the contract contain a license grant to a licensee (incl. sublicensor) and the affiliates of such licensee/sublicensor?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_026_ZE_Parties_1",
+      "source_contract_id": "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Zebra Technologies Corporation",
+      "gold_answer_start": 251,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p0_c0",
+        "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p23_c3",
+        "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p23_c4"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p0",
+        "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p23"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_025_BO_Parties_1",
+      "source_contract_id": "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "JVLS, LLC",
+      "gold_answer_start": 257,
+      "gold_answers_count": 3,
+      "strict_gold_child_ids": [
+        "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0_c0",
+        "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0_c3",
+        "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0_c4",
+        "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p4_c4"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0",
+        "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p4"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_031_CO_Parties_1",
+      "source_contract_id": "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "CORIO",
+      "gold_answer_start": 116,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0_c0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0_c1",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0_c3",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p1_c0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p1_c1",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p1_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p1_c3",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p1_c4",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p2_c0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p2_c1",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p2_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p2_c3",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p2_c4",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p3_c0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p3_c1",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p3_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p3_c3",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p3_c4",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p4_c0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p4_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p4_c4",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p5_c0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p5_c1",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p5_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p6_c0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p6_c1",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p6_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p6_c3",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p6_c4",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p7_c0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p7_c1",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p7_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p8_c1",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p8_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p8_c3",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p8_c4",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p9_c0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p9_c2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p9_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p0",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p1",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p2",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p3",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p4",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p5",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p6",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p7",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p8",
+        "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI_v1_p9"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_027_Ch_unans_Right_Of_First_Refusal_16",
+      "source_contract_id": "cuad_contract_027_ChinaRealEstateInformationCorp",
+      "category": "Right Of First Refusal",
+      "question": "Is there a right of first refusal, first offer, or first negotiation granted?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_022_ON_Parties_1",
+      "source_contract_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "On2",
+      "gold_answer_start": 254,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p0_c0",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p0_c1",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p0_c4",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p1_c0",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p1_c1",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p1_c2",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p1_c3",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p1_c4",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p2_c0",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p2_c4",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p2_c5",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p3_c0",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p3_c4",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p3_c5",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p4_c0",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p4_c1",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p4_c2",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p4_c3",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p5_c2",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6_c1",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6_c2",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6_c3",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6_c4",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6_c5",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p7_c0",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p7_c1",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p7_c2",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p7_c3",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p7_c4",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p7_c5",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p8_c0",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p8_c1",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p8_c2",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p8_c3",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p8_c4",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p9_c0",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p9_c1",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p9_c2",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p9_c3",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p9_c4",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p10_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p0",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p1",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p10",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p2",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p3",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p4",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p5",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p6",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p7",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p8",
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p9"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_031_CO_unans_General_36",
+      "source_contract_id": "cuad_contract_031_CORIOINC_07_20_2000_EX_10_5_LI",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Liquidated Damages\" that should be reviewed by a lawyer. Details: Does the contract contain a clause that would award either party liquidated damages for breach or a fee upon the termination of a contract (termination fee)?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_027_Ch_Parties_1",
+      "source_contract_id": "cuad_contract_027_ChinaRealEstateInformationCorp",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Beijing Yisheng Leju Information Services Co., Ltd.",
+      "gold_answer_start": 371,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p0_c0",
+        "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p6_c4",
+        "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p8_c3",
+        "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p8_c4"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p0",
+        "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p6",
+        "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p8"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_024_OP_Document_Name_0",
+      "source_contract_id": "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Service Agreement",
+      "gold_answer_start": 36,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_026_ZE_Document_Name_0",
+      "source_contract_id": "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "INTELLECTUAL PROPERTY AGREEMENT",
+      "gold_answer_start": 52,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p0_c0",
+        "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p23_c4"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p0",
+        "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20_v1_p23"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_023_Fr_Parties_1",
+      "source_contract_id": "cuad_contract_023_Freecook_20180605_S_1_EX_10_3_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "FreeCook",
+      "gold_answer_start": 238,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p0_c0",
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p0_c5",
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p1_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p0",
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p1"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_022_ON_Document_Name_0",
+      "source_contract_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "SUPPORT AND MAINTENANCE AGREEMENT",
+      "gold_answer_start": 161,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_034_SE_Document_Name_0",
+      "source_contract_id": "cuad_contract_034_SENMIAOTECHNOLOGYLTD_02_19_201",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Collaboration Agreement",
+      "gold_answer_start": 82,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_034_SENMIAOTECHNOLOGYLTD_02_19_201_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_034_SENMIAOTECHNOLOGYLTD_02_19_201_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_017_In_unans_General_40",
+      "source_contract_id": "cuad_contract_017_IntegrityFunds_20200121_485BPO",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Third Party Beneficiary\" that should be reviewed by a lawyer. Details: Is there a non-contracting party who is a beneficiary to some or all of the clauses in the contract and therefore can enforce its rights against a contracting party?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_028_HE_unans_Post-Termination_Services_32",
+      "source_contract_id": "cuad_contract_028_HERTZGLOBALHOLDINGS_INC_07_07_",
+      "category": "Post-Termination Services",
+      "question": "What post-termination transition or wind-down services must be provided?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_034_SE_Parties_1",
+      "source_contract_id": "cuad_contract_034_SENMIAOTECHNOLOGYLTD_02_19_201",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Party A and Party B shall be individually referred to as a \"Party\" and collectively as the \"Parties\".",
+      "gold_answer_start": 1067,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_034_SENMIAOTECHNOLOGYLTD_02_19_201_v1_p0_c0",
+        "cuad_contract_034_SENMIAOTECHNOLOGYLTD_02_19_201_v1_p0_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_034_SENMIAOTECHNOLOGYLTD_02_19_201_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_022_ON_unans_General_26",
+      "source_contract_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Transferable License\" that should be reviewed by a lawyer. Details: Does the contract limit the ability of a party to transfer the license being granted to a third party?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_019_SI_unans_Insurance_38",
+      "source_contract_id": "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1",
+      "category": "Insurance",
+      "question": "What commercial general liability or professional insurance coverage must be maintained?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_019_SI_unans_Right_Of_First_Refusal_16",
+      "source_contract_id": "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1",
+      "category": "Right Of First Refusal",
+      "question": "Is there a right of first refusal, first offer, or first negotiation granted?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_028_HE_Parties_1",
+      "source_contract_id": "cuad_contract_028_HERTZGLOBALHOLDINGS_INC_07_07_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "(hereinafter referred to collectively as the \"Parties\" and individually as a \"Party\").",
+      "gold_answer_start": 639,
+      "gold_answers_count": 7,
+      "strict_gold_child_ids": [
+        "cuad_contract_028_HERTZGLOBALHOLDINGS_INC_07_07__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_028_HERTZGLOBALHOLDINGS_INC_07_07__v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_015_Th_unans_General_36",
+      "source_contract_id": "cuad_contract_015_ThriventVariableInsuranceAccou",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Liquidated Damages\" that should be reviewed by a lawyer. Details: Does the contract contain a clause that would award either party liquidated damages for breach or a fee upon the termination of a contract (termination fee)?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_022_ON_unans_General_8",
+      "source_contract_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_015_Th_unans_Post-Termination_Services_32",
+      "source_contract_id": "cuad_contract_015_ThriventVariableInsuranceAccou",
+      "category": "Post-Termination Services",
+      "question": "What post-termination transition or wind-down services must be provided?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_033_CY_Document_Name_0",
+      "source_contract_id": "cuad_contract_033_CYBERIANOUTPOSTINC_07_09_1998_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Promotion Agreement",
+      "gold_answer_start": 505,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_033_CYBERIANOUTPOSTINC_07_09_1998__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_033_CYBERIANOUTPOSTINC_07_09_1998__v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_021_BO_Document_Name_0",
+      "source_contract_id": "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "AGENCY AGREEMENT",
+      "gold_answer_start": 71,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p0_c0",
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p26_c1",
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p26_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p0",
+        "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX__v1_p26"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_023_Fr_unans_Volume_Restriction_22",
+      "source_contract_id": "cuad_contract_023_Freecook_20180605_S_1_EX_10_3_",
+      "category": "Volume Restriction",
+      "question": "Are there volume restrictions or maximum quantity thresholds?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_015_Th_unans_Insurance_38",
+      "source_contract_id": "cuad_contract_015_ThriventVariableInsuranceAccou",
+      "category": "Insurance",
+      "question": "What commercial general liability or professional insurance coverage must be maintained?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_020_IN_Parties_1",
+      "source_contract_id": "cuad_contract_020_INTRICONCORP_03_10_2009_EX_10_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Dynamic Hearing Pty Ltd",
+      "gold_answer_start": 235,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_020_INTRICONCORP_03_10_2009_EX_10__v1_p0_c0",
+        "cuad_contract_020_INTRICONCORP_03_10_2009_EX_10__v1_p8_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_020_INTRICONCORP_03_10_2009_EX_10__v1_p0",
+        "cuad_contract_020_INTRICONCORP_03_10_2009_EX_10__v1_p8"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_021_BO_unans_General_40",
+      "source_contract_id": "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Third Party Beneficiary\" that should be reviewed by a lawyer. Details: Is there a non-contracting party who is a beneficiary to some or all of the clauses in the contract and therefore can enforce its rights against a contracting party?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_017_In_Document_Name_0",
+      "source_contract_id": "cuad_contract_017_IntegrityFunds_20200121_485BPO",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "DISTRIBUTION AND SERVICES AGREEMENT",
+      "gold_answer_start": 0,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_017_IntegrityFunds_20200121_485BPO_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_017_IntegrityFunds_20200121_485BPO_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_034_SE_unans_General_30",
+      "source_contract_id": "cuad_contract_034_SENMIAOTECHNOLOGYLTD_02_19_201",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Irrevocable Or Perpetual License\" that should be reviewed by a lawyer. Details: Does the contract contain a\u00a0 license grant that is irrevocable or perpetual?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_018_PR_Document_Name_0",
+      "source_contract_id": "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Intellectual Property Agreement",
+      "gold_answer_start": 54,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_015_Th_Parties_1",
+      "source_contract_id": "cuad_contract_015_ThriventVariableInsuranceAccou",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Thrivent Financial for Lutherans",
+      "gold_answer_start": 334,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0_c0",
+        "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0_c2",
+        "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_015_ThriventVariableInsuranceAccou_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_029_GL_Document_Name_0",
+      "source_contract_id": "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "CONSULTING AGREEMENT",
+      "gold_answer_start": 14,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_023_Fr_unans_General_36",
+      "source_contract_id": "cuad_contract_023_Freecook_20180605_S_1_EX_10_3_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Liquidated Damages\" that should be reviewed by a lawyer. Details: Does the contract contain a clause that would award either party liquidated damages for breach or a fee upon the termination of a contract (termination fee)?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_015_Th_unans_Parties_10",
+      "source_contract_id": "cuad_contract_015_ThriventVariableInsuranceAccou",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_022_ON_unans_Notice_Period_To_Terminate_Renewal_6",
+      "source_contract_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006",
+      "category": "Notice Period To Terminate Renewal",
+      "question": "What is the notice period required to cancel or prevent automatic renewal?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_025_BO_unans_General_40",
+      "source_contract_id": "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Third Party Beneficiary\" that should be reviewed by a lawyer. Details: Is there a non-contracting party who is a beneficiary to some or all of the clauses in the contract and therefore can enforce its rights against a contracting party?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_025_BO_unans_Uncapped_Liability_34",
+      "source_contract_id": "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020_",
+      "category": "Uncapped Liability",
+      "question": "Are there any uncapped liability exceptions or indemnities excluded from limitation of liability?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_033_CY_unans_General_14",
+      "source_contract_id": "cuad_contract_033_CYBERIANOUTPOSTINC_07_09_1998_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_030_Pf_Document_Name_0",
+      "source_contract_id": "cuad_contract_030_PfHospitalityGroupInc_20150923",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "FORM OF FRANCHISE AGREEMENT",
+      "gold_answer_start": 0,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_030_PfHospitalityGroupInc_20150923_v1_p0_c0",
+        "cuad_contract_030_PfHospitalityGroupInc_20150923_v1_p26_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_030_PfHospitalityGroupInc_20150923_v1_p0",
+        "cuad_contract_030_PfHospitalityGroupInc_20150923_v1_p26"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_029_GL_Parties_1",
+      "source_contract_id": "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Consultant",
+      "gold_answer_start": 339,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p0_c0",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p0_c1",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p0_c2",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p1_c0",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p1_c1",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p1_c2",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p1_c3",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p2_c0",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p2_c2",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p3_c0",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p3_c1",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p4_c0",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p5_c2",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p5_c3",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p5_c4"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p0",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p1",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p2",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p3",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p4",
+        "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20_v1_p5"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_021_BO_unans_General_14",
+      "source_contract_id": "cuad_contract_021_BONTONSTORESINC_04_20_2018_EX_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_029_GL_unans_General_26",
+      "source_contract_id": "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Transferable License\" that should be reviewed by a lawyer. Details: Does the contract limit the ability of a party to transfer the license being granted to a third party?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_033_CY_Parties_1",
+      "source_contract_id": "cuad_contract_033_CYBERIANOUTPOSTINC_07_09_1998_",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Cyberian Outpost, Inc.",
+      "gold_answer_start": 31,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_033_CYBERIANOUTPOSTINC_07_09_1998__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_033_CYBERIANOUTPOSTINC_07_09_1998__v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_019_SI_Document_Name_0",
+      "source_contract_id": "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Strategic Alliance Agreement",
+      "gold_answer_start": 15,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_015_Th_unans_General_30",
+      "source_contract_id": "cuad_contract_015_ThriventVariableInsuranceAccou",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Irrevocable Or Perpetual License\" that should be reviewed by a lawyer. Details: Does the contract contain a\u00a0 license grant that is irrevocable or perpetual?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_022_ON_unans_Insurance_38",
+      "source_contract_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006",
+      "category": "Insurance",
+      "question": "What commercial general liability or professional insurance coverage must be maintained?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_022_ON_unans_Non-Compete_12",
+      "source_contract_id": "cuad_contract_022_ON2TECHNOLOGIES_INC_11_17_2006",
+      "category": "Non-Compete",
+      "question": "Does the contract impose non-compete restrictions on any party, and what is the scope/duration?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_032_TU_Document_Name_0",
+      "source_contract_id": "cuad_contract_032_TUNIUCORP_03_06_2014_EX_10_COO",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Cooperation Agreement (2014 Amendment)",
+      "gold_answer_start": 60,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_032_TUNIUCORP_03_06_2014_EX_10_COO_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_032_TUNIUCORP_03_06_2014_EX_10_COO_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_023_Fr_unans_Post-Termination_Services_32",
+      "source_contract_id": "cuad_contract_023_Freecook_20180605_S_1_EX_10_3_",
+      "category": "Post-Termination Services",
+      "question": "What post-termination transition or wind-down services must be provided?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_028_HE_Document_Name_0",
+      "source_contract_id": "cuad_contract_028_HERTZGLOBALHOLDINGS_INC_07_07_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "INTELLECTUAL PROPERTY AGREEMENT",
+      "gold_answer_start": 54,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_028_HERTZGLOBALHOLDINGS_INC_07_07__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_028_HERTZGLOBALHOLDINGS_INC_07_07__v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_017_In_Parties_1",
+      "source_contract_id": "cuad_contract_017_IntegrityFunds_20200121_485BPO",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Integrity Short Term Government Fund",
+      "gold_answer_start": 157,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_017_IntegrityFunds_20200121_485BPO_v1_p0_c0",
+        "cuad_contract_017_IntegrityFunds_20200121_485BPO_v1_p4_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_017_IntegrityFunds_20200121_485BPO_v1_p0",
+        "cuad_contract_017_IntegrityFunds_20200121_485BPO_v1_p4"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_028_HE_unans_General_28",
+      "source_contract_id": "cuad_contract_028_HERTZGLOBALHOLDINGS_INC_07_07_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Affiliate License-Licensee\" that should be reviewed by a lawyer. Details: Does the contract contain a license grant to a licensee (incl. sublicensor) and the affiliates of such licensee/sublicensor?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_019_SI_unans_Uncapped_Liability_34",
+      "source_contract_id": "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1",
+      "category": "Uncapped Liability",
+      "question": "Are there any uncapped liability exceptions or indemnities excluded from limitation of liability?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_018_PR_Parties_1",
+      "source_contract_id": "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Marv Enterprises, LLC",
+      "gold_answer_start": 424,
+      "gold_answers_count": 7,
+      "strict_gold_child_ids": [
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p0_c0",
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p1_c3",
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p2_c4",
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p5_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p0",
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p1",
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p2",
+        "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202_v1_p5"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_017_In_unans_General_36",
+      "source_contract_id": "cuad_contract_017_IntegrityFunds_20200121_485BPO",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Liquidated Damages\" that should be reviewed by a lawyer. Details: Does the contract contain a clause that would award either party liquidated damages for breach or a fee upon the termination of a contract (termination fee)?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_018_PR_unans_Price_Restriction_20",
+      "source_contract_id": "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202",
+      "category": "Price Restriction",
+      "question": "Are there price restrictions, most favored nation pricing, or minimum price obligations?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_033_CY_unans_Post-Termination_Services_32",
+      "source_contract_id": "cuad_contract_033_CYBERIANOUTPOSTINC_07_09_1998_",
+      "category": "Post-Termination Services",
+      "question": "What post-termination transition or wind-down services must be provided?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_030_Pf_Parties_1",
+      "source_contract_id": "cuad_contract_030_PfHospitalityGroupInc_20150923",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Pizza Fusion Holding, Inc.",
+      "gold_answer_start": 1504,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_030_PfHospitalityGroupInc_20150923_v1_p0_c1"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_030_PfHospitalityGroupInc_20150923_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_018_PR_unans_Uncapped_Liability_34",
+      "source_contract_id": "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202",
+      "category": "Uncapped Liability",
+      "question": "Are there any uncapped liability exceptions or indemnities excluded from limitation of liability?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_027_Ch_Document_Name_0",
+      "source_contract_id": "cuad_contract_027_ChinaRealEstateInformationCorp",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "DOMAIN NAME AND CONTENT LICENSE AGREEMENT",
+      "gold_answer_start": 47,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_027_ChinaRealEstateInformationCorp_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_029_GL_unans_Insurance_38",
+      "source_contract_id": "cuad_contract_029_GLOBALTECHNOLOGIESLTD_06_08_20",
+      "category": "Insurance",
+      "question": "What commercial general liability or professional insurance coverage must be maintained?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_032_TU_unans_Insurance_38",
+      "source_contract_id": "cuad_contract_032_TUNIUCORP_03_06_2014_EX_10_COO",
+      "category": "Insurance",
+      "question": "What commercial general liability or professional insurance coverage must be maintained?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_016_Re_unans_General_14",
+      "source_contract_id": "cuad_contract_016_ReynoldsConsumerProductsInc_20",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Non-Disparagement\" that should be reviewed by a lawyer. Details: Is there a requirement on a party not to disparage the counterparty?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_024_OP_Parties_1",
+      "source_contract_id": "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "PC Financial",
+      "gold_answer_start": 138,
+      "gold_answers_count": 5,
+      "strict_gold_child_ids": [
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p0_c0",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p0_c1",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p0_c2",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p1_c0",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p1_c1",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p1_c2",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p2_c0",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p2_c1",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p2_c2",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p2_c3",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p3_c0",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p3_c1",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p3_c2",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p4_c0",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p4_c1",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p4_c2",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p5_c0",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p5_c1",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p5_c3"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p0",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p1",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p2",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p3",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p4",
+        "cuad_contract_024_OPERALTD_04_30_2020_EX_4_14_SE_v1_p5"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_020_IN_Document_Name_0",
+      "source_contract_id": "cuad_contract_020_INTRICONCORP_03_10_2009_EX_10_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Strategic Alliance Agreement",
+      "gold_answer_start": 890,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_020_INTRICONCORP_03_10_2009_EX_10__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_020_INTRICONCORP_03_10_2009_EX_10__v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_023_Fr_Document_Name_0",
+      "source_contract_id": "cuad_contract_023_Freecook_20180605_S_1_EX_10_3_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Website Design, Development and Hosting Agreement",
+      "gold_answer_start": 89,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p0_c0",
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p0_c5",
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p1_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p0",
+        "cuad_contract_023_Freecook_20180605_S_1_EX_10_3__v1_p1"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_019_SI_Parties_1",
+      "source_contract_id": "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Sibannac, Inc.",
+      "gold_answer_start": 324,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1_v1_p0_c0",
+        "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1_v1_p1_c2",
+        "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1_v1_p1_c4"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1_v1_p0",
+        "cuad_contract_019_SIBANNAC_INC_12_04_2017_EX_2_1_v1_p1"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_026_ZE_unans_Volume_Restriction_22",
+      "source_contract_id": "cuad_contract_026_ZEBRATECHNOLOGIESCORP_04_16_20",
+      "category": "Volume Restriction",
+      "question": "Are there volume restrictions or maximum quantity thresholds?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_018_PR_unans_General_8",
+      "source_contract_id": "cuad_contract_018_PREMIERBIOMEDICALINC_05_14_202",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Most Favored Nation\" that should be reviewed by a lawyer. Details: Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_032_TU_Parties_1",
+      "source_contract_id": "cuad_contract_032_TUNIUCORP_03_06_2014_EX_10_COO",
+      "category": "Parties",
+      "question": "Who are the named parties entering into this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "Nanjing Tuniu Technology Co., Ltd.,",
+      "gold_answer_start": 186,
+      "gold_answers_count": 4,
+      "strict_gold_child_ids": [
+        "cuad_contract_032_TUNIUCORP_03_06_2014_EX_10_COO_v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_032_TUNIUCORP_03_06_2014_EX_10_COO_v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_025_BO_unans_General_30",
+      "source_contract_id": "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020_",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Irrevocable Or Perpetual License\" that should be reviewed by a lawyer. Details: Does the contract contain a\u00a0 license grant that is irrevocable or perpetual?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_025_BO_Document_Name_0",
+      "source_contract_id": "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020_",
+      "category": "Document Name",
+      "question": "What is the official title and full document name of this agreement?",
+      "is_unanswerable": false,
+      "gold_evidence": "JOINT VENTURE AGREEMENT",
+      "gold_answer_start": 43,
+      "gold_answers_count": 1,
+      "strict_gold_child_ids": [
+        "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0_c0"
+      ],
+      "strict_gold_parent_ids": [
+        "cuad_contract_025_BORROWMONEYCOM_INC_06_11_2020__v1_p0"
+      ]
+    },
+    {
+      "query_id": "dev_cuad_cuad_contract_017_In_unans_General_30",
+      "source_contract_id": "cuad_contract_017_IntegrityFunds_20200121_485BPO",
+      "category": "General",
+      "question": "Highlight the parts (if any) of this contract related to \"Irrevocable Or Perpetual License\" that should be reviewed by a lawyer. Details: Does the contract contain a\u00a0 license grant that is irrevocable or perpetual?",
+      "is_unanswerable": true,
+      "gold_evidence": "",
+      "gold_answer_start": -1,
+      "gold_answers_count": 0,
+      "strict_gold_child_ids": [],
+      "strict_gold_parent_ids": []
+    }
+  ]
+}

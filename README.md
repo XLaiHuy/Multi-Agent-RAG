@@ -176,3 +176,16 @@ python evaluation/scripts/benchmark_eval_cache.py
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+
+## 🏆 Phase 6 End-to-End Real API Benchmark (Production Complete)
+
+The complete end-to-end RAG system has been rigorously evaluated on **$N=200$ Held-Out Queries across 25 unseen contracts** using real Google GenAI API calls (`gemma-4-26b-a4b-it`) under strict **Layer A Zero Gold Access** isolation:
+
+- **Balanced Answerability Accuracy**: **74.50%** (82.0% unanswerable refusal, 67.0% answerable acceptance)
+- **Child Citation Hit Rate**: **86.57%** (Parent Citation Hit Rate: **94.03%**)
+- **Citation Precision**: **82.84%** (Citation Recall: **63.50%**)
+- **Grounded Claim Rate**: **100.0%** (0.00% wrong document or hallucinated chunk IDs)
+- **API Operational Efficiency**: **3.42 calls/query**, **3,971.9 tokens/query**, **32.6s P50 latency**, **0 rate-limit failures**.
+
+See [PHASE6_REAL_API_END_TO_END_EVALUATION.md](evaluation/reports/PHASE6_REAL_API_END_TO_END_EVALUATION.md) and [PHASE6_AGENT_ABLATION.md](evaluation/reports/PHASE6_AGENT_ABLATION.md) for complete empirical data.

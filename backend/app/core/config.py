@@ -43,12 +43,12 @@ class Settings(BaseSettings):
 
     # Model Routing - Decoupled per Task
     llm_provider: str = Field(default="gemini", alias="LLM_PROVIDER")
-    planner_model: str = Field(default="gemini-flash-latest", alias="PLANNER_MODEL")
-    critic_model: str = Field(default="gemini-flash-latest", alias="CRITIC_MODEL")
-    rewrite_model: str = Field(default="gemini-flash-latest", alias="REWRITE_MODEL")
-    verifier_model: str = Field(default="gemini-flash-latest", alias="VERIFIER_MODEL")
-    generation_model: str = Field(default="gemini-flash-latest", alias="GENERATION_MODEL")
-    ocr_model: str = Field(default="gemini-flash-latest", alias="OCR_MODEL")
+    planner_model: str = Field(default="gemma-4-26b-a4b-it", alias="PLANNER_MODEL")
+    critic_model: str = Field(default="gemma-4-26b-a4b-it", alias="CRITIC_MODEL")
+    rewrite_model: str = Field(default="gemma-4-26b-a4b-it", alias="REWRITE_MODEL")
+    verifier_model: str = Field(default="gemma-4-26b-a4b-it", alias="VERIFIER_MODEL")
+    generation_model: str = Field(default="gemma-4-26b-a4b-it", alias="GENERATION_MODEL")
+    ocr_model: str = Field(default="gemma-4-26b-a4b-it", alias="OCR_MODEL")
 
     # Local Ollama fallback (if configured)
     ollama_base_url: str = Field(default="http://localhost:11434/v1", alias="OLLAMA_BASE_URL")
