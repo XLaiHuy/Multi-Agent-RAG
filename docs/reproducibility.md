@@ -1,73 +1,52 @@
-# Reproducibility Guide & Benchmark Execution
+# Reproducibility & Benchmark Execution Guide
 
-This guide provides instructions for reproducing all test suites, evaluation harnesses, and verifying benchmark artifacts in the repository.
+This guide provides exact commands to run test suites, verify cache acceleration, and reproduce the Phase 4.2 frozen evaluation metrics.
 
 ---
 
-## 1. Prerequisites & Environment Setup
+## 1. Quality Gate & Unit Tests
 
-Clone repository and configure Python environment:
-
+Run all 54 unit, security, and benchmark integrity tests:
 ```bash
-# Clone repository
-git clone https://github.com/XLaiHuy/Multi-Agent-RAG.git
-cd Multi-Agent-RAG
-
-# Create virtual environment (Python 3.10+)
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
+pytest tests/
 ```
 
-Create local environment configuration:
-```bash
-cp .env.example .env
+Expected output:
+```text
+============================= 54 passed in ~16s =============================
 ```
 
 ---
 
-## 2. Running Automated Tests
+## 2. Reproduce Frozen Holdout Evaluation
 
-Run the complete test suite (Unit tests, Security ACLs, Anti-IDOR, Token chunking, Deterministic agents):
-
+To execute the single-pass evaluation on `CUSTOM_CUAD_HOLDOUT_V2` ($N=294$) under strict child gold evidence mapping:
 ```bash
-python -m pytest tests/
+python evaluation/scripts/run_phase4_2.py
 ```
 
-*Expected Output*: `47 passed in ~15-25s`.
+Generated result artifacts:
+- `evaluation/results/phase4_2/final_holdout_strict_child_gold.json`
+- `evaluation/results/phase4_2/gold_mapping_audit.json`
+- `evaluation/results/phase4_2/online_latency_holdout.json`
+- `evaluation/results/phase4_2/holdout_rank_trace_strict.jsonl`
 
 ---
 
-## 3. Reproducing Fast Evaluation Harness
+## 3. Reproduce Cache Speedup Benchmark
 
-The evaluation harness uses cryptographic parameter hashing (`evaluation/cache_manager.py`) to cache intermediate document chunks, dense embeddings, and BM25 tokenizations:
-
+To measure cold vs warm runtime and verify exact SHA-256 fingerprint matching:
 ```bash
-# Run Phase 4.1 DEV Evaluation (Warm cache: ~25.8s, Cold: ~40 min)
-python evaluation/scripts/run_phase4_1.py
+python evaluation/scripts/benchmark_eval_cache.py
 ```
 
-*Outputs generated in `evaluation/results/phase4_1/`:*
-- `cache_speedup_apples_to_apples.json` (94.70x speedup verification)
-- `true_doc_scoped_dev.json` (Global vs True Scoped metrics)
-- `candidate_budget_dev.json` (Candidate budget sweep $k \in [10, 75]$)
-- `reranker_ab_dev.json` (TinyBERT vs BGE-Reranker-Base A/B)
-- `retrieval_latency_dev.json` (Live measured latency profiling)
-
----
-
-## 4. Inspecting Frozen Held-Out Benchmark
-
-The canonical evaluation on `CUSTOM_CUAD_HOLDOUT_V2` ($N=293$) is frozen under configuration `v4.1.0` (`evaluation/configs/retrieval_final_config_v4_1.json`):
-
-```bash
-python -c "import json; res=json.load(open('evaluation/results/phase4_1/final_holdout_doc_scoped.json')); print('Hit@10:', res['post_rerank_metrics']['HitRate@10'], 'MRR:', res['post_rerank_metrics']['MRR'])"
+Expected output:
+```text
+  Cold Runtime: ~180 s
+  Warm Runtime: ~1.54 s
+  Speedup Ratio: ~116.8x
+  Result Hash Match: YES (Exact Match)
 ```
 
-*Canonical Held-Out Result:*
-- **Hit@5**: 82.94%
-- **Hit@10**: 94.54%
-- **MRR**: 0.6418
-- **Latency P50**: 68.89 ms (CPU)
+Generated artifact:
+- `evaluation/results/phase4_2/cache_speedup_verified.json`

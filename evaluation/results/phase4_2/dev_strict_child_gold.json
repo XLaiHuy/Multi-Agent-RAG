@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP_PHASE4_2_DEV_STRICT_CHILD_GOLD",
+  "dataset": "CUAD DEV (20 Contracts, 244 Answerable Queries)",
+  "total_answerable": 244,
+  "valid_evaluated": 244,
+  "child_metrics": {
+    "CandidateHitRate@1": 40.57377049180328,
+    "CandidateHitRate@5": 75.0,
+    "CandidateHitRate@10": 84.8360655737705,
+    "CandidateHitRate@20": 93.0327868852459,
+    "HitRate@1": 40.57377049180328,
+    "HitRate@5": 68.85245901639344,
+    "HitRate@10": 80.32786885245902,
+    "MRR": 0.5250731850117095,
+    "nDCG@5": 0.49176387783516945,
+    "TrueChunkRecall@5": 58.31470419351057,
+    "TrueChunkRecall@10": 70.22377181124209,
+    "TrueChunkRecall@20": 70.22377181124209
+  },
+  "parent_metrics_separate": {
+    "ParentHitRate@5": 83.60655737704919,
+    "ParentHitRate@10": 92.21311475409836
+  },
+  "gold_mapping_distribution": {
+    "MAPPED_CHILD_EXACT": 237,
+    "MAPPED_CHILD_SPAN_OVERLAP": 7,
+    "UNMAPPED_CHUNK_BOUNDARY": 0,
+    "UNMAPPED_PARSER_NORMALIZATION": 0,
+    "UNMAPPED_EMPTY_GOLD": 0,
+    "OTHER_UNMAPPED": 0
+  }
+}

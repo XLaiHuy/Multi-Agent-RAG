@@ -1,0 +1,15 @@
+{
+  "benchmark_name": "EVALUATION_CACHE_SPEEDUP_BENCHMARK",
+  "workload_description": "25 CUAD DEV queries across 3 contracts (90 chunks) evaluated under true document-scoped hybrid retrieval + TinyBERT reranker",
+  "workload_contracts_count": 3,
+  "workload_chunks_count": 90,
+  "workload_queries_count": 25,
+  "cold_runtime_seconds": 179.74,
+  "warm_runtime_seconds": 1.5384,
+  "speedup_ratio": 116.84,
+  "cold_result_hash": "666c72934e39b40b8ce9689eed398c51ac1c114e8dffe47e6c7478a470d42c1c",
+  "warm_result_hash": "666c72934e39b40b8ce9689eed398c51ac1c114e8dffe47e6c7478a470d42c1c",
+  "result_identity_verified": true,
+  "timing_unit": "seconds",
+  "timestamp": "2026-08-16T01:22:43Z"
+}

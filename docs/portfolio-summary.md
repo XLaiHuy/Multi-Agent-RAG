@@ -1,77 +1,76 @@
-# Senior AI Engineer Portfolio Summary & Interview Guide
+# Portfolio Summary: Enterprise Multi-Agent Contract Intelligence Platform
 
-This document provides a concise source-of-truth for technical recruiters, hiring managers, and AI engineering interviewers.
-
----
-
-## 1. Project Overview
-
-**Project**: Enterprise Contract Intelligence Platform  
-**Repository**: [https://github.com/XLaiHuy/Multi-Agent-RAG](https://github.com/XLaiHuy/Multi-Agent-RAG)  
-**Domain**: Enterprise Legal AI, Contract Question Answering, Clause Comparison & Risk Review  
-**Architecture**: Role-Aware Multi-Agent RAG with Document-Scoped Hybrid Retrieval & Hierarchical Context Expansion
+**Author:** AI Engineer Portfolio  
+**Repository:** [XLaiHuy/Multi-Agent-RAG](https://github.com/XLaiHuy/Multi-Agent-RAG)  
+**Status:** Phase 4.2 Frozen Scientific Evaluation  
 
 ---
 
-## 2. Verified Headline Metrics (CUAD Held-Out Split, $N=293$)
+## Executive Summary for Recruiters & Interviewers
 
-*Evaluated on 25 unseen contracts, 293 answerable queries under frozen config `v4.1.0` on commodity 4-thread CPU:*
-
-| Metric | Result | Benchmark Significance |
-| :--- | :---: | :--- |
-| **HitRate@10** | **94.54%** | Gold clause retrieved in top-10 in 94.5% of questions |
-| **HitRate@5** | **82.94%** | High top-rank precision for single-pass context feeding |
-| **MRR (Mean Reciprocal Rank)** | **0.6418** | High reciprocal ranking position across diverse categories |
-| **CandidateHitRate@20** | **98.29%** | First-stage hybrid recall before reranking truncation |
-| **Measured Latency (P50)** | **68.89 ms** | Sub-100ms retrieval on 4 CPU threads (zero GPU required) |
-| **Evaluation Acceleration** | **94.70x** | Harness sweep time reduced from 40.7 min to 25.8s |
-| **Security Isolation** | **0 Leaks** | Zero cross-tenant retrieval leakage observed across 7 ACL suites |
-
----
-
-## 3. Five Key Engineering & Architectural Decisions
-
-1. **True Document-Scoped Retrieval vs Multi-Contract Post-Filtering**:
-   - *Problem*: Multi-contract corpora create cross-agreement distractor collisions on common legal questions (*"Governing law?"*).
-   - *Solution*: Explicitly bounded search space to the active document prior to Dense dot-product and BM25 scoring.
-   - *Impact*: Lifted Hit@10 from 28.67% to **94.54%** (+65.87 pp) on held-out contracts.
-2. **BGE-M3 + BM25Okapi Hybrid Fusion with Equal RRF ($k=60$)**:
-   - Combines 1024-dim dense semantic embeddings with lexical exact match to capture both conceptual obligations and statutory keyword phrases.
-3. **Structure-Aware Parent-Child Chunking**:
-   - Indexes child chunks (~250 tokens) with section breadcrumbs for high retrieval precision, expanding to parent context (~1200 tokens) for synthesis.
-4. **Empirical Reranker Optimization (TinyBERT vs BGE-Reranker-Base)**:
-   - Verified that `ms-marco-TinyBERT-L-2-v2` (4.4M params) achieves equal or superior precision (90.34% vs 89.08% Hit@10) while running **60x faster on CPU** (153ms vs 9,142ms).
-5. **Deterministic Parameter-Sensitive Evaluation Caching**:
-   - Built a cryptographic cache invalidating on all tuning parameters, accelerating iteration cycles by **94.7x** with identical float32 metric outputs.
+This project implements a **production-grade, tenant-isolated contract intelligence platform** featuring:
+1. **Document-Scoped Hybrid Retrieval**: Combines dense semantic search (`BAAI/bge-m3`), sparse keyword retrieval (`BM25Okapi`), Reciprocal Rank Fusion ($k=60$), and lightweight CrossEncoder reranking (`ms-marco-TinyBERT-L-2-v2`).
+2. **Hierarchical Structure-Aware Chunking**: Creates ~250-token child chunks for precision indexing and ~1,200-token parent chunks for context synthesis.
+3. **Empirically Defensible Accuracy**: Evaluated on $N=294$ answerable queries across 25 unseen contracts (`CUSTOM_CUAD_HOLDOUT_V2`) under strict child gold evidence mapping (zero parent-to-sibling leakage):
+   - **Strict Child HitRate@10**: **81.97%**
+   - **Strict Child HitRate@5**: **68.71%**
+   - **Strict Child MRR**: **0.5214**
+   - **Parent Context HitRate@10**: **94.90%**
+4. **Sub-Second Online CPU Latency**: End-to-end online query execution (including BGE-M3 query embedding + search + TinyBERT rerank) completes in **586 ms P50** / **820 ms P95** on standard CPU.
+5. **Deterministic Cache Acceleration**: Accelerates repeated evaluation runs by **116.8x** (Cold 179.7s $	o$ Warm 1.54s) while proving exact float32 result identity via SHA-256 fingerprint matching.
 
 ---
 
-## 4. Candidate Resume / CV Bullets
+## Top 5 Architectural & Engineering Decisions
 
-### Candidate A (Retrieval & ML Focus):
-> *"Built a document-scoped hybrid legal RAG retriever using BGE-M3, BM25, RRF and CrossEncoder reranking, achieving 94.54% HitRate@10 and 0.6418 MRR across 293 held-out CUAD questions from 25 unseen contracts."*
+1. **Document-Scoped QA Formulation vs Global Search**
+   - *Problem*: Global multi-contract vector search on legal contracts suffers severe cross-agreement clause collisions, yielding only 28.67% Hit@10.
+   - *Decision*: Bound retrieval slices to the user's active agreement, achieving **81.97% Strict Child Hit@10** and **94.90% Parent Hit@10**.
 
-### Candidate B (Systems & Performance Focus):
-> *"Engineered deterministic embedding and candidate caching for RAG evaluation that reduced sweep latency from 40.7 minutes to 25.8 seconds (94.7x speedup) while preserving exact float32 metric identity."*
+2. **Hierarchical Parent-Child Indexing & Strict Evidence Evaluation**
+   - *Problem*: Large chunks dilute dense vectors; small chunks truncate vital surrounding legal clauses.
+   - *Decision*: Index child chunks (~250 tokens) for search, expand to parent chunks (~1,200 tokens) for synthesis. Evaluated under strict child evidence matching to eliminate sibling false positives.
 
-### Candidate C (Full-Stack & Security Focus):
-> *"Designed a tenant-aware contract intelligence platform with hierarchical Parent-Child retrieval, bounded Planner/Critic/Verifier reasoning and ACL prefiltering, with zero cross-tenant retrieval leakage observed across 7 security regression tests."*
+3. **TinyBERT FAST_DEFAULT vs Heavy Cross-Encoders**
+   - *Problem*: 110M parameter rerankers (`bge-reranker-base`) introduce 9+ seconds CPU latency.
+   - *Decision*: Selected `ms-marco-TinyBERT-L-2-v2` (4.4M params), reducing reranker latency to 164 ms (60x faster) with identical top-10 accuracy.
 
-### Recommended 2-Bullet Combination for 1-Page Resume:
-- **Bullet 1**: *Candidate A (Retrieval & ML Focus)*
-- **Bullet 2**: *Candidate C (Full-Stack & Security Focus)*
+4. **Deterministic Evaluation Caching with Fingerprint Identity**
+   - *Problem*: Repeated parameter sweeps spent 40+ minutes recomputing identical embeddings.
+   - *Decision*: Built a cryptographically keyed cache hashing 11 pipeline parameters, reducing runtime by **116.8x** with verified SHA-256 ranking identity.
+
+5. **Tenant Isolation & Security-First Ingestion**
+   - *Problem*: Multi-tenant RAG systems risk IDOR attacks and cross-tenant leakage.
+   - *Decision*: Mandatory tenant prefiltering enforced at query entry; verified with zero leakage across 7 security regression suites.
 
 ---
 
-## 5. Technical Interview Talking Points & Deep Dives
+## Verified Resume / CV Bullets
 
-1. **Why Equal RRF over Learned Reciprocal Rank Weights?**
-   - Equal RRF ($k=60$) avoids overfitting to training split distribution shifts and provides scale-invariant fusion across disparate score distributions.
-2. **Why Parent-Child Chunking over Large Sliding Windows?**
-   - Small child chunks prevent semantic dilution in dense embeddings; hierarchical parent expansion ensures the LLM sees full clauses without window boundary chopping.
-3. **Why Bounded 3-Agent Orchestration over Open-Ended ReAct Loops?**
-   - Open-ended multi-agent loops introduce latency variance and runaway LLM costs. Bounding to Planner $	o$ Critic (max 2 loops) $	o$ Verifier guarantees bounded execution budgets.
-4. **How Is Anti-IDOR Enforced at the Data Layer?**
-   - Predicates enforce `(tenant_id, accessible_role)` at the SQL query level and in-memory vector slicing, verified by automated security regression tests.
-5. **Why Was TinyBERT Kept over BGE-Reranker-Base?**
-   - For scoped single-document candidates ($k=20$), TinyBERT's distillation on MS-MARCO provides sufficient discriminative power without the 9-second CPU latency penalty of a 110M model.
+### 1. Retrieval & Machine Learning Focus
+> *"Architected a document-scoped hybrid legal retriever combining BGE-M3, BM25, RRF, and CrossEncoder reranking, achieving 81.97% strict child HitRate@10, 94.90% parent clause recovery, and 0.5214 MRR on 294 held-out CUAD queries across 25 unseen contracts."*
+
+### 2. Systems Performance & Latency Focus
+> *"Optimized end-to-end CPU retrieval and reranking latency to 586 ms P50 / 820 ms P95 (including online BGE-M3 query embedding), and engineered a deterministic caching framework delivering 116.8x evaluation speedup with verified result fingerprint matching."*
+
+### 3. Full-Stack & Enterprise Security Focus
+> *"Developed a tenant-aware enterprise contract intelligence platform with FastAPI, React, hierarchical parent-child indexing, bounded 3-agent verification, and zero cross-tenant retrieval leakage across 7 security regression suites."*
+
+---
+
+## 5 Technical Interview Talking Points
+
+1. **How do you prevent cross-contract clause collisions in legal RAG?**  
+   *Answer*: In legal contracts, boilerplates like "Governing Law" or "Termination" appear identically across contracts. By enforcing pre-retrieval document scoping to the active contract ID, search precision jumps from 28.67% to 81.97% Hit@10.
+
+2. **Why separate Child HitRate from Parent HitRate?**  
+   *Answer*: A child chunk (~250 tokens) contains the exact sentence match. Sibling child chunks sharing the same parent contain unrelated text. Strict child metrics ensure the retriever hits the exact clause, while parent metrics measure synthesis context adequacy.
+
+3. **How was sub-second online CPU latency achieved?**  
+   *Answer*: BGE-M3 encodes the single incoming query in 437 ms on CPU. Document-scoped vector dot products and BM25 take $<2$ ms on 50 chunks. TinyBERT (4.4M parameters) reranks top-20 candidates in 164 ms, yielding 586 ms P50 total.
+
+4. **How does evaluation caching guarantee scientific validity?**  
+   *Answer*: Cache keys hash manifest checksums, chunk sizes, and embedding models. Cold vs warm outputs are SHA-256 fingerprinted, guaranteeing identical rankings while eliminating 99% of compute overhead.
+
+5. **How is multi-tenant isolation enforced?**  
+   *Answer*: Tenant IDs are enforced as mandatory prefilters before any index lookups occur, preventing IDOR vulnerabilities.

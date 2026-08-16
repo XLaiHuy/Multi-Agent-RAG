@@ -1,0 +1,26 @@
+{
+  "CV_SAFE": [
+    "Strict Child-Level HitRate@10 (81.97%) on CUSTOM_CUAD_HOLDOUT_V2 (N=294)",
+    "Strict Child-Level HitRate@5 (68.71%) on CUSTOM_CUAD_HOLDOUT_V2 (N=294)",
+    "Strict Child-Level MRR (0.5214) on CUSTOM_CUAD_HOLDOUT_V2 (N=294)",
+    "Separate Parent Context HitRate@10 (94.90%) on CUSTOM_CUAD_HOLDOUT_V2",
+    "Online Retrieval + Rerank Latency P50 (586.11 ms) including query embedding",
+    "Evaluation cache acceleration (>90x speedup with verified result fingerprint match)",
+    "Observed zero cross-tenant retrieval leakage across 7 security & ACL regression suites"
+  ],
+  "README_SAFE": [
+    "True Document-Scoped QA vs Global Multi-Contract formulation comparison",
+    "TinyBERT FAST_DEFAULT reranker optimization (60x faster than 110M model on CPU)",
+    "Structure-aware parent-child hierarchical context chunking"
+  ],
+  "HISTORICAL_SUPERSEDED": [
+    "Phase 4.1 Parent-Propagated Child HitRate@10 (94.54%) -> Superseded by Phase 4.2 strict child gold",
+    "Phase 4.1 Post-Embedding Only Latency P50 (68.89 ms) -> Superseded by Phase 4.2 online latency"
+  ],
+  "INVALIDATED_PROHIBITED": [
+    "100% unanswerable refusal accuracy (REAL_API NOT_RUN)",
+    "40.5% LLM cost reduction (REAL_API NOT_RUN)",
+    "94.74% generation faithfulness (REAL_API NOT_RUN)",
+    "Official LegalBench-RAG results (NOT_RUN)"
+  ]
+}

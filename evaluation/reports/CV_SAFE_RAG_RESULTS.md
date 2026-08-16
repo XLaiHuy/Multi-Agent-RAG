@@ -1,31 +1,31 @@
-# CV-Safe Multi-Agent RAG Results Matrix
+# CV-Safe & Scientifically Defensible RAG Evaluation Results
 
-**Last Updated**: 2026-08-16  
-**Status**: VERIFIED & AUDITED (Phase 4.1)
-
----
-
-## 1. Frozen Benchmark Summary (CUSTOM_CUAD_HOLDOUT_V2, $N=293$)
-
-| Benchmark / Split | Mode | Candidate Hit@20 | Hit@5 | Hit@10 | MRR | Latency P50 | Scientific Validity Status |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **CUSTOM_CUAD_HOLDOUT_V2** | True Document-Scoped QA | **98.29%** | **82.94%** | **94.54%** | **0.6418** | **68.89 ms** | **CV-SAFE FROZEN BENCHMARK** |
-| **CUSTOM_CUAD_HOLDOUT_V2** | Global Multi-Contract | 39.59% | 19.11% | 28.67% | 0.1078 | 168.42 ms | **README-SAFE MULTI-DOC BASELINE** |
-| **CUAD DEV ($N=238$)** | True Document-Scoped QA | 94.96% | 80.67% | 90.34% | 0.6359 | 154.58 ms | **DEV EXPERIMENT VERIFIED** |
-| **CUAD DEV ($N=238$)** | Global Multi-Contract | 42.44% | 20.17% | 31.09% | 0.1173 | 174.57 ms | **DEV EXPERIMENT VERIFIED** |
+**Frozen as of Phase 4.2 Gate:** 2026-08-16  
+**Status:** CV_SAFE, README_SAFE, AUDITED  
 
 ---
 
-## 2. Verified Architecture & Engineering Truths
+## 1. Verified Headline Metrics (CUSTOM_CUAD_HOLDOUT_V2, N=294)
 
-- **True Document-Scoped Prefiltering**: Scopes dense and sparse search spaces to the target contract before ranking, boosting Hit@10 from 28.67% to **94.54%** on held-out contracts.
-- **Evaluation Harness Acceleration**: Cryptographic SHA-256 evaluation cache delivers **94.70x speedup** on DEV sweeps without metric deviation.
-- **Production Latency**: Measured end-to-end CPU retrieval latency is **P50 = 68.89 ms** on Holdout.
-- **Reranker Validation**: TinyBERT (4.4M params) delivers higher accuracy (90.34% Hit@10) than BGE-Reranker-Base (89.08% Hit@10) at 60x lower compute cost on CPU.
+| Metric Category | Metric Name | Measured Value | Scope & Evidence Definition |
+| :--- | :--- | :---: | :--- |
+| **Strict Child Retrieval** | **HitRate@10** | **81.97%** | Exact ~250-token child contains gold evidence |
+| **Strict Child Retrieval** | **HitRate@5** | **68.71%** | Exact ~250-token child contains gold evidence |
+| **Strict Child Retrieval** | **HitRate@1** | **39.12%** | Exact ~250-token child contains gold evidence |
+| **Strict Child Retrieval** | **MRR** | **0.5214** | Strict Mean Reciprocal Rank |
+| **Strict Child Retrieval** | **nDCG@5** | **0.4906** | Normalized Discounted Cumulative Gain |
+| **Candidate Recovery** | **CandidateHitRate@20** | **92.86%** | BGE-M3 + BM25 + RRF Candidate Pool ($k=20$) |
+| **Parent Context Recovery** | **ParentHitRate@10** | **94.90%** | Expanded parent context (~1200 tokens) contains clause |
+| **Parent Context Recovery** | **ParentHitRate@5** | **83.67%** | Expanded parent context (~1200 tokens) contains clause |
+| **Online Latency** | **Total Online P50 / P95** | **586 ms / 820 ms** | End-to-end CPU (including online BGE-M3 query embed) |
+| **Post-Embed Latency** | **Post-Embedding P50** | **166 ms** | Scoped search + BM25 + RRF + TinyBERT |
+| **Evaluation Acceleration** | **Cache Speedup** | **116.8x** | Cold 179.7s $	o$ Warm 1.54s (SHA-256 fingerprint verified) |
+| **Tenant Isolation** | **Security Leakage** | **0.0%** | 7 / 7 ACL & security regression suites passing |
 
 ---
 
-## 3. Boundary & Non-Claims
+## 2. Superseded & Non-Claim Boundaries
 
-- **Generation & LLM Judge**: Generation faithfulness and refusal evaluation remain `REAL_API NOT_RUN`.
-- **LegalBench-RAG**: Evaluated locally on mock subsets only; official live benchmark marked `NOT_RUN`.
+- **Phase 4.1 Parent-Propagated Gold**: Hit@10 = 94.54% is **SUPERSEDED** by Phase 4.2 strict child Hit@10 = **81.97%**.
+- **Phase 4.1 Post-Embedding Latency**: 68.89 ms is clarified as post-embedding, while true online latency is **586 ms P50**.
+- **Real API End-to-End Generation**: Refusal rate, faithfulness (94.74%), and cost reduction (40.5%) remain **NOT_RUN**.

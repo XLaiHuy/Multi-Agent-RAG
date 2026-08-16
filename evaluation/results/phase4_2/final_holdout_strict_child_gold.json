@@ -1,0 +1,39 @@
+{
+  "experiment_id": "EXP_PHASE4_2_HOLDOUT_STRICT_CHILD_GOLD",
+  "benchmark": "CUSTOM_CUAD_HOLDOUT_V2",
+  "total_contracts": 25,
+  "total_answerable_queries": 294,
+  "valid_evaluated_queries": 294,
+  "timestamp": "2026-08-15T23:53:32Z",
+  "strict_child_retrieval_metrics": {
+    "CandidateHitRate@1": 40.476190476190474,
+    "CandidateHitRate@5": 72.10884353741497,
+    "CandidateHitRate@10": 85.37414965986395,
+    "CandidateHitRate@20": 92.85714285714286,
+    "CandidateHitRate@50": 95.578231292517,
+    "HitRate@1": 39.1156462585034,
+    "HitRate@5": 68.70748299319727,
+    "HitRate@10": 81.97278911564626,
+    "MRR": 0.521389428787388,
+    "nDCG@5": 0.49056981832411123,
+    "TrueChunkRecall@5": 57.40942372119172,
+    "TrueChunkRecall@10": 69.03772699806228,
+    "TrueChunkRecall@20": 69.03772699806228
+  },
+  "parent_context_metrics_separate": {
+    "ParentHitRate@5": 83.6734693877551,
+    "ParentHitRate@10": 94.89795918367348
+  },
+  "comparison_vs_phase4_1": {
+    "phase4_1_parent_propagated_child_HitRate@5": 82.94,
+    "phase4_1_parent_propagated_child_HitRate@10": 94.54,
+    "phase4_1_parent_propagated_MRR": 0.6418,
+    "phase4_2_strict_child_HitRate@5": 68.70748299319727,
+    "phase4_2_strict_child_HitRate@10": 81.97278911564626,
+    "phase4_2_strict_child_MRR": 0.521389428787388,
+    "delta_HitRate@5": -14.232517006802725,
+    "delta_HitRate@10": -12.567210884353742,
+    "delta_MRR": -0.120410571212612,
+    "status": "PHASE4_1_SUPERSEDED_BY_STRICT_CHILD_GOLD_V2"
+  }
+}

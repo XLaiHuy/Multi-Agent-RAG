@@ -1,0 +1,23 @@
+{
+  "protocol_version": "v4.2.0",
+  "task_mode": "TRUE_DOCUMENT_SCOPED_QA",
+  "gold_mapping_protocol": "STRICT_CHILD_EXACT_OR_SPAN_V2",
+  "parent_metric_protocol": "SEPARATE_PARENT_CONTEXT_EVALUATION",
+  "query_latency_protocol": "ONLINE_QUERY_EMBEDDING_INCLUDED",
+  "dense_model": "BAAI/bge-m3",
+  "dense_dimension": 1024,
+  "child_target_tokens": 250,
+  "child_overlap_tokens": 30,
+  "parent_target_tokens": 1200,
+  "parent_overlap_tokens": 100,
+  "bm25_tokenization": "regex_word_lower",
+  "rrf_k": 60,
+  "broad_candidate_pool_size": 100,
+  "parent_dedup_max_per_parent": 2,
+  "candidate_budget_k": 20,
+  "reranker_model": "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+  "reranker_max_seq_length": 512,
+  "query_encoding_protocol": "online_single_or_batch_embed",
+  "protocol_sha256": "8c59910d57187c3bbf59942a1b920e060ea8db6e5e8e390c9b0e27103eb303d8",
+  "timestamp": "2026-08-15T23:49:56Z"
+}
