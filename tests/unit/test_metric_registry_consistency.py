@@ -5,7 +5,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 def test_metric_registry_and_public_docs_consistency():
-    """Verify that CV_SAFE_RAG_RESULTS.md, claim_classification_v6_1.json, and final_public_metrics.json match raw metrics."""
+    """Verify that CV_SAFE_RAG_RESULTS.md, claim_classification_v6_1.json, final_public_metrics.json, and README match raw metrics."""
     res_dir = REPO_ROOT / "evaluation" / "results" / "phase6_1"
     
     public_file = res_dir / "final_public_metrics.json"
@@ -19,9 +19,6 @@ def test_metric_registry_and_public_docs_consistency():
     assert cit_file.exists(), f"Missing {cit_file}"
     
     pub_data = json.loads(public_file.read_text(encoding="utf-8"))
-    claim_data = json.loads(claim_file.read_text(encoding="utf-8"))
-    ans_data = json.loads(ans_file.read_text(encoding="utf-8"))
-    cit_data = json.loads(cit_file.read_text(encoding="utf-8"))
     
     # 1. Check Retrieval Canonical Numbers
     assert pub_data["retrieval"]["child_hit_at_10"] == 81.97
@@ -49,6 +46,29 @@ def test_metric_registry_and_public_docs_consistency():
     assert "62.00%" in cv_doc
     assert "85.07%" in cv_doc
     assert "0.00%" in cv_doc
+
+    # 4. Check README.md
+    readme_doc = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    assert "81.97%" in readme_doc
+    assert "0.5214" in readme_doc
+    assert "72.50%" in readme_doc
+    assert "80.97%" in readme_doc
+    assert "62.00%" in readme_doc
+    assert "0 / 140 observed" in readme_doc
+
+    # 5. Check docs/portfolio-summary.md
+    port_doc = (REPO_ROOT / "docs" / "portfolio-summary.md").read_text(encoding="utf-8")
+    assert "81.97%" in port_doc
+    assert "0.5214" in port_doc
+    assert "72.50%" in port_doc
+    assert "80.97%" in port_doc
+
+    # 6. Check docs/cv-project-entry.md
+    cv_entry_doc = (REPO_ROOT / "docs" / "cv-project-entry.md").read_text(encoding="utf-8")
+    assert "81.97%" in cv_entry_doc
+    assert "0.5214" in cv_entry_doc
+    assert "72.5%" in cv_entry_doc or "72.50%" in cv_entry_doc
+    assert "80.97%" in cv_entry_doc
 
 def test_no_top1_fallback_in_citation_metrics():
     """Verify that citation metrics explicitly declare fallback is removed."""

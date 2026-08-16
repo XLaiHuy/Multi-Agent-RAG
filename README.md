@@ -6,7 +6,19 @@
 [![Pytest](https://img.shields.io/badge/tests-67%20passed-brightgreen.svg)](tests/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-An enterprise-grade, evidence-bounded Retrieval-Augmented Generation (RAG) system built for high-precision legal contract analysis. The system combines document-scoped hybrid retrieval (BGE-M3 dense embeddings + BM25Okapi sparse lexical search + Reciprocal Rank Fusion + TinyBERT cross-encoder reranking) with an evidence-bounded Multi-Agent execution pipeline (Planner, Critic, Generator, and Verifier) to eliminate cross-document contamination and ensure verifiable clause-level citations.
+An evidence-bounded Retrieval-Augmented Generation (RAG) system engineered for high-precision legal contract analysis. The system couples document-scoped hybrid retrieval (BGE-M3 dense embeddings + BM25Okapi sparse lexical search + Reciprocal Rank Fusion + TinyBERT cross-encoder reranking) with an evidence-bounded Multi-Agent execution pipeline (Planner, Critic, Generator, and Verifier) designed to reduce cross-document errors and produce verifiable clause-level citations.
+
+---
+
+## 🏆 Key Headline Results
+
+| **81.97%** | **0.5214** | **72.50%** | **80.97%** |
+| :---: | :---: | :---: | :---: |
+| **Strict Child Hit@10** | **Mean Reciprocal Rank (MRR)** | **Strict Balanced Accuracy** | **Macro Citation Precision** |
+| Top-10 retrieved child chunks | Reciprocal rank of first gold | Strict sentinel refusal accuracy | Exact match of cited clauses |
+| contain exact gold clause span | clause match ($N=294$) | on held-out test split ($N=200$) | against gold reference spans |
+
+> **Evaluation Scope**: Retrieval evaluated on **294 held-out CUAD queries** across 25 contracts. End-to-end generation evaluated on **200 real Google GenAI API queries** across 25 unseen contracts.
 
 ---
 
@@ -17,38 +29,61 @@ An enterprise-grade, evidence-bounded Retrieval-Augmented Generation (RAG) syste
 - **Retriever Pipeline**: `BAAI/bge-m3` (Dense) + `BM25Okapi` (Sparse) + `RRF (k=60)` + `TinyBERT CrossEncoder`
 - **Granularity**: ~250-token child chunks (dense/sparse index) with ~1,200-token parent section expansion
 
-| Metric | Measured Result | Scope / Definition |
-| :--- | :--- | :--- |
-| **Strict Child HitRate@5** | **68.71%** | Top-5 retrieved child chunks contain exact gold clause span |
-| **Strict Child HitRate@10** | **81.97%** | Top-10 retrieved child chunks contain exact gold clause span |
-| **Mean Reciprocal Rank (MRR)** | **0.5214** | Reciprocal rank of first gold child match across $N=294$ |
-| **Parent Section HitRate@10** | **94.90%** | Top-10 retrieved parent sections contain gold clause |
-| **Corpus-Wide Collision Drop** | **28.67%** | HitRate@10 collapses when querying all 25 contracts simultaneously |
+| Metric | Result |
+| :--- | ---: |
+| **Strict Child HitRate@5** | 68.71% |
+| **Strict Child HitRate@10** | 81.97% |
+| **Mean Reciprocal Rank (MRR)** | 0.5214 |
+| **Parent Section HitRate@10** | 94.90% |
+| **Online CPU Retrieval P50** | 586 ms |
+| **Corpus-Wide Collision Baseline (Hit@10)** | 28.67% |
+
+*Caption: 294 answerable held-out CUAD queries across 25 contracts under strict child-level evidence mapping.*
+
+---
 
 ### B. Real API End-to-End Generation Benchmark (Phase 6.1 Frozen)
 - **Dataset**: Custom CUAD Holdout v2 ($N = 200$ queries: 100 Answerable, 100 Unanswerable across 25 unseen contracts)
 - **Architecture**: Bounded Multi-Agent Pipeline (`FULL_BOUNDED_MULTI_AGENT`)
-- **API Engine**: Real Google GenAI API (`gemma-4-26b-a4b-it`) under strict Layer A Zero-Gold isolation
+- **API Engine**: Real Google GenAI API (`gemma-4-26b-a4b-it`) benchmark under strict Layer A Zero-Gold isolation
 - **Citation Protocol**: Strict in-text regex extraction (`[Reference N: <chunk_id>]`) with zero rank-based fallback
 
-| Metric | Measured Result | Scope / Protocol |
-| :--- | :--- | :--- |
-| **Inclusive Balanced Accuracy** | **74.50%** | Prose-aware: 82.00% refusal (unanswerable) + 67.00% acceptance (answerable) |
-| **Strict Balanced Accuracy** | **72.50%** | Sentinel-only: 78.00% strict refusal + 67.00% acceptance |
-| **Unanswerable Refusal Rate** | **82.00%** | 82 / 100 correct refusals on unanswerable contract queries (78 strict, 4 prose) |
-| **Answerable Acceptance Rate** | **67.00%** | 67 / 100 accepted answers with verified citations |
-| **Valid Citation Compliance** | **98.51%** | 84 / 85 accepted answers contained valid explicit in-text citations |
-| **Child Citation Hit Rate** | **85.07%** | 58 / 67 accepted answerable responses cite verified gold child clause |
-| **End-to-End Child Coverage** | **62.00%** | 58 / 100 total answerable queries cite verified gold child clause |
-| **Parent Citation Hit Rate** | **92.54%** | 63 / 67 accepted answerable responses cite verified parent section |
-| **Citation Precision (Macro)** | **80.97%** | Mean precision of cited clauses against gold reference spans |
-| **Wrong-Document Citation Rate** | **0.00%** | 0 wrong-document citations observed across 140 emitted citation mentions |
-| **Invalid Citation Mention Rate**| **0.00%** | 0 invalid reference indices or non-existent chunk IDs |
-| **Grounded Material Claim Rate** | **97.93%** | 142 / 145 claims supported by retrieved evidence (Judge: `gemma-4-26b-a4b-it`) |
-| **Semantic Correctness** | **92.54%** | Mean score 1.85 / 2.0 against gold evidence (Judge: `gemma-4-26b-a4b-it`) |
-| **Mean Production Calls / Query**| **3.42 calls** | Measured across $N=200$ test queries |
-| **Mean Total Tokens / Query** | **3,971.9 tokens** | Measured directly from Google GenAI API response metadata |
-| **End-to-End Latency (P50)** | **32.62 s** | Median latency across $N=200$ test queries |
+| Metric | Result |
+| :--- | ---: |
+| **Strict Balanced Answerability Accuracy** | 72.50% |
+| **Inclusive Balanced Answerability Accuracy** (Prose-Aware) | 74.50% |
+| **Strict Unanswerable Refusal Rate** (78 / 100 strict sentinels) | 78.00% |
+| **Inclusive Unanswerable Refusal Rate** (82 / 100 total refusals) | 82.00% |
+| **Answerable Acceptance Rate** (67 / 100 answered) | 67.00% |
+| **Valid Explicit Citation Compliance** (84 / 85 accepted answers) | 98.51% |
+| **Child Citation Hit Rate** (58 / 67 accepted answerable responses) | 85.07% |
+| **End-to-End Child Citation Coverage** (58 / 100 total answerable) | 62.00% |
+| **Parent Citation Hit Rate** (63 / 67 accepted answerable responses) | 92.54% |
+| **Parent Citation Coverage** (63 / 100 total answerable) | 68.00% |
+| **Citation Precision (Macro)** | 80.97% |
+| **Citation Precision (Micro)** | 73.53% |
+| **Citation Recall (Macro)** | 63.00% |
+| **Wrong-Document Citations** | 0 / 140 observed |
+| **Invalid Citation Mentions** | 0 / 140 observed |
+| **Mean Production Calls / Query** | 3.42 |
+| **Mean Total Tokens / Query** | 3,971.9 |
+| **End-to-End Latency P50** | 32.62 s |
+| **End-to-End Latency P95** | 57.13 s |
+
+*Caption: 200 held-out queries (100 answerable + 100 unanswerable) across 25 unseen contracts, real Google GenAI API benchmark.*
+
+---
+
+### C. Judge-Based Evaluation (`JUDGE-BASED`)
+Independent evaluation was conducted using `gemma-4-26b-a4b-it` across all 85 accepted answers (100.0% evaluation coverage):
+
+| Metric | Result | Scope / Evidence Evaluated |
+| :--- | ---: | :--- |
+| **Grounded Material Claim Rate** | 97.93% | 142 / 145 claims supported by retrieved context supplied to generator |
+| **Unsupported Claim Rate** | 2.07% | 3 / 145 claims unsupported by retrieved context |
+| **Contradicted Claim Rate** | 0.00% | 0 / 145 claims contradicted by retrieved context |
+| **Semantic Correctness** | 92.54% | Mean score 1.85 / 2.0 evaluated against reference gold text |
+| **Contradiction Rate (vs Gold)** | 1.49% | 1 / 67 accepted answerable responses |
 
 ---
 
@@ -81,7 +116,7 @@ flowchart TD
         Generator --> Verifier
     end
     
-    Verifier --> Output([Verified Answer with Clause Citations\nor INSUFFICIENT_EVIDENCE Refusal])
+    Verifier --> Output([Answer with Clause Citations\nor INSUFFICIENT_EVIDENCE Refusal])
 ```
 
 ---
@@ -115,7 +150,7 @@ Deterministic cryptographic cache keys hash manifest versions, chunking paramete
 | **Fusion Algorithm** | Reciprocal Rank Fusion ($k=60$) | Non-parametric rank combination |
 | **Reranker** | `ms-marco-TinyBERT-L-2-v2` | Lightweight 4.4M-parameter cross-encoder |
 | **Vector Store** | ChromaDB & In-Memory Slices | Document-scoped embedding persistence |
-| **Generation Engine** | Google GenAI API (`gemma-4-26b-a4b-it`) | Real API benchmark model |
+| **Generation Engine** | Google GenAI API (`gemma-4-26b-a4b-it`) | Real API benchmark model (`gemini-flash-latest` prod default) |
 | **Frontend UI** | React 18, Vite, Lucide Icons | Responsive legal intelligence dashboard |
 | **Quality & Tests** | Pytest, Compileall | 67 comprehensive unit, security, and integrity tests |
 
@@ -181,6 +216,7 @@ python evaluation/scripts/rescore_phase6_strict.py
 - [Multi-Tenant Security & ACL Proof](docs/security.md)
 - [Step-by-Step Reproducibility Guide](docs/reproducibility.md)
 - [Portfolio Summary & Engineering Decisions](docs/portfolio-summary.md)
+- [CV Project Entry Source](docs/cv-project-entry.md)
 - [Phase 6.1 Final Scientific Sign-Off](evaluation/reports/PHASE6_1_FINAL_SCIENTIFIC_SIGNOFF.md)
 - [Phase 4.2 Master Metric Integrity Report](evaluation/reports/PHASE4_2_FINAL_METRIC_INTEGRITY.md)
 
@@ -190,7 +226,7 @@ python evaluation/scripts/rescore_phase6_strict.py
 
 - **Real API End-to-End Evaluation**: COMPLETE — Phase 6.1 frozen scientific evaluation with Google GenAI real API calls.
 - **Corpus-Wide Benchmark**: Official LegalBench-RAG multi-contract benchmark is `NOT_RUN`. Metrics reported are on `CUSTOM_CUAD_HOLDOUT_V2`.
-- **Security Scope**: Multi-tenant ACL isolation is validated empirically across 7 regression test suites with zero observed leakage.
+- **Security Scope**: Multi-tenant ACL isolation is validated empirically across 7 regression test suites with zero observed cross-tenant leakage.
 
 ---
 

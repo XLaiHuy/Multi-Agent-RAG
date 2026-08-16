@@ -28,23 +28,24 @@ This document serves as the **Single Source of Truth** for all verified, reprodu
 
 | Metric | Measured Value | Denominator Scope | Verification Status |
 |---|---|---|---|
-| **Balanced Answerability Accuracy** | **74.50%** | $N=200$ queries | **CV_SAFE** |
-| **Unanswerable Refusal Rate** | **82.00%** | 82 / 100 unanswerable queries | **CV_SAFE** |
-| **Answerable Acceptance Rate** | **67.00%** | 67 / 100 answerable queries | **CV_SAFE** |
-| **False Refusal Rate** | **33.00%** | 33 / 100 answerable queries | **CV_SAFE** |
-| **False Answer Rate** | **18.00%** | 18 / 100 unanswerable queries | **CV_SAFE** |
-| **Explicit Citation Compliance** | **98.51%** | 84 / 85 accepted answers | **CV_SAFE** |
-| **Child Citation Hit Rate** | **85.07%** | 58 / 67 accepted answerable responses | **CV_SAFE** |
-| **Child Citation Coverage** | **62.00%** | 58 / 100 total answerable queries | **CV_SAFE** |
-| **Parent Citation Hit Rate** | **92.54%** | 63 / 67 accepted answerable responses | **CV_SAFE** |
-| **Parent Citation Coverage** | **68.00%** | 63 / 100 total answerable queries | **CV_SAFE** |
+| **Strict Balanced Answerability Accuracy** | **72.50%** | Sentinel-only prefix requirement ($N=200$) | **CV_SAFE** |
+| **Inclusive Balanced Answerability Accuracy** | **74.50%** | Prose-aware refusal accounting ($N=200$) | **CV_SAFE** |
+| **Strict Unanswerable Refusal Rate** | **78.00%** | 78 / 100 strict sentinel refusals | **CV_SAFE** |
+| **Inclusive Unanswerable Refusal Rate** | **82.00%** | 82 / 100 total unanswerable refusals | **CV_SAFE** |
+| **Answerable Acceptance Rate** | **67.00%** | 67 / 100 answerable queries answered | **CV_SAFE** |
+| **Valid Explicit Citation Compliance** | **98.51%** | 84 / 85 accepted answers contained valid citations | **CV_SAFE** |
+| **Child Citation Hit Rate** | **85.07%** | 58 / 67 accepted answerable responses cite gold child | **CV_SAFE** |
+| **End-to-End Child Citation Coverage** | **62.00%** | 58 / 100 total answerable queries cite gold child | **CV_SAFE** |
+| **Parent Citation Hit Rate** | **92.54%** | 63 / 67 accepted answerable responses cite gold parent | **CV_SAFE** |
+| **Parent Citation Coverage** | **68.00%** | 63 / 100 total answerable queries cite gold parent | **CV_SAFE** |
 | **Citation Precision (Macro)** | **80.97%** | Mean precision across cited answers | **CV_SAFE** |
+| **Citation Precision (Micro)** | **73.53%** | Micro-averaged citation precision | **CV_SAFE** |
 | **Citation Recall (Macro)** | **63.00%** | Mean recall across gold spans | **CV_SAFE** |
-| **Wrong Document Citation Rate** | **0.00%** | 0 / 140 emitted citations | **CV_SAFE** |
-| **Invalid Citation Mention Rate** | **0.00%** | 0 / 140 emitted citations | **CV_SAFE** |
-| **Production API Calls / Query** | **3.42 calls** | Mean calls across $N=200$ | **CV_SAFE** |
-| **Total Tokens / Query** | **3,971.9 tokens** | Mean tokens across $N=200$ | **CV_SAFE** |
-| **End-to-End Latency (P50)** | **32.62 s** | Median latency across $N=200$ | **CV_SAFE** |
+| **Wrong-Document Citations** | **0 / 140 observed** | 0 cross-document citations observed | **CV_SAFE** |
+| **Invalid Citation Mentions** | **0 / 140 observed** | 0 invalid reference indices or chunk IDs | **CV_SAFE** |
+| **Production API Calls / Query** | **3.42 calls** | Mean calls across $N=200$ test queries | **CV_SAFE** |
+| **Total Tokens / Query** | **3,971.9 tokens** | Mean tokens across $N=200$ test queries | **CV_SAFE** |
+| **End-to-End Latency (P50)** | **32.62 s** | Median latency across $N=200$ test queries | **CV_SAFE** |
 
 ---
 
@@ -66,7 +67,7 @@ This document serves as the **Single Source of Truth** for all verified, reprodu
 ## 2. Recommended Resume / CV Bullets
 
 ### Recommended Bullet 1 (Retrieval Engineering):
-> **"Engineered a document-scoped legal retrieval pipeline using BGE-M3, BM25, Reciprocal Rank Fusion ($k=60$), and CrossEncoder reranking, achieving 81.97% strict child HitRate@10 and 0.5214 MRR on 294 held-out CUAD contract queries."**
+> **"Engineered a document-scoped legal retrieval pipeline using BGE-M3, BM25, Reciprocal Rank Fusion, and CrossEncoder reranking, achieving 81.97% strict child HitRate@10 and 0.5214 MRR across 294 held-out CUAD queries from 25 contracts."**
 
-### Recommended Bullet 2 (Safe Generation & Systems):
-> **"Designed an evidence-bounded Multi-Agent RAG system with Google GenAI, achieving 74.50% balanced answerability accuracy, 82.00% unanswerable refusal, and 80.97% citation precision with zero cross-document contamination across 25 unseen contracts."**
+### Recommended Bullet 2 (Systems & Evidence-Bounded Generation):
+> **"Built an evidence-bounded multi-agent legal RAG system evaluated with real Google GenAI on 200 held-out queries, achieving 72.5% strict balanced answerability accuracy and 80.97% macro citation precision, with 0/140 wrong-document citations observed."**
