@@ -115,3 +115,5 @@ Evaluated by `gemma-4-26b-a4b-it` across all 85 accepted answers (100.0% coverag
 - **Why Document Scoping?**: In legal contract QA, users ask questions about an active agreement. Global corpus search drops HitRate@10 from 81.97% to 28.67% due to boilerplate overlap across agreements.
 - **Why RRF over Simple Linear Weighted Sum?**: RRF is non-parametric and invariant to score distributions across dense cosine similarity and sparse BM25 scores.
 - **Why Strict Child Mapping?**: Credit is granted only when the retrieved ~250-token chunk directly overlaps the gold annotated clause, avoiding inflated scores from sibling propagation.
+
+- [Master Interview Study Guide & Deep-Dive Curriculum](interview-study-guide.md)

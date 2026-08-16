@@ -217,6 +217,7 @@ python evaluation/scripts/rescore_phase6_strict.py
 - [Step-by-Step Reproducibility Guide](docs/reproducibility.md)
 - [Portfolio Summary & Engineering Decisions](docs/portfolio-summary.md)
 - [CV Project Entry Source](docs/cv-project-entry.md)
+- [Master Interview Study Guide & Curriculum](docs/interview-study-guide.md)
 - [Phase 6.1 Final Scientific Sign-Off](evaluation/reports/PHASE6_1_FINAL_SCIENTIFIC_SIGNOFF.md)
 - [Phase 4.2 Master Metric Integrity Report](evaluation/reports/PHASE4_2_FINAL_METRIC_INTEGRITY.md)
 
