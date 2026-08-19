@@ -23,16 +23,32 @@ logger = logging.getLogger("database")
 
 settings = get_settings()
 
+def normalize_database_url(url: str) -> str:
+    """
+    Normalizes PostgreSQL DATABASE_URL to use psycopg 3 (postgresql+psycopg://).
+    Preserves SQLite, MySQL, and already-specified drivers without modification.
+    """
+    if not url:
+        return url
+    if url.startswith("postgres://"):
+        return "postgresql+psycopg://" + url[len("postgres://"):]
+    if url.startswith("postgresql://") and not url.startswith("postgresql+"):
+        return "postgresql+psycopg://" + url[len("postgresql://"):]
+    return url
+
+
+effective_database_url = normalize_database_url(settings.database_url)
+
 # Connect args for SQLite to allow multi-threaded access in FastAPI
-connect_args = {"check_same_thread": False} if settings.database_url.startswith("sqlite") else {}
+connect_args = {"check_same_thread": False} if effective_database_url.startswith("sqlite") else {}
 
 # Create directory if using SQLite
-if settings.database_url.startswith("sqlite"):
-    db_file = settings.database_url.replace("sqlite:///", "")
+if effective_database_url.startswith("sqlite"):
+    db_file = effective_database_url.replace("sqlite:///", "")
     Path(db_file).parent.mkdir(parents=True, exist_ok=True)
 
 engine = create_engine(
-    settings.database_url,
+    effective_database_url,
     connect_args=connect_args,
     pool_pre_ping=True,
     echo=settings.debug,
@@ -54,106 +70,120 @@ def init_database():
     """Initializes database schema and optionally seeds dev accounts in development mode."""
     Base.metadata.create_all(bind=engine)
     
-    # Only seed demo accounts if NOT in production
     is_prod = settings.environment.lower() in ["production", "prod"]
-    if is_prod:
-        logger.info("[Database] Production mode active: skipping default demo user seeding.")
-        return
 
     with SessionLocal() as db:
-        # Check if default tenant exists
-        default_tenant = db.query(Tenant).filter(Tenant.id == "default_tenant").first()
-        if not default_tenant:
-            default_tenant = Tenant(id="default_tenant", name="Enterprise Standard Corp")
-            db.add(default_tenant)
-            db.commit()
+        if not is_prod:
+            # Check if default tenant exists
+            default_tenant = db.query(Tenant).filter(Tenant.id == "default_tenant").first()
+            if not default_tenant:
+                default_tenant = Tenant(id="default_tenant", name="Enterprise Standard Corp")
+                db.add(default_tenant)
+                db.commit()
 
-        # Check if users already seeded
-        user_count = db.query(User).count()
-        if user_count == 0:
-            logger.info("[Database] Seeding development accounts (admin, legal01, finance01, hr01, user01)...")
-            demo_users = [
-                User(
-                    username="admin",
-                    hashed_password=hash_password("admin123"),
-                    full_name="System Administrator",
-                    role="admin",
-                    tenant_id="default_tenant",
-                ),
-                User(
-                    username="legal01",
-                    hashed_password=hash_password("legal123"),
-                    full_name="Senior Legal Counsel",
-                    role="legal",
-                    tenant_id="default_tenant",
-                ),
-                User(
-                    username="finance01",
-                    hashed_password=hash_password("finance123"),
-                    full_name="Finance Director",
-                    role="finance",
-                    tenant_id="default_tenant",
-                ),
-                User(
-                    username="hr01",
-                    hashed_password=hash_password("hr123"),
-                    full_name="HR Manager",
-                    role="hr",
-                    tenant_id="default_tenant",
-                ),
-                User(
-                    username="user01",
-                    hashed_password=hash_password("user123"),
-                    full_name="Standard Employee",
-                    role="user",
-                    tenant_id="default_tenant",
-                ),
-            ]
-            db.add_all(demo_users)
-            db.commit()
-            logger.info("[Database] Development seed complete.")
+            # Check if users already seeded
+            user_count = db.query(User).count()
+            if user_count == 0:
+                logger.info("[Database] Seeding development accounts (admin, legal01, finance01, hr01, user01)...")
+                demo_users = [
+                    User(
+                        username="admin",
+                        hashed_password=hash_password("admin123"),
+                        full_name="System Administrator",
+                        role="admin",
+                        tenant_id="default_tenant",
+                    ),
+                    User(
+                        username="legal01",
+                        hashed_password=hash_password("legal123"),
+                        full_name="Senior Legal Counsel",
+                        role="legal",
+                        tenant_id="default_tenant",
+                    ),
+                    User(
+                        username="finance01",
+                        hashed_password=hash_password("finance123"),
+                        full_name="Finance Director",
+                        role="finance",
+                        tenant_id="default_tenant",
+                    ),
+                    User(
+                        username="hr01",
+                        hashed_password=hash_password("hr123"),
+                        full_name="HR Manager",
+                        role="hr",
+                        tenant_id="default_tenant",
+                    ),
+                    User(
+                        username="user01",
+                        hashed_password=hash_password("user123"),
+                        full_name="Standard Employee",
+                        role="user",
+                        tenant_id="default_tenant",
+                    ),
+                ]
+                db.add_all(demo_users)
+                db.commit()
+                logger.info("[Database] Development seed complete.")
 
-        # Check if contracts already seeded
-        doc_count = db.query(Document).count()
-        fixtures_dir = Path("tests/fixtures/cuad_small")
-        if doc_count == 0 and fixtures_dir.exists():
-            logger.info("[Database] Auto-seeding CUAD demo contracts for immediate testing...")
-            for md_file in sorted(fixtures_dir.glob("*.md")):
-                doc_id = md_file.stem
-                title = "Cooperation and License Agreement" if "01" in doc_id else "Enterprise Cloud Services Agreement"
-                
-                doc = Document(
-                    id=doc_id,
-                    tenant_id="default_tenant",
-                    filename=f"{title}.md",
-                    original_filename=f"{title}.md",
-                    file_type="markdown",
-                    storage_path=str(md_file.resolve()),
-                    char_count=len(md_file.read_text(encoding="utf-8")),
-                    page_count=2,
-                    created_by="admin",
-                )
-                db.add(doc)
+            # Check if contracts already seeded
+            doc_count = db.query(Document).count()
+            fixtures_dir = Path("tests/fixtures/cuad_small")
+            if doc_count == 0 and fixtures_dir.exists():
+                logger.info("[Database] Auto-seeding CUAD demo contracts for immediate testing...")
+                for md_file in sorted(fixtures_dir.glob("*.md")):
+                    doc_id = md_file.stem
+                    title = "Cooperation and License Agreement" if "01" in doc_id else "Enterprise Cloud Services Agreement"
 
-                for r in ["admin", "legal", "finance", "hr", "user", "*"]:
-                    db.add(DocumentACL(document_id=doc_id, tenant_id="default_tenant", role=r, allow_read=True))
+                    doc = Document(
+                        id=doc_id,
+                        tenant_id="default_tenant",
+                        filename=f"{title}.md",
+                        original_filename=f"{title}.md",
+                        file_type="markdown",
+                        storage_path=str(md_file.resolve()),
+                        char_count=len(md_file.read_text(encoding="utf-8")),
+                        page_count=2,
+                        created_by="admin",
+                    )
+                    db.add(doc)
 
-            db.commit()
+                    for r in ["admin", "legal", "finance", "hr", "user", "*"]:
+                        db.add(DocumentACL(document_id=doc_id, tenant_id="default_tenant", role=r, allow_read=True))
 
-        # Always index existing documents into in-memory BM25 and Chroma if BM25 index is empty
+                db.commit()
+        else:
+            logger.info("[Database] Production mode active: skipping default demo user & contract seeding.")
+
+        # Rehydrate in-memory BM25 index from persistent ChromaDB collection or disk in both dev and prod
         try:
             from backend.app.ingestion.pipeline import get_ingestion_pipeline
             pipeline = get_ingestion_pipeline()
             if pipeline.bm25.bm25 is None or len(pipeline.bm25.chunk_ids) == 0:
-                all_docs = db.query(Document).all()
-                if all_docs:
-                    logger.info(f"[Database] Synchronizing {len(all_docs)} documents into in-memory BM25 & ChromaDB...")
-                    for doc in all_docs:
-                        p = Path(doc.storage_path)
-                        if p.exists():
-                            job_id = f"startup_sync_{doc.id}"
-                            pipeline.process_job(job_id, doc.id, p, tenant_id=doc.tenant_id)
-                    logger.info("[Database] Ingestion & indexing synchronized successfully!")
+                # Fast path: Rehydrate directly from persistent ChromaDB collection
+                try:
+                    chroma_data = pipeline.dense.collection.get(include=["documents", "metadatas"])
+                    if chroma_data and chroma_data.get("ids") and len(chroma_data["ids"]) > 0:
+                        logger.info(f"[Database] Rehydrating BM25 index from {len(chroma_data['ids'])} chunks in persistent ChromaDB...")
+                        pipeline.bm25.build_index(
+                            chunk_ids=chroma_data["ids"],
+                            documents=chroma_data["documents"],
+                            metadatas=chroma_data["metadatas"],
+                        )
+                        logger.info("[Database] In-memory BM25 index rehydrated successfully from ChromaDB.")
+                    else:
+                        raise ValueError("Chroma collection is empty; checking database records...")
+                except Exception as chroma_err:
+                    logger.debug(f"[Database] Chroma rehydration skipped: {chroma_err}")
+                    all_docs = db.query(Document).all()
+                    if all_docs:
+                        logger.info(f"[Database] Synchronizing {len(all_docs)} documents into in-memory BM25 & ChromaDB...")
+                        for doc in all_docs:
+                            p = Path(doc.storage_path)
+                            if p.exists():
+                                job_id = f"startup_sync_{doc.id}"
+                                pipeline.process_job(job_id, doc.id, p, tenant_id=doc.tenant_id)
+                        logger.info("[Database] Ingestion & indexing synchronized successfully!")
         except Exception as e:
             logger.warning(f"[Database] Could not sync document index on startup: {e}")
 

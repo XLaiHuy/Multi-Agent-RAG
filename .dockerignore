@@ -1,0 +1,40 @@
+# Git and IDE
+.git
+.gitignore
+.github/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Python & Virtual Environments
+.venv/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node & Frontend
+node_modules/
+frontend/
+
+# Local Data, Volumes, Secrets
+.env
+.env.*
+data/
+*.sqlite
+*.db
+*.log
+
+# Large Evaluation Datasets and Raw Outputs
+evaluation/datasets/cuad/raw/
+evaluation/runs/
+evaluation/cache/
+evaluation/artifacts/cache/
+*.npy
+*.npz
+*.pkl

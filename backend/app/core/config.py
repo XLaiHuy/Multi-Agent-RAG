@@ -5,7 +5,7 @@ Derives retrieval baseline defaults from backend.app.core.retrieval_defaults.
 import os
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Optional, List
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from dotenv import load_dotenv
@@ -103,21 +103,40 @@ class Settings(BaseSettings):
     confidence_weight_rerank_score: float = 0.20
     confidence_weight_metadata_match: float = 0.15
 
+    # CORS Allowed Origins (Comma-separated)
+    allowed_origins: str = Field(default="http://localhost:5173", alias="ALLOWED_ORIGINS")
+
+    def get_allowed_origins(self) -> List[str]:
+        """Parses comma-separated ALLOWED_ORIGINS string into a list of origins."""
+        if not self.allowed_origins:
+            return ["http://localhost:5173"]
+        origins = [o.strip() for o in self.allowed_origins.split(",") if o.strip()]
+        return origins if origins else ["http://localhost:5173"]
+
     # Optional Advanced Docling Parser Adapter
     use_docling_parser: bool = Field(default=False, alias="USE_DOCLING_PARSER")
 
     model_config = SettingsConfigDict(
         env_file=(".env", "../.env", "../../.env"),
         env_file_encoding="utf-8",
-        extra="ignore"
+        extra="ignore",
+        populate_by_name=True,
     )
 
     def validate_security(self):
         """Validates critical security requirements at startup."""
         is_prod = self.environment.lower() in ["production", "prod"]
         if is_prod:
+            dev_default_secret = "dev_insecure_jwt_secret_key_change_in_production_1234567890"
             if not self.jwt_secret_key or len(self.jwt_secret_key) < 32:
-                raise ValueError("SECURITY FATAL: In production, JWT_SECRET_KEY must be >= 32 chars.")
+                raise ValueError("SECURITY FATAL: In production, JWT_SECRET_KEY must be >= 32 characters.")
+            if self.jwt_secret_key == dev_default_secret:
+                raise ValueError("SECURITY FATAL: In production, JWT_SECRET_KEY must not use the built-in development default secret.")
+            if self.llm_provider.lower() == "gemini" and not self.gemini_api_key:
+                raise ValueError("SECURITY FATAL: In production with LLM_PROVIDER=gemini, GEMINI_API_KEY must be set.")
+            origins = self.get_allowed_origins()
+            if "*" in origins:
+                raise ValueError("SECURITY FATAL: In production, ALLOWED_ORIGINS must not contain wildcard '*' when credentials are enabled.")
 
 
 _settings: Optional[Settings] = None

@@ -45,7 +45,7 @@ app = FastAPI(
 # CORS Middleware configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -56,9 +56,13 @@ app.add_middleware(
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.error(f"Unhandled Exception on {request.url.path}: {exc}", exc_info=True)
+    is_prod = settings.environment.lower() in ["production", "prod"]
+    content = {"error": "Internal Server Error"}
+    if not is_prod:
+        content["detail"] = str(exc)
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"error": "Internal Server Error", "detail": str(exc)},
+        content=content,
     )
 
 
@@ -75,7 +79,19 @@ def health_check():
 
 @app.get("/ready", tags=["Health"])
 def readiness_check():
-    return {"status": "ready", "database": "connected"}
+    """Readiness probe: validates database connectivity with a lightweight probe."""
+    try:
+        from sqlalchemy import text
+        from backend.app.persistence.database import engine
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        return {"status": "ready", "database": "connected"}
+    except Exception as e:
+        logger.error(f"Readiness check failed: {e}")
+        return JSONResponse(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            content={"status": "unavailable", "database": "disconnected"},
+        )
 
 
 # Include Versioned API Routers

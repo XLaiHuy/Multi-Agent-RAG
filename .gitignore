@@ -1,6 +1,7 @@
 # Environment & Secrets
 .env
 .env.*
+!.env.example
 
 # Python & Virtual Envs
 .venv/
@@ -34,7 +35,8 @@ Thumbs.db
 
 # Documentation & Study Notes
 Doc-ref/
-docs/
+docs/*
+!docs/deployment-railway.md
 
 evaluation/cache/
 evaluation/artifacts/cache/
