@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import CitationViewerModal from './CitationViewerModal'
 import DebugPanel from './DebugPanel'
+import { createChatStream } from '../api/chat'
 
 const DEMO_QUESTIONS = [
   {
@@ -27,12 +28,13 @@ const DEMO_QUESTIONS = [
 ]
 
 export default function ChatInterface({
-  documents,
-  token,
-  apiUrl,
+  documents = [],
+  token: _token,
+  apiUrl: _apiUrl,
   user,
   onLogout,
   onOpenUpload,
+  onOpenWorkspace,
   resetSignal = 0,
 }) {
   const storageKey = `chat_history_${user?.tenant_id || 'default'}_${user?.username || 'user'}`
@@ -59,6 +61,7 @@ export default function ChatInterface({
   const [messages, setMessages] = useState(getInitialMessages)
   const [inputQuery, setInputQuery] = useState('')
   const [loading, setLoading] = useState(false)
+  const [streamStage, setStreamStage] = useState('')
   const [selectedDocId, setSelectedDocId] = useState('')
   const [activeCitation, setActiveCitation] = useState(null)
   const [latestStats, setLatestStats] = useState(null)
@@ -114,65 +117,73 @@ export default function ChatInterface({
     setMessages((prev) => [...prev, userMsg])
     setInputQuery('')
     setLoading(true)
+    setStreamStage('Đang kết nối pipeline pháp lý...')
+
+    const payload = {
+      query: q,
+      document_ids: selectedDocId ? [selectedDocId] : null,
+      mode: queryMode,
+    }
 
     try {
-      const payload = {
-        query: q,
-        document_ids: selectedDocId ? [selectedDocId] : null,
-      }
-
-      const res = await fetch(`${apiUrl}/api/v1/chat`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      createChatStream(
+        payload,
+        (eventType, eventData) => {
+          if (eventType === 'stage') {
+            setStreamStage(eventData.message || 'Đang xử lý...')
+          } else if (eventType === 'final') {
+            const assistantMsg = {
+              role: 'assistant',
+              content: eventData.answer,
+              citations: eventData.citations || [],
+              verification_status: eventData.verification_status,
+              stats: eventData.stats,
+            }
+            setMessages((prev) => [...prev, assistantMsg])
+            if (eventData.stats) {
+              setLatestStats(eventData.stats)
+            }
+            setLoading(false)
+            setStreamStage('')
+          }
         },
-        body: JSON.stringify(payload),
-      })
+        (err) => {
+          let content = `⚠️ **Lỗi:** ${err.message}`
+          let isSessionExpired = false
 
-      if (res.status === 401) {
-        throw new Error('SESSION_EXPIRED')
-      }
+          if (err.message === 'SESSION_EXPIRED' || err.message.toLowerCase().includes('token has expired') || err.message.includes('401')) {
+            content = `⚠️ **Phiên làm việc đã hết hạn:** Mã xác thực đăng nhập đã hết hạn. Vui lòng đăng nhập lại để tiếp tục tra cứu.`
+            isSessionExpired = true
+          }
 
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}))
-        throw new Error(errData.detail || 'Lỗi khi gọi pipeline xử lý ngôn ngữ pháp lý.')
-      }
-
-      const data = await res.json()
-
-      const assistantMsg = {
-        role: 'assistant',
-        content: data.answer,
-        citations: data.citations || [],
-        verification_status: data.verification_status,
-        stats: data.stats,
-      }
-
-      setMessages((prev) => [...prev, assistantMsg])
-      if (data.stats) {
-        setLatestStats(data.stats)
-      }
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: 'assistant',
+              content,
+              citations: [],
+              isSessionExpired,
+            },
+          ])
+          setLoading(false)
+          setStreamStage('')
+        },
+        () => {
+          setLoading(false)
+          setStreamStage('')
+        }
+      )
     } catch (err) {
-      let content = `⚠️ **Lỗi:** ${err.message}`
-      let isSessionExpired = false
-
-      if (err.message === 'SESSION_EXPIRED' || err.message.toLowerCase().includes('token has expired')) {
-        content = `⚠️ **Phiên làm việc đã hết hạn:** Mã xác thực đăng nhập đã hết hạn. Vui lòng đăng nhập lại để tiếp tục tra cứu.`
-        isSessionExpired = true
-      }
-
       setMessages((prev) => [
         ...prev,
         {
           role: 'assistant',
-          content,
+          content: `⚠️ **Lỗi:** ${err.message}`,
           citations: [],
-          isSessionExpired,
         },
       ])
-    } finally {
       setLoading(false)
+      setStreamStage('')
     }
   }
 
@@ -237,7 +248,7 @@ export default function ChatInterface({
 
       {/* 2. Main Workspace Body */}
       {isInitialState ? (
-        /* HERO WELCOME SCREEN (Enterprise Legal SaaS Design) */
+        /* HERO WELCOME SCREEN */
         <div className="flex-1 overflow-y-auto px-6 py-10 flex flex-col items-center justify-center max-w-3xl mx-auto w-full animate-fadeIn">
           {/* Official OU Logo */}
           <div className="w-20 h-20 rounded-3xl bg-white p-2.5 shadow-xl shadow-blue-500/10 mb-5 ring-4 ring-blue-50/90 border border-slate-200/90 flex items-center justify-center">
@@ -288,7 +299,7 @@ export default function ChatInterface({
                   onClick={() => setQueryMode(queryMode === 'pro' ? 'fast' : 'pro')}
                   className="px-3 py-1.5 rounded-xl text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 transition-all duration-150 flex items-center gap-1 cursor-pointer border border-blue-200/80"
                 >
-                  <span>✨ {queryMode === 'pro' ? 'Chuyên nghiệp (Safe RAG)' : 'Phân tích nhanh'}</span>
+                  <span>✨ {queryMode === 'pro' ? 'Chuyên nghiệp (Safe Multi-Agent)' : 'Phân tích nhanh'}</span>
                   <span className="text-[10px] text-blue-500">⌄</span>
                 </button>
               </div>
@@ -304,7 +315,7 @@ export default function ChatInterface({
             </div>
           </div>
 
-          {/* Suggested Prompts with 'Demo' tag (Clean & High-Contrast) */}
+          {/* Suggested Prompts with 'Demo' tag */}
           <div className="w-full space-y-2.5">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 px-1 flex items-center justify-between">
               <span>💡 Tình huống pháp lý & hợp đồng mẫu:</span>
@@ -378,14 +389,24 @@ export default function ChatInterface({
                       Căn cứ trích dẫn:
                     </span>
                     {m.citations.map((c, cIdx) => (
-                      <button
-                        key={cIdx}
-                        onClick={() => setActiveCitation(c)}
-                        className="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition border border-blue-200/80 flex items-center gap-1 active:scale-95 shadow-2xs cursor-pointer"
-                        title={c.supporting_text}
-                      >
-                        <span>📌</span> Trang {c.page} {c.section_path?.[0] || 'Điều khoản'}
-                      </button>
+                      <div key={cIdx} className="flex items-center gap-1">
+                        <button
+                          onClick={() => setActiveCitation(c)}
+                          className="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition border border-blue-200/80 flex items-center gap-1 active:scale-95 shadow-2xs cursor-pointer"
+                          title={c.supporting_text}
+                        >
+                          <span>📌</span> Trang {c.page} {c.section_path?.[0] || 'Điều khoản'}
+                        </button>
+                        {onOpenWorkspace && (
+                          <button
+                            onClick={() => onOpenWorkspace(c)}
+                            className="px-1.5 py-1 text-[10px] rounded-lg bg-slate-100 hover:bg-blue-100 text-slate-600 hover:text-blue-700 transition cursor-pointer"
+                            title="Mở tài liệu đối soát PDF"
+                          >
+                            🔍 PDF
+                          </button>
+                        )}
+                      </div>
                     ))}
 
                     {m.verification_status && (
@@ -436,7 +457,7 @@ export default function ChatInterface({
               </div>
               <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs text-xs text-slate-600 flex items-center gap-2.5">
                 <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                <span>Đang tra cứu kho điều khoản, thẩm định chứng cứ & tổng hợp giải đáp pháp lý...</span>
+                <span>{streamStage || 'Đang tra cứu kho điều khoản & tổng hợp giải đáp pháp lý...'}</span>
               </div>
             </div>
           )}
@@ -478,7 +499,11 @@ export default function ChatInterface({
 
       {/* Citation Modal */}
       {activeCitation && (
-        <CitationViewerModal citation={activeCitation} onClose={() => setActiveCitation(null)} />
+        <CitationViewerModal
+          citation={activeCitation}
+          onClose={() => setActiveCitation(null)}
+          onOpenWorkspace={onOpenWorkspace}
+        />
       )}
 
       {/* Observability Telemetry Drawer */}
@@ -488,5 +513,3 @@ export default function ChatInterface({
     </div>
   )
 }
-
-

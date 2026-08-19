@@ -98,6 +98,9 @@ class DenseRetriever:
 
         query_vector = self.embedder.embed_query(query)
 
+        if allowed_doc_ids is not None and len(allowed_doc_ids) == 0:
+            return []
+
         # Build Chroma where filter
         where_conditions = []
         if tenant_id:
@@ -127,14 +130,27 @@ class DenseRetriever:
             logger.warning(f"[DenseRetriever] Chroma query skipped ({e}), falling back to lexical search.")
             return []
 
-
         hits: List[DenseSearchResult] = []
         ids = results.get("ids", [[]])[0]
         docs = results.get("documents", [[]])[0]
         metas = results.get("metadatas", [[]])[0]
         dists = results.get("distances", [[]])[0]
 
+        allowed_set = set(allowed_doc_ids) if allowed_doc_ids is not None else None
+
         for cid, doc_text, meta, dist in zip(ids, docs, metas, dists):
+            m = meta or {}
+            # Strict fail-closed verification
+            if tenant_id is not None:
+                chunk_tenant = m.get("tenant_id")
+                if not chunk_tenant or chunk_tenant != tenant_id:
+                    continue
+
+            if allowed_set is not None:
+                chunk_doc = m.get("doc_id")
+                if not chunk_doc or chunk_doc not in allowed_set:
+                    continue
+
             # For cosine distance in Chroma: similarity = 1 - distance
             similarity = max(0.0, min(1.0, 1.0 - float(dist)))
             hits.append(
@@ -143,7 +159,7 @@ class DenseRetriever:
                     text=doc_text,
                     similarity=similarity,
                     distance=float(dist),
-                    metadata=meta or {},
+                    metadata=m,
                 )
             )
 

@@ -102,31 +102,19 @@ async def chat_stream(
     qa_service = get_contract_qa_service()
 
     async def event_generator():
-        yield {"event": "status", "data": json.dumps({"message": "🔍 Evaluating complexity & retrieval plan..."})}
-        await asyncio.sleep(0.05)
-
-        # Run synchronous QA in threadpool
-        res = await asyncio.to_thread(
-            qa_service.answer_query,
+        # Stream real execution events from service
+        for step_event in qa_service.answer_query_stream(
             query=query,
             tenant_id=current_user.tenant_id,
             role=current_user.role,
             username=current_user.username,
             document_ids=request_data.document_ids,
             chat_history=[m.dict() for m in request_data.chat_history] if request_data.chat_history else None,
-        )
+        ):
+            event_type = step_event.get("event", "message")
+            yield {"event": event_type, "data": json.dumps(step_event)}
+            await asyncio.sleep(0.01)
 
-        # Yield citations
-        citations_list = [c.dict() for c in res.citations]
-        yield {"event": "citations", "data": json.dumps({"citations": citations_list, "verification_status": res.verification_status})}
-
-        # Stream answer tokens
-        words = res.answer.split(" ")
-        for w in words:
-            yield {"event": "token", "data": json.dumps({"token": w + " "})}
-            await asyncio.sleep(0.015)
-
-        yield {"event": "stats", "data": json.dumps(res.stats.dict() if res.stats else {})}
         yield {"event": "done", "data": "[DONE]"}
 
     return EventSourceResponse(event_generator())

@@ -4,7 +4,7 @@ Combines deterministic regex/keyword heuristics with context-aware LLM reasoning
 Fully covers Vietnamese Commercial/Civil Codes and International Commercial Standards (Common Law / UCC / GDPR).
 """
 import re
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass
 
 
@@ -228,16 +228,100 @@ DEFAULT_RISK_RULES: List[RiskRuleDefinition] = [
 
 
 class RiskRuleEngine:
-    """Evaluates text blocks against configured risk rules."""
+    """
+    Evaluates text blocks against configured risk rules with deterministic structured predicates:
+    1. Regex / Keyword candidate detection
+    2. Structured numeric extraction & threshold predicates (e.g. Penalty > 8%, Notice > 60 days)
+    3. Safe negation & compliance exclusion handling (e.g. 'không vượt quá 8%')
+    """
 
     def __init__(self, rules: Optional[List[RiskRuleDefinition]] = None):
         self.rules = rules or DEFAULT_RISK_RULES
 
+    @staticmethod
+    def _check_excessive_penalty_vn(text: str) -> Tuple[bool, Optional[float]]:
+        """
+        Extracts penalty percentage and verifies if it strictly exceeds the 8% statutory cap
+        under Article 301, Vietnam Commercial Law.
+        Returns: (is_excessive, extracted_pct)
+        """
+        # If text explicitly states 'không vượt quá 8%' or 'tối đa 8%', it is compliant
+        if re.search(r"(?i)(không\s+vượt\s+quá|tối\s+đa|not\s+exceed(ing)?|maximum\s+of)\s+8\s*%", text):
+            return False, 8.0
+
+        # Look for penalty patterns with numbers
+        patterns = [
+            r"(?i)(?:phạt\s+vi\s+phạm|mức\s+phạt|penalty\s+of|liquidated\s+damages\s+of|fine\s+of)\s*(?:là|is)?\s*(\d+(?:\.\d+)?)\s*%",
+            r"(?i)(\d+(?:\.\d+)?)\s*%\s*(?:trên\s+tổng\s+giá\s+trị|tiền\s+phạt|phạt\s+vi\s+phạm|as\s+a\s+penalty)",
+        ]
+        for p in patterns:
+            for match in re.finditer(p, text):
+                try:
+                    pct = float(match.group(1))
+                    if pct > 8.0:
+                        return True, pct
+                except (ValueError, IndexError):
+                    continue
+
+        return False, None
+
+    @staticmethod
+    def _check_excessive_notice(text: str, threshold_days: int = 60) -> Tuple[bool, Optional[int]]:
+        """
+        Extracts notice period days and checks if it exceeds the threshold (e.g. > 60 days).
+        Returns: (is_excessive, extracted_days)
+        """
+        patterns = [
+            r"(?i)(?:thông\s+báo\s+trước|notice\s+of|prior\s+notice\s+of|providing|giving)\s*(?:ít\s+nhất|at\s+least)?\s*(\d+)\s*(?:ngày|days)",
+            r"(?i)(\d+)\s*(?:ngày|days)\s*(?:trước\s+khi\s+chấm\s+dứt|prior\s+to\s+termination|prior\s+written\s+notice|prior\s+notice|notice)",
+        ]
+        for p in patterns:
+            for match in re.finditer(p, text):
+                try:
+                    days = int(match.group(1))
+                    if days > threshold_days:
+                        return True, days
+                except (ValueError, IndexError):
+                    continue
+        return False, None
+
     def scan_block_deterministic(self, text: str) -> List[Dict[str, Any]]:
-        """Run regex and keyword checks on a text block."""
+        """Run regex, keyword, and numeric predicate checks on a text block."""
         matches = []
+        text_lower = text.lower()
+
         for rule in self.rules:
             if not rule.default_enabled:
+                continue
+
+            # Specialized predicate for excessive penalties (> 8% cap)
+            if rule.rule_id == "RULE_EXCESSIVE_PENALTY_VN":
+                is_excessive, extracted_pct = self._check_excessive_penalty_vn(text)
+                if is_excessive:
+                    matches.append({
+                        "rule_id": rule.rule_id,
+                        "rule_name": rule.name,
+                        "severity": rule.severity,
+                        "category": rule.category,
+                        "matched_patterns": [f"Extracted penalty: {extracted_pct}% > 8% cap"],
+                        "matched_keywords": ["phạt vi phạm"],
+                        "extracted_value": extracted_pct,
+                    })
+                continue
+
+            # Specialized predicate for excessive notice periods (> 60 days)
+            if rule.rule_id in ["RULE_LONG_NOTICE_PERIOD", "RULE_EXCESSIVE_NOTICE_PERIOD"]:
+                is_excessive, extracted_days = self._check_excessive_notice(text, threshold_days=rule.threshold_days or 60)
+                if is_excessive:
+                    matches.append({
+                        "rule_id": rule.rule_id,
+                        "rule_name": rule.name,
+                        "severity": rule.severity,
+                        "category": rule.category,
+                        "matched_patterns": [f"Extracted notice: {extracted_days} days > 60 days threshold"],
+                        "matched_keywords": ["thông báo trước"],
+                        "extracted_value": extracted_days,
+                    })
                 continue
 
             matched_patterns = []
@@ -246,7 +330,6 @@ class RiskRuleEngine:
                     matched_patterns.append(pattern)
 
             matched_keywords = []
-            text_lower = text.lower()
             for kw in rule.keywords:
                 if kw.lower() in text_lower:
                     matched_keywords.append(kw)
@@ -260,5 +343,6 @@ class RiskRuleEngine:
                     "matched_patterns": matched_patterns,
                     "matched_keywords": matched_keywords,
                 })
+
         return matches
 

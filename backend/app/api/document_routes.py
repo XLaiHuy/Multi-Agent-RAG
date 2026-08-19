@@ -160,8 +160,8 @@ def get_document(
     doc = DocumentRepository.get_document_if_accessible(db, doc_id, current_user.tenant_id, current_user.role)
     if not doc:
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Document not found or you lack authorized access permissions.",
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Document not found or inaccessible.",
         )
 
     return DocumentInfo(
@@ -175,3 +175,65 @@ def get_document(
         created_at=doc.created_at.isoformat(),
         status="READY",
     )
+
+
+@document_router.get("/{doc_id}/content")
+def get_document_content(
+    doc_id: str,
+    current_user: UserTokenData = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Secure Document Content Stream:
+    1. Validates tenant and role ACL access.
+    2. Enforces strict path traversal prevention.
+    3. Streams file content with correct MIME type for in-browser PDF/Text rendering.
+    """
+    from fastapi.responses import FileResponse
+
+    doc = DocumentRepository.get_document_if_accessible(db, doc_id, current_user.tenant_id, current_user.role)
+    if not doc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Document not found or inaccessible.",
+        )
+
+    settings = get_settings()
+    tenant_storage = Path(settings.storage_dir).resolve() / current_user.tenant_id
+    file_path = Path(doc.storage_path).resolve()
+
+    # Prevent directory traversal: verify file resides within storage directory
+    try:
+        file_path.relative_to(Path(settings.storage_dir).resolve())
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Unauthorized file storage path traversal detected.",
+        )
+
+    if not file_path.exists() or not file_path.is_file():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Document physical content file not found on server.",
+        )
+
+    # Determine media type
+    media_types = {
+        "pdf": "application/pdf",
+        "txt": "text/plain; charset=utf-8",
+        "md": "text/markdown; charset=utf-8",
+        "json": "application/json; charset=utf-8",
+        "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "png": "image/png",
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "webp": "image/webp",
+    }
+    m_type = media_types.get(doc.file_type.lower(), "application/octet-stream")
+
+    return FileResponse(
+        path=str(file_path),
+        media_type=m_type,
+        filename=doc.filename,
+    )
+

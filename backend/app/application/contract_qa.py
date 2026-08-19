@@ -9,11 +9,12 @@ Produces StructuredAnswer with exact supporting CitationItems and execution stat
 """
 import time
 import logging
-from typing import List, Dict, Any, Optional, Iterator
+from typing import List, Dict, Any, Optional, Tuple, Iterator
 
 from backend.app.core.config import get_settings
 from backend.app.providers.gemini_gateway import get_gemini_gateway, GeminiAPIGateway
 from backend.app.providers.reranker import get_reranker
+from backend.app.providers.observability import trace_step
 from backend.app.retrieval.bm25 import get_bm25_retriever
 from backend.app.retrieval.dense import get_dense_retriever
 from backend.app.retrieval.fusion import reciprocal_rank_fusion, HierarchicalParentExpander, RetrievedCandidate
@@ -52,8 +53,11 @@ class ContractQAService:
         allowed_doc_ids: Optional[List[str]],
         top_k: int = 15,
         use_rerank: bool = True,
-    ) -> List[RetrievedCandidate]:
-        """Runs BM25 + Dense + RRF + Parent Expansion + CrossEncoder Reranking."""
+    ) -> Tuple[List[RetrievedCandidate], Dict[str, Any]]:
+        """
+        Runs BM25 + Dense + RRF + Parent Expansion + CrossEncoder Reranking.
+        Returns: (candidates, retrieval_trace) where retrieval_trace holds true independent ranked IDs.
+        """
         # 1. Sparse BM25 Search
         bm25_hits = self.bm25.search(
             query=query, top_k=top_k, tenant_id=tenant_id, allowed_doc_ids=allowed_doc_ids
@@ -71,12 +75,13 @@ class ContractQAService:
         # 3. Reciprocal Rank Fusion (RRF)
         fused = reciprocal_rank_fusion([dense_ranked_ids, bm25_ranked_ids], k=60)
         top_fused = fused[:top_k]
+        fused_scores = [score for cid, score in top_fused]
 
         # 4. Construct candidates
         candidates: List[RetrievedCandidate] = []
         for cid, rrf_score in top_fused:
-            meta = {}
             text = ""
+            meta: Dict[str, Any] = {}
             dense_score = 0.0
             bm25_score = 0.0
 
@@ -129,6 +134,8 @@ class ContractQAService:
         if plan.use_parent_expansion:
             candidates = HierarchicalParentExpander.expand_candidates(candidates, use_parent_expansion=True)
 
+        rerank_scores: List[float] = []
+
         # 6. Adaptive CrossEncoder Reranking
         if use_rerank and self.settings.enable_reranker and candidates:
             candidate_texts = [c.text for c in candidates]
@@ -138,10 +145,38 @@ class ContractQAService:
             for orig_idx, score in rerank_results:
                 cand = candidates[orig_idx]
                 cand.rerank_score = score
+                rerank_scores.append(score)
                 reranked_candidates.append(cand)
-            return reranked_candidates
+            candidates = reranked_candidates
+        else:
+            candidates = candidates[:plan.final_k]
 
-        return candidates[:plan.final_k]
+        trace = {
+            "dense_ranked_ids": dense_ranked_ids,
+            "bm25_ranked_ids": bm25_ranked_ids,
+            "fused_scores": fused_scores,
+            "rerank_scores": rerank_scores,
+        }
+        return candidates, trace
+
+    @staticmethod
+    def _deduplicate_candidates(
+        existing: List[RetrievedCandidate], new_cands: List[RetrievedCandidate], max_k: int = 10
+    ) -> List[RetrievedCandidate]:
+        """Merges candidate lists by chunk_id, preserving best scores and enforcing a budget."""
+        seen = {c.chunk_id: i for i, c in enumerate(existing)}
+        merged = list(existing)
+        for nc in new_cands:
+            if nc.chunk_id in seen:
+                idx = seen[nc.chunk_id]
+                score_old = merged[idx].rerank_score or merged[idx].rrf_score or 0.0
+                score_new = nc.rerank_score or nc.rrf_score or 0.0
+                if score_new > score_old:
+                    merged[idx] = nc
+            else:
+                merged.append(nc)
+                seen[nc.chunk_id] = len(merged) - 1
+        return merged[:max_k]
 
     def answer_query(
         self,
@@ -177,7 +212,8 @@ class ContractQAService:
 
         # Step 1: Retrieval Planning (Agent 1)
         r_start = time.perf_counter()
-        plan = self.planner.plan(query_stripped, context_docs_count=len(document_ids) if document_ids else 1)
+        with trace_step("PlannerAgent", {"query": query_stripped, "tenant_id": tenant_id}):
+            plan = self.planner.plan(query_stripped, context_docs_count=len(document_ids) if document_ids else 1)
         stats.routing_ms = (time.perf_counter() - r_start) * 1000
         stats.retrieval_path = plan.task_type
 
@@ -186,17 +222,18 @@ class ContractQAService:
             g_start = time.perf_counter()
             resp = ""
             try:
-                resp = self.gateway.generate(
-                    prompt=f"You are a helpful, professional Enterprise Contract Intelligence assistant. Respond politely to: {query_stripped}",
-                    model_type="generation",
-                    temperature=0.3,
-                )
+                with trace_step("ConversationalGeneration", {"query": query_stripped}):
+                    resp = self.gateway.generate(
+                        prompt=f"You are a helpful, professional Enterprise Contract Intelligence assistant. Respond politely in Vietnamese: {query_stripped}",
+                        model_type="generation",
+                        temperature=0.3,
+                    )
             except Exception as e:
-                logger.warning(f"[QA] Conversational fallback due to gateway rate limit/error: {e}")
-                resp = "Hello! I am your Enterprise Contract Intelligence assistant. You can ask detailed questions about your uploaded agreements, compare clauses, or review contract risks."
+                logger.warning(f"[QA] Conversational fallback due to gateway error: {e}")
+                resp = "Xin chào! Tôi là Trợ lý AI Tra cứu & Phân tích Hợp đồng. Bạn có thể đặt câu hỏi về các điều khoản, quyền hạn, mức phạt hoặc quét rủi ro hợp đồng."
 
             if not resp or not resp.strip():
-                resp = "Hello! I am your Enterprise Contract Intelligence assistant. How can I assist you with your agreements today?"
+                resp = "Xin chào! Tôi là Trợ lý AI Tra cứu & Phân tích Hợp đồng. Tôi có thể hỗ trợ gì cho bạn hôm nay?"
 
             stats.generation_ms = (time.perf_counter() - g_start) * 1000
             stats.total_ms = (time.perf_counter() - start_time) * 1000
@@ -212,21 +249,22 @@ class ContractQAService:
 
         # Step 2: Retrieval Execution
         ret_start = time.perf_counter()
-        candidates = self._execute_retrieval(
-            query=query_stripped,
-            plan=plan,
-            tenant_id=tenant_id,
-            allowed_doc_ids=document_ids,
-            top_k=plan.candidate_k,
-            use_rerank=plan.use_reranker,
-        )
+        with trace_step("HybridRetrieval", {"query": query_stripped, "task_type": plan.task_type}):
+            candidates, ret_trace = self._execute_retrieval(
+                query=query_stripped,
+                plan=plan,
+                tenant_id=tenant_id,
+                allowed_doc_ids=document_ids,
+                top_k=plan.candidate_k,
+                use_rerank=plan.use_reranker,
+            )
         stats.retrieval_ms = (time.perf_counter() - ret_start) * 1000
 
         # Fast path if no documents or candidates found
         if not candidates:
             stats.total_ms = (time.perf_counter() - start_time) * 1000
             return StructuredAnswer(
-                answer="⚠️ **Thư viện chưa có tài liệu hợp đồng phù hợp:**\n\nHiện tại chưa có tài liệu hợp đồng nào trong thư viện hoặc không tìm thấy điều khoản liên quan tới câu hỏi của bạn. Vui lòng bấm vào nút **'Upload'** ở thanh điều hướng trên cùng để tải lên hợp đồng (PDF, DOCX, Markdown, JSON) và bắt đầu tra cứu.",
+                answer="⚠️ **Thư viện chưa có tài liệu hợp đồng phù hợp:**\n\nHiện tại chưa có tài liệu hợp đồng nào trong thư viện hoặc không tìm thấy điều khoản liên quan tới câu hỏi của bạn. Vui lòng bấm vào nút **'Tải lên Hợp đồng'** ở thanh điều hướng để tải lên hợp đồng và bắt đầu tra cứu.",
                 citations=[],
                 verification_status="skipped",
                 confidence_score=0.0,
@@ -234,15 +272,16 @@ class ContractQAService:
                 stats=stats,
             )
 
-        # Step 3: Retrieval Confidence Assessment
-        dense_ids = [c.chunk_id for c in candidates]
-        fused_scores = [c.rrf_score for c in candidates]
-        rerank_scores = [c.rerank_score for c in candidates if c.rerank_score is not None]
+        # Step 3: Retrieval Confidence Assessment with true independent signals
+        dense_ranked = ret_trace.get("dense_ranked_ids", [])
+        bm25_ranked = ret_trace.get("bm25_ranked_ids", [])
+        fused_scores = ret_trace.get("fused_scores", [])
+        rerank_scores = ret_trace.get("rerank_scores", [])
         top_meta = [c.metadata for c in candidates if c.metadata]
 
         conf_signals = self.confidence_engine.compute_confidence(
-            dense_ranked_ids=dense_ids,
-            bm25_ranked_ids=dense_ids,
+            dense_ranked_ids=dense_ranked,
+            bm25_ranked_ids=bm25_ranked,
             fused_scores=fused_scores,
             rerank_scores=rerank_scores,
             query=query_stripped,
@@ -253,11 +292,12 @@ class ContractQAService:
         # Step 4: Evidence Critic (Agent 2) if confidence < 0.70 or complex
         if conf_signals.final_confidence < 0.70 and plan.complexity in ["medium", "high"]:
             try:
-                critique = self.critic.evaluate_evidence(query_stripped, candidates, retrieval_attempt=1)
+                with trace_step("CriticAgent", {"confidence": conf_signals.final_confidence}):
+                    critique = self.critic.evaluate_evidence(query_stripped, candidates, retrieval_attempt=1)
                 stats.llm_calls_count += 1
                 if critique.recommended_action == "expand_query" and critique.expansion_queries:
                     expanded_q = critique.expansion_queries[0]
-                    more_candidates = self._execute_retrieval(
+                    more_candidates, _ = self._execute_retrieval(
                         query=expanded_q,
                         plan=plan,
                         tenant_id=tenant_id,
@@ -265,7 +305,7 @@ class ContractQAService:
                         top_k=5,
                         use_rerank=False,
                     )
-                    candidates.extend(more_candidates)
+                    candidates = self._deduplicate_candidates(candidates, more_candidates, max_k=plan.final_k + 3)
             except Exception as e:
                 logger.warning(f"[QA] Critic agent skipped due to gateway error: {e}")
 
@@ -294,15 +334,16 @@ Câu hỏi của người dùng: {query_stripped}
 Câu trả lời phân tích pháp lý:"""
 
         g_start = time.perf_counter()
-        v_status = "grounded"
+        verification_status = "grounded"
         answer = ""
         try:
-            answer = self.gateway.generate(
-                prompt=gen_prompt,
-                system_instruction=system_prompt,
-                model_type="generation",
-                temperature=0.1,
-            )
+            with trace_step("GeneratorAgent", {"query": query_stripped}):
+                answer = self.gateway.generate(
+                    prompt=gen_prompt,
+                    system_instruction=system_prompt,
+                    model_type="generation",
+                    temperature=0.1,
+                )
             if not answer or not answer.strip():
                 answer = "Tài liệu hợp đồng được cung cấp không đề cập hoặc không có thông tin quy định về câu hỏi này."
 
@@ -311,15 +352,16 @@ Câu trả lời phân tích pháp lý:"""
 
             # Step 6: Answer Verification (Agent 3)
             v_start = time.perf_counter()
-            verification = self.verifier.verify(
-                query=query_stripped,
-                answer=answer,
-                evidence_texts=evidence_texts,
-                regeneration_count=0,
-            )
+            with trace_step("VerifierAgent", {"answer_preview": answer[:200]}):
+                verification = self.verifier.verify(
+                    query=query_stripped,
+                    answer=answer,
+                    evidence_texts=evidence_texts,
+                    regeneration_count=0,
+                )
             stats.verification_ms = (time.perf_counter() - v_start) * 1000
             stats.llm_calls_count += 1
-            v_status = verification.status
+            verification_status = verification.status
 
             # Handle regeneration if unsupported
             if verification.recommended_action == "regenerate":
@@ -339,18 +381,18 @@ Hãy viết lại câu trả lời bằng TIẾNG VIỆT, bám sát 100% từng 
                 verification = self.verifier.verify(
                     query=query_stripped, answer=answer, evidence_texts=evidence_texts, regeneration_count=1
                 )
-                v_status = verification.status
+                verification_status = verification.status
             elif verification.recommended_action == "qualify_or_refuse":
                 answer = f"[Lưu ý: Một số chi tiết trong câu trả lời có thể chưa được chứng minh đầy đủ từ hợp đồng gốc]\n\n{answer}"
-                v_status = verification.status
+                verification_status = verification.status
         except Exception as e:
-            logger.error(f"[QA] Generation failed: {e}")
+            logger.error(f"[QA] Generation or verification failed: {e}")
             if not answer:
                 answer = f"⚠️ **Kết quả tìm kiếm từ kho điều khoản hợp đồng:**\n\n"
                 for i, c in enumerate(candidates[:3], 1):
                     sec_title = " > ".join(c.section_path) if c.section_path else "Điều khoản"
                     answer += f"**{i}. {c.doc_id} ({sec_title} - Trang {c.page_number}):**\n> {c.text[:400]}...\n\n"
-            v_status = "grounded"
+            verification_status = "fallback"
 
         # Construct exact CitationItems
         citations: List[CitationItem] = []
@@ -371,15 +413,15 @@ Hãy viết lại câu trả lời bằng TIẾNG VIỆT, bám sát 100% từng 
 
         stats.total_ms = (time.perf_counter() - start_time) * 1000
 
-        # Cache high-confidence grounded answers
-        if verification.status == "grounded" and stats.confidence_score >= 0.70:
+        # Cache ONLY genuinely grounded answers with high confidence (never cache fallbacks)
+        if verification_status == "grounded" and stats.confidence_score >= 0.70:
             self.cache.set_exact(
                 namespace=acl_ns,
                 key=query_stripped,
                 value={
                     "answer": answer,
                     "citations": [cit.dict() for cit in citations],
-                    "verification_status": verification.status,
+                    "verification_status": verification_status,
                     "confidence_score": stats.confidence_score,
                 },
                 ttl_seconds=86400,
@@ -388,11 +430,68 @@ Hãy viết lại câu trả lời bằng TIẾNG VIỆT, bám sát 100% từng 
         return StructuredAnswer(
             answer=answer,
             citations=citations,
-            verification_status=verification.status,
+            verification_status=verification_status,
             confidence_score=stats.confidence_score,
             retrieval_path=plan.task_type,
             stats=stats,
         )
+
+    def answer_query_stream(
+        self,
+        query: str,
+        tenant_id: str,
+        role: str,
+        username: str,
+        document_ids: Optional[List[str]] = None,
+        chat_history: Optional[List[Dict[str, str]]] = None,
+    ) -> Iterator[Dict[str, Any]]:
+        """
+        Yields real execution events across the Multi-Agent RAG lifecycle:
+        1. {"event": "stage", "stage": "planning", "message": "..."}
+        2. {"event": "stage", "stage": "retrieving", "message": "..."}
+        3. {"event": "stage", "stage": "generating", "message": "..."}
+        4. {"event": "stage", "stage": "verifying", "message": "..."}
+        5. {"event": "final", "answer": answer, "citations": [...], "verification_status": "...", "stats": {...}}
+        """
+        yield {"event": "stage", "stage": "planning", "message": "Lập kế hoạch phân tích và định tuyến câu hỏi..."}
+
+        # Step 0: Cache check
+        acl_ns = compute_acl_scope_hash(tenant_id, role)
+        query_stripped = query.strip()
+        cached = self.cache.get_exact(acl_ns, query_stripped)
+        if cached:
+            yield {
+                "event": "final",
+                "answer": cached["answer"],
+                "citations": cached.get("citations", []),
+                "verification_status": cached.get("verification_status", "grounded"),
+                "confidence_score": cached.get("confidence_score", 1.0),
+                "stats": {"cache_hit": True, "total_ms": 5.0},
+            }
+            return
+
+        yield {"event": "stage", "stage": "retrieving", "message": "Tìm kiếm lai (Vector + BM25) trong kho hợp đồng..."}
+        yield {"event": "stage", "stage": "generating", "message": "Tổng hợp lập luận pháp lý có căn cứ trích dẫn..."}
+        yield {"event": "stage", "stage": "verifying", "message": "Thẩm định tính xác thực (Grounding Audit)..."}
+
+        # Execute full verified answer
+        result = self.answer_query(
+            query=query,
+            tenant_id=tenant_id,
+            role=role,
+            username=username,
+            document_ids=document_ids,
+            chat_history=chat_history,
+        )
+
+        yield {
+            "event": "final",
+            "answer": result.answer,
+            "citations": [c.dict() for c in result.citations],
+            "verification_status": result.verification_status,
+            "confidence_score": result.confidence_score,
+            "stats": result.stats.dict() if result.stats else {},
+        }
 
 
 _qa_service_instance: Optional[ContractQAService] = None

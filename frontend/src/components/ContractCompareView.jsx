@@ -1,78 +1,10 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import CitationViewerModal from './CitationViewerModal'
-
-// Lightweight Markdown renderer: handles bold, headings, tables, hr, lists
-function renderMarkdown(text) {
-  if (!text) return ''
-  const lines = text.split('\n')
-  const result = []
-  let i = 0
-  while (i < lines.length) {
-    const line = lines[i]
-    // Table detection: starts with |
-    if (line.trim().startsWith('|')) {
-      const tableLines = []
-      while (i < lines.length && lines[i].trim().startsWith('|')) {
-        tableLines.push(lines[i])
-        i++
-      }
-      // skip separator row (|:---|:---|)
-      const rows = tableLines.filter(l => !l.match(/^\|[-:\s|]+\|?\s*$/))
-      const tableHtml = rows.map((row, rIdx) => {
-        const cells = row.split('|').filter((_, ci) => ci > 0 && ci < row.split('|').length - 1)
-        const tag = rIdx === 0 ? 'th' : 'td'
-        return `<tr>${cells.map(c => `<${tag} class="border border-indigo-800/30 px-3 py-2 text-left text-xs ${rIdx === 0 ? 'font-bold text-indigo-200 bg-indigo-900/40' : 'text-slate-200'}">${inlineFormat(c.trim())}</${tag}>`).join('')}</tr>`
-      }).join('')
-      result.push(`<div class="overflow-x-auto my-3"><table class="w-full border-collapse text-xs">${tableHtml}</table></div>`)
-      continue
-    }
-    // Horizontal rule
-    if (line.trim() === '---' || line.trim() === '***') {
-      result.push('<hr class="border-indigo-800/40 my-3" />')
-      i++
-      continue
-    }
-    // Headings
-    if (line.startsWith('#### ')) {
-      result.push(`<h4 class="text-xs font-bold text-indigo-200 mt-4 mb-1">${inlineFormat(line.slice(5))}</h4>`)
-      i++
-      continue
-    }
-    if (line.startsWith('### ')) {
-      result.push(`<h3 class="text-sm font-bold text-white mt-5 mb-1">${inlineFormat(line.slice(4))}</h3>`)
-      i++
-      continue
-    }
-    if (line.startsWith('## ')) {
-      result.push(`<h2 class="text-base font-bold text-white mt-5 mb-1">${inlineFormat(line.slice(3))}</h2>`)
-      i++
-      continue
-    }
-    // Bullet list
-    if (line.trim().startsWith('* ') || line.trim().startsWith('- ')) {
-      result.push(`<li class="ml-4 text-xs text-slate-300 list-disc list-inside">${inlineFormat(line.trim().slice(2))}</li>`)
-      i++
-      continue
-    }
-    // Empty line
-    if (line.trim() === '') {
-      result.push('<div class="h-2"></div>')
-      i++
-      continue
-    }
-    // Normal paragraph
-    result.push(`<p class="text-xs text-slate-200 leading-relaxed">${inlineFormat(line)}</p>`)
-    i++
-  }
-  return result.join('')
-}
-
-function inlineFormat(text) {
-  return text
-    .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
-    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-    .replace(/`([^`]+)`/g, '<code class="bg-indigo-900/50 px-1 rounded text-indigo-200">$1</code>')
-}
+import { Button } from './ui/button'
+import { Card, CardHeader, CardTitle, CardContent } from './ui/card'
+import { Badge } from './ui/badge'
+import { Alert, AlertDescription } from './ui/alert'
+import { Skeleton } from './ui/skeleton'
 
 const DEFAULT_FACETS = [
   'Thời hạn hợp đồng & Quyền chấm dứt (Term & Termination)',
@@ -84,7 +16,13 @@ const DEFAULT_FACETS = [
   'Bảo mật thông tin & Dữ liệu (Confidentiality & Data Protection)',
 ]
 
-export default function ContractCompareView({ documents, token, apiUrl, onOpenUpload }) {
+export default function ContractCompareView({
+  documents = [],
+  token,
+  apiUrl,
+  onOpenUpload: _onOpenUpload,
+  onOpenWorkspace,
+}) {
   const [contractA, setContractA] = useState(documents[0]?.id || '')
   const [contractB, setContractB] = useState(documents[1]?.id || documents[0]?.id || '')
   const [selectedFacets, setSelectedFacets] = useState(DEFAULT_FACETS)
@@ -101,24 +39,24 @@ export default function ContractCompareView({ documents, token, apiUrl, onOpenUp
   }, [documents, contractA, contractB])
 
   const toggleFacet = (facet) => {
-    if (selectedFacets.includes(facet)) {
-      setSelectedFacets(selectedFacets.filter((f) => f !== facet))
-    } else {
-      setSelectedFacets([...selectedFacets, facet])
-    }
+    setSelectedFacets((prev) =>
+      prev.includes(facet) ? prev.filter((f) => f !== facet) : [...prev, facet]
+    )
   }
 
   const handleCompare = async () => {
     if (!contractA || !contractB) {
-      setError('Please select two contracts to compare.')
+      setError('Vui lòng chọn đủ 2 hợp đồng để tiến hành so sánh đối chiếu.')
       return
     }
+
     if (contractA === contractB) {
-      setError('Please select two different contracts for comparison.')
+      setError('Vui lòng chọn 2 phiên bản hoặc 2 hợp đồng khác nhau để so sánh.')
       return
     }
+
     if (selectedFacets.length === 0) {
-      setError('Please select at least one legal facet to compare.')
+      setError('Vui lòng chọn ít nhất một khía cạnh điều khoản so sánh.')
       return
     }
 
@@ -134,15 +72,15 @@ export default function ContractCompareView({ documents, token, apiUrl, onOpenUp
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          contract_a_id: contractA,
-          contract_b_id: contractB,
+          doc_a_id: contractA,
+          doc_b_id: contractB,
           facets: selectedFacets,
         }),
       })
 
       if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.detail || 'Failed to compare contracts.')
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.detail || 'Lỗi khi so sánh đối chiếu hợp đồng.')
       }
 
       const data = await res.json()
@@ -154,214 +92,230 @@ export default function ContractCompareView({ documents, token, apiUrl, onOpenUp
     }
   }
 
+  const docAObj = documents.find((d) => d.id === contractA)
+  const docBObj = documents.find((d) => d.id === contractB)
+
   return (
     <div className="flex-1 overflow-y-auto p-6 max-w-7xl mx-auto w-full space-y-6">
-      {/* View Header */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-            <span>⚖️</span> Multi-Contract Comparison
-          </h2>
-          <p className="text-sm text-slate-500 mt-1">
-            Perform facet-decomposed independent retrieval and side-by-side clause contrast across two agreements.
+      {/* Header */}
+      <Card className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white border-0 shadow-md">
+        <CardHeader className="p-6">
+          <CardTitle className="text-xl font-bold flex items-center gap-2 text-white">
+            <span>⚖️</span> So sánh & Đối chiếu Điều khoản Hợp đồng (Contract Comparison)
+          </CardTitle>
+          <p className="text-slate-300 text-xs mt-1">
+            Phân tích điểm khác biệt, rủi ro phát sinh giữa 2 bản hợp đồng hoặc 2 phiên bản cập nhật.
           </p>
-        </div>
-      </div>
+        </CardHeader>
+      </Card>
 
-      {/* Contract Selection & Facets Picker */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Contract Selectors & Facet Filters */}
+      <Card>
+        <CardContent className="p-6 space-y-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Contract A */}
+            <div>
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+                Hợp đồng A (Bản gốc / Chuẩn)
+              </label>
+              <select
+                value={contractA}
+                onChange={(e) => setContractA(e.target.value)}
+                className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none text-slate-900 dark:text-white"
+              >
+                {documents.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    📄 {d.filename} ({d.file_type.toUpperCase()})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Contract B */}
+            <div>
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+                Hợp đồng B (Bản đối tác / Sửa đổi)
+              </label>
+              <select
+                value={contractB}
+                onChange={(e) => setContractB(e.target.value)}
+                className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none text-slate-900 dark:text-white"
+              >
+                {documents.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    📄 {d.filename} ({d.file_type.toUpperCase()})
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Facets Multi-select */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-              Select Contract A
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+              Khía cạnh pháp lý cần so sánh
             </label>
-            <select
-              value={contractA}
-              onChange={(e) => setContractA(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-            >
-              {documents.map((d) => (
-                <option key={d.id} value={d.id}>
-                  📄 {d.filename} ({d.file_type.toUpperCase()})
-                </option>
-              ))}
-            </select>
+            <div className="flex flex-wrap gap-2">
+              {DEFAULT_FACETS.map((facet) => {
+                const isSelected = selectedFacets.includes(facet)
+                return (
+                  <button
+                    key={facet}
+                    type="button"
+                    onClick={() => toggleFacet(facet)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer ${
+                      isSelected
+                        ? 'bg-blue-600 text-white shadow-xs'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    {isSelected ? '✓ ' : '+ '}
+                    {facet}
+                  </button>
+                )
+              })}
+            </div>
           </div>
 
-          <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-              Select Contract B
-            </label>
-            <select
-              value={contractB}
-              onChange={(e) => setContractB(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-            >
-              {documents.map((d) => (
-                <option key={d.id} value={d.id}>
-                  📄 {d.filename} ({d.file_type.toUpperCase()})
-                </option>
-              ))}
-            </select>
+          <div className="flex justify-end pt-2">
+            <Button onClick={handleCompare} disabled={loading || !contractA || !contractB} className="h-11 px-8">
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <span className="animate-spin">⏳</span> Đang so sánh điều khoản...
+                </span>
+              ) : (
+                '⚖️ Bắt đầu Đối chiếu So sánh'
+              )}
+            </Button>
           </div>
+        </CardContent>
+      </Card>
+
+      {error && (
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+
+      {loading && (
+        <div className="space-y-4">
+          <Skeleton className="h-32 w-full rounded-xl" />
+          <Skeleton className="h-64 w-full rounded-xl" />
         </div>
-
-        {/* Facet Checkboxes */}
-        <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
-            Comparison Facets to Retrieve & Contrast:
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {DEFAULT_FACETS.map((facet) => {
-              const active = selectedFacets.includes(facet)
-              return (
-                <button
-                  key={facet}
-                  type="button"
-                  onClick={() => toggleFacet(facet)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition border ${
-                    active
-                      ? 'bg-indigo-50 border-indigo-300 text-indigo-700 shadow-xs'
-                      : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
-                  }`}
-                >
-                  {active ? '✓ ' : '+ '}
-                  {facet}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        {error && (
-          <div className="p-3 bg-red-50 text-red-700 border border-red-200 rounded-xl text-xs font-medium">
-            ⚠️ {error}
-          </div>
-        )}
-
-        <button
-          onClick={handleCompare}
-          disabled={loading}
-          className="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold rounded-xl shadow-md transition disabled:opacity-50 flex items-center justify-center gap-2"
-        >
-          {loading ? (
-            <>
-              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              Decomposing & Retrieving Evidence...
-            </>
-          ) : (
-            <>🔍 Run Comparison Analysis</>
-          )}
-        </button>
-      </div>
+      )}
 
       {/* Comparison Results */}
       {result && (
-        <div className="space-y-6 animate-fadeIn">
-          {/* Executive Summary Banner */}
-          <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-950 p-6 rounded-2xl text-white shadow-lg border border-indigo-900/50">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-300">
-                Executive Legal Summary
-              </span>
-              <span className="text-xs bg-indigo-500/20 text-indigo-200 px-2.5 py-1 rounded-full border border-indigo-400/30">
-                ⚡ Processed in {Math.round(result.stats?.total_ms || 0)}ms
-              </span>
-            </div>
-            <div
-              className="text-sm leading-relaxed font-sans"
-              dangerouslySetInnerHTML={{ __html: renderMarkdown(result.summary_comparison) }}
-            />
-          </div>
+        <div className="space-y-6 animate-in fade-in duration-300">
+          {/* Executive Summary */}
+          <Card className="border-indigo-200 dark:border-indigo-900/50 bg-indigo-50/40 dark:bg-indigo-950/20">
+            <CardHeader className="p-5">
+              <CardTitle className="text-base font-bold text-indigo-950 dark:text-indigo-200">
+                Tổng hợp Đối chiếu Khác biệt
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-5 pt-0">
+              <p className="text-xs leading-relaxed text-slate-800 dark:text-slate-200 whitespace-pre-wrap">
+                {result.summary || 'Đã hoàn tất đối chiếu các điều khoản chính giữa hai tài liệu.'}
+              </p>
+            </CardContent>
+          </Card>
 
-          {/* Facet Comparison Cards */}
+          {/* Matrix of Facets */}
           <div className="space-y-4">
-            <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
-              <span>📋</span> Facet-by-Facet Contrast ({result.facet_comparisons?.length || 0} Facets)
+            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+              Chi tiết Đối chiếu từng Khía cạnh ({result.facets?.length || 0})
             </h3>
 
-            {result.facet_comparisons?.map((facet, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden"
-              >
-                <div className="px-6 py-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                  <span className="font-bold text-sm text-slate-800 flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-md bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">
-                      {idx + 1}
-                    </span>
-                    {facet.facet_name}
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100 p-6 gap-6">
-                  {/* Contract A */}
-                  <div className="space-y-3">
-                    <div className="text-xs font-bold text-blue-700 uppercase tracking-wider flex items-center gap-1.5">
-                      <span>📄</span> {result.contract_a_name}
+            <div className="grid grid-cols-1 gap-4">
+              {(result.facets || []).map((f, idx) => (
+                <Card key={idx} className="overflow-hidden">
+                  <CardHeader className="p-4 bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-sm font-bold text-slate-900 dark:text-white">
+                        {f.facet_name}
+                      </CardTitle>
+                      {f.has_conflict && (
+                        <Badge variant="destructive" className="text-[10px] uppercase">
+                          Có khác biệt lớn
+                        </Badge>
+                      )}
                     </div>
-                    <p className="text-xs text-slate-700 leading-relaxed bg-blue-50/40 p-3.5 rounded-xl border border-blue-100">
-                      {facet.contract_a_findings}
-                    </p>
-                    {facet.contract_a_citations?.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 pt-1">
-                        {facet.contract_a_citations.map((c, cIdx) => (
-                          <button
-                            key={cIdx}
-                            onClick={() => setActiveCitation(c)}
-                            className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-blue-100/70 text-blue-800 hover:bg-blue-200 transition border border-blue-200 flex items-center gap-1"
-                          >
-                            <span>📌</span> P.{c.page} {c.section_path?.[0] || 'Clause'}
-                          </button>
-                        ))}
+                  </CardHeader>
+
+                  <CardContent className="p-4 space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Doc A Clause */}
+                      <div className="p-3 rounded-lg bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/40 text-xs">
+                        <div className="font-semibold text-blue-900 dark:text-blue-300 mb-1 flex items-center justify-between">
+                          <span>{docAObj?.filename || 'Hợp đồng A'}:</span>
+                          {onOpenWorkspace && f.citation_a && (
+                            <button
+                              onClick={() =>
+                                onOpenWorkspace({
+                                  document_id: contractA,
+                                  filename: docAObj?.filename,
+                                  ...f.citation_a,
+                                })
+                              }
+                              className="text-[10px] text-blue-600 hover:underline cursor-pointer"
+                            >
+                              Xem PDF
+                            </button>
+                          )}
+                        </div>
+                        <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-serif italic">
+                          "{f.clause_a || 'Không tìm thấy điều khoản tương ứng.'}"
+                        </p>
+                      </div>
+
+                      {/* Doc B Clause */}
+                      <div className="p-3 rounded-lg bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-900/40 text-xs">
+                        <div className="font-semibold text-indigo-900 dark:text-indigo-300 mb-1 flex items-center justify-between">
+                          <span>{docBObj?.filename || 'Hợp đồng B'}:</span>
+                          {onOpenWorkspace && f.citation_b && (
+                            <button
+                              onClick={() =>
+                                onOpenWorkspace({
+                                  document_id: contractB,
+                                  filename: docBObj?.filename,
+                                  ...f.citation_b,
+                                })
+                              }
+                              className="text-[10px] text-indigo-600 hover:underline cursor-pointer"
+                            >
+                              Xem PDF
+                            </button>
+                          )}
+                        </div>
+                        <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-serif italic">
+                          "{f.clause_b || 'Không tìm thấy điều khoản tương ứng.'}"
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Synthesis Analysis */}
+                    {f.analysis && (
+                      <div className="pt-2 text-xs text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-lg">
+                        <span className="font-semibold text-slate-900 dark:text-white">Nhận xét pháp lý: </span>
+                        <span>{f.analysis}</span>
                       </div>
                     )}
-                  </div>
-
-                  {/* Contract B */}
-                  <div className="space-y-3">
-                    <div className="text-xs font-bold text-indigo-700 uppercase tracking-wider flex items-center gap-1.5">
-                      <span>📄</span> {result.contract_b_name}
-                    </div>
-                    <p className="text-xs text-slate-700 leading-relaxed bg-indigo-50/40 p-3.5 rounded-xl border border-indigo-100">
-                      {facet.contract_b_findings}
-                    </p>
-                    {facet.contract_b_citations?.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 pt-1">
-                        {facet.contract_b_citations.map((c, cIdx) => (
-                          <button
-                            key={cIdx}
-                            onClick={() => setActiveCitation(c)}
-                            className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-indigo-100/70 text-indigo-800 hover:bg-indigo-200 transition border border-indigo-200 flex items-center gap-1"
-                          >
-                            <span>📌</span> P.{c.page} {c.section_path?.[0] || 'Clause'}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Key Differences & Risk Assessment Strip */}
-                <div className="px-6 py-3 bg-amber-50/50 border-t border-amber-100/80 flex flex-col md:flex-row md:items-center justify-between text-xs gap-2">
-                  <div className="text-slate-700">
-                    <strong className="text-amber-800">⚡ Key Discrepancy:</strong> {facet.key_differences}
-                  </div>
-                  {facet.risk_assessment && (
-                    <div className="text-amber-900 font-medium bg-amber-100 px-2.5 py-0.5 rounded-md self-start md:self-auto">
-                      {facet.risk_assessment}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       )}
 
       {/* Citation Modal */}
       {activeCitation && (
-        <CitationViewerModal citation={activeCitation} onClose={() => setActiveCitation(null)} />
+        <CitationViewerModal
+          citation={activeCitation}
+          onClose={() => setActiveCitation(null)}
+          onOpenWorkspace={onOpenWorkspace}
+        />
       )}
     </div>
   )

@@ -86,20 +86,29 @@ class BM25Retriever:
             scores = self.bm25.get_scores(query_tokens)
 
             results: List[Tuple[str, float, Dict[str, Any]]] = []
-            allowed_set = set(allowed_doc_ids) if allowed_doc_ids else None
+            allowed_set = set(allowed_doc_ids) if allowed_doc_ids is not None else None
 
-            for i, (cid, score) in enumerate(zip(self.chunk_ids, scores)):
-                if score <= 0.0:
-                    continue
-
+            for i, (cid, raw_score) in enumerate(zip(self.chunk_ids, scores)):
                 meta = self.metadatas[i]
-                
-                # Tenant filter
-                if tenant_id and meta.get("tenant_id") and meta.get("tenant_id") != tenant_id:
-                    continue
 
-                # Document ID filter
-                if allowed_set and meta.get("doc_id") and meta.get("doc_id") not in allowed_set:
+                # Strict fail-closed Tenant filter
+                if tenant_id is not None:
+                    chunk_tenant = meta.get("tenant_id")
+                    if not chunk_tenant or chunk_tenant != tenant_id:
+                        continue
+
+                # Strict fail-closed Doc ID filter
+                if allowed_set is not None:
+                    chunk_doc_id = meta.get("doc_id")
+                    if not chunk_doc_id or chunk_doc_id not in allowed_set:
+                        continue
+
+                # Compute effective score: handle small-corpus BM25 IDF saturation
+                tokenized_doc = tokenize_for_bm25(self.documents[i])
+                overlap = len(set(query_tokens).intersection(set(tokenized_doc)))
+                score = float(raw_score) if raw_score > 0.0 else (0.1 * overlap if overlap > 0 else 0.0)
+
+                if score <= 0.0:
                     continue
 
                 results.append((cid, float(score), meta))

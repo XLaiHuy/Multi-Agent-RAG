@@ -6,6 +6,7 @@ into unified CanonicalDocument representations with pages, blocks, bounding boxe
 import io
 import json
 import re
+import logging
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 
@@ -15,6 +16,69 @@ from backend.app.domain.canonical import (
 )
 from backend.app.providers.interfaces import OCRProvider
 from backend.app.core.config import get_settings
+
+logger = logging.getLogger("document_parsers")
+
+
+class DoclingPDFParserAdapter:
+    """Optional Docling parser adapter for advanced layout, tables, and OCR parsing."""
+
+    @staticmethod
+    def is_available() -> bool:
+        try:
+            import docling  # noqa: F401
+            return True
+        except ImportError:
+            return False
+
+    @staticmethod
+    def parse_pdf(file_path: Path, doc_id: str) -> Optional[CanonicalDocument]:
+        """Parses PDF with Docling if available; returns None on failure or missing dependency."""
+        if not DoclingPDFParserAdapter.is_available():
+            return None
+        try:
+            from docling.document_converter import DocumentConverter
+            converter = DocumentConverter()
+            res = converter.convert(str(file_path))
+            doc = res.document
+            page_blocks_map: Dict[int, List[CanonicalBlock]] = {}
+
+            for item, _ in doc.iterate_items():
+                text = getattr(item, "text", "") or ""
+                text = text.strip()
+                if not text:
+                    continue
+                p_num = 1
+                if hasattr(item, "prov") and item.prov and len(item.prov) > 0:
+                    p_num = getattr(item.prov[0], "page_no", 1) or 1
+
+                b_type = BlockType.TABLE if "table" in str(type(item)).lower() else BlockType.PARAGRAPH
+                b_id = f"{doc_id}_p{p_num}_docling_{len(page_blocks_map.get(p_num, []))}"
+                block = CanonicalBlock(
+                    block_id=b_id,
+                    block_type=b_type,
+                    text=text,
+                    page_number=p_num,
+                    metadata={"parser": "docling"},
+                )
+                page_blocks_map.setdefault(p_num, []).append(block)
+
+            canonical_pages: List[CanonicalPage] = []
+            for p_num in sorted(page_blocks_map.keys()):
+                canonical_pages.append(CanonicalPage(page_number=p_num, blocks=page_blocks_map[p_num]))
+
+            if canonical_pages:
+                return CanonicalDocument(
+                    doc_id=doc_id,
+                    title=file_path.name,
+                    doc_type="pdf",
+                    pages=canonical_pages,
+                    metadata={"parsed_by": "docling"},
+                )
+        except Exception as e:
+            logger.warning(f"[DoclingAdapter] Docling parsing fallback to NativePDFParser: {e}")
+        return None
+
 
 
 class OCRGatingAnalyzer:
@@ -359,7 +423,14 @@ class MasterDocumentParser:
     def parse(file_path: Path, doc_id: str, ocr_provider: Optional[OCRProvider] = None) -> CanonicalDocument:
         ext = file_path.suffix.lower()
         if ext == ".pdf":
-            # Check OCR gating per page
+            # 1. If Docling is available and configured, attempt Docling layout parsing
+            settings = get_settings()
+            if getattr(settings, "use_docling_parser", False) and DoclingPDFParserAdapter.is_available():
+                docling_doc = DoclingPDFParserAdapter.parse_pdf(file_path, doc_id)
+                if docling_doc:
+                    return docling_doc
+
+            # 2. Native PyMuPDF extraction
             native_doc = NativePDFParser.parse_pdf(file_path, doc_id)
             # If native extraction yielded ample text, return native
             total_chars = sum(len(b.text) for b in native_doc.get_all_blocks())
