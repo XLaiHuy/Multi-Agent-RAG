@@ -95,14 +95,28 @@ class GeminiEmbeddingProvider(EmbeddingProvider):
     def embed_queries_batch(
         self, queries: List[str], batch_size: int = 32
     ) -> List[List[float]]:
-        """Batch encodes queries using the identical normalization and inference protocol as embed_query."""
+        """Batch encodes queries using the Gemini EmbedContent API."""
+        if not self.client:
+            raise RuntimeError("Gemini API key is not configured.")
         if not queries:
             return []
-        model = self._get_model()
-        vectors = model.encode(
-            queries, batch_size=batch_size, show_progress_bar=False, normalize_embeddings=True
-        )
-        return vectors.tolist()
+
+        all_vectors = []
+        for i in range(0, len(queries), batch_size):
+            batch = queries[i : i + batch_size]
+            formatted_batch = [f"task: contract retrieval | query: {q}" for q in batch]
+            res = self.client.models.embed_content(
+                model=self.model,
+                contents=formatted_batch,
+                config=types.EmbedContentConfig(output_dimensionality=self._dim),
+            )
+            if not res.embeddings:
+                raise ValueError("Empty batch embedding received from Gemini API.")
+            all_vectors.extend([list(e.values) for e in res.embeddings])
+            if i + batch_size < len(queries):
+                time.sleep(0.05)
+
+        return all_vectors
 
     def embed_documents_batch(
         self, texts: List[str], batch_size: int = 50

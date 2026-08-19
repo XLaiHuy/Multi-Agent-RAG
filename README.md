@@ -5,22 +5,22 @@
 [![React 19](https://img.shields.io/badge/React-19.2%2B-61DAFB.svg)](https://react.dev)
 [![TanStack Query](https://img.shields.io/badge/TanStack%20Query-v5-FF4154.svg)](https://tanstack.com/query)
 [![PDF.js](https://img.shields.io/badge/PDF.js-Evidence%20Workspace-E74C3C.svg)](https://mozilla.github.io/pdf.js/)
-[![BGE-M3](https://img.shields.io/badge/Dense-BGE--M3-FF6F00.svg)](https://huggingface.co/BAAI/bge-m3)
-[![Pytest](https://img.shields.io/badge/tests-75%20passed-brightgreen.svg)](tests/)
+[![Dense](https://img.shields.io/badge/Dense-BGE--Small%20%7C%20BGE--M3-FF6F00.svg)](https://huggingface.co/BAAI)
+[![Pytest](https://img.shields.io/badge/tests-109%20passed-brightgreen.svg)](tests/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-An evidence-bounded Retrieval-Augmented Generation (RAG) system engineered for high-precision legal contract analysis. The platform couples document-scoped hybrid retrieval (BGE-M3 dense embeddings + BM25Okapi sparse lexical search + Reciprocal Rank Fusion + TinyBERT cross-encoder reranking) with an evidence-bounded Multi-Agent execution pipeline (Planner, Critic, Generator, and Verifier) designed to eliminate cross-document hallucinations and produce verifiable clause-level citations.
+An evidence-bounded Retrieval-Augmented Generation (RAG) system engineered for high-precision legal contract analysis. The platform couples document-scoped hybrid retrieval (dense embeddings + BM25Okapi sparse lexical search + Reciprocal Rank Fusion + TinyBERT cross-encoder reranking) with an evidence-bounded Multi-Agent execution pipeline (Planner, Critic, and Verifier reasoning agents + grounding-constrained generation step) designed to reduce cross-document retrieval/citation errors (0/140 wrong-document citations observed in the frozen end-to-end benchmark) and produce verifiable clause-level citations.
 
 ---
 
-## 🏆 Key Headline Results
+## 🏆 Key Headline Results (Frozen Benchmark)
 
 | **81.97%** | **0.5214** | **72.50%** | **80.97%** |
 | :---: | :---: | :---: | :---: |
 | **Strict Child Hit@10** | **Mean Reciprocal Rank (MRR)** | **Strict Balanced Accuracy** | **Macro Citation Precision** |
 | Top-10 retrieved child chunks contain exact gold clause span | Reciprocal rank of first gold clause match ($N=294$) | Strict sentinel refusal accuracy on held-out test split ($N=200$) | Exact match of cited clauses against gold reference spans |
 
-> **Evaluation Scope**: Retrieval evaluated on **294 held-out CUAD queries** across 25 contracts. End-to-end generation evaluated on **200 real Google GenAI API queries** across 25 unseen contracts.
+> **Evaluation Scope**: Retrieval evaluated on **294 held-out CUAD queries** across 25 contracts. End-to-end generation evaluated on **200 real Google GenAI API queries** across 25 unseen contracts under frozen Phase 4.2 / Phase 6.1 protocols.
 
 ---
 
@@ -28,12 +28,14 @@ An evidence-bounded Retrieval-Augmented Generation (RAG) system engineered for h
 
 ```mermaid
 flowchart TD
-    User([User Legal Query]) --> Scope[Document-Scoped Boundary]
+    User([User Legal Query]) --> CacheCheck{Document-Scoped\nCache Check}
+    CacheCheck -- Cache Hit --> CachedOutput([Cached Grounded Answer])
+    CacheCheck -- Cache Miss --> Scope[Document-Scoped Boundary]
     Scope --> Ingestion[Structure-Aware Chunking\nChild ~250 tok / Parent ~1200 tok]
     Ingestion --> HybridRetrieval[Hybrid Retrieval Layer]
     
     subgraph HybridRetrieval [Hybrid Retrieval Layer]
-        Dense[BGE-M3 Dense Search\nCosine Similarity Top-20]
+        Dense[Dense Semantic Search\nProduction: BGE-Small | Eval: BGE-M3]
         Sparse[BM25Okapi Lexical Search\nExact Keywords Top-20]
         Dense --> RRF[Reciprocal Rank Fusion\nk=60 Non-Parametric]
         Sparse --> RRF
@@ -42,13 +44,14 @@ flowchart TD
     
     CrossEncoder --> Agents[Multi-Agent Generation & Verification Stack]
     
-    subgraph Agents [Bounded Multi-Agent Execution Stack]
+    subgraph Agents [3 Reasoning Agents + Evidence-Bounded Generation Step]
         Planner[Planner Agent\nTask & Complexity Routing]
-        Critic[Critic Agent\nEvidence Sufficiency Audit]
-        Generator[Generator Agent\nEvidence-Bounded Synthesis]
+        Critic[Critic Agent\nSufficiency Audit if Conf < 0.70]
+        Generator[Evidence-Bounded Generation Step\nStrict Vietnamese Legal Synthesis]
         Verifier[Verifier Agent\nCitation Support & Grounding Audit]
         
-        Planner --> Critic
+        Planner --> HybridRetrieval
+        HybridRetrieval --> Critic
         Critic --> Generator
         Generator --> Verifier
     end
@@ -63,7 +66,7 @@ flowchart TD
 
 ### A. Document-Scoped Hybrid Retrieval Benchmark
 - **Dataset**: CUAD Held-Out Split ($N = 294$ answerable queries across 25 unseen contracts)
-- **Retriever Pipeline**: `BAAI/bge-m3` (Dense) + `BM25Okapi` (Sparse) + `RRF (k=60)` + `TinyBERT CrossEncoder`
+- **Retriever Pipeline**: `BAAI/bge-m3` (Dense Evaluation Selected) + `BM25Okapi` (Sparse) + `RRF (k=60)` + `TinyBERT CrossEncoder`
 - **Granularity**: ~250-token child chunks (dense/sparse index) with ~1,200-token parent section expansion
 
 | Metric | Result |
@@ -111,8 +114,8 @@ flowchart TD
 
 ---
 
-### C. Blinded LLM Judge Evaluation (`JUDGE-BASED`)
-Independent evaluation was conducted using `gemma-4-26b-a4b-it` across all 85 accepted answers (100.0% evaluation coverage):
+### C. LLM Judge-Based Evaluation (Groundedness & Reference Text Alignment)
+Evaluation was conducted using `gemma-4-26b-a4b-it` across all 85 accepted answers (100.0% evaluation coverage), assessing grounding against retrieved context and semantic correctness against reference gold text:
 
 | Metric | Result | Scope / Evidence Evaluated |
 | :--- | ---: | :--- |
@@ -134,18 +137,19 @@ In legal contract review, users query an active contract ($\approx 45\text{--}60
 - **Direct Citation Jumps**: Clicking any citation instantly loads the document, navigates to the exact page, and highlights the target Bounding Box.
 - **Format Flexibility**: High-DPI canvas rendering for PDF files and structured monospace viewer for DOCX, TXT, and Markdown.
 
-### 3. TanStack Query & Observable Ingestion Pipeline
-- **Reactive State Management**: Centralized API services with automatic cache invalidation and token refresh.
-- **Live Ingestion Tracking**: Asynchronous document ingestion with real-time stage progress: `PARSING` (15%) $\rightarrow$ `CHUNKING` (40%) $\rightarrow$ `EMBEDDING` (65%) $\rightarrow$ `INDEXING` (85%) $\rightarrow$ `READY` (100%).
+### 3. Document-Scoped Caching & Real Execution-Stage Streaming
+- **Document-Scoped Cache**: Cache keys incorporate tenant ID, ACL role, canonical sorted document scope, and effective embedding model identity, preventing cache leakage across different documents or model configurations.
+- **Real Execution Streaming**: Yields real-time pipeline events (`planning` $\rightarrow$ `retrieving` $\rightarrow$ `critic` (if confidence < 0.70) $\rightarrow$ `generating` $\rightarrow$ `verifying` $\rightarrow$ `final`). Cache hits immediately yield `final` without synthetic intermediate stages.
 
 ### 4. Deterministic Numeric Risk Predicates
 - **Statutory Limits**: Automatically extracts penalty percentages and triggers violations strictly when exceeding the 8% cap under Article 301, Vietnam Commercial Law.
 - **Negation Handling**: Recognizes compliant exclusions such as *"không vượt quá 8%"* or *"maximum 8%"* without false positives.
 - **Notice Period Thresholds**: Detects termination notice periods strictly exceeding specified day limits (> 60 days).
 
-### 5. Multi-Tenant ACL & Anti-Path-Traversal Security
+### 5. Multi-Tenant ACL & Ingestion Parser Boundary
 - **Fail-Closed Retrieval**: Chunks lacking valid `tenant_id` or `doc_id` metadata are rejected immediately when scoped queries execute.
 - **Secure File Streaming**: `GET /api/v1/documents/{doc_id}/content` enforces strict path resolution within authorized tenant directories.
+- **Parser & OCR Gating**: Standalone image OCR requires a concrete OCRProvider. The optional Docling adapter currently applies to PDF parsing. No standalone image OCR provider is wired by default.
 
 ---
 
@@ -154,16 +158,17 @@ In legal contract review, users query an active contract ($\approx 45\text{--}60
 | Component | Technology | Description |
 | :--- | :--- | :--- |
 | **Backend API** | FastAPI (Python 3.10+) | High-performance asynchronous REST API with JWT security |
-| **Embeddings** | `BAAI/bge-m3` | 1024-dimensional semantic embeddings |
-| **Sparse Retrieval** | `rank-bm25` (BM25Okapi) | Exact legal keyword matching with fail-closed filtering |
+| **Dense Embeddings** | `BAAI/bge-small-en-v1.5` / `BAAI/bge-m3` | 384-dim production default (CPU fast) / 1024-dim frozen evaluation standard |
+| **Sparse Retrieval** | `rank-bm25` (BM25Okapi) | Exact legal keyword matching with fail-closed tenant filtering |
 | **Fusion Algorithm** | Reciprocal Rank Fusion ($k=60$) | Non-parametric rank combination |
 | **Reranker** | `ms-marco-TinyBERT-L-2-v2` | Lightweight 4.4M-parameter cross-encoder |
-| **Vector Database** | ChromaDB Persistent Store | Document-scoped embedding persistence |
+| **Vector Database** | ChromaDB Persistent Store | Non-destructive document-scoped embedding persistence |
+| **Document Parsers** | PyMuPDF, python-docx | Native parsers (Core) + Optional Docling adapter for PDF (`requirements-docling.txt`) |
 | **Frontend Framework** | React 19, Vite, Tailwind CSS | Modern enterprise Legal SaaS dashboard |
 | **State Management** | TanStack Query v5 | Reactive server-state caching and polling |
 | **Document Viewer** | `pdfjs-dist` (PDF.js) | High-performance canvas PDF rendering & bbox overlay |
-| **Observability** | Langfuse & Custom Tracing | Optional privacy-preserving multi-agent trace logging |
-| **Quality & Tests** | Pytest, Oxlint, Compileall | 75 unit, security, ACL, and metric consistency tests |
+| **Observability** | Langfuse (Optional) | Safe context-managed trace logging (`requirements-observability.txt`) |
+| **Quality & Tests** | Pytest, Oxlint, Compileall | 109 unit, security, ACL, and metric consistency tests |
 
 ---
 
@@ -172,14 +177,14 @@ In legal contract review, users query an active contract ($\approx 45\text{--}60
 ```text
 Multi-Agent-RAG/
 ├── backend/app/
-│   ├── agents/          # Planner, Critic, Verifier multi-agent orchestration
+│   ├── agents/          # Planner, Critic, Verifier reasoning agents
 │   ├── api/             # FastAPI routers (documents, chat, risk, compare, auth)
 │   ├── application/     # ContractQAService, ContractCompare, ContractRisk services
 │   ├── core/            # Config, security, JWT authentication
 │   ├── domain/          # CanonicalDocument, CanonicalBlock, RiskRule definitions
 │   ├── ingestion/       # MasterDocumentParser, NativePDFParser, Parent-Child Chunker
 │   ├── persistence/     # SQLite/PostgreSQL models, repositories, caching
-│   ├── providers/       # BGE-M3, TinyBERT reranker, Gemini Gateway, Observability
+│   ├── providers/       # BGE dense embeddings, TinyBERT reranker, Gemini Gateway, Observability
 │   └── retrieval/       # Dense retriever, BM25 retriever, RRF, Confidence Engine
 ├── frontend/
 │   ├── src/
@@ -188,9 +193,11 @@ Multi-Agent-RAG/
 │   │   ├── components/ui/ # Reusable UI primitives (Button, Card, Dialog, Badge, Tabs)
 │   │   ├── hooks/       # useDocuments, useIngestionJob, useChat, useRiskReview
 │   │   └── lib/         # Utility functions (cn, class merge)
+│   ├── package.json
+│   └── vite.config.js
 ├── evaluation/          # Benchmark manifests, frozen scores, and replication scripts
 ├── sample_contracts/    # Realistic Vietnamese contract templates (SaaS, NDA, Equipment)
-└── tests/               # 75 unit, security, ACL, and metric consistency tests
+└── tests/               # 109 unit, security, ACL, and metric consistency tests
 ```
 
 ---
@@ -208,7 +215,7 @@ cd Multi-Agent-RAG
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Install dependencies
+# Install core dependencies
 pip install -r requirements.txt
 
 # Start backend server
@@ -228,7 +235,7 @@ npm run dev
 ### 3. Run Automated Tests
 
 ```bash
-# Run backend pytest suite (75 passed)
+# Run backend pytest suite (109 passed)
 pytest tests/ -q
 
 # Run frontend build and linter

@@ -5,13 +5,13 @@ Provides synchronous and SSE streaming QA, verified citations, and anti-IDOR con
 import json
 import uuid
 import asyncio
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sse_starlette.sse import EventSourceResponse
 from sqlalchemy.orm import Session
 
 from backend.app.core.security import get_current_user, UserTokenData
-from backend.app.persistence.database import get_db, ConversationRepository
+from backend.app.persistence.database import get_db, ConversationRepository, DocumentRepository
 from backend.app.application.contract_qa import get_contract_qa_service
 from backend.app.domain.schemas import (
     ContractQARequest, ContractQAResponse, CitationItem, ExecutionStats
@@ -19,6 +19,38 @@ from backend.app.domain.schemas import (
 
 qa_router = APIRouter(prefix="/chat", tags=["Contract QA"])
 conversation_router = APIRouter(prefix="/conversations", tags=["Conversations"])
+
+
+def resolve_authorized_document_scope(
+    db: Session,
+    requested_document_ids: Optional[List[str]],
+    tenant_id: str,
+    role: str,
+) -> List[str]:
+    """
+    Enforces Document ACL authorization at the API boundary:
+    1. If explicit requested_document_ids provided:
+       - Every ID must exist and be accessible under the user's tenant_id and role.
+       - If ANY requested document is unauthorized or nonexistent, raises HTTP 404 (fail closed).
+       - Returns the validated list of document IDs.
+    2. If no explicit document scope (None or empty):
+       - Resolves all documents accessible to the user's tenant_id and role.
+       - Returns the list of accessible document IDs (or [] if none).
+    """
+    if requested_document_ids is not None and len(requested_document_ids) > 0:
+        authorized_ids = []
+        for doc_id in requested_document_ids:
+            doc = DocumentRepository.get_document_if_accessible(db, doc_id=doc_id, tenant_id=tenant_id, role=role)
+            if not doc:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail=f"Document '{doc_id}' not found or access denied.",
+                )
+            authorized_ids.append(doc.id)
+        return authorized_ids
+    else:
+        accessible_docs = DocumentRepository.list_accessible_documents(db, tenant_id=tenant_id, role=role)
+        return [doc.id for doc in accessible_docs]
 
 
 # --- Synchronous QA Endpoint ---
@@ -32,10 +64,19 @@ def chat_sync(
     """
     Synchronous Contract QA:
     Executes Adaptive Multi-Agent RAG pipeline and persists interaction to database.
+    Enforces Document ACL authorization before query execution.
     """
     query = request_data.query.strip()
     if not query:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Query cannot be empty.")
+
+    # Enforce strict Document ACL authorization at the API boundary
+    authorized_document_ids = resolve_authorized_document_scope(
+        db=db,
+        requested_document_ids=request_data.document_ids,
+        tenant_id=current_user.tenant_id,
+        role=current_user.role,
+    )
 
     conv_id = request_data.conv_id or f"conv_{uuid.uuid4().hex[:12]}"
     qa_service = get_contract_qa_service()
@@ -55,7 +96,7 @@ def chat_sync(
         tenant_id=current_user.tenant_id,
         role=current_user.role,
         username=current_user.username,
-        document_ids=request_data.document_ids,
+        document_ids=authorized_document_ids,
         chat_history=[m.dict() for m in request_data.chat_history] if request_data.chat_history else None,
     )
 
@@ -89,14 +130,24 @@ def chat_sync(
 async def chat_stream(
     request_data: ContractQARequest,
     current_user: UserTokenData = Depends(get_current_user),
+    db: Session = Depends(get_db),
 ):
     """
     SSE Streaming Contract QA:
-    Yields progressive status updates, sources/citations, and token-by-token answer stream.
+    SSE execution-stage streaming with an atomic verified final answer.
+    Enforces Document ACL authorization before stream execution.
     """
     query = request_data.query.strip()
     if not query:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Query cannot be empty.")
+
+    # Enforce strict Document ACL authorization at the API boundary
+    authorized_document_ids = resolve_authorized_document_scope(
+        db=db,
+        requested_document_ids=request_data.document_ids,
+        tenant_id=current_user.tenant_id,
+        role=current_user.role,
+    )
 
     conv_id = request_data.conv_id or f"conv_{uuid.uuid4().hex[:12]}"
     qa_service = get_contract_qa_service()
@@ -108,7 +159,7 @@ async def chat_stream(
             tenant_id=current_user.tenant_id,
             role=current_user.role,
             username=current_user.username,
-            document_ids=request_data.document_ids,
+            document_ids=authorized_document_ids,
             chat_history=[m.dict() for m in request_data.chat_history] if request_data.chat_history else None,
         ):
             event_type = step_event.get("event", "message")
