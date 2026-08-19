@@ -29,33 +29,35 @@ An evidence-bounded Retrieval-Augmented Generation (RAG) system engineered for h
 ```mermaid
 flowchart TD
     User(["User Legal Query"]) --> CacheCheck{"Document-Scoped<br/>Cache Check"}
-    CacheCheck -- "Cache Hit" --> CachedOutput(["Cached Grounded Answer"])
-    CacheCheck -- "Cache Miss" --> Scope["Document-Scoped Boundary"]
-    Scope --> Ingestion["Structure-Aware Chunking<br/>Child ~250 tok / Parent ~1200 tok"]
-    Ingestion --> HybridRetrieval
+    CacheCheck -->|"Cache Hit"| CachedOutput(["Cached Grounded Answer"])
+    CacheCheck -->|"Cache Miss"| Scope["Document-Scoped Boundary"]
+    
+    Scope --> Planner["Planner Agent<br/>Task & Complexity Routing"]
     
     subgraph HybridRetrieval ["Hybrid Retrieval Layer"]
-        Dense["Dense Semantic Search<br/>Production: BGE-Small | Eval: BGE-M3"]
+        Dense["Dense Semantic Search<br/>Production: BGE-Small / Eval: BGE-M3"]
         Sparse["BM25Okapi Lexical Search<br/>Exact Keywords Top-20"]
-        Dense --> RRF["Reciprocal Rank Fusion<br/>k=60 Non-Parametric"]
+        RRF["Reciprocal Rank Fusion<br/>k=60 Non-Parametric"]
+        CrossEncoder["TinyBERT CrossEncoder Reranker<br/>Top-5 Candidates"]
+        
+        Dense --> RRF
         Sparse --> RRF
-        RRF --> CrossEncoder["TinyBERT CrossEncoder Reranker<br/>Top-5 Candidates"]
+        RRF --> CrossEncoder
     end
     
-    CrossEncoder --> Agents
+    Planner --> Dense
+    Planner --> Sparse
     
-    subgraph Agents ["3 Reasoning Agents + Evidence-Bounded Generation Step"]
-        Planner["Planner Agent<br/>Task & Complexity Routing"]
-        Critic["Critic Agent<br/>Sufficiency Audit if Conf &lt; 0.70"]
+    subgraph ReasoningPipeline ["Reasoning & Verification Stack"]
+        Critic["Critic Agent<br/>Sufficiency Audit on Low Confidence"]
         Generator["Evidence-Bounded Generation Step<br/>Strict Vietnamese Legal Synthesis"]
         Verifier["Verifier Agent<br/>Citation Support & Grounding Audit"]
         
-        Planner --> HybridRetrieval
-        HybridRetrieval --> Critic
         Critic --> Generator
         Generator --> Verifier
     end
     
+    CrossEncoder --> Critic
     Verifier --> Output(["Answer with Clause Citations<br/>or INSUFFICIENT_EVIDENCE Refusal"])
     Output --> Workspace["PDF.js Split-Pane Legal Evidence Workspace<br/>Page Jump & Bounding Box Highlight"]
 ```
