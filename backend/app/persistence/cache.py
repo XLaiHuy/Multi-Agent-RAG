@@ -15,9 +15,55 @@ from backend.app.providers.interfaces import CacheStore
 
 
 def compute_acl_scope_hash(tenant_id: str, role: str, corpus_version: str = "v1", embedding_model: str = "bge-m3") -> str:
-    """Computes a cryptographically distinct namespace for caching."""
+    """Computes a cryptographically distinct namespace for role/tenant scoping."""
     raw = f"{tenant_id}::{role}::{corpus_version}::{embedding_model}"
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
+
+
+def get_effective_embedding_identity(settings: Optional[Any] = None) -> str:
+    """Derives the effective embedding identity based on provider, active model, and dimension."""
+    if settings is None:
+        try:
+            from backend.app.core.config import get_settings
+            settings = get_settings()
+        except Exception:
+            return "local::BAAI/bge-small-en-v1.5::384"
+
+    provider = getattr(settings, "embedding_provider", "local").lower()
+    if provider == "gemini":
+        model_name = getattr(settings, "gemini_embedding_model", "text-embedding-004")
+    else:
+        model_name = getattr(settings, "local_embedding_model", "BAAI/bge-small-en-v1.5")
+
+    dim = getattr(settings, "embedding_dimension", 384)
+    return f"{provider}::{model_name}::{dim}"
+
+
+def build_query_cache_identity(
+    tenant_id: str,
+    role: str,
+    document_ids: Optional[List[str]] = None,
+    corpus_version: str = "v1",
+    embedding_identity: Optional[str] = None,
+) -> str:
+    """
+    Computes a deterministic, cryptographic cache identity including:
+    - tenant_id
+    - role
+    - canonical deduplicated sorted document scope (or '__ALL__' if unscoped)
+    - corpus version & effective embedding model/dimension identity
+    """
+    if document_ids:
+        canonical_docs = sorted(list(set(document_ids)))
+        docs_repr = ",".join(canonical_docs)
+    else:
+        docs_repr = "__ALL__"
+
+    if not embedding_identity:
+        embedding_identity = get_effective_embedding_identity()
+
+    raw = f"{tenant_id}::{role}::{docs_repr}::{corpus_version}::{embedding_identity}"
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:24]
 
 
 class SemanticCacheEntry:
@@ -42,13 +88,13 @@ class BoundedSemanticCache(CacheStore):
     def __init__(self, max_entries_per_namespace: int = 1000, default_ttl_seconds: int = 86400):
         self.max_entries = max_entries_per_namespace
         self.default_ttl = default_ttl_seconds
-        
+
         # exact_cache: {namespace: OrderedDict[exact_query_hash, (result, expires_at)]}
         self._exact_cache: Dict[str, OrderedDict[str, Tuple[Dict[str, Any], float]]] = {}
-        
+
         # semantic_cache: {namespace: List[SemanticCacheEntry]}
         self._semantic_cache: Dict[str, List[SemanticCacheEntry]] = {}
-        
+
         self._lock = threading.Lock()
 
     def get_exact(self, namespace: str, key: str) -> Optional[Dict[str, Any]]:

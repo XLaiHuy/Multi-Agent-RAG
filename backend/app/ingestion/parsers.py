@@ -146,7 +146,7 @@ class NativePDFParser:
                     continue
 
                 bbox = BoundingBox(x0=round(x0, 2), y0=round(y0, 2), x1=round(x1, 2), y1=round(y1, 2))
-                
+
                 # Heading detection heuristic (short text, starts with Article/Section/Chapter/digits)
                 is_heading = False
                 if len(text.split("\n")) <= 2 and len(text) < 120:
@@ -196,7 +196,7 @@ class MarkdownParser:
     def parse_markdown(file_path: Path, doc_id: str) -> CanonicalDocument:
         text = file_path.read_text(encoding="utf-8", errors="ignore")
         lines = text.split("\n")
-        
+
         blocks: List[CanonicalBlock] = []
         current_section_stack: List[Tuple[int, str]] = [] # [(level, text)]
         current_paragraph: List[str] = []
@@ -320,7 +320,7 @@ class JSONParser:
                 json_path_str = ".".join(current_path)
                 val_str = str(node)
                 text = f"**{json_path_str}**: {val_str}"
-                
+
                 b_id = f"{doc_id}_b{block_counter}"
                 blocks.append(
                     CanonicalBlock(
@@ -384,14 +384,14 @@ class DocxParser:
             for row in table.rows:
                 row_cells = [c.text.strip().replace("\n", " ") for c in row.cells]
                 table_rows.append(row_cells)
-            
+
             if table_rows:
                 # Convert table rows to markdown representation
                 md_table_lines = ["| " + " | ".join(table_rows[0]) + " |"]
                 md_table_lines.append("| " + " | ".join(["---"] * len(table_rows[0])) + " |")
                 for r in table_rows[1:]:
                     md_table_lines.append("| " + " | ".join(r) + " |")
-                
+
                 table_text = "\n".join(md_table_lines)
                 b_id = f"{doc_id}_b{block_counter}"
                 blocks.append(
@@ -423,20 +423,22 @@ class MasterDocumentParser:
     def parse(file_path: Path, doc_id: str, ocr_provider: Optional[OCRProvider] = None) -> CanonicalDocument:
         ext = file_path.suffix.lower()
         if ext == ".pdf":
-            # 1. If Docling is available and configured, attempt Docling layout parsing
+            # 1. If Docling parser is configured
             settings = get_settings()
-            if getattr(settings, "use_docling_parser", False) and DoclingPDFParserAdapter.is_available():
-                docling_doc = DoclingPDFParserAdapter.parse_pdf(file_path, doc_id)
-                if docling_doc:
-                    return docling_doc
+            if getattr(settings, "use_docling_parser", False):
+                if DoclingPDFParserAdapter.is_available():
+                    docling_doc = DoclingPDFParserAdapter.parse_pdf(file_path, doc_id)
+                    if docling_doc:
+                        return docling_doc
+                else:
+                    logger.warning("[MasterDocumentParser] USE_DOCLING_PARSER=true but 'docling' dependency is not installed. Falling back to native PyMuPDF.")
 
             # 2. Native PyMuPDF extraction
             native_doc = NativePDFParser.parse_pdf(file_path, doc_id)
-            # If native extraction yielded ample text, return native
             total_chars = sum(len(b.text) for b in native_doc.get_all_blocks())
             if total_chars >= 100:
                 return native_doc
-            
+
             # Scanned / empty PDF fallback with OCR if provider available
             if ocr_provider:
                 fitz_doc = fitz.open(str(file_path))
@@ -464,6 +466,11 @@ class MasterDocumentParser:
                 return CanonicalDocument(
                     doc_id=doc_id, title=file_path.name, doc_type="pdf", pages=ocr_pages, metadata={"is_scanned": True}
                 )
+
+            # If zero text and no OCR configured, do not silently index an empty document
+            if total_chars == 0:
+                raise ValueError(f"Scanned or image-only PDF '{file_path.name}' contains zero extractable text and no OCR provider is configured.")
+
             return native_doc
 
         elif ext in [".md", ".txt"]:

@@ -63,7 +63,7 @@ class NoOpSpan:
 
 @contextmanager
 def trace_step(name: str, metadata: Optional[Dict[str, Any]] = None, input_data: Optional[Any] = None):
-    """Context manager for tracing an execution step."""
+    """Context manager for tracing an execution step. Yields exactly once."""
     client = get_langfuse_client()
     if not client:
         yield NoOpSpan()
@@ -72,10 +72,20 @@ def trace_step(name: str, metadata: Optional[Dict[str, Any]] = None, input_data:
     redact = os.environ.get("LANGFUSE_REDACT_CONTENT", "true").lower() in ["true", "1", "yes"]
     safe_input = "[REDACTED_FOR_PRIVACY]" if (redact and isinstance(input_data, str)) else input_data
 
+    span = None
     try:
         span = client.span(name=name, metadata=metadata or {}, input=safe_input)
-        yield span
-        span.end()
     except Exception as e:
-        logger.debug(f"[Observability] Tracing span failed silently: {e}")
-        yield NoOpSpan()
+        logger.debug(f"[Observability] Failed to create span: {e}")
+
+    try:
+        if span is not None:
+            yield span
+        else:
+            yield NoOpSpan()
+    finally:
+        if span is not None:
+            try:
+                span.end()
+            except Exception as e:
+                logger.debug(f"[Observability] Span end failed silently: {e}")

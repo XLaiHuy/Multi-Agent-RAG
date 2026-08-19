@@ -103,6 +103,9 @@ class Settings(BaseSettings):
     confidence_weight_rerank_score: float = 0.20
     confidence_weight_metadata_match: float = 0.15
 
+    # Optional Advanced Docling Parser Adapter
+    use_docling_parser: bool = Field(default=False, alias="USE_DOCLING_PARSER")
+
     model_config = SettingsConfigDict(
         env_file=(".env", "../.env", "../../.env"),
         env_file_encoding="utf-8",

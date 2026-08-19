@@ -31,7 +31,7 @@ Uptime must exceed 99.9% per billing cycle.
     assert doc.doc_id == "md_test_01"
     assert doc.doc_type == "markdown"
     assert len(doc.pages) == 1
-    
+
     blocks = doc.pages[0].blocks
     assert len(blocks) >= 4
 

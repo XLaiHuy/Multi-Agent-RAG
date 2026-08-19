@@ -53,7 +53,7 @@ def get_db() -> Generator[Session, None, None]:
 def init_database():
     """Initializes database schema and optionally seeds dev accounts in development mode."""
     Base.metadata.create_all(bind=engine)
-    
+
     # Only seed demo accounts if NOT in production
     is_prod = settings.environment.lower() in ["production", "prod"]
     if is_prod:
@@ -121,7 +121,7 @@ def init_database():
             for md_file in sorted(fixtures_dir.glob("*.md")):
                 doc_id = md_file.stem
                 title = "Cooperation and License Agreement" if "01" in doc_id else "Enterprise Cloud Services Agreement"
-                
+
                 doc = Document(
                     id=doc_id,
                     tenant_id="default_tenant",
@@ -245,7 +245,7 @@ class DocumentRepository:
             created_by=created_by,
         )
         db.add(doc)
-        
+
         # Initial version
         ver = DocumentVersion(
             id=str(uuid.uuid4()),

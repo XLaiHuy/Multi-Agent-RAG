@@ -56,7 +56,7 @@ def main():
     # 2. Khởi động Frontend
     frontend_dir = ROOT_DIR / "frontend"
     print("\n▶️ [2/2] Đang khởi động Frontend Vite (Port 5173)...")
-    
+
     frontend_proc = subprocess.Popen(
         "npm run dev",
         cwd=str(frontend_dir),

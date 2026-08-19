@@ -33,10 +33,10 @@ class DenseRetriever:
     def __init__(self, embedding_provider: Optional[EmbeddingProvider] = None):
         self.settings = get_settings()
         self.embedder = embedding_provider or get_embedding_provider()
-        
+
         os.makedirs(self.settings.chroma_path, exist_ok=True)
         self.chroma_client = chromadb.PersistentClient(path=self.settings.chroma_path)
-        
+
         try:
             self.collection = self.chroma_client.get_or_create_collection(
                 name=self.settings.chroma_collection,
@@ -46,18 +46,13 @@ class DenseRetriever:
                 },
             )
         except Exception as e:
-            logger.warning(f"[DenseRetriever] Chroma collection init warning ({e}), re-creating...")
-            try:
-                self.chroma_client.delete_collection(self.settings.chroma_collection)
-            except Exception:
-                pass
-            self.collection = self.chroma_client.create_collection(
-                name=self.settings.chroma_collection,
-                metadata={
-                    "hnsw:space": "cosine",
-                    "embedding_dimension": self.embedder.dimension,
-                },
+            logger.error(
+                f"[DenseRetriever] Failed to initialize ChromaDB collection '{self.settings.chroma_collection}': {e}"
             )
+            raise RuntimeError(
+                f"ChromaDB collection initialization failed for '{self.settings.chroma_collection}'. "
+                f"Preserving existing data without destructive recovery: {e}"
+            ) from e
 
     @staticmethod
     def _sanitize_metadata_for_chroma(meta: Dict[str, Any]) -> Dict[str, Any]:

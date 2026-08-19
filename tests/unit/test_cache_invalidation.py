@@ -17,7 +17,7 @@ def test_cache_key_invalidation():
         broad_candidate_pool_size=100,
         structural_metadata_version="v1",
     )
-    
+
     # 1. Change manifest hash
     k_manifest = compute_cache_key(
         manifest_hash="diff_hash",
@@ -28,7 +28,7 @@ def test_cache_key_invalidation():
         dense_model="BAAI/bge-m3",
     )
     assert k_manifest != base_key
-    
+
     # 2. Change chunk size
     k_chunk = compute_cache_key(
         manifest_hash="abc123hash",
@@ -39,7 +39,7 @@ def test_cache_key_invalidation():
         dense_model="BAAI/bge-m3",
     )
     assert k_chunk != base_key
-    
+
     # 3. Change dense model
     k_dense = compute_cache_key(
         manifest_hash="abc123hash",
