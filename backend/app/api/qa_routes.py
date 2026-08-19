@@ -5,7 +5,7 @@ Provides synchronous and SSE streaming QA, verified citations, and anti-IDOR con
 import json
 import uuid
 import asyncio
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sse_starlette.sse import EventSourceResponse
 from sqlalchemy.orm import Session
