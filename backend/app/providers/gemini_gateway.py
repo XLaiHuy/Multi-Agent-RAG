@@ -36,13 +36,13 @@ class GeminiAPIGateway(LLMProvider):
     def __init__(self, settings: Optional[Settings] = None):
         self.settings = settings or get_settings()
         self.api_key = self.settings.gemini_api_key
-
+        
         # Initialize Google GenAI client if key exists
         self.client = genai.Client(api_key=self.api_key) if self.api_key else None
-
+        
         # Concurrency Semaphore
         self._concurrency_semaphore = threading.Semaphore(self.settings.gemini_concurrency_limit)
-
+        
         # Circuit Breaker state
         self._consecutive_failures = 0
         self._circuit_open_until = 0.0
@@ -122,7 +122,7 @@ class GeminiAPIGateway(LLMProvider):
             if now - self._rpm_window_start > 60.0:
                 self._rpm_window_start = now
                 self._rpm_request_count = 0
-
+            
             if self._rpm_request_count >= self.settings.gemini_rpm_limit:
                 sleep_duration = 60.0 - (now - self._rpm_window_start) + 0.1
                 if sleep_duration > 0:
@@ -162,12 +162,12 @@ class GeminiAPIGateway(LLMProvider):
                     self._record_failure(e, model_name)
                     logger.error(f"[Gateway] Non-retryable API error {status_code}: {e}")
                     raise e
-
+                
                 # 429 Rate limit or 5xx Server error -> Retry with jittered backoff
                 if status_code == 429:
                     with self._metrics_lock:
                         self.metrics["throttled_429_count"] += 1
-
+                
             except Exception as e:
                 err_str = str(e).lower()
                 # Fast fail on invalid API key, auth failure, or unconfigured quota
@@ -199,7 +199,7 @@ class GeminiAPIGateway(LLMProvider):
             raise RuntimeError("Gemini API key is not configured.")
 
         model_name = self._resolve_model_name(model_type)
-
+        
         config = types.GenerateContentConfig(
             temperature=temperature,
             system_instruction=system_instruction,
@@ -263,7 +263,7 @@ class GeminiAPIGateway(LLMProvider):
             raise RuntimeError("Gemini API key is not configured.")
 
         model_name = self._resolve_model_name(model_type)
-
+        
         config = types.GenerateContentConfig(
             temperature=temperature,
             system_instruction=system_instruction,

@@ -7,12 +7,12 @@ from backend.app.retrieval.confidence import RetrievalConfidenceEngine
 
 def test_high_confidence_signals():
     engine = RetrievalConfidenceEngine()
-
+    
     dense_ranked = ["chunk_1", "chunk_2", "chunk_3", "chunk_4", "chunk_5"]
     bm25_ranked = ["chunk_1", "chunk_2", "chunk_3", "chunk_5", "chunk_6"]
     fused_scores = [0.032, 0.020, 0.015, 0.010]
     rerank_scores = [0.92, 0.65, 0.40]
-
+    
     top_meta = [
         {"section_path": ["Termination", "Notice Period"], "title": "MSA Agreement.pdf"},
         {"section_path": ["Termination Rights"], "title": "MSA Agreement.pdf"},

@@ -25,14 +25,14 @@ def test_runtime_label_isolation():
         "strict_gold_child_ids": ["cuad_contract_001_p0_c0"],
         "strict_gold_parent_ids": ["cuad_contract_001_p0"]
     }
-
+    
     # Layer A Sanitizer
     sanitized_payload = {
         "query_id": sample_manifest_query["query_id"],
         "question": sample_manifest_query["question"],
         "selected_document_id": sample_manifest_query["source_contract_id"]
     }
-
+    
     assert "is_unanswerable" not in sanitized_payload
     assert "answers" not in sanitized_payload
     assert "strict_gold_child_ids" not in sanitized_payload
@@ -48,11 +48,11 @@ def test_structured_refusal_vs_error():
     """
     refusal_text = "INSUFFICIENT_EVIDENCE: The provided contract excerpts do not contain information regarding this question."
     cands = [{"chunk_id": "c1", "parent_id": "p1", "doc_id": "doc1", "text": "Some text"}]
-
+    
     dec_ref, cit_ref = parse_decision_and_citations(refusal_text, cands)
     assert dec_ref == "INSUFFICIENT_EVIDENCE"
     assert len(cit_ref) == 0
-
+    
     answer_text = "According to [Reference 1], the governing law is the State of Delaware."
     dec_ans, cit_ans = parse_decision_and_citations(answer_text, cands)
     assert dec_ans == "ANSWER"
@@ -67,7 +67,7 @@ def test_token_f1_computation():
     """
     pred = "This Agreement is governed by Delaware law."
     gold = "governed by the laws of Delaware"
-
+    
     prec, rec, f1 = compute_f1(pred, gold)
     assert 0.0 < f1 <= 1.0
     assert prec > 0.0

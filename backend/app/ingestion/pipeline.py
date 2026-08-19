@@ -55,7 +55,7 @@ class IngestionPipeline:
             # Stage 1: PARSING
             with SessionLocal() as db:
                 JobRepository.update_job_status(db, job_id, "PARSING", 15)
-
+            
             logger.info(f"[Ingestion] Job {job_id}: Parsing {file_path.name}...")
             canonical_doc: CanonicalDocument = MasterDocumentParser.parse(file_path, document_id)
 
