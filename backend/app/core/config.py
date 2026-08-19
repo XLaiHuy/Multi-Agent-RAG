@@ -34,7 +34,7 @@ class Settings(BaseSettings):
     app_version: str = "3.5.1"
 
     # Security & JWT
-    jwt_secret_key: str = Field(default="", alias="JWT_SECRET_KEY")
+    jwt_secret_key: str = Field(default="dev_insecure_jwt_secret_key_change_in_production_1234567890", alias="JWT_SECRET_KEY")
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = Field(default=60 * 24, alias="ACCESS_TOKEN_EXPIRE_MINUTES")
 

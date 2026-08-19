@@ -3,8 +3,6 @@ Embedding Providers (Local SentenceTransformers & Gemini API).
 Decoupled implementation conforming to EmbeddingProvider interface.
 """
 import os
-os.environ.setdefault("HF_HUB_OFFLINE", "1")
-os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 import time
 import logging
 from typing import List, Optional
@@ -67,7 +65,6 @@ class LocalEmbeddingProvider(EmbeddingProvider):
 
     @property
     def dimension(self) -> int:
-        self._get_model()
         return self._dim
 
 
