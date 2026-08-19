@@ -3,6 +3,7 @@ Dense Semantic Vector Retriever.
 Integrates with ChromaDB and EmbeddingProvider with tenant isolation and ACL pre-filtering.
 """
 import os
+import json
 import logging
 import chromadb
 from typing import List, Dict, Any, Optional
@@ -44,8 +45,8 @@ class DenseRetriever:
                     "embedding_dimension": self.embedder.dimension,
                 },
             )
-        except Exception:
-            # Recreate collection if incompatible dimension
+        except Exception as e:
+            logger.warning(f"[DenseRetriever] Chroma collection init warning ({e}), re-creating...")
             try:
                 self.chroma_client.delete_collection(self.settings.chroma_collection)
             except Exception:
@@ -58,6 +59,31 @@ class DenseRetriever:
                 },
             )
 
+    @staticmethod
+    def _sanitize_metadata_for_chroma(meta: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        ChromaDB strictly requires metadata values to be primitives (str, int, float, bool)
+        or non-empty homogeneous lists of primitives. Rejects None, dicts, and nested dicts.
+        """
+        clean = {}
+        for k, v in meta.items():
+            if v is None:
+                continue
+            if isinstance(v, (str, int, float, bool)):
+                clean[k] = v
+            elif isinstance(v, list):
+                if not v:
+                    continue
+                if all(isinstance(x, (str, int, float, bool)) for x in v) and len(set(type(x) for x in v)) <= 1:
+                    clean[k] = v
+                else:
+                    clean[k] = json.dumps(v, ensure_ascii=False)
+            elif isinstance(v, dict):
+                clean[k] = json.dumps(v, ensure_ascii=False)
+            else:
+                clean[k] = str(v)
+        return clean
+
     def upsert_chunks(
         self,
         chunk_ids: List[str],
@@ -68,11 +94,12 @@ class DenseRetriever:
         """Batch upsert child chunks into ChromaDB."""
         if not chunk_ids:
             return
+        sanitized_metas = [self._sanitize_metadata_for_chroma(m) for m in metadatas]
         self.collection.upsert(
             ids=chunk_ids,
             documents=texts,
             embeddings=embeddings,
-            metadatas=metadatas,
+            metadatas=sanitized_metas,
         )
 
     def search(
@@ -151,6 +178,17 @@ class DenseRetriever:
                 if not chunk_doc or chunk_doc not in allowed_set:
                     continue
 
+            # Rehydrate JSON fields
+            hydrated = {}
+            for k, v in m.items():
+                if isinstance(v, str) and (v.startswith("{") or v.startswith("[")):
+                    try:
+                        hydrated[k] = json.loads(v)
+                    except Exception:
+                        hydrated[k] = v
+                else:
+                    hydrated[k] = v
+
             # For cosine distance in Chroma: similarity = 1 - distance
             similarity = max(0.0, min(1.0, 1.0 - float(dist)))
             hits.append(
@@ -159,7 +197,7 @@ class DenseRetriever:
                     text=doc_text,
                     similarity=similarity,
                     distance=float(dist),
-                    metadata=m,
+                    metadata=hydrated,
                 )
             )
 
