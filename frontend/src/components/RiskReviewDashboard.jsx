@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CitationViewerModal from './CitationViewerModal'
 
 const SEVERITY_COLORS = {
@@ -15,12 +15,18 @@ const SEVERITY_ICONS = {
   low: 'ℹ️',
 }
 
-export default function RiskReviewDashboard({ documents, token, apiUrl }) {
+export default function RiskReviewDashboard({ documents, token, apiUrl, onOpenUpload }) {
   const [selectedDoc, setSelectedDoc] = useState(documents[0]?.id || '')
   const [loading, setLoading] = useState(false)
   const [report, setReport] = useState(null)
   const [error, setError] = useState('')
   const [activeCitation, setActiveCitation] = useState(null)
+
+  useEffect(() => {
+    if (!selectedDoc && documents.length > 0) {
+      setSelectedDoc(documents[0].id)
+    }
+  }, [documents, selectedDoc])
 
   const handleReview = async () => {
     if (!selectedDoc) {
@@ -45,7 +51,7 @@ export default function RiskReviewDashboard({ documents, token, apiUrl }) {
       })
 
       if (!res.ok) {
-        const data = await res.json()
+        const data = await res.json().catch(() => ({}))
         throw new Error(data.detail || 'Failed to analyze contract risks.')
       }
 

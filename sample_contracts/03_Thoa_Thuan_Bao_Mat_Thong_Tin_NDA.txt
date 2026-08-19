@@ -1,0 +1,44 @@
+CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc lập - Tự do - Hạnh phúc
+---***---
+
+THỎA THUẬN BẢO MẬT THÔNG TIN VÀ DỮ LIỆU KINH DOANH (NDA)
+(Số: 2026/NDA/SEC-PARTNER)
+
+Hôm nay, ngày 05 tháng 03 năm 2026, các bên gồm:
+
+BÊN TIẾT LỘ THÔNG TIN (BÊN A):
+- CÔNG TY CỔ PHẦN ĐẦU TƯ & CÔNG NGHỆ ALPHA
+- Đại diện: Ông Nguyễn Văn An - Tổng Giám Đốc
+
+BÊN NHẬN THÔNG TIN (BÊN B):
+- CÔNG TY TNHH THƯƠNG MẠI & DỊCH VỤ BETA
+- Đại diện: Bà Trần Thị Bình - Giám Đốc Điều Hành
+
+Hai bên thỏa thuận ký kết bản Thỏa thuận bảo mật thông tin với các điều khoản:
+
+ĐIỀU 1: PHẠM VI VÀ ĐỊNH NGHĨA THÔNG TIN BẢO MẬT
+1.1. "Thông tin bảo mật" bao gồm toàn bộ các bí mật kinh doanh, mã nguồn phần mềm, chiến lược giá, danh sách khách hàng, dữ liệu cá nhân của người dùng, báo cáo tài chính và mọi tài liệu được Bên A chuyển giao cho Bên B dưới dạng văn bản, tệp điện tử hoặc trao đổi miệng.
+
+ĐIỀU 2: NGHĨA VỤ CỦA BÊN NHẬN THÔNG TIN
+2.1. Bên B cam kết giữ bí mật tuyệt đối, chỉ sử dụng thông tin cho mục đích đánh giá cơ hội hợp tác kinh doanh giữa hai bên.
+2.2. Không được sao chép, công bố, tiết lộ hoặc chuyển giao cho bất kỳ bên thứ ba nào khi chưa có sự đồng ý bằng văn bản của Bên A.
+2.3. Áp dụng mức độ cẩn trọng tối đa, tối thiểu tương đương với mức độ bảo vệ bí mật kinh doanh của chính Bên B.
+
+ĐIỀU 3: THỜI HẠN BẢO MẬT VÔ THỜI HẠN (PERPETUAL OBLIGATION)
+3.1. Nghĩa vụ bảo mật thông tin theo thỏa thuận này có hiệu lực vô thời hạn (kéo dài vĩnh viễn), áp dụng đối với tất cả các thông tin được chuyển giao bất kể việc hai bên có tiến hành ký kết hợp đồng chính thức hay không.
+
+ĐIỀU 4: ĐIỀU KHOẢN CẤM LÔI KÉO VÀ TUYỂN DỤNG NHÂN SỰ
+4.1. Trong thời gian hợp tác và trong vòng 24 (hai mươi bốn) tháng sau khi kết thúc đàm phán, Bên B cam kết không được tuyển dụng, tiếp cận hoặc lôi kéo bất kỳ nhân sự, lập trình viên hoặc cán bộ quản lý nào của Bên A.
+4.2. Trường hợp Bên B vi phạm điều khoản này, Bên B phải thanh toán một khoản tiền phạt bồi thường cố định là 500.000.000 VNĐ (Năm trăm triệu đồng) cho mỗi nhân sự tuyển dụng trái phép.
+
+ĐIỀU 5: TRÁCH NHIỆM BỒI THƯỜNG THIỆT HẠI
+5.1. Bồi thường không giới hạn: Trường hợp Bên B làm rò rỉ hoặc vi phạm nghĩa vụ bảo mật, Bên B phải chịu trách nhiệm bồi thường vô hạn mọi thiệt hại trực tiếp, gián tiếp, thiệt hại về cơ hội kinh doanh và toàn bộ chi phí thuê luật sư phát sinh của Bên A.
+
+ĐIỀU 6: LUẬT ÁP DỤNG VÀ GIẢI QUYẾT TRANH CHẤP
+6.1. Thỏa thuận này được điều chỉnh bởi Pháp luật Việt Nam.
+6.2. Mọi tranh chấp phát sinh từ thỏa thuận này sẽ được giải quyết tại Tòa án nhân dân có thẩm quyền tại Thành phố Hồ Chí Minh.
+
+ĐẠI DIỆN BÊN A                                          ĐẠI DIỆN BÊN B
+(Ký, đóng dấu)                                          (Ký, đóng dấu)
+Nguyễn Văn An                                           Trần Thị Bình

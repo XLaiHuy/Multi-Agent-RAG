@@ -1,16 +1,90 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CitationViewerModal from './CitationViewerModal'
 
+// Lightweight Markdown renderer: handles bold, headings, tables, hr, lists
+function renderMarkdown(text) {
+  if (!text) return ''
+  const lines = text.split('\n')
+  const result = []
+  let i = 0
+  while (i < lines.length) {
+    const line = lines[i]
+    // Table detection: starts with |
+    if (line.trim().startsWith('|')) {
+      const tableLines = []
+      while (i < lines.length && lines[i].trim().startsWith('|')) {
+        tableLines.push(lines[i])
+        i++
+      }
+      // skip separator row (|:---|:---|)
+      const rows = tableLines.filter(l => !l.match(/^\|[-:\s|]+\|?\s*$/))
+      const tableHtml = rows.map((row, rIdx) => {
+        const cells = row.split('|').filter((_, ci) => ci > 0 && ci < row.split('|').length - 1)
+        const tag = rIdx === 0 ? 'th' : 'td'
+        return `<tr>${cells.map(c => `<${tag} class="border border-indigo-800/30 px-3 py-2 text-left text-xs ${rIdx === 0 ? 'font-bold text-indigo-200 bg-indigo-900/40' : 'text-slate-200'}">${inlineFormat(c.trim())}</${tag}>`).join('')}</tr>`
+      }).join('')
+      result.push(`<div class="overflow-x-auto my-3"><table class="w-full border-collapse text-xs">${tableHtml}</table></div>`)
+      continue
+    }
+    // Horizontal rule
+    if (line.trim() === '---' || line.trim() === '***') {
+      result.push('<hr class="border-indigo-800/40 my-3" />')
+      i++
+      continue
+    }
+    // Headings
+    if (line.startsWith('#### ')) {
+      result.push(`<h4 class="text-xs font-bold text-indigo-200 mt-4 mb-1">${inlineFormat(line.slice(5))}</h4>`)
+      i++
+      continue
+    }
+    if (line.startsWith('### ')) {
+      result.push(`<h3 class="text-sm font-bold text-white mt-5 mb-1">${inlineFormat(line.slice(4))}</h3>`)
+      i++
+      continue
+    }
+    if (line.startsWith('## ')) {
+      result.push(`<h2 class="text-base font-bold text-white mt-5 mb-1">${inlineFormat(line.slice(3))}</h2>`)
+      i++
+      continue
+    }
+    // Bullet list
+    if (line.trim().startsWith('* ') || line.trim().startsWith('- ')) {
+      result.push(`<li class="ml-4 text-xs text-slate-300 list-disc list-inside">${inlineFormat(line.trim().slice(2))}</li>`)
+      i++
+      continue
+    }
+    // Empty line
+    if (line.trim() === '') {
+      result.push('<div class="h-2"></div>')
+      i++
+      continue
+    }
+    // Normal paragraph
+    result.push(`<p class="text-xs text-slate-200 leading-relaxed">${inlineFormat(line)}</p>`)
+    i++
+  }
+  return result.join('')
+}
+
+function inlineFormat(text) {
+  return text
+    .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code class="bg-indigo-900/50 px-1 rounded text-indigo-200">$1</code>')
+}
+
 const DEFAULT_FACETS = [
-  'Term and Termination Rights',
-  'Notice Period Requirements',
-  'Limitation of Liability & Liability Cap',
-  'Indemnification Obligations',
-  'Governing Law & Dispute Resolution',
-  'Payment Terms and Price Adjustments',
+  'Thời hạn hợp đồng & Quyền chấm dứt (Term & Termination)',
+  'Quy định thời hạn báo trước (Notice Period Requirements)',
+  'Giới hạn trách nhiệm & Mức trần bồi thường (Limitation of Liability)',
+  'Nghĩa vụ bồi thường bên thứ ba (Indemnification)',
+  'Luật áp dụng & Cơ quan giải quyết tranh chấp (Governing Law & Forum)',
+  'Điều khoản thanh toán & Điều chỉnh giá (Payment & Pricing)',
+  'Bảo mật thông tin & Dữ liệu (Confidentiality & Data Protection)',
 ]
 
-export default function ContractCompareView({ documents, token, apiUrl }) {
+export default function ContractCompareView({ documents, token, apiUrl, onOpenUpload }) {
   const [contractA, setContractA] = useState(documents[0]?.id || '')
   const [contractB, setContractB] = useState(documents[1]?.id || documents[0]?.id || '')
   const [selectedFacets, setSelectedFacets] = useState(DEFAULT_FACETS)
@@ -18,6 +92,13 @@ export default function ContractCompareView({ documents, token, apiUrl }) {
   const [result, setResult] = useState(null)
   const [error, setError] = useState('')
   const [activeCitation, setActiveCitation] = useState(null)
+
+  useEffect(() => {
+    if (documents.length > 0) {
+      if (!contractA) setContractA(documents[0].id)
+      if (!contractB) setContractB(documents[1]?.id || documents[0].id)
+    }
+  }, [documents, contractA, contractB])
 
   const toggleFacet = (facet) => {
     if (selectedFacets.includes(facet)) {
@@ -187,9 +268,10 @@ export default function ContractCompareView({ documents, token, apiUrl }) {
                 ⚡ Processed in {Math.round(result.stats?.total_ms || 0)}ms
               </span>
             </div>
-            <p className="text-sm leading-relaxed text-slate-200 whitespace-pre-wrap font-sans">
-              {result.summary_comparison}
-            </p>
+            <div
+              className="text-sm leading-relaxed font-sans"
+              dangerouslySetInnerHTML={{ __html: renderMarkdown(result.summary_comparison) }}
+            />
           </div>
 
           {/* Facet Comparison Cards */}

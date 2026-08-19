@@ -273,16 +273,33 @@ class GeminiAPIGateway(LLMProvider):
 
         def _call():
             import json
+            import re
             response = self.client.models.generate_content(
                 model=model_name,
                 contents=prompt,
                 config=config,
             )
             if response and response.text:
-                return json.loads(response.text)
+                raw = response.text.strip()
+                if raw.startswith("```"):
+                    raw = re.sub(r"^```(?:json)?\s*", "", raw)
+                    raw = re.sub(r"\s*```$", "", raw)
+                raw = raw.strip()
+                try:
+                    return json.loads(raw)
+                except Exception:
+                    match = re.search(r"(\{[\s\S]*\}|\[[\s\S]*\])", raw)
+                    if match:
+                        try:
+                            return json.loads(match.group(1))
+                        except Exception:
+                            pass
+                    logger.warning(f"[Gateway] Structured JSON parsing failed for raw response: {raw[:200]}")
+                    return {}
             return {}
 
         return self._execute_with_resilience(_call, model_name)
+
 
 
 _gateway_instance: Optional[GeminiAPIGateway] = None

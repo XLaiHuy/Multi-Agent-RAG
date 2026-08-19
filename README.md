@@ -175,7 +175,6 @@ Multi-Agent-RAG/
 │   ├── reports/         # Master scientific reports & ablation studies
 │   ├── results/         # Machine-readable JSON results & rank traces
 │   └── scripts/         # run_phase4_2.py, rescore_phase6_strict.py, run_phase6_1_judge.py
-├── docs/                # Architecture, evaluation, security, and reproducibility docs
 ├── frontend/            # Vite + React frontend dashboard
 └── tests/               # 67 unit, security, ACL, and metric consistency tests
 ```
@@ -209,17 +208,12 @@ python evaluation/scripts/rescore_phase6_strict.py
 
 ---
 
-## Documentation Hub
+## Evaluation Reports & System Docs
 
-- [Architecture & Ingestion Pipeline](docs/architecture.md)
-- [Evaluation Methodology & Benchmark Splits](docs/evaluation.md)
-- [Multi-Tenant Security & ACL Proof](docs/security.md)
-- [Step-by-Step Reproducibility Guide](docs/reproducibility.md)
-- [Portfolio Summary & Engineering Decisions](docs/portfolio-summary.md)
-- [CV Project Entry Source](docs/cv-project-entry.md)
-- [Master Interview Study Guide & Curriculum](docs/interview-study-guide.md)
 - [Phase 6.1 Final Scientific Sign-Off](evaluation/reports/PHASE6_1_FINAL_SCIENTIFIC_SIGNOFF.md)
 - [Phase 4.2 Master Metric Integrity Report](evaluation/reports/PHASE4_2_FINAL_METRIC_INTEGRITY.md)
+- [Interactive API Swagger Docs](http://localhost:8000/docs)
+
 
 ---
 

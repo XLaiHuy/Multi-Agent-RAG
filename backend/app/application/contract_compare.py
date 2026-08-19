@@ -18,21 +18,22 @@ from backend.app.domain.schemas import (
 logger = logging.getLogger("contract_compare")
 
 DEFAULT_COMPARISON_FACETS = [
-    "Term and Termination Rights",
-    "Notice Period Requirements",
-    "Limitation of Liability & Liability Cap",
-    "Indemnification Obligations",
-    "Governing Law & Dispute Resolution",
-    "Payment Terms and Price Adjustments",
-    "Confidentiality & Data Protection",
+    "Thời hạn hợp đồng & Quyền chấm dứt (Term & Termination)",
+    "Quy định thời hạn báo trước (Notice Period Requirements)",
+    "Giới hạn trách nhiệm & Mức trần bồi thường (Limitation of Liability)",
+    "Nghĩa vụ bồi thường thiệt hại bên thứ ba (Indemnification)",
+    "Luật áp dụng & Cơ quan giải quyết tranh chấp (Governing Law & Dispute Resolution)",
+    "Điều khoản thanh toán & Điều chỉnh giá (Payment Terms & Pricing)",
+    "Bảo mật thông tin & Bảo vệ dữ liệu (Confidentiality & Data Protection)",
+    "Quyền Sở hữu Trí tuệ (Intellectual Property Rights)",
 ]
 
 
 class FacetSynthesis(BaseModel):
-    contract_a_summary: str
-    contract_b_summary: str
-    key_differences: str
-    risk_assessment: str
+    contract_a_summary: str = Field(description="Tóm tắt ngắn gọn quy định của Hợp đồng A bằng tiếng Việt")
+    contract_b_summary: str = Field(description="Tóm tắt ngắn gọn quy định của Hợp đồng B bằng tiếng Việt")
+    key_differences: str = Field(description="Điểm khác biệt cốt lõi giữa 2 hợp đồng bằng tiếng Việt")
+    risk_assessment: str = Field(description="Nhận định rủi ro và đánh giá bên nào có lợi thế hơn bằng tiếng Việt")
 
 
 class ComparisonSynthesis(BaseModel):
@@ -62,7 +63,7 @@ class ContractCompareService:
         custom_facets: Optional[List[str]] = None,
     ) -> ContractCompareResponse:
         """
-        Executes independent facet retrieval and structured comparative synthesis.
+        Executes decomposed, facet-by-facet comparison across two contracts.
         """
         start_time = time.perf_counter()
         stats = ExecutionStats()
@@ -73,7 +74,7 @@ class ContractCompareService:
 
         # Retrieve evidence independently for each facet and each document
         for facet in facets:
-            facet_query = f"Clause and conditions regarding {facet}"
+            facet_query = f"Điều khoản và quy định liên quan đến {facet}"
 
             # Contract A independent retrieval
             plan_a = self.qa_service.planner.plan(facet_query, context_docs_count=1)
@@ -99,7 +100,7 @@ class ContractCompareService:
                 )
                 for c in cands_a
             ]
-            text_a = "\n\n".join(c.text for c in cands_a) if cands_a else "No specific clause found."
+            text_a = "\n\n".join(c.text for c in cands_a) if cands_a else "Không tìm thấy điều khoản quy định cụ thể."
 
             # Contract B independent retrieval
             plan_b = self.qa_service.planner.plan(facet_query, context_docs_count=1)
@@ -125,22 +126,22 @@ class ContractCompareService:
                 )
                 for c in cands_b
             ]
-            text_b = "\n\n".join(c.text for c in cands_b) if cands_b else "No specific clause found."
+            text_b = "\n\n".join(c.text for c in cands_b) if cands_b else "Không tìm thấy điều khoản quy định cụ thể."
 
-            # Synthesize contrast for this specific facet
-            facet_prompt = f"""Compare the following two contracts on the specific topic: '{facet}'.
+            # Synthesize contrast for this specific facet in Vietnamese
+            facet_prompt = f"""Bạn là Cố vấn Pháp lý Doanh nghiệp Cấp cao. Hãy so sánh hai bản hợp đồng sau đây về khía cạnh: '{facet}'.
 
-[Contract A: {contract_a_name}]
+[Hợp đồng A: {contract_a_name}]
 {text_a}
 
-[Contract B: {contract_b_name}]
+[Hợp đồng B: {contract_b_name}]
 {text_b}
 
-Provide a structured contrast:
-1. Summary for Contract A
-2. Summary for Contract B
-3. Key differences
-4. Practical risk assessment for both parties."""
+Yêu cầu cung cấp phân tích có cấu trúc bằng TIẾNG VIỆT:
+1. contract_a_summary: Tóm tắt ngắn gọn nội dung của Hợp đồng A.
+2. contract_b_summary: Tóm tắt ngắn gọn nội dung của Hợp đồng B.
+3. key_differences: Điểm khác biệt quan trọng nhất giữa hai bên.
+4. risk_assessment: Đánh giá rủi ro pháp lý/thương mại thực tế và nhận định hợp đồng nào bảo vệ quyền lợi tốt hơn."""
 
             try:
                 facet_synth = self.gateway.generate_structured(
@@ -157,8 +158,8 @@ Provide a structured contrast:
                         contract_a_citations=citations_a,
                         contract_b_findings=facet_synth.get("contract_b_summary", text_b[:200]),
                         contract_b_citations=citations_b,
-                        key_differences=facet_synth.get("key_differences", "Differences not explicitly detailed."),
-                        risk_assessment=facet_synth.get("risk_assessment", "Standard operational terms."),
+                        key_differences=facet_synth.get("key_differences", "Không có sự khác biệt đáng kể."),
+                        risk_assessment=facet_synth.get("risk_assessment", "Điều khoản theo thông lệ thị trường."),
                     )
                 )
             except Exception as e:
@@ -170,16 +171,16 @@ Provide a structured contrast:
                         contract_a_citations=citations_a,
                         contract_b_findings=text_b[:250],
                         contract_b_citations=citations_b,
-                        key_differences="Analysis fallback due to generation error.",
-                        risk_assessment="Review source citations directly.",
+                        key_differences="Xem xét trích dẫn trực tiếp.",
+                        risk_assessment="Kiểm tra điều khoản gốc.",
                     )
                 )
 
-        # Generate overall executive summary
-        summary_prompt = f"""You are a Principal Legal Counsel.
-Provide a high-level executive summary comparing '{contract_a_name}' vs '{contract_b_name}'
-based on the analyzed facets: {', '.join(facets)}.
-Highlight which contract is more favorable and outline critical risk discrepancies."""
+        # Generate overall executive summary in Vietnamese
+        summary_prompt = f"""Bạn là Giám đốc Pháp chế Doanh nghiệp (General Counsel).
+Hãy viết một bản tóm tắt điều hành cấp cao (Executive Summary) bằng TIẾNG VIỆT so sánh giữa '{contract_a_name}' và '{contract_b_name}'
+dựa trên các khía cạnh đã phân tích: {', '.join(facets)}.
+Nêu rõ hợp đồng nào đem lại lợi thế thương mại và bảo vệ an toàn pháp lý tốt hơn cho doanh nghiệp, cùng các lưu ý đàm phán quan trọng."""
 
         try:
             exec_summary = self.gateway.generate(

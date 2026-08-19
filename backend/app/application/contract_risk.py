@@ -88,19 +88,21 @@ class ContractRiskService:
             rule_name = match_info["rule_name"]
             default_sev = match_info["severity"]
 
-            prompt = f"""You are a Senior Corporate Contract Risk Assessor.
-A deterministic risk rule '{rule_name}' was triggered on the following contract clause:
+            prompt = f"""Bạn là Chuyên gia Thẩm định Rủi ro Hợp đồng Doanh nghiệp Cấp cao (Senior Corporate Contract Risk Assessor).
+Một quy tắc rủi ro pháp lý '{rule_name}' đã được kích hoạt đối với điều khoản hợp đồng sau:
 
-Clause Text:
+Nội dung điều khoản:
 "{text}"
 
-Context Metadata:
-Section Path: {meta.get('section_path', [])}
-Page: {meta.get('page_number', 1)}
+Thông tin bổ sung:
+Phần/Mục: {meta.get('section_path', [])}
+Trang: {meta.get('page_number', 1)}
 
-Instructions:
-1. Evaluate if this clause represents a genuine legal/commercial risk or if it contains standard market exceptions.
-2. If genuine risk, provide severity (low, medium, high, critical), concise risk explanation, and redline revision recommendation."""
+Yêu cầu thực hiện bằng TIẾNG VIỆT:
+1. Đánh giá xem điều khoản này có thực sự là rủi ro pháp lý/thương mại đối với doanh nghiệp hay không (is_true_risk: true/false).
+2. Nếu là rủi ro thực sự, hãy xác định mức độ (severity: 'low', 'medium', 'high', 'critical').
+3. risk_explanation: Giải thích ngắn gọn, rõ ràng bằng TIẾNG VIỆT về nguy cơ hoặc trách nhiệm pháp lý/tài chính tiềm ẩn nếu ký điều khoản này.
+4. recommendation: Đưa ra đề xuất chỉnh sửa câu từ cụ thể (redline) hoặc hướng đàm phán bằng TIẾNG VIỆT để bảo vệ tối đa quyền lợi doanh nghiệp."""
 
             try:
                 interpretation = self.gateway.generate_structured(
@@ -136,8 +138,8 @@ Instructions:
                         severity=sev,
                         clause_title=sec_title,
                         clause_text=text,
-                        risk_explanation=interpretation.get("risk_explanation", "Potential risk detected by rule."),
-                        recommendation=interpretation.get("recommendation", "Review clause terms with counterparty."),
+                        risk_explanation=interpretation.get("risk_explanation", "Phát hiện rủi ro tiềm ẩn theo quy chuẩn pháp lý."),
+                        recommendation=interpretation.get("recommendation", "Đề nghị xem xét và đàm phán lại câu chữ điều khoản với đối tác."),
                         citations=[citation],
                     )
                     findings.append(finding)

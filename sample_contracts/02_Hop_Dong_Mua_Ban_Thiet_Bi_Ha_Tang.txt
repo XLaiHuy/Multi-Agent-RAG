@@ -1,0 +1,57 @@
+CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc lập - Tự do - Hạnh phúc
+---***---
+
+HỢP ĐỒNG MUA BÁN THIẾT BỊ HẠ TẦNG CÔNG NGHỆ THÔNG TIN
+(Số: 2026/HĐMB-IT/VINATECH-BETA)
+
+Hôm nay, ngày 20 tháng 02 năm 2026, tại Hà Nội, chúng tôi gồm có:
+
+BÊN BÁN (BÊN A):
+- Tên công ty: CÔNG TY CỔ PHẦN CÔNG NGHỆ VINA-TECH VIỆT NAM
+- Địa chỉ: Số 88 đường Láng Hạ, Đống Đa, Hà Nội
+- Đại diện bởi: Ông Hoàng Minh Đức - Chức vụ: Giám Đốc Kinh Doanh
+- Mã số thuế: 0106543210
+
+BÊN MUA (BÊN B):
+- Tên công ty: CÔNG TY TNHH THƯƠNG MẠI & DỊCH VỤ BETA
+- Địa chỉ: Tòa nhà Landmark, Quận Cầu Giấy, TP. Hà Nội
+- Đại diện bởi: Bà Trần Thị Bình - Chức vụ: Giám Đốc Điều Hành
+- Mã số thuế: 0109876543
+
+Hai bên thống nhất ký kết Hợp đồng mua bán thiết bị máy chủ và hệ thống mạng với các nội dung sau:
+
+ĐIỀU 1: DANH MỤC HÀNG HÓA VÀ TIÊU CHUẨN KỸ THUẬT
+1.1. Bên A cung cấp cho Bên B 05 Hệ thống máy chủ Dell PowerEdge R750 và 10 Thiết bị chuyển mạch Switch Cisco Catalyst 9300 mới 100%, nguyên đai nguyên kiện, kèm chứng chỉ CO/CQ xuất xứ rõ ràng.
+1.2. Thời gian giao hàng: Trong vòng 30 (ba mươi) ngày làm việc kể từ ngày Bên A nhận được tiền tạm ứng đợt 1.
+
+ĐIỀU 2: GIÁ TRỊ HỢP ĐỒNG VÀ PHƯƠNG THỨC THANH TOÁN
+2.1. Tổng giá trị hợp đồng: 1.250.000.000 VNĐ (Một tỷ hai trăm năm mươi triệu đồng Việt Nam). Giá đã bao gồm thuế GTGT (10%), chi phí vận chuyển, lắp đặt và đào tạo chuyển giao.
+2.2. Đồng tiền thanh toán: Đồng Việt Nam (VNĐ).
+2.3. Lộ trình thanh toán:
+   - Đợt 1: Tạm ứng 30% giá trị hợp đồng trong vòng 05 ngày làm việc kể từ ngày ký.
+   - Đợt 2: Thanh toán 65% giá trị hợp đồng sau khi nghiệm thu bàn giao thiết bị hoàn chỉnh.
+   - Đợt 3: Thanh toán 5% giá trị hợp đồng còn lại sau khi hết thời hạn bảo hành 12 tháng (hoặc giải tỏa Bảo lãnh bảo hành).
+
+ĐIỀU 3: BẢO HÀNH VÀ DỊCH VỤ HẬU MÃI
+3.1. Thời hạn bảo hành: 24 (hai mươi bốn) tháng đối với máy chủ và 36 (ba mươi sáu) tháng đối với thiết bị mạng.
+3.2. Cam kết hỗ trợ kỹ thuật (SLA): Khi nhận được thông báo sự cố phần cứng, kỹ sư Bên A có mặt tại chỗ trong vòng 04 giờ làm việc tại Hà Nội và 08 giờ làm việc tại các tỉnh thành khác.
+
+ĐIỀU 4: PHẠT VI PHẠM HỢP ĐỒNG VÀ BỒI THƯỜNG THIỆT HẠI
+4.1. Phạt chậm giao hàng: Nếu Bên A chậm giao hàng so với thời hạn quy định mà không có lý do chính đáng, Bên A chịu phạt 0.2%/ngày trên giá trị phần thiết bị chậm bàn giao, nhưng tổng mức phạt vi phạm không vượt quá 8% (Tám phần trăm) giá trị phần nghĩa vụ bị vi phạm theo đúng quy định tại Điều 301 Luật Thương mại Việt Nam.
+4.2. Phạt chậm thanh toán: Nếu Bên B chậm thanh toán, Bên B chịu lãi suất phạt chậm trả tính theo lãi suất nợ quá hạn của Ngân hàng Vietcombank tại thời điểm thanh toán.
+
+ĐIỀU 5: CHẤM DỨT HỢP ĐỒNG VÀ THỜI HẠN BÁO TRƯỚC
+5.1. Chấm dứt do thỏa thuận: Các bên có quyền thỏa thuận chấm dứt hợp đồng bằng văn bản.
+5.2. Chấm dứt tự nguyện (Termination for Convenience): Mỗi bên có quyền đơn phương chấm dứt hợp đồng bằng việc thông báo bằng văn bản trước ít nhất 30 (ba mươi) ngày cho bên kia và thanh toán đầy đủ các chi phí thực tế đã phát sinh đến thời điểm chấm dứt.
+
+ĐIỀU 6: BẢO MẬT THÔNG TIN
+6.1. Mỗi bên cam kết bảo mật toàn bộ thông tin kỹ thuật, cấu hình hệ thống và bí mật kinh doanh của bên kia trong thời hạn hợp đồng và kéo dài 03 (ba) năm sau khi hợp đồng kết thúc.
+
+ĐIỀU 7: LUẬT ÁP DỤNG VÀ CƠ QUAN TÀI PHÁN TRANH CHẤP
+7.1. Hợp đồng này được điều chỉnh và giải thích theo quy định của Pháp luật Nước Cộng hòa Xã hội Chủ nghĩa Việt Nam.
+7.2. Mọi tranh chấp phát sinh giữa hai bên trước hết được giải quyết thông qua thương lượng hòa giải. Nếu không giải quyết được trong vòng 30 ngày, tranh chấp sẽ được đưa ra giải quyết tại Trung tâm Trọng tài Quốc tế Việt Nam (VIAC) bên cạnh Phòng Thương mại và Công nghiệp Việt Nam theo Quy tắc tố tụng trọng tài của Trung tâm này.
+
+ĐẠI DIỆN BÊN A                                          ĐẠI DIỆN BÊN B
+(Ký, ghi rõ họ tên và đóng dấu)                         (Ký, ghi rõ họ tên và đóng dấu)
+Hoàng Minh Đức                                          Trần Thị Bình

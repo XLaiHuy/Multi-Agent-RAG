@@ -30,9 +30,15 @@ data/
 Thumbs.db
 .vscode/
 .idea/
+.codegraph/
+
+# Documentation & Study Notes
+Doc-ref/
+docs/
 
 evaluation/cache/
 evaluation/artifacts/cache/
 *.npy
 *.npz
 *.pkl
+

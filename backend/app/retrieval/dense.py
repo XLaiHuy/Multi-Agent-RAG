@@ -3,12 +3,16 @@ Dense Semantic Vector Retriever.
 Integrates with ChromaDB and EmbeddingProvider with tenant isolation and ACL pre-filtering.
 """
 import os
+import logging
 import chromadb
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 
 from backend.app.core.config import get_settings
 from backend.app.providers.embeddings import get_embedding_provider, EmbeddingProvider
+
+logger = logging.getLogger("dense_retriever")
+
 
 
 @dataclass
@@ -84,8 +88,10 @@ class DenseRetriever:
         if not query.strip():
             return []
 
+        total_count = 0
         try:
-            if self.collection.count() == 0:
+            total_count = self.collection.count()
+            if total_count <= 0:
                 return []
         except Exception:
             return []
@@ -108,16 +114,19 @@ class DenseRetriever:
         elif len(where_conditions) > 1:
             where_filter = {"$and": where_conditions}
 
+        query_k = max(1, min(top_k, total_count))
+
         try:
             results = self.collection.query(
                 query_embeddings=[query_vector],
-                n_results=top_k,
+                n_results=query_k,
                 where=where_filter,
                 include=["documents", "metadatas", "distances"],
             )
         except Exception as e:
             logger.warning(f"[DenseRetriever] Chroma query skipped ({e}), falling back to lexical search.")
             return []
+
 
         hits: List[DenseSearchResult] = []
         ids = results.get("ids", [[]])[0]

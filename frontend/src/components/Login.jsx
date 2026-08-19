@@ -64,11 +64,11 @@ export default function Login({ onLogin, apiUrl }) {
         {/* Left Branding & Quick Accounts Strip */}
         <div className="md:col-span-5 bg-gradient-to-br from-indigo-950 via-slate-900 to-blue-950 p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-700 text-white">
           <div>
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 to-blue-500 flex items-center justify-center text-2xl shadow-lg mb-4">
-              ⚖️
+            <div className="w-14 h-14 rounded-2xl bg-white p-1.5 shadow-lg mb-4 ring-2 ring-indigo-400/30 flex items-center justify-center">
+              <img src="/oulogo.png" alt="OU Logo" className="w-full h-full object-contain rounded-xl" />
             </div>
             <h2 className="text-xl font-black tracking-tight text-white">
-              Enterprise Contract Intelligence
+              AI TRA CỨU LUẬT & HỢP ĐỒNG
             </h2>
             <p className="text-xs text-slate-400 mt-1 leading-relaxed">
               Adaptive Multi-Agent RAG Platform dành cho thẩm định và rà soát hợp đồng doanh nghiệp.

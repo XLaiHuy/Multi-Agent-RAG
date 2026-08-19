@@ -278,16 +278,20 @@ class ContractQAService:
 
         context_prompt_str = "\n\n---\n\n".join(context_parts)
 
-        system_prompt = """You are a Senior Legal Contract Intelligence Analyst.
-Answer the user's question with precise factual accuracy based solely on the provided reference excerpts.
-Always cite the exact supporting document and section (e.g. [Document Reference X])."""
+        system_prompt = """Bạn là Chuyên viên Phân tích Pháp lý Hợp đồng Doanh nghiệp Cấp cao (Senior Legal Contract Intelligence Analyst).
+Nhiệm vụ của bạn là giải đáp thắc mắc của người dùng một cách chuẩn xác, khách quan và chuyên nghiệp, dựa HOÀN TOÀN vào các đoạn trích dẫn điều khoản hợp đồng được cung cấp.
 
-        gen_prompt = f"""Reference Contract Context:
+Quy tắc bắt buộc:
+1. Trả lời bằng TIẾNG VIỆT rõ ràng, mạch lạc, chuẩn văn phong pháp lý doanh nghiệp (nếu người dùng hỏi bằng tiếng Anh thì trả lời bằng tiếng Anh).
+2. Luôn trích dẫn rõ căn cứ số điều khoản và tài liệu tham chiếu (ví dụ: [Tài liệu tham khảo 1], Điều X, Khoản Y).
+3. Nếu tài liệu được cung cấp không chứa thông tin hoặc không đủ căn cứ để trả lời câu hỏi, hãy nêu rõ ràng rằng: "Hợp đồng được cung cấp không có điều khoản quy định về vấn đề này." Tuyệt đối không suy diễn hoặc bịa đặt thông tin."""
+
+        gen_prompt = f"""Ngữ cảnh trích dẫn từ Hợp đồng:
 {context_prompt_str}
 
-User Question: {query_stripped}
+Câu hỏi của người dùng: {query_stripped}
 
-Answer:"""
+Câu trả lời phân tích pháp lý:"""
 
         g_start = time.perf_counter()
         v_status = "grounded"
@@ -300,7 +304,7 @@ Answer:"""
                 temperature=0.1,
             )
             if not answer or not answer.strip():
-                answer = "The provided contract documents do not specify or mention information regarding this query."
+                answer = "Tài liệu hợp đồng được cung cấp không đề cập hoặc không có thông tin quy định về câu hỏi này."
 
             stats.generation_ms = (time.perf_counter() - g_start) * 1000
             stats.llm_calls_count += 1
@@ -321,8 +325,8 @@ Answer:"""
             if verification.recommended_action == "regenerate":
                 regen_prompt = f"""{gen_prompt}
 
-IMPORTANT CORRECTION: Your previous answer contained unsupported statements: {verification.critique_for_regeneration}.
-Strictly adhere only to the verbatim factual context provided above."""
+YÊU CẦU ĐIỀU CHỈNH: Câu trả lời trước của bạn có nội dung chưa được chứng minh bởi tài liệu: {verification.critique_for_regeneration}.
+Hãy viết lại câu trả lời bằng TIẾNG VIỆT, bám sát 100% từng câu chữ trong ngữ cảnh trích dẫn ở trên."""
                 regen_ans = self.gateway.generate(
                     prompt=regen_prompt,
                     system_instruction=system_prompt,
@@ -337,7 +341,7 @@ Strictly adhere only to the verbatim factual context provided above."""
                 )
                 v_status = verification.status
             elif verification.recommended_action == "qualify_or_refuse":
-                answer = f"[Notice: Certain details in the contract could not be fully substantiated.]\n\n{answer}"
+                answer = f"[Lưu ý: Một số chi tiết trong câu trả lời có thể chưa được chứng minh đầy đủ từ hợp đồng gốc]\n\n{answer}"
                 v_status = verification.status
         except Exception as e:
             logger.error(f"[QA] Generation failed: {e}")

@@ -1,0 +1,64 @@
+CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc lập - Tự do - Hạnh phúc
+---***---
+
+HỢP ĐỒNG CUNG CẤP VÀ SỬ DỤNG DỊCH VỤ PHẦN MỀM SAAS
+(Số: 2026/HĐ-SAAS/ALPHA-BETA)
+
+Hôm nay, ngày 15 tháng 01 năm 2026, tại Thành phố Hồ Chí Minh, chúng tôi gồm có:
+
+BÊN CUNG CẤP DỊCH VỤ (BÊN A):
+- Tên đơn vị: CÔNG TY CỔ PHẦN CÔNG NGHỆ ALPHA CLOUD
+- Địa chỉ: Tầng 12, Tòa nhà Innovation, Quận 1, TP. Hồ Chí Minh
+- Đại diện bởi: Ông Nguyễn Văn An - Chức vụ: Tổng Giám Đốc
+- Mã số thuế: 0312345678
+
+BÊN SỬ DỤNG DỊCH VỤ (BÊN B):
+- Tên đơn vị: CÔNG TY TNHH THƯƠNG MẠI & DỊCH VỤ BETA
+- Địa chỉ: Tòa nhà Landmark, Quận Cầu Giấy, TP. Hà Nội
+- Đại diện bởi: Bà Trần Thị Bình - Chức vụ: Giám Đốc Điều Hành
+- Mã số thuế: 0109876543
+
+Hai Bên cùng thống nhất ký kết Hợp đồng dịch vụ phần mềm điện toán đám mây (SaaS) với các điều khoản sau:
+
+ĐIỀU 1: ĐỐI TƯỢNG HỢP ĐỒNG & PHẠM VI DỊCH VỤ
+1.1. Bên A đồng ý cung cấp quyền truy cập và sử dụng Nền tảng quản trị doanh nghiệp Alpha-ERP trên nền tảng đám mây cho Bên B.
+1.2. Số lượng người dùng đăng ký tối đa: 150 tài khoản truy cập đồng thời.
+
+ĐIỀU 2: GIÁ TRỊ HỢP ĐỒNG VÀ PHƯƠNG THỨC THANH TOÁN
+2.1. Phí dịch vụ hàng năm: 25.000 USD / năm (Hai mươi lăm nghìn Đô la Mỹ).
+2.2. Phương thức thanh toán: Bên B thanh toán bằng chuyển khoản ngân hàng bằng đồng Đô la Mỹ (USD) vào tài khoản ngoại tệ của Bên A trong vòng 15 ngày kể từ ngày nhận hóa đơn.
+2.3. Điều chỉnh giá: Bên A có toàn quyền tự ý điều chỉnh tăng giá phí dịch vụ hàng năm tối đa 15% mà không cần có sự đồng ý trước bằng văn bản của Bên B.
+
+ĐIỀU 3: THỜI HẠN HỢP ĐỒNG VÀ TỰ ĐỘNG GIA HẠN
+3.1. Hợp đồng có hiệu lực 02 (hai) năm kể từ ngày ký.
+3.2. Cơ chế gia hạn tự động (Evergreen Renewal): Sau khi hết hạn thời hạn ban đầu, Hợp đồng này sẽ tự động gia hạn thêm các chu kỳ liên tiếp 01 (một) năm trừ khi Bên B gửi thông báo bằng văn bản từ chối gia hạn trước ít nhất 90 (chín mươi) ngày trước ngày kết thúc chu kỳ.
+3.3. Quyền chấm dứt: Bên B chỉ được quyền chấm dứt hợp đồng khi Bên A vi phạm nghiêm trọng nghĩa vụ và không khắc phục trong vòng 60 ngày. Bên B không có quyền đơn phương chấm dứt hợp đồng tự nguyện (no termination for convenience).
+
+ĐIỀU 4: BẢO VỆ DỮ LIỆU CÁ NHÂN VÀ BẢO MẬT THÔNG TIN
+4.1. Các bên cam kết tuân thủ đầy đủ quy định tại Nghị định 13/2023/NĐ-CP của Chính phủ Việt Nam về bảo vệ dữ liệu cá nhân.
+4.2. Bên A có trách nhiệm áp dụng các biện pháp kỹ thuật và an ninh mạng để ngăn ngừa hành vi truy cập trái phép hoặc rò rỉ dữ liệu cá nhân của khách hàng Bên B.
+4.3. Trong trường hợp xảy ra sự cố an toàn thông tin hoặc rò rỉ dữ liệu, Bên A phải thông báo cho Bên B trong vòng 24 giờ kể từ khi phát hiện.
+
+ĐIỀU 5: GIỚI HẠN TRÁCH NHIỆM & MỨC TRẦN BỒI THƯỜNG
+5.1. Dịch vụ phần mềm được cung cấp trên nguyên tắc "Nguyên trạng" (As-Is), Bên A không bảo đảm phần mềm vận hành hoàn toàn không có lỗi kỹ thuật hoặc không bị gián đoạn.
+5.2. Mức trần trách nhiệm bồi thường: Tổng mức bồi thường thiệt hại tối đa của Bên A đối với bất kỳ khiếu nại nào phát sinh từ hợp đồng này sẽ không vượt quá tổng số phí dịch vụ mà Bên B đã thực tế thanh toán cho Bên A trong 03 (ba) tháng gần nhất trước thời điểm phát sinh sự kiện.
+
+ĐIỀU 6: BỒI THƯỜNG THIỆT HẠI & PHẠT VI PHẠM
+6.1. Trường hợp Bên B chậm thanh toán hoặc vi phạm bất kỳ điều khoản nào, Bên B phải chịu mức phạt vi phạm là 20% (Hai mươi phần trăm) trên tổng giá trị hợp đồng năm đó.
+6.2. Bên B cam kết bồi thường, bào chữa và giữ cho Bên A không bị thiệt hại trước mọi khiếu nại, tổn thất phát sinh từ bên thứ ba liên quan đến nội dung dữ liệu do Bên B tải lên hệ thống.
+
+ĐIỀU 7: QUYỀN SỞ HỮU TRÍ TUỆ
+7.1. Mọi quyền sở hữu trí tuệ đối với nền tảng phần mềm, mã nguồn gốc, thuật ngữ và giao diện người dùng thuộc quyền sở hữu độc quyền của Bên A.
+7.2. Toàn bộ các báo cáo tổng hợp, quy trình tối ưu và dữ liệu phái sinh được tạo ra trong quá trình Bên B sử dụng phần mềm sẽ được Bên B chuyển giao toàn bộ quyền sở hữu trí tuệ cho Bên A.
+
+ĐIỀU 8: HẠN CHẾ CẠNH TRANH & TUYỂN DỤNG
+8.1. Trong thời hạn hợp đồng và trong vòng 02 (hai) năm sau khi chấm dứt, Bên B cam kết không được tuyển dụng bất kỳ nhân sự hoặc kỹ sư phần mềm nào của Bên A nếu không có sự chấp thuận trước bằng văn bản.
+
+ĐIỀU 9: LUẬT ÁP DỤNG VÀ GIẢI QUYẾT TRANH CHẤP
+9.1. Hợp đồng này được diễn giải và điều chỉnh theo luật pháp nước ngoài (Luật của nước Cộng hòa Singapore).
+9.2. Mọi tranh chấp phát sinh sẽ được đưa ra giải quyết chung thẩm tại Trung tâm Trọng tài Quốc tế Singapore (SIAC) bằng tiếng Anh.
+
+ĐẠI DIỆN BÊN A                                          ĐẠI DIỆN BÊN B
+(Ký, ghi rõ họ tên và đóng dấu)                         (Ký, ghi rõ họ tên và đóng dấu)
+Nguyễn Văn An                                           Trần Thị Bình
